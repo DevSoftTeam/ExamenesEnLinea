@@ -1,0 +1,66 @@
+UserAnswer:
+    type: entity
+    table: user_answer
+    indexes:
+        respondio_fk:
+            columns:
+                - id_test_taken
+                - id_user
+                - id_test
+        relationship_12_fk:
+            columns:
+                - id_question
+    uniqueConstraints:
+        user_answer_pk:
+            columns:
+                - id_user_answer
+    id:
+        idUserAnswer:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_user_answer
+            generator:
+                strategy: SEQUENCE
+    fields:
+        response:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+        orderAnswer:
+            type: string
+            nullable: true
+            length: 24
+            options:
+                fixed: false
+            column: order_answer
+    manyToOne:
+        idQuestion:
+            targetEntity: Question
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_question:
+                    referencedColumnName: id_question
+            orphanRemoval: false
+        idTestTaken:
+            targetEntity: TestTaken
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_test_taken:
+                    referencedColumnName: id_test_taken
+                id_user:
+                    referencedColumnName: id_user
+                id_test:
+                    referencedColumnName: id_test
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

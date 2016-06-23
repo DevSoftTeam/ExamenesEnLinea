@@ -1,0 +1,46 @@
+Association:
+    type: entity
+    table: association
+    indexes:
+        relationship_14_fk:
+            columns:
+                - id_answer_element
+        relationship_13_fk:
+            columns:
+                - id_question
+    uniqueConstraints:
+        association_pk:
+            columns:
+                - id_association
+    id:
+        idAssociation:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_association
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idQuestion:
+            targetEntity: Question
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_question:
+                    referencedColumnName: id_question
+            orphanRemoval: false
+        idAnswerElement:
+            targetEntity: AnswerElement
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_answer_element:
+                    referencedColumnName: id_answer_element
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

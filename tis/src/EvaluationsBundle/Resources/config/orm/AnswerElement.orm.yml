@@ -1,0 +1,51 @@
+AnswerElement:
+    type: entity
+    table: answer_element
+    indexes:
+        puede_tener_fk:
+            columns:
+                - id_question
+    uniqueConstraints:
+        answer_element_pk:
+            columns:
+                - id_answer_element
+    id:
+        idAnswerElement:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_answer_element
+            generator:
+                strategy: SEQUENCE
+    fields:
+        content:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        orderVar:
+            type: string
+            nullable: false
+            length: 24
+            options:
+                fixed: false
+            column: order_var
+        isCorrect:
+            type: boolean
+            nullable: false
+            column: is_correct
+    manyToOne:
+        idQuestion:
+            targetEntity: Question
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_question:
+                    referencedColumnName: id_question
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

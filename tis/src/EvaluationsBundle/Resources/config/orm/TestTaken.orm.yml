@@ -1,0 +1,53 @@
+TestTaken:
+    type: entity
+    table: test_taken
+    indexes:
+        resuelto_fk:
+            columns:
+                - id_test
+        realiza_1_fk:
+            columns:
+                - id_user
+    uniqueConstraints:
+        test_taken_pk:
+            columns:
+                - id_test_taken
+                - id_user
+                - id_test
+    id:
+        idTestTaken:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_test_taken
+    fields:
+        userScore:
+            type: decimal
+            nullable: true
+            precision: 10
+            scale: 0
+            column: user_score
+    oneToOne:
+        idUser:
+            targetEntity: UserSystem
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+        idTest:
+            targetEntity: Test
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_test:
+                    referencedColumnName: id_test
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,26 @@
+TypeCuestion:
+    type: entity
+    table: type_cuestion
+    uniqueConstraints:
+        type_cuestion_pk:
+            columns:
+                - id_type
+    id:
+        idType:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_type
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nameType:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+            column: name_type
+    lifecycleCallbacks: {  }

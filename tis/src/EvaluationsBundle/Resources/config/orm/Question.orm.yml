@@ -1,0 +1,68 @@
+Question:
+    type: entity
+    table: question
+    indexes:
+        tiene_12_fk:
+            columns:
+                - id_area
+        pertenece_fk:
+            columns:
+                - id_type
+    uniqueConstraints:
+        question_pk:
+            columns:
+                - id_question
+    id:
+        idQuestion:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_question
+            generator:
+                strategy: SEQUENCE
+    fields:
+        statementQuestion:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+            column: statement_question
+        pathImageQuestion:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+            column: path_image_question
+        pathFileQuestion:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+            column: path_file_question
+    manyToOne:
+        idType:
+            targetEntity: TypeCuestion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_type:
+                    referencedColumnName: id_type
+            orphanRemoval: false
+        idArea:
+            targetEntity: Area
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_area:
+                    referencedColumnName: id_area
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

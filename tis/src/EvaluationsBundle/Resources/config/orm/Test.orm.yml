@@ -1,0 +1,83 @@
+Test:
+    type: entity
+    table: test
+    indexes:
+        crear_fk:
+            columns:
+                - id_user
+    uniqueConstraints:
+        test_pk:
+            columns:
+                - id_test
+    id:
+        idTest:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_test
+            generator:
+                strategy: SEQUENCE
+    fields:
+        titleTest:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+            column: title_test
+        matter:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+        institution:
+            type: string
+            nullable: true
+            length: 150
+            options:
+                fixed: false
+        hourInit:
+            type: date
+            nullable: true
+            column: hour_init
+        hourEnd:
+            type: date
+            nullable: true
+            column: hour_end
+        date:
+            type: date
+            nullable: true
+        scoreTest:
+            type: decimal
+            nullable: true
+            precision: 100
+            scale: 3
+            column: score_test
+        totalPercentage:
+            type: decimal
+            nullable: true
+            precision: 10
+            scale: 0
+            column: total_percentage
+        testPassword:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+            column: test_password
+    manyToOne:
+        idUser:
+            targetEntity: UserSystem
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

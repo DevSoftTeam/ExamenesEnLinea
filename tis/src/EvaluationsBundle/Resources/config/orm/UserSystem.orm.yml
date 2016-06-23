@@ -1,0 +1,50 @@
+UserSystem:
+    type: entity
+    table: user_system
+    uniqueConstraints:
+        user_pk:
+            columns:
+                - id_user
+    id:
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_user
+            generator:
+                strategy: SEQUENCE
+    fields:
+        login:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+        password:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+        name:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+        mail:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        lastName:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: true
+            column: last_name
+    lifecycleCallbacks: {  }

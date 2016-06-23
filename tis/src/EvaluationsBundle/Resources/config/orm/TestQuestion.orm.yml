@@ -1,0 +1,41 @@
+TestQuestion:
+    type: entity
+    table: test_question
+    indexes:
+        tiene_1_fk:
+            columns:
+                - id_test
+    uniqueConstraints:
+        test_cuestion_pk:
+            columns:
+                - id_question
+    id: {  }
+    fields:
+        percent:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    oneToOne:
+        idQuestion:
+            targetEntity: Question
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_question:
+                    referencedColumnName: id_question
+            orphanRemoval: false
+    manyToOne:
+        idTest:
+            targetEntity: Test
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_test:
+                    referencedColumnName: id_test
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

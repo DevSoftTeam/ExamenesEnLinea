@@ -1,0 +1,41 @@
+KeyWord:
+    type: entity
+    table: key_word
+    indexes:
+        puede_tener_1_fk:
+            columns:
+                - id_question
+    uniqueConstraints:
+        key_word_pk:
+            columns:
+                - id_key_word
+    id:
+        idKeyWord:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_key_word
+            generator:
+                strategy: SEQUENCE
+    fields:
+        contentWord:
+            type: string
+            nullable: false
+            length: 40
+            options:
+                fixed: false
+            column: content_word
+    manyToOne:
+        idQuestion:
+            targetEntity: Question
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_question:
+                    referencedColumnName: id_question
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

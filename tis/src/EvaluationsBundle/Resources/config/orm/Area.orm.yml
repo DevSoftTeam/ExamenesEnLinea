@@ -1,0 +1,33 @@
+Area:
+    type: entity
+    table: area
+    uniqueConstraints:
+        area_pk:
+            columns:
+                - id_area
+    id:
+        idArea:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_area
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nameArea:
+            type: string
+            nullable: false
+            length: 40
+            options:
+                fixed: false
+            column: name_area
+        descriptionArea:
+            type: text
+            nullable: true
+            length: null
+            options:
+                fixed: false
+            column: description_area
+    lifecycleCallbacks: {  }
