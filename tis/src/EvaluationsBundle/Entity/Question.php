@@ -1,9 +1,7 @@
 <?php
 
 namespace EvaluationsBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Question
  *
@@ -14,55 +12,96 @@ class Question
 {
     /**
      * @var integer
-     *
      * @ORM\Column(name="id_question", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="question_id_question_seq", allocationSize=1, initialValue=1)
      */
     private $idQuestion;
-
     /**
      * @var string
-     *
      * @ORM\Column(name="statement_question", type="text", nullable=false)
      */
     private $statementQuestion;
-
     /**
      * @var string
-     *
      * @ORM\Column(name="path_image_question", type="string", length=256, nullable=true)
      */
     private $pathImageQuestion;
-
     /**
      * @var string
-     *
      * @ORM\Column(name="path_file_question", type="string", length=256, nullable=true)
      */
     private $pathFileQuestion;
-
     /**
      * @var \TypeQuestion
-     *
      * @ORM\ManyToOne(targetEntity="TypeQuestion")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type", referencedColumnName="id_type")
      * })
      */
     private $idType;
-
     /**
      * @var \Area
-     *
      * @ORM\ManyToOne(targetEntity="Area")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_area", referencedColumnName="id_area")
      * })
      */
     private $idArea;
-
-
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getIdQuestion()
+    {
+        return $this->idQuestion;
+    }
+    public function setStatementQuestion($statementQuestion)
+    {
+        $this->statementQuestion = $statementQuestion;
+        return $this;
+    }
+    public function getStatementQuestion()
+    {
+        return $this->statementQuestion;
+    }
+    public function setPathImageQuestion($pathImageQuestion)
+    {
+        $this->pathImageQuestion = $pathImageQuestion;
+        return $this;
+    }
+    public function getPathImageQuestion()
+    {
+        return $this->pathImageQuestion;
+    }
+    public function setPathFileQuestion($pathFileQuestion)
+    {
+        $this->pathFileQuestion = $pathFileQuestion;
+        return $this;
+    }
+    public function getPathFileQuestion()
+    {
+        return $this->pathFileQuestion;
+    }
+    public function setIdType($idType)
+    {
+        $this->idType = $idType;
+        return $this;
+    }
+    public function getIdType()
+    {
+        return $this->idType;
+    }
+    public function setIdArea($idArea)
+    {
+        $this->idArea = $idArea;
+        return $this;
+    }
+    public function getIdArea()
+    {
+        return $this->idArea;
+    }
 }
 
