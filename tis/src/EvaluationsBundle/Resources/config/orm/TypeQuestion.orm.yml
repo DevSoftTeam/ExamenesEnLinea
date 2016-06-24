@@ -1,6 +1,6 @@
-TypeCuestion:
+TypeQuestion:
     type: entity
-    table: type_cuestion
+    table: type_question
     uniqueConstraints:
         type_cuestion_pk:
             columns:

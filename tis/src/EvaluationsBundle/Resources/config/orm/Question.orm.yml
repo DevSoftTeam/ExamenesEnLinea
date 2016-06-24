@@ -46,7 +46,7 @@ Question:
             column: path_file_question
     manyToOne:
         idType:
-            targetEntity: TypeCuestion
+            targetEntity: TypeQuestion
             cascade: {  }
             fetch: LAZY
             mappedBy: null

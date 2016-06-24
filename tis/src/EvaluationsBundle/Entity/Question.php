@@ -44,9 +44,9 @@ class Question
     private $pathFileQuestion;
 
     /**
-     * @var \TypeCuestion
+     * @var \TypeQuestion
      *
-     * @ORM\ManyToOne(targetEntity="TypeCuestion")
+     * @ORM\ManyToOne(targetEntity="TypeQuestion")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_type", referencedColumnName="id_type")
      * })
