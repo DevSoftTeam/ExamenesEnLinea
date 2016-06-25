@@ -1,3 +1,7 @@
+evaluations_testquestion:
+    resource: "@EvaluationsBundle/Resources/config/routing/testquestion.php"
+    prefix:   /testquestion
+
 evaluations_homepage:
     path:     /
     defaults: { _controller: EvaluationsBundle:Default:index }
