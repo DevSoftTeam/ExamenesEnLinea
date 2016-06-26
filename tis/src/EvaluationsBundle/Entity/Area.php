@@ -36,6 +36,39 @@ class Area
      */
     private $descriptionArea;
 
+    public function getId() {
+        return $this->idArea ;
+    }
+    public function getIdArea() {
+        return $this->idArea ;
+    }
 
+    public function getNameArea() {
+        return $this->nameArea;
+    }
+
+    public function getDescriptionArea() {
+        return $this->descriptionArea;
+    }
+
+    public function __call($name, $arguments)
+    {
+        // Nota: el valor $name es sensible a mayúsculas.
+        echo "Llamando al método de objeto '$name' "
+            . implode(', ', $arguments). "\n";
+    }
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+        return $this;
+    }
 }
 

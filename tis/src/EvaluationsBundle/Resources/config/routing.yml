@@ -6,6 +6,11 @@ evaluations_testquestion:
     resource: "@EvaluationsBundle/Resources/config/routing/testquestion.php"
     prefix:   /testquestion
 
+evaluations_area:
+    resource: "@EvaluationsBundle/Resources/config/routing/area.php"
+    prefix:   /area
+
+
 evaluations_homepage:
     path:     /
     defaults: { _controller: EvaluationsBundle:Default:index }
