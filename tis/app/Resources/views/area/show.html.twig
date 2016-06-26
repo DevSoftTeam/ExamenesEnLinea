@@ -6,15 +6,15 @@
     <table>
         <tbody>
             <tr>
-                <th>Idarea</th>
+                <th>Identificador area:</th>
                 <td>{{ area.idArea }}</td>
             </tr>
             <tr>
-                <th>Namearea</th>
+                <th>Nombre area:</th>
                 <td>{{ area.nameArea }}</td>
             </tr>
             <tr>
-                <th>Descriptionarea</th>
+                <th>Descripcion de area:</th>
                 <td>{{ area.descriptionArea }}</td>
             </tr>
         </tbody>
@@ -22,14 +22,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('area_index') }}">Back to the list</a>
+            <a href="{{ path('area_index') }}">Volver a la lista</a>
         </li>
         <li>
-            <a href="{{ path('area_edit', { 'id': area.idArea }) }}">Edit</a>
+            <a href="{{ path('area_edit', { 'id': area.idArea }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Borrar">
             {{ form_end(delete_form) }}
         </li>
     </ul>

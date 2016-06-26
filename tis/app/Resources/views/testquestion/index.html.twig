@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>TestQuestion list</h1>
+    <h1>Lista de preguntas del examen</h1>
 
     <table>
         <thead>
             <tr>
-                <th>Percent</th>
-                <th>Actions</th>
+                <th>Porcentaje</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -17,10 +17,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('testquestion_show', { 'id': testQuestion.idQuestion }) }}">show</a>
+                            <a href="{{ path('testquestion_show', { 'id': testQuestion.idQuestion }) }}">Mostrar</a>
                         </li>
                         <li>
-                            <a href="{{ path('testquestion_edit', { 'id': testQuestion.idQuestion }) }}">edit</a>
+                            <a href="{{ path('testquestion_edit', { 'id': testQuestion.idQuestion }) }}">Editar</a>
                         </li>
                     </ul>
                 </td>
@@ -31,7 +31,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('testquestion_new') }}">Create a new entry</a>
+            <a href="{{ path('testquestion_new') }}">Crear una nueva pregunta</a>
         </li>
     </ul>
 {% endblock %}

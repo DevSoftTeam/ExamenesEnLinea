@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Area list</h1>
+    <h1>Lista de area</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Idarea</th>
-                <th>Namearea</th>
-                <th>Descriptionarea</th>
-                <th>Actions</th>
+                <th>Nombre de area</th>
+                <th>Descripcion de area</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('area_new') }}">Create a new entry</a>
+            <a href="{{ path('area_new') }}">Crear una nueva pregunta</a>
         </li>
     </ul>
 {% endblock %}

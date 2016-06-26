@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>TestQuestion</h1>
+    <h1>Preguntas del examen</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Percent</th>
+                <th>Porcentaje</th>
                 <td>{{ testQuestion.percent }}</td>
             </tr>
         </tbody>
@@ -14,14 +14,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('testquestion_index') }}">Back to the list</a>
+            <a href="{{ path('testquestion_index') }}">Volver a la lista</a>
         </li>
         <li>
-            <a href="{{ path('testquestion_edit', { 'id': testQuestion.idQuestion }) }}">Edit</a>
+            <a href="{{ path('testquestion_edit', { 'id': testQuestion.idQuestion }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Borrar">
             {{ form_end(delete_form) }}
         </li>
     </ul>
