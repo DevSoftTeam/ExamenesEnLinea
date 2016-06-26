@@ -4,10 +4,13 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+         <!-- Compiled and minified CSS -->
+       {%- include "MaterializeBundle:Materialize:css.html.twig" -%}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+       {%- include "MaterializeBundle:Materialize:css.html.twig" -%}
     </body>
 </html>
