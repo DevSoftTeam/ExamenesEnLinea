@@ -27,6 +27,7 @@ class Test
      *
      * @ORM\Column(name="title_test", type="string", length=200, nullable=false)
      */
+
     private $titleTest;
 
     /**
@@ -95,6 +96,60 @@ class Test
      */
     private $idUser;
 
+    public function getId() {
+          return $this->idTest;
+    }
 
+    public function getidTest() {
+          return $this->idTest;
+    }
+
+    public function gettitleTest() {
+        return $this->titleTest;
+    }
+    public function getmatter() {
+        return $this->matter;
+    }
+    public function getinstitution() {
+        return $this->institution;
+    }
+    public function gethourInit() {
+        return $this->hourInit;
+    }
+    public function gethourEnd() {
+        return $this->hourEnd ;
+    }
+    public function getdate() {
+        return $this->date ;
+    }
+    public function getscoreTest() {
+        return $this->scoreTest ;
+    }
+    public function gettotalPercentage() {
+        return $this->totalPercentage ;
+    }
+    public function gettestPassword() {
+        return $this->testPassword ;
+    }
+
+    public function __call($name, $arguments)
+    {
+        // Nota: el valor $name es sensible a mayúsculas.
+        echo "Llamando al método de objeto '$name' "
+             . implode(', ', $arguments). "\n";
+    }
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+          return $this->$property;
+        }
+    }
+
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+          $this->$property = $value;
+        }
+        return $this;
+    }
 }
 

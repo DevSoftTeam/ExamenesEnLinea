@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Test list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idtest</th>
+                <th>Titletest</th>
+                <th>Matter</th>
+                <th>Institution</th>
+                <th>Hourinit</th>
+                <th>Hourend</th>
+                <th>Date</th>
+                <th>Scoretest</th>
+                <th>Totalpercentage</th>
+                <th>Testpassword</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for test in tests %}
+            <tr>
+                <td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>
+                <td>{{ test.titleTest }}</td>
+                <td>{{ test.matter }}</td>
+                <td>{{ test.institution }}</td>
+                <td>{% if test.hourInit %}{{ test.hourInit|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if test.hourEnd %}{{ test.hourEnd|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if test.date %}{{ test.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ test.scoreTest }}</td>
+                <td>{{ test.totalPercentage }}</td>
+                <td>{{ test.testPassword }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('test_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

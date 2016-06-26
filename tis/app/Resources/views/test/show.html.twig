@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Test</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idtest</th>
+                <td>{{ test.idTest }}</td>
+            </tr>
+            <tr>
+                <th>Titletest</th>
+                <td>{{ test.titleTest }}</td>
+            </tr>
+            <tr>
+                <th>Matter</th>
+                <td>{{ test.matter }}</td>
+            </tr>
+            <tr>
+                <th>Institution</th>
+                <td>{{ test.institution }}</td>
+            </tr>
+            <tr>
+                <th>Hourinit</th>
+                <td>{% if test.hourInit %}{{ test.hourInit|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Hourend</th>
+                <td>{% if test.hourEnd %}{{ test.hourEnd|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if test.date %}{{ test.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Scoretest</th>
+                <td>{{ test.scoreTest }}</td>
+            </tr>
+            <tr>
+                <th>Totalpercentage</th>
+                <td>{{ test.totalPercentage }}</td>
+            </tr>
+            <tr>
+                <th>Testpassword</th>
+                <td>{{ test.testPassword }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('test_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
