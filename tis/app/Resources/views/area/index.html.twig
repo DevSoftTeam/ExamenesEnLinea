@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Area list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idarea</th>
+                <th>Namearea</th>
+                <th>Descriptionarea</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for area in areas %}
+            <tr>
+                <td><a href="{{ path('area_show', { 'id': area.idArea }) }}">{{ area.idArea }}</a></td>
+                <td>{{ area.nameArea }}</td>
+                <td>{{ area.descriptionArea }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('area_show', { 'id': area.idArea }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('area_edit', { 'id': area.idArea }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('area_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
