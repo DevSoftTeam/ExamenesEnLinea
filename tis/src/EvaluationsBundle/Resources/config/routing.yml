@@ -2,6 +2,10 @@ evaluations_test:
         resource: "@EvaluationsBundle/Resources/config/routing/test.php"
         prefix:   /test
 
+evaluations_question:
+        resource: "@EvaluationsBundle/Resources/config/routing/question.php"
+        prefix:   /question
+
 evaluations_testquestion:
     resource: "@EvaluationsBundle/Resources/config/routing/testquestion.php"
     prefix:   /testquestion
@@ -14,4 +18,12 @@ evaluations_area:
 evaluations_homepage:
     path:     /
     defaults: { _controller: EvaluationsBundle:Default:index }
+
+evaluations_openQuestion:
+    path:     /openQuestion
+    defaults: { _controller: EvaluationsBundle:OpenQuestion:new }
+
+evaluations_openQuestionSave:
+    path:     /openQuestion/new
+    defaults: { _controller: EvaluationsBundle:OpenQuestion:save }
 
