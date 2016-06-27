@@ -21,9 +21,9 @@ class TestType extends AbstractType
             ->add('hourInit')
             ->add('hourEnd')
             ->add('date')
-            //->add('hourInit', 'date')
-            //->add('hourEnd', 'date')
-            //->add('date', 'date')
+            /*->add('hourInit', 'date')
+            ->add('hourEnd', 'date')
+            ->add('date', 'date')*/
             ->add('scoreTest')
             ->add('totalPercentage')
             ->add('testPassword')

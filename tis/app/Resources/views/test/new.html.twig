@@ -4,13 +4,18 @@
     <h1>Test creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        { form_widget(form) }}
     {{ form_end(form) }}
-
+    
     <ul>
         <li>
             <a href="{{ path('test_index') }}">Back to the list</a>
         </li>
     </ul>
+
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+          });
+    </script>
 {% endblock %}

@@ -6,11 +6,14 @@
         {% block stylesheets %}{% endblock %}
          <!-- Compiled and minified CSS -->
        {%- include "MaterializeBundle:Materialize:css.html.twig" -%}
+       <script src="{{ asset('js/jquery-3.0.0.min.js') }}"></script>
+       <script src="{{ asset('js/materialize.min.js') }}"></script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-       {%- include "MaterializeBundle:Materialize:css.html.twig" -%}
+        <div class="container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </div>
     </body>
 </html>
