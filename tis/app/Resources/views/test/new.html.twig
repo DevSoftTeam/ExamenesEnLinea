@@ -7,10 +7,16 @@
         {{ form_widget(form) }}
         <input type="submit" value="Crear exámen" />
     {{ form_end(form) }}
-
+    
     <ul>
         <li>
             <a href="{{ path('test_index') }}">Volver a la lista</a>
         </li>
     </ul>
+
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+          });
+    </script>
 {% endblock %}
