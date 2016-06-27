@@ -6,23 +6,24 @@
     <table>
         <thead>
             <tr>
-                <th>Idtest</th>
-                <th>Titletest</th>
-                <th>Matter</th>
-                <th>Institution</th>
-                <th>Hourinit</th>
-                <th>Hourend</th>
-                <th>Date</th>
-                <th>Scoretest</th>
-                <th>Totalpercentage</th>
-                <th>Testpassword</th>
-                <th>Actions</th>
+               <!-- <th>Idtest</th>-->
+                <th>Título de Exámen</th>
+                <th>Materia</th>
+                <th>Institución</th>
+
+                <th>Hora inicio de registro</th>
+                <th>Hora final de registro</th>
+                <th>Fecha</th>
+                <th>Puntaje del exámen</th>
+                <th>Total de porcentaje</th>
+                <th>Contraseña del exámen</th>
+                <th>Accciones</th>
             </tr>
         </thead>
         <tbody>
         {% for test in tests %}
             <tr>
-                <td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>
+                 <!--<td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>-->
                 <td>{{ test.titleTest }}</td>
                 <td>{{ test.matter }}</td>
                 <td>{{ test.institution }}</td>
@@ -35,10 +36,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">show</a>
+                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">Mostrar</a>
                         </li>
                         <li>
-                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">edit</a>
+                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>
                         </li>
                     </ul>
                 </td>
@@ -49,7 +50,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('test_new') }}">Create a new entry</a>
+            <a href="{{ path('test_new') }}">Crear nuevo exámen</a>
         </li>
     </ul>
 {% endblock %}

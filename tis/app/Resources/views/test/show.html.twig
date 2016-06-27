@@ -5,44 +5,44 @@
 
     <table>
         <tbody>
-            <tr>
+            <!--<tr>
                 <th>Idtest</th>
                 <td>{{ test.idTest }}</td>
-            </tr>
+            </tr>-->
             <tr>
-                <th>Titletest</th>
+                <th>Titulo del examen:</th>
                 <td>{{ test.titleTest }}</td>
             </tr>
             <tr>
-                <th>Matter</th>
+                <th>Materia:</th>
                 <td>{{ test.matter }}</td>
             </tr>
             <tr>
-                <th>Institution</th>
+                <th>Institucion:</th>
                 <td>{{ test.institution }}</td>
             </tr>
             <tr>
-                <th>Hourinit</th>
+                <th>Hora de inicio de registro:</th>
                 <td>{% if test.hourInit %}{{ test.hourInit|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Hourend</th>
+                <th>Hora fin del registro:</th>
                 <td>{% if test.hourEnd %}{{ test.hourEnd|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Date</th>
+                <th>Fecha:</th>
                 <td>{% if test.date %}{{ test.date|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Scoretest</th>
+                <th>Puntaje del examen:</th>
                 <td>{{ test.scoreTest }}</td>
             </tr>
             <tr>
-                <th>Totalpercentage</th>
+                <th>Total del porcentaje:</th>
                 <td>{{ test.totalPercentage }}</td>
             </tr>
             <tr>
-                <th>Testpassword</th>
+                <th>Contrasena del examen:</th>
                 <td>{{ test.testPassword }}</td>
             </tr>
         </tbody>
@@ -50,14 +50,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('test_index') }}">Back to the list</a>
+            <a href="{{ path('test_index') }}">Volver a la lista</a>
         </li>
         <li>
-            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Edit</a>
+            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Borrar">
             {{ form_end(delete_form) }}
         </li>
     </ul>
