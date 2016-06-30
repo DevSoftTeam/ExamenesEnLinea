@@ -91,7 +91,7 @@ class Test
      *
      * @ORM\ManyToOne(targetEntity="UserSystem")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user", nullable=false)
      * })
      */
     private $idUser;

@@ -54,6 +54,10 @@ class Question
      *
      * @return int
      */
+    public function getId()
+    {
+        return $this->idQuestion;
+    }
     public function getIdQuestion()
     {
         return $this->idQuestion;
@@ -102,6 +106,19 @@ class Question
     public function getIdArea()
     {
         return $this->idArea;
+    }
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+          return $this->$property;
+        }
+    }
+
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+          $this->$property = $value;
+        }
+        return $this;
     }
 }
 

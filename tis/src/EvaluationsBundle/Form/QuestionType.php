@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TestType extends AbstractType
+class QuestionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,19 +15,11 @@ class TestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titleTest')
-            ->add('matter')
-            ->add('institution')
-            ->add('hourInit')
-            ->add('hourEnd')
-            ->add('date')
-            /*->add('hourInit', 'date')
-            ->add('hourEnd', 'date')
-            ->add('date', 'date')*/
-            ->add('scoreTest')
-            ->add('totalPercentage')
-            ->add('testPassword')
-//            ->add('idUser')
+            ->add('statementQuestion')
+            ->add('pathImageQuestion')
+            ->add('pathFileQuestion')
+            ->add('idType')
+            ->add('idArea')
         ;
     }
     
@@ -37,7 +29,7 @@ class TestType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'EvaluationsBundle\Entity\Test'
+            'data_class' => 'EvaluationsBundle\Entity\Question'
         ));
     }
 }

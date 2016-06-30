@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Question</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idquestion</th>
+                <td>{{ question.idQuestion }}</td>
+            </tr>
+            <tr>
+                <th>Statementquestion</th>
+                <td>{{ question.statementQuestion }}</td>
+            </tr>
+            <tr>
+                <th>Pathimagequestion</th>
+                <td>{{ question.pathImageQuestion }}</td>
+            </tr>
+            <tr>
+                <th>Pathfilequestion</th>
+                <td>{{ question.pathFileQuestion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('question_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
