@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h3>Crear pregunta abierta - respuesta parrafo</h3>
+    <form action="openQuestion/new" method="GET">
+    	<label>Enunciado:</label>
+    	<input type="text" name="statementQuestion">
+    	<input type="submit" value="Guardar">
+    </form>
+{% endblock %}

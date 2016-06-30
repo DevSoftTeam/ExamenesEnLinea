@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Question list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idquestion</th>
+                <th>Statementquestion</th>
+                <th>Pathimagequestion</th>
+                <th>Pathfilequestion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td><a href="{{ path('question_show', { 'id': question.idQuestion }) }}">{{ question.idQuestion }}</a></td>
+                <td>{{ question.statementQuestion }}</td>
+                <td>{{ question.pathImageQuestion }}</td>
+                <td>{{ question.pathFileQuestion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('question_show', { 'id': question.idQuestion }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('question_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

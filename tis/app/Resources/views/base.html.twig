@@ -5,22 +5,22 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('http://fonts.googleapis.com/icon?family=Material+Icons') }}" rel="stylesheet" />
-            <link href="{{ asset('materialize/css/materialize.min.css') }}" rel="stylesheet" />
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% endblock %}
          <!-- Compiled and minified CSS -->
        {%- include "MaterializeBundle:Materialize:css.html.twig" -%}
     </head>
-    <body style ="background-color:#B2DFDB">
-        {%- include "MaterializeBundle:Materialize:css.html.twig" -%}
+    <body  style ="background-color:#B2DFDB;">
         {% block javascripts %}
-            <script src="{{ asset('js/jquery-2.1.1.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/jquery-3.0.0.min.js') }}" type="text/javascript"></script>
             <script src="{{asset('js/materialize.min.js')}}" type="text/javascript" ></script>
             <script>$(".dropdown-button").dropdown();</script>
+            <script>$(".dropdown-collapse").sideNav();</script>
         {% endblock %}
         <ul id="dropfunctions" class="dropdown-content teal">
-            <li><a class="white-text" href="#">Crear Examenes</a></li>
+            <li><a class="white-text" href="/test">Crear Examenes</a></li>
             <li><a class="white-text" href="#">Crear Preguntas</a></li>
+            <li><a class="white-text" href="/openQuestion">Pregunta Abierta</a></li>
         </ul>
         <nav >
             <div class="nav-wrapper teal ">
@@ -32,8 +32,11 @@
                 </ul>
             </div>
         </nav>
+        <div class="container">
+            {% block body %}
 
-        {% block body %}{% endblock %}
+            {% endblock %}
+        </div>
 
         <footer class="page-footer teal">
             <div class="footer-copyright">
