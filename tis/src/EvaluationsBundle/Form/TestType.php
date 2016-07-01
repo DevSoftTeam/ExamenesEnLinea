@@ -27,7 +27,7 @@ class TestType extends AbstractType
             ->add('scoreTest')
             ->add('totalPercentage')
             ->add('testPassword')
-            ->add('idUser')
+//            ->add('idUser')
         ;
     }
     

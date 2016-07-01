@@ -14,6 +14,9 @@ evaluations_area:
     resource: "@EvaluationsBundle/Resources/config/routing/area.php"
     prefix:   /area
 
+#evaluations_questionselector:
+#    path:     /
+#    defaults: { _controller: EvaluationsBundle:questionSelector:index }
 
 evaluations_homepage:
     path:     /
