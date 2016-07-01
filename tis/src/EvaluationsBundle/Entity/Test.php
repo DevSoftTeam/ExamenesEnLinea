@@ -47,23 +47,30 @@ class Test
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="hour_init", type="date", nullable=true)
+     * @ORM\Column(name="test_init", type="datetime", nullable=true)
      */
-    private $hourInit;
+    private $testInit;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="hour_end", type="date", nullable=true)
+     * @ORM\Column(name="test_end", type="datetime", nullable=true)
      */
-    private $hourEnd;
+    private $testEnd;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date", nullable=true)
+     * @ORM\Column(name="registration_init", type="datetime", nullable=true)
      */
-    private $date;
+    private $registrationInit;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registration_end", type="datetime", nullable=true)
+     */
+    private $registrationEnd;
 
     /**
      * @var string
@@ -113,11 +120,27 @@ class Test
     public function getinstitution() {
         return $this->institution;
     }
-    public function gethourInit() {
-        return $this->hourInit;
+    public function gettestInit() {
+        return $this->testInit;
     }
-    public function gethourEnd() {
-        return $this->hourEnd ;
+    public function gettestEnd() {
+        return $this->testEnd ;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistrationInit()
+    {
+        return $this->registrationInit;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistrationEnd()
+    {
+        return $this->registrationEnd;
     }
     public function getdate() {
         return $this->date ;
