@@ -128,6 +128,13 @@ class Test
     }
 
     /**
+     * @return \UserSystem
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+    /**
      * @return \DateTime
      */
     public function getRegistrationInit()
