@@ -14,9 +14,11 @@ use EvaluationsBundle\Entity\Question;
  */
 class OpenQuestionController extends Controller
 {
-    public function newAction(Request $request)
+    public function newAction()
     {
-        return $this->render('EvaluationsBundle:Question:newOpenQuestion.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
+        return $this->render('EvaluationsBundle:Question:newOpenQuestion.html.twig',array('areas'=>$areas));
         /*
         $question = new Question();
         $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
