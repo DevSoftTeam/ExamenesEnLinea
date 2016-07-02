@@ -19,31 +19,16 @@ class OpenQuestionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
         return $this->render('EvaluationsBundle:Question:newOpenQuestion.html.twig',array('areas'=>$areas));
-        /*
-        $question = new Question();
-        $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($question);
-            $em->flush();
-
-            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
-        }
-
-        return $this->render('question/new.html.twig', array(
-            'question' => $question,
-            'form' => $form->createView(),
-        ));*/
     }
     public function saveAction(Request $request){
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
         $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find(1);
-        $idArea = $em->getRepository('EvaluationsBundle:Area')->find(1);
-        $statement = $request->query->get('statementQuestion');
-
+        $idArea = $em->getRepository('EvaluationsBundle:Area')->find($request->request->get('area'));
+        $statement = $request->request->get('statementQuestion');
+        $image = $request->files->get('image');
+        $pathImage = $request->request->get('pathImage');
+        //print($image);
         $question->setIdType($idType);
         $question->setIdArea($idArea);
         $question->setStatementQuestion($statement);
