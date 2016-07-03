@@ -26,9 +26,19 @@ class OpenQuestionController extends Controller
         $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find(1);
         $idArea = $em->getRepository('EvaluationsBundle:Area')->find($request->request->get('area'));
         $statement = $request->request->get('statementQuestion');
-        $image = $request->files->get('image');
-        $pathImage = $request->request->get('pathImage');
-        //print($image);
+        $file = $request->files->get('image');
+        //$pathImage = $request->request->get('pathImageQuestion');
+
+        // Recogemos el fichero
+        //$file=$form['image']->getData();
+        // Sacamos la extensión del fichero
+        $ext=$file->guessExtension();
+        // Le ponemos un nombre al fichero
+        $file_name=time().".".$ext;
+        // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+        $file->move("uploads", $file_name);
+        // Establecemos el nombre de fichero en el atributo de la entidad
+        $question->setPathImageQuestion($file_name);
         $question->setIdType($idType);
         $question->setIdArea($idArea);
         $question->setStatementQuestion($statement);
