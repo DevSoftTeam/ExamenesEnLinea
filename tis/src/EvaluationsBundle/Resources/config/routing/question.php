@@ -36,7 +36,7 @@ $collection->add('question_new', new Route(
 ));
 
 $collection->add('questionFile_new', new Route(
-    '/fileQuestion',
+    '/fileQuestion/{id_type}',
     /*array('_controller' => 'EvaluationsBundle:Question:fileQuestionNew'),*/
     array('_controller' => 'EvaluationsBundle:Question:fileQuestionNew'),
     array(),

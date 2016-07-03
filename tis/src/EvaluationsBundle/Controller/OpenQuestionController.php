@@ -23,8 +23,8 @@ class OpenQuestionController extends Controller
     public function saveAction(Request $request){
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
-        $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find(1);
-        $idArea = $em->getRepository('EvaluationsBundle:Area')->find($request->request->get('area'));
+        $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($request->request->get('id_type'));
+        $idArea = $em->getRepository('EvaluationsBundle:Area')->find($request->request->get('id_area'));
         $statement = $request->request->get('statementQuestion');
         $file = $request->files->get('image');
         //$pathImage = $request->request->get('pathImageQuestion');

@@ -19,8 +19,8 @@ class QuestionType extends AbstractType
             ->add('statementQuestion')
             ->add('pathImageQuestion')
             ->add('pathFileQuestion')
-           // ->add('idType')
-           // ->add('idArea')
+            ->add('idType')
+            ->add('idArea')
             ->add('image', FileType::class,array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control")

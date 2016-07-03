@@ -29,6 +29,41 @@ class TypeQuestion
      */
     private $nameType;
 
+    public function getId()
+    {
+        return $this->idType;
+    }
+
+    public function getId_type()
+    {
+        return $this->idType;
+    }
+
+    public function getName_type()
+    {
+        return $this->nameType;   
+    }
+
+
+    public function __call($name, $arguments)
+    {
+        // Nota: el valor $name es sensible a mayúsculas.
+        echo "Llamando al método de objeto '$name' "
+            . implode(', ', $arguments). "\n";
+    }
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+        return $this;
+    }
 
 }
 
