@@ -3,11 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <title>Bienvenidos</title>
-        {% block stylesheets %}
             <link href="{{ asset('http://fonts.googleapis.com/icon?family=Material+Icons') }}" rel="stylesheet" />
             <link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% endblock %}
     </head>
     <body  style ="background-color:#B2DFDB;">
 
@@ -41,7 +39,6 @@
             </div>
         </footer>
 
-        {% block javascripts %}
             <script src="{{ asset('js/jquery-3.0.0.min.js') }}" type="text/javascript"></script>
             <script src="{{asset('js/materialize.min.js')}}" type="text/javascript" ></script>
             <script>
@@ -49,6 +46,5 @@
                 $(".dropdown-collapse").sideNav();
                 $(document).ready(function() {$('select').material_select();});
             </script>
-        {% endblock %}
     </body>
 </html>
