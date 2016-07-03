@@ -6,43 +6,43 @@
     <table>
         <tbody>
             <tr>
-                <th>Idtest</th>
+                <th>Nro Examen</th>
                 <td>{{ test.idTest }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titulo</th>
                 <td>{{ test.title }}</td>
             </tr>
             <tr>
-                <th>Matter</th>
+                <th>Materia</th>
                 <td>{{ test.matter }}</td>
             </tr>
             <tr>
-                <th>Institution</th>
+                <th>Institucion</th>
                 <td>{{ test.institution }}</td>
             </tr>
             <tr>
-                <th>Starttime</th>
+                <th>Inicio Examen</th>
                 <td>{% if test.startTime %}{{ test.startTime|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Endtime</th>
+                <th>Fin Examen</th>
                 <td>{% if test.endTime %}{{ test.endTime|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Startenrollment</th>
+                <th>Inicio Inscripcion</th>
                 <td>{% if test.startEnrollment %}{{ test.startEnrollment|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Endenrollment</th>
+                <th>Fin Inscripcion</th>
                 <td>{% if test.endEnrollment %}{{ test.endEnrollment|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Score</th>
+                <th>Puntuacion Maxima</th>
                 <td>{{ test.score }}</td>
             </tr>
             <tr>
-                <th>Percentage</th>
+                <th>Porcentage Total</th>
                 <td>{{ test.percentage }}</td>
             </tr>
         </tbody>
@@ -50,10 +50,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('test_index') }}">Back to the list</a>
+            <a href="{{ path('test_index') }}">Ver Examenes</a>
         </li>
         <li>
-            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Edit</a>
+            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

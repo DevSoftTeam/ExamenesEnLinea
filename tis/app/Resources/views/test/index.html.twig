@@ -6,17 +6,17 @@
     <table>
         <thead>
             <tr>
-                <th>Id </th>
+                <th>Nro Examen</th>
                 <th>Titulo</th>
                 <th>Materia</th>
                 <th>Institucion</th>
-                <th>Hora Inicio</th>
-                <th>Hora Final</th>
-                <th>Startenrollment</th>
-                <th>Endenrollment</th>
-                <th>Score</th>
-                <th>Percentage</th>
-                <th>Actions</th>
+                <th>Inicio Examen</th>
+                <th>Fin Examen</th>
+                <th>Inicio Inscripcion</th>
+                <th>Fin Inscripcion</th>
+                <th>Puntuacion Maxima</th>
+                <th>Porcentage Total</th>
+                <th>Funciones</th>
             </tr>
         </thead>
         <tbody>
@@ -35,10 +35,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">show</a>
+                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">mostrar</a>
                         </li>
                         <li>
-                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">edit</a>
+                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">editar</a>
                         </li>
                     </ul>
                 </td>
@@ -49,7 +49,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('test_new') }}">Create a new entry</a>
+            <a href="{{ path('test_new') }}">Crear nuevo Examen</a>
         </li>
     </ul>
 {% endblock %}

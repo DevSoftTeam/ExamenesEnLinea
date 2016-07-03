@@ -24,7 +24,7 @@ class TestType extends AbstractType
             ->add('endEnrollment')//, 'datetime')
             ->add('score')
             ->add('percentage')
-            ->add('idUser')
+           // ->add('idUser')
         ;
     }
     
