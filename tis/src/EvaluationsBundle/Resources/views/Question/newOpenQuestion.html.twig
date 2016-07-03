@@ -3,7 +3,8 @@
 {% block body %}
 	<h4>Pregunta abierta con respuesta párrafo: </h4>
 	<div class="row">
-    <form action="openQuestion/new" method="POST" class="col s12">
+
+    <form action="openQuestion/new" method="POST" class="col s12" enctype="multipart/form-data" >
     	<div class="input-field col s11">
     	<select name="area">
     		<option value="" disabled selected>Sin area</option>
