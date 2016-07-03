@@ -27,8 +27,8 @@ class OpenQuestionController extends Controller
         $idArea = $em->getRepository('EvaluationsBundle:Area')->find($request->request->get('area'));
         $statement = $request->request->get('statementQuestion');
         $image = $request->files->get('image');
-        $pathImage = $request->request->get('pathImage');
-        //print($image);
+        $pathImage = $request->request->get('pathImageQuestion');
+        
         $question->setIdType($idType);
         $question->setIdArea($idArea);
         $question->setStatementQuestion($statement);
