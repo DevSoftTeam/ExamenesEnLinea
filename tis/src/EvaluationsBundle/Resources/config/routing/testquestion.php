@@ -24,6 +24,19 @@ $collection->add('testquestion_show', new Route(
     array(),
     array('GET')
 ));
+/*
+testquestion_fileQuestionNew
+array('_controller' => 'EvaluationsBundle:TestQuestion:new')
+*/
+$collection->add('testquestion_fileQuestionNew', new Route(
+    '/fileQuestion',
+    array('_controller' => 'EvaluationsBundle:TestQuestion:fileQuestionNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
 
 $collection->add('testquestion_new', new Route(
     '/new',
@@ -34,6 +47,8 @@ $collection->add('testquestion_new', new Route(
     array(),
     array('GET', 'POST')
 ));
+
+
 
 $collection->add('testquestion_edit', new Route(
     '/{id}/edit',
