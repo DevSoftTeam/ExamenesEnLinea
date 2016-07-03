@@ -35,6 +35,17 @@ $collection->add('question_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('questionFile_new', new Route(
+    '/fileQuestion/{id_type}',
+    /*array('_controller' => 'EvaluationsBundle:Question:fileQuestionNew'),*/
+    array('_controller' => 'EvaluationsBundle:Question:fileQuestionNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
 $collection->add('question_edit', new Route(
     '/{id}/edit',
     array('_controller' => 'EvaluationsBundle:Question:edit'),

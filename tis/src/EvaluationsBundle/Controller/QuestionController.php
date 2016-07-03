@@ -35,35 +35,48 @@ class QuestionController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $types = $em->getRepository('EvaluationsBundle:TypeQuestion')->findAll();
+
+        return $this->render('question/new.html.twig', array(
+            'types' => $types,
+        ));
+    }
+
+    /*
+        fileQuestionNew
+     *
+     */
+    public function fileQuestionNewAction(Request $request)
+    {
         $question = new Question();
+        $em = $this->getDoctrine()->getManager();
+        $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
         $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $form->handleRequest($request);
-
+        $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($request->request->get('area'));
+        $idArea = $em->getRepository('EvaluationsBundle:Area')->find($request->request->get('area'));
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            // Recogemos el fichero
+            $file=$form['image']->getData();  
 
-        // Recogemos el fichero
-        $file=$form['image']->getData();
-         
-        // Sacamos la extensión del fichero
-        $ext=$file->guessExtension();
-         
-        // Le ponemos un nombre al fichero
-        $file_name=time().".".$ext;
-         
-        // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
-        $file->move("uploads", $file_name);
-         
-        // Establecemos el nombre de fichero en el atributo de la entidad
-        $question->setPathImageQuestion($file_name);
+            // Sacamos la extensión del fichero
+            $ext=$file->guessExtension();
+            // Le ponemos un nombre al fichero
+            $file_name=time().".".$ext;
+            // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+            $file->move("uploads", $file_name);
+            // Establecemos el nombre de fichero en el atributo de la entidad
+            $question->setPathImageQuestion($file_name);
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $em->flush();
 
             return $this->redirectToRoute('question_show', array('id' => $question->getId()));
         }
 
-        return $this->render('question/new.html.twig', array(
+        return $this->render('question/fileQuestionNew.html.twig', array(
             'question' => $question,
             'form' => $form->createView(),
         ));
