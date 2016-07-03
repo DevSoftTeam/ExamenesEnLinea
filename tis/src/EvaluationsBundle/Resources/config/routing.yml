@@ -14,6 +14,10 @@ evaluations_area:
     resource: "@EvaluationsBundle/Resources/config/routing/area.php"
     prefix:   /area
 
+evaluations_usersystem:
+        resource: "@EvaluationsBundle/Resources/config/routing/usersystem.php"
+        prefix:   /usersystem
+
 evaluations_homepage:
     path:     /
     defaults: { _controller: EvaluationsBundle:Default:index }
