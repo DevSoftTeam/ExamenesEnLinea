@@ -22,10 +22,3 @@ evaluations_homepage:
     path:     /
     defaults: { _controller: EvaluationsBundle:Default:index }
 
-evaluations_openQuestion:
-    path:     /openQuestion
-    defaults: { _controller: EvaluationsBundle:OpenQuestion:new }
-
-evaluations_openQuestionSave:
-    path:     /openQuestion/new
-    defaults: { _controller: EvaluationsBundle:OpenQuestion:save }

@@ -43,8 +43,7 @@ class QuestionController extends Controller
         ));
     }
 
-    /*
-        fileQuestionNew
+    /*  fileQuestionNew
      *
      */
     public function fileQuestionNewAction(Request $request)

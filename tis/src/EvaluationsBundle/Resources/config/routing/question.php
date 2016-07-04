@@ -46,6 +46,16 @@ $collection->add('questionFile_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('openQuestion_new', new Route(
+    '/openQuestion/{id_type}',
+    array('_controller' => 'EvaluationsBundle:OpenQuestion:oqNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
 $collection->add('question_edit', new Route(
     '/{id}/edit',
     array('_controller' => 'EvaluationsBundle:Question:edit'),
