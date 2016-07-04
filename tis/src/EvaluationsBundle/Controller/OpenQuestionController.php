@@ -21,7 +21,7 @@ class OpenQuestionController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-
+          if(!is_null($form['statementQuestion']->getData())){
             $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
             $idArea = $em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
             $file=$form['image']->getData();
@@ -34,8 +34,10 @@ class OpenQuestionController extends Controller
                 $file_name=$pathImage."_".time().".".$ext;
                 $file->move("uploads/images", $file_name);
                 $question->setPathImageQuestion($file_name);
+               }else{
+                $question->setPathImageQuestion(null);
                }
-              }  
+             }  
             $question->setIdType($idType);
             $question->setIdArea($idArea);
 
@@ -43,6 +45,7 @@ class OpenQuestionController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+          }
         }
 
         return $this->render('EvaluationsBundle:Question:newOpenQuestion.html.twig', array(
