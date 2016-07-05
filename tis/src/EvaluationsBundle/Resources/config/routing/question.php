@@ -75,5 +75,15 @@ $collection->add('question_delete', new Route(
     array(),
     array('DELETE')
 ));
+$collection->add('trueFalseQuestion_new', new Route(
+    '/trueFalseQuestion/{id_type}',
+    array('_controller' => 'EvaluationsBundle:trueFalseQuestion:tfqNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
 
 return $collection;
