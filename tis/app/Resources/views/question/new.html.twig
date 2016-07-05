@@ -1,12 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Question creation</h1>
+    <h1>Seleccione el tipo de pregunta</h1>
+    {#}
+    <ul>
+        {% for type in types %}
+            <li>
+                <a href="{{type.id_type}}"> {{ type.name_type }}</a>
+            </li>
+            <option value=></option>
+        {% endfor %}
+        /*
+            para tod@s el id se tendria que recuperar de la base de datos 
+            y comparar con los tipos bien definidos a menos que ingresemos una URL 
+            dentro la tabla de tipos
+        */
+    </ul>#}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <ul>
+        <li>
+            <a href="openQuestion/1"> pregunta abierta </a>
+        </li>
+        <li>
+            <a href="fileQuestion/3"> pregunta subir archivo </a>
+        </li>
+        <li>
+            <a href="URLDayne"> pregunta verdadero falso </a>
+        </li>
+    </ul>
 
     <ul>
         <li>

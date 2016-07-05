@@ -1,22 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Crear exámen</h1>
+    <h1>Crear Examen</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Crear exámen" />
+        <div class="row">
+            <div class="row input-field ">
+                {{ form_widget(form.title)}}
+                <label for="input_text">Titulo</label>
+            </div>
+            <div class="row input-field">
+                {{ form_widget(form.matter)}}
+                <label for="input_text">Materia</label>
+            </div>
+            <div class="row input-field">
+                {{ form_widget(form.institution)}}
+                <label for="input_text">Institucion</label>
+            </div>
+
+            {#<div class="col input-field">#}
+                {#{{ form_widget(form.startTime)}}#}
+                {#{{ form.startTime|date('Y-m-d\\TH:i:sP') }}#}
+                {#<input type="date" class="datepicker">#}
+                {#{{ form_widget(form.startTime, {'attr': {'class': 'datepicker'}}) }}#}
+                {#{{ form_label(form.startTime) }}#}
+                {#{{ form_widget(form.startTime)}}#}
+            {#</div>#}
+            {#<div class="col input-field">#}
+                {#{{ form_widget(form.endTime)}}#}
+            {#</div>#}
+            {#<div class="col input-field">#}
+                {#{{ form_widget(form.startEnrollment)}}#}
+            {#</div>#}
+            {#<div class="col input-field">#}
+                {#{{ form_widget(form.endEnrollment)}}#}
+            {#</div>#}
+
+            <div class="row input-field">
+                {{ form_widget(form.score)}}
+                <label for="input_text">Puntuacion Maxima</label>
+            </div>
+
+            <div class="row input-field">
+                {{ form_widget(form.percentage)}}
+                <label for="input_text">Procentaje Total</label>
+            </div>
+        </div>
+        {#{{ form_widget(form) }}#}
+    {#<input type="submit" value="Create" />#}
+
+    <input type="submit" value="Create" />
     {{ form_end(form) }}
-    
+
     <ul>
         <li>
-            <a href="{{ path('test_index') }}">Volver a la lista</a>
+            <a href="{{ path('test_index') }}">Atras</a>
         </li>
     </ul>
-
-    <script>
-        $(document).ready(function() {
-            $('select').material_select();
-          });
-    </script>
 {% endblock %}

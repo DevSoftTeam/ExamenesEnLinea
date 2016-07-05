@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Question file</h1>
+
+    {{ form_start(form) }}
+    {#{{ form_widget(form) }} #}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <div>
+        <label for="test_idUser">Id user</label>
+        <select id="test_idUser" name="test[idUser]">
+            <option value=""></option>    
+        </select>
+    </div>
+
+    <input list="browsers" name="browser">
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+
+    <ul>
+        <li>
+            <a href="{{ path('question_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

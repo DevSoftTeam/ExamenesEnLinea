@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class QuestionType extends AbstractType
 {
@@ -18,12 +20,22 @@ class QuestionType extends AbstractType
         $builder
             ->add('statementQuestion')
             ->add('pathImageQuestion')
-            ->add('pathFileQuestion')
-           // ->add('idType')
-           // ->add('idArea')
+            //->add('pathFileQuestion')
+            //->add('idType')
+            ->add('area', EntityType::class, array(
+                    'class' => 'EvaluationsBundle:Area',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('u')
+                            ->orderBy('u.idArea', 'DESC');
+                    },
+                    'choice_label' => 'nameArea',
+                    'choice_value' => 'idArea',
+                    'required' => true,
+                ))
             ->add('image', FileType::class,array(
                 "label" => "Imagen:",
-                "attr" =>array("class" => "form-control")
+                "attr" =>array("class" => "form-control"),
+                "required" => false
             ))
         ;
     }

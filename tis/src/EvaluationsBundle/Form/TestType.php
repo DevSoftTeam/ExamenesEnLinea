@@ -15,19 +15,16 @@ class TestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titleTest')
+            ->add('title')
             ->add('matter')
             ->add('institution')
-            ->add('hourInit')
-            ->add('hourEnd')
-            ->add('date')
-            /*->add('hourInit', 'date')
-            ->add('hourEnd', 'date')
-            ->add('date', 'date')*/
-            ->add('scoreTest')
-            ->add('totalPercentage')
-            ->add('testPassword')
-//            ->add('idUser')
+            ->add('startTime')
+            ->add('endTime')
+            ->add('startEnrollment')
+            ->add('endEnrollment')
+            ->add('score')
+            ->add('percentage')
+           // ->add('idUser')
         ;
     }
     

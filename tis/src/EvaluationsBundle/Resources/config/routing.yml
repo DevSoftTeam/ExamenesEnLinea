@@ -14,18 +14,11 @@ evaluations_area:
     resource: "@EvaluationsBundle/Resources/config/routing/area.php"
     prefix:   /area
 
+evaluations_usersystem:
+        resource: "@EvaluationsBundle/Resources/config/routing/usersystem.php"
+        prefix:   /usersystem
+
 evaluations_homepage:
     path:     /
     defaults: { _controller: EvaluationsBundle:Default:index }
 
-evaluations_openQuestion:
-    path:     /openQuestion
-    defaults: { _controller: EvaluationsBundle:OpenQuestion:new }
-
-evaluations_openQuestionSave:
-    path:     /openQuestion/new
-    defaults: { _controller: EvaluationsBundle:OpenQuestion:save }
-
-evaluations_trueFalseQuestion:
-    path: /trueFalseQuestion
-    defaults: {_controller: EvaluationsBundle:trueFalseQuestion:new}
