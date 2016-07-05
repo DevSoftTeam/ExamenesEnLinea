@@ -26,3 +26,6 @@ evaluations_openQuestionSave:
     path:     /openQuestion/new
     defaults: { _controller: EvaluationsBundle:OpenQuestion:save }
 
+evaluations_trueFalseQuestion:
+    path: /trueFalseQuestion
+    defaults: {_controller: EvaluationsBundle:trueFalseQuestion:new}
