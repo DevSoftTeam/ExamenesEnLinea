@@ -1,7 +1,7 @@
 <?php
 
 namespace EvaluationsBundle\Form;
-
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,10 +18,30 @@ class TestType extends AbstractType
             ->add('title')
             ->add('matter')
             ->add('institution')
-            ->add('startTime')
-            ->add('endTime')
-            ->add('startEnrollment')
-            ->add('endEnrollment')
+            ->add('startTime', DateTimeType::class, array(
+                'widget' => 'single_text',
+                'html5' => false,
+                'required' => false,
+                'attr' => ['class' => 'datepicker'],
+            ))
+            ->add('endTime', DateTimeType::class, array(
+                'widget' => 'single_text',
+                'html5' => true,
+                'required' => false,
+                'attr' => ['class' => 'datepicker'],
+            ))
+            ->add('startEnrollment', DateTimeType::class, array(
+                'widget' => 'single_text',
+                'html5' => true,
+                'required' => false,
+                'attr' => ['class' => 'datepicker'],
+            ))
+            ->add('endEnrollment', DateTimeType::class, array(
+                'widget' => 'single_text',
+                'html5' => true,
+                'required' => false,
+                'attr' => ['class' => 'datepicker'],
+            ))
             ->add('score')
             ->add('percentage')
            // ->add('idUser')

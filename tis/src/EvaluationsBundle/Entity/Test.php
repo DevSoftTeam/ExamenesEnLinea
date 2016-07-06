@@ -198,6 +198,10 @@ class Test
         return $this;
     }
 
+    public function getMonth()
+    {
+        return $this->startTime.month;
+    }
     /**
      * Get startTime
      *
@@ -362,5 +366,6 @@ class Test
         }
         return $this;
     }
+
 }
 
