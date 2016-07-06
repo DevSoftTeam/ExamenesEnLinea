@@ -46,20 +46,16 @@ class QuestionController extends Controller
     /*  fileQuestionNew
      *
      */
-    public function fileQuestionNewAction(Request $request)
+    public function fileQuestionNewAction(Request $request, $id_type)
     {
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
-        $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
-        $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
+        $form = $this->createForm('EvaluationsBundle\Form\FileQuestionType', $question);
         $form->handleRequest($request);
-        $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($request->request->get('area'));
-        $idArea = $em->getRepository('EvaluationsBundle:Area')->find($request->request->get('area'));
         
         if ($form->isSubmitted() && $form->isValid()) {
             // Recogemos el fichero
             $file=$form['image']->getData();  
-
             // Sacamos la extensión del fichero
             $ext=$file->guessExtension();
             // Le ponemos un nombre al fichero
@@ -68,15 +64,14 @@ class QuestionController extends Controller
             $file->move("uploads", $file_name);
             // Establecemos el nombre de fichero en el atributo de la entidad
             $question->setPathImageQuestion($file_name);
-
             $em->persist($question);
             $em->flush();
-
             return $this->redirectToRoute('question_show', array('id' => $question->getId()));
         }
 
         return $this->render('question/fileQuestionNew.html.twig', array(
             'question' => $question,
+            'type' => $id_type,
             'form' => $form->createView(),
         ));
     }

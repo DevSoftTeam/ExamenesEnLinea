@@ -1,28 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Question file</h1>
-
+    <h1>pregunta subir archivo</h1>
+        
     {{ form_start(form) }}
-    {#{{ form_widget(form) }} #}
+        {#{ form_widget(form) }#}
+        <div class="row">
+            <div class="input-field">
+              <i class="material-icons prefix">mode_edit</i>
+            {{ form_widget(form.statementQuestion, {'attr': {'class':"materialize-textarea"}}) }}
+            {{ form_errors(form.statementQuestion) }}
+                <label for="question_statementQuestion">Enunciado</label>
+            </div>
+        </div>
+        
+        {{ form_widget(form.idType, {'attr': {'value': type}}) }}
+        
+        <label for="question_area">Area</label>
+        {{ form_errors(form.area) }}
+        {{ form_widget(form.area) }}
+        
+        {{ form_widget(form.image) }}
+
+        <br>
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
-    <div>
-        <label for="test_idUser">Id user</label>
-        <select id="test_idUser" name="test[idUser]">
-            <option value=""></option>    
-        </select>
-    </div>
-
-    <input list="browsers" name="browser">
+{#    <input list="browsers" name="browser">
         <datalist id="browsers">
             <option value="Internet Explorer">
-            <option value="Firefox">
-            <option value="Chrome">
-            <option value="Opera">
-            <option value="Safari">
-        </datalist>
+        </datalist>#}
 
     <ul>
         <li>

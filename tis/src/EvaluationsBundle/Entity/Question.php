@@ -122,5 +122,10 @@ class Question
         }
         return $this;
     }
+
+    public function __call($name, $arguments){
+        echo "Llamando al método de objeto '$name' "
+            . implode(', ', $arguments). "\n";
+    }
 }
 
