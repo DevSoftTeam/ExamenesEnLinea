@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class QuestionType extends AbstractType
+class FileQuestionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,37 +22,6 @@ class QuestionType extends AbstractType
             ->add('statementQuestion')
             //->add('pathImageQuestion')
             //->add('pathFileQuestion')
-            /*->add('idType',EntityType::class, array(
-                    'class' => 'EvaluationsBundle:TypeQuestion','query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('u');
-                    },
-                    'choice_label' => 'nameType',
-                    'choice_value' => 'idType',
-                    'required' => true,
-                ))*/
-            ->add('idType', HiddenType::class)
-            ->add('area', EntityType::class, array(
-                    'class' => 'EvaluationsBundle:Area',
-                    'query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('u')
-                            ->orderBy('u.idArea', 'DESC');
-                    },
-                    'choice_label' => 'nameArea',
-                    'choice_value' => 'idArea',
-                    'required' => true,
-            ))
-            ->add('image', FileType::class,array(
-                "label" => "Imagen:",
-                "attr" =>array("class" => "form-control"),
-                "required" => false
-            ))
-        ;
-    }
-
-    public function buildFormFileQuestion(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('statementQuestion')
             ->add('idType', HiddenType::class)
             ->add('area', EntityType::class, array(
                     'class' => 'EvaluationsBundle:Area',
@@ -70,13 +39,12 @@ class QuestionType extends AbstractType
                 "required" => false
             ))
             ->add('pathFileQuestion', FileType::class,array(
-                "label" => "archivo:",
+                "label" => "File:",
                 "attr" =>array("class" => "form-control"),
-                "required" => false
+                "required" => true
             ))
         ;
     }
-    
     /**
      * @param OptionsResolver $resolver
      */
