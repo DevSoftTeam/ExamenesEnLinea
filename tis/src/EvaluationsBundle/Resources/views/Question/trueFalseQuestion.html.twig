@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-  <h4>Pregunta abierta con respuesta verdadero falso: </h4>
+  <h4>Pregunta con respuesta verdadero falso: </h4>
   <div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
@@ -43,6 +43,8 @@
         <i class="material-icons">send</i>
       </button>
       <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+      </button>
+      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Añadir respuesta</a>
       <br>
       </div>
 
