@@ -18,23 +18,32 @@
                 <label for="input_text">Institucion</label>
             </div>
 
-            {#<div class="col input-field">#}
-                {#{{ form_widget(form.startTime)}}#}
-                {#{{ form.startTime|date('Y-m-d\\TH:i:sP') }}#}
-                {#<input type="date" class="datepicker">#}
-                {#{{ form_widget(form.startTime, {'attr': {'class': 'datepicker'}}) }}#}
-                {#{{ form_label(form.startTime) }}#}
-                {#{{ form_widget(form.startTime)}}#}
-            {#</div>#}
-            {#<div class="col input-field">#}
-                {#{{ form_widget(form.endTime)}}#}
-            {#</div>#}
-            {#<div class="col input-field">#}
-                {#{{ form_widget(form.startEnrollment)}}#}
-            {#</div>#}
-            {#<div class="col input-field">#}
-                {#{{ form_widget(form.endEnrollment)}}#}
-            {#</div>#}
+            <div class="row">
+                {#{{ form_widget(form.startTime, {'attr':{'class':'datapicker'}})}}#}
+                {{ form_widget(form.startTime)}}
+                <label for="input_text">Inicio De examen</label>
+            </div>
+
+            <div class="row">
+                {{ form_widget(form.endTime)}}
+                <label for="input_datetime">Fin De examen</label>
+            </div>
+            <div class="row">
+                {{ form_widget(form.startEnrollment)}}
+                <label for="input_datetime">Inicio Inscripcion</label>
+            </div>
+            <div class="row">
+                {{ form_widget(form.endEnrollment)}}
+                <label for="input_datetime">Fin Inscripcion</label>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $('.datepicker').datepicker({
+                        format: 'yyyy-mm-dd H:i'
+                    });
+                });
+            </script>
 
             <div class="row input-field">
                 {{ form_widget(form.score)}}
