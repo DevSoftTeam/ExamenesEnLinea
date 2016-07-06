@@ -38,7 +38,7 @@ class FileQuestionType extends AbstractType
                 "attr" =>array("class" => "form-control"),
                 "required" => false
             ))
-            ->add('pathImageQuestion', FileType::class,array(
+            ->add('pathFileQuestion', FileType::class,array(
                 "label" => "File:",
                 "attr" =>array("class" => "form-control"),
                 "required" => true

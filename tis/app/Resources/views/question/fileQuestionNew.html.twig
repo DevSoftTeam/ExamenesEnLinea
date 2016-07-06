@@ -7,23 +7,41 @@
         {#{ form_widget(form) }#}
         <div class="row">
             <div class="input-field">
-              <i class="material-icons prefix">mode_edit</i>
+            <i class="material-icons prefix">mode_edit</i>
             {{ form_widget(form.statementQuestion, {'attr': {'class':"materialize-textarea"}}) }}
             {{ form_errors(form.statementQuestion) }}
                 <label for="question_statementQuestion">Enunciado</label>
             </div>
         </div>
         
-        {{ form_widget(form.idType, {'attr': {'value': type}}) }}
-        
         <label for="question_area">Area</label>
         {{ form_errors(form.area) }}
         {{ form_widget(form.area) }}
-        
-        {{ form_widget(form.image) }}
+
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>imagen</span>
+            <i class="material-icons right">perm_media</i>
+                {{ form_widget(form.image) }}
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>archivo</span>
+            <i class="material-icons right">description</i>
+                {{ form_widget(form.pathFileQuestion) }}
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
 
         <br>
-        <input type="submit" value="Create" />
+        <input type="submit" value="crear" class="btn waves-effect waves-light" /> 
     {{ form_end(form) }}
 
 {#    <input list="browsers" name="browser">

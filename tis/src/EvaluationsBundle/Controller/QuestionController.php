@@ -55,15 +55,29 @@ class QuestionController extends Controller
         
         if ($form->isSubmitted() && $form->isValid()) {
             // Recogemos el fichero
-            $file=$form['image']->getData();  
-            // Sacamos la extensión del fichero
-            $ext=$file->guessExtension();
-            // Le ponemos un nombre al fichero
-            $file_name=time().".".$ext;
-            // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
-            $file->move("uploads", $file_name);
-            // Establecemos el nombre de fichero en el atributo de la entidad
-            $question->setPathImageQuestion($file_name);
+           $file=$form['image']->getData();
+            if (!is_null($file)) {
+               $ext=$file->guessExtension();
+               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
+                $pathImage = $form['pathImageQuestion']->getData();
+                $pathImage = explode(".", $pathImage);
+                $pathImage =  $pathImage[0];
+                $file_name=$pathImage."_".time().".".$ext;
+                $file->move("uploads/images", $file_name);
+                $question->setPathImageQuestion($file_name);
+               }else{
+                $question->setPathImageQuestion(null);
+               }
+            }
+            if ($file=$form['pathFileQuestion'] != "") {
+                $file=$form['pathFileQuestion']->getData();  
+                $ext=$file->guessExtension();
+                $file_name=time().".".$ext;
+                $file->move("uploads", $file_name);
+                $question->setpathFileQuestion($file_name);
+            }
+            $idType=$em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
+            $idArea=$em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
             $em->persist($question);
             $em->flush();
             return $this->redirectToRoute('question_show', array('id' => $question->getId()));
