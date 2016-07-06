@@ -21,7 +21,8 @@ class OpenQuestionController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-          if(!is_null($form['statementQuestion']->getData())){
+            $statement = $form['statementQuestion']->getData();
+          if(!is_null($statement) && strlen($statement)<=5000){
             $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
             $idArea = $em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
             $file=$form['image']->getData();
