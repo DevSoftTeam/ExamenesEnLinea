@@ -23,6 +23,8 @@ class Question
     /**
      * @var string
      * @ORM\Column(name="statement_question", type="text", nullable=false)
+     * @Assert\Length(min=5) 
+     * @Assert\NotBlank()
      */
     private $statementQuestion;
     /**

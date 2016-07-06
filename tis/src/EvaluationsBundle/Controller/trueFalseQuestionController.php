@@ -1,28 +1,22 @@
 <?php
 
 namespace EvaluationsBundle\Controller;
-
+ 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Question;
-//use EvaluationsBundle\Form\QuestionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-/**
- * OpenQuestion controller.
- *
- */
-class OpenQuestionController extends Controller
-{
-    public function oqNewAction($id_type, Request $request){
+class trueFalseQuestionController extends Controller
+{public function tfqNewAction($id_type, Request $request){
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $statement = $form['statementQuestion']->getData();
-          if(!is_null($statement) && strlen($statement)<=5000){
+          if(!is_null($form['statementQuestion']->getData())){
             $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
             $idArea = $em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
             $file=$form['image']->getData();
@@ -49,7 +43,7 @@ class OpenQuestionController extends Controller
           }
         }
 
-        return $this->render('EvaluationsBundle:Question:newOpenQuestion.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:trueFalseQuestion.html.twig', array(
             'question' => $question,
             'form' => $form->createView(),
         ));
