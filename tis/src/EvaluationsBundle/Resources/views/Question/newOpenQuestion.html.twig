@@ -5,6 +5,20 @@
 	<h4>Pregunta abierta con respuesta párrafo: </h4>
 	<div class="row">
 
+<!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" data-toggle="modal" data-target="#modal1" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
     	
@@ -14,7 +28,7 @@
     	</div>
     	<div class="col s1">
 
-    	<a class="btn-floating btn-short waves-effect waves-light pink" href="/area/new"><i class="material-icons aligned rigth">add</i></a></div>
+    	<a class="btn-floating btn-short waves-effect waves-light pink modal-trigger" href="#modal1"><i class="material-icons aligned rigth">add</i></a></div>
     	
     	</div>
 
@@ -49,7 +63,34 @@
     <!--/form-->
     {{ form_end(form) }}
     </div>
+
+ <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+
+    <h1>Creacion de area</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Crear" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('area_index') }}">Volver a la lista</a>
+        </li>
+    </ul>
+
+
+
+      
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
     <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();});
-    </script>
+    $('input#input_text, textarea#textarea1').characterCounter();
+});</script>
 {% endblock %}
