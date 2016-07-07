@@ -20,17 +20,8 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('statementQuestion')
-            //->add('pathImageQuestion')
+            ->add('pathImageQuestion')
             //->add('pathFileQuestion')
-            /*->add('idType',EntityType::class, array(
-                    'class' => 'EvaluationsBundle:TypeQuestion','query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('u');
-                    },
-                    'choice_label' => 'nameType',
-                    'choice_value' => 'idType',
-                    'required' => true,
-                ))*/
-            ->add('idType', HiddenType::class)
             ->add('area', EntityType::class, array(
                     'class' => 'EvaluationsBundle:Area',
                     'query_builder' => function (EntityRepository $er) {
