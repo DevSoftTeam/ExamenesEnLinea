@@ -21,7 +21,6 @@ class QuestionType extends AbstractType
         $builder
             ->add('statementQuestion')
             ->add('pathImageQuestion')
-            ->add('idType', HiddenType::class)
             ->add('area', EntityType::class, array(
                     'class' => 'EvaluationsBundle:Area',
                     'query_builder' => function (EntityRepository $er) {

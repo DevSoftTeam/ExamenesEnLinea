@@ -1,16 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <h1>Creacion de area</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Crear" />
-    {{ form_end(form) }}
+    {{ form_end(form) }}1
 
-    <ul>
-        <li>
-            <a href="{{ path('area_index') }}">Volver a la lista</a>
-        </li>
-    </ul>
 {% endblock %}
+
