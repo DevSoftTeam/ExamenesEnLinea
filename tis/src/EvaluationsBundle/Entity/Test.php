@@ -43,32 +43,59 @@ class Test
     private $institution;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
-     * @ORM\Column(name="start_time", type="datetime", nullable=true)
+     * @ORM\Column(name="start_time", type="time", nullable=true)
      */
     private $startTime;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
-     * @ORM\Column(name="end_time", type="datetime", nullable=true)
+     * @ORM\Column(name="end_time", type="time", nullable=true)
      */
     private $endTime;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="start_enrollment", type="datetime", nullable=true)
+     * @ORM\Column(name="start_date", type="date", nullable=true)
      */
-    private $startEnrollment;
+    private $startDate;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="end_enrollment", type="datetime", nullable=true)
+     * @ORM\Column(name="end_date", type="date", nullable=true)
      */
-    private $endEnrollment;
+    private $endDate;
+    /**
+     * @var \Time
+     *
+     * @ORM\Column(name="start_tenrollment", type="time", nullable=true)
+     */
+    private $startTimeEnrollment;
+
+    /**
+     * @var \Time
+     *
+     * @ORM\Column(name="end_tenrollment", type="time", nullable=true)
+     */
+    private $endTimeEnrollment;
+
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="start_denrollment", type="date", nullable=true)
+     */
+    private $startDateEnrollment;
+
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="end_denrollment", type="date", nullable=true)
+     */
+    private $endDateEnrollment;
 
     /**
      * @var int
@@ -191,21 +218,16 @@ class Test
      *
      * @return Test
      */
-    public function setStartTime($startTime)
-    {
-        $this->startTime = $startTime;
-
-        return $this;
-    }
-
-    public function getMonth()
-    {
-        return $this->startTime.month;
-    }
     /**
-     * Get startTime
-     *
-     * @return \DateTime
+     * @return \Date
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @return \Time
      */
     public function getStartTime()
     {
@@ -213,23 +235,15 @@ class Test
     }
 
     /**
-     * Set endTime
-     *
-     * @param \DateTime $endTime
-     *
-     * @return Test
+     * @return \Date
      */
-    public function setEndTime($endTime)
+    public function getEndDate()
     {
-        $this->endTime = $endTime;
-
-        return $this;
+        return $this->endDate;
     }
 
     /**
-     * Get endTime
-     *
-     * @return \DateTime
+     * @return \Time
      */
     public function getEndTime()
     {
@@ -237,53 +251,36 @@ class Test
     }
 
     /**
-     * Set startEnrollment
-     *
-     * @param \DateTime $startEnrollment
-     *
-     * @return Test
+     * @return \Date
      */
-    public function setStartEnrollment($startEnrollment)
+    public function getStartDateEnrollment()
     {
-        $this->startEnrollment = $startEnrollment;
-
-        return $this;
+        return $this->startDateEnrollment;
     }
 
     /**
-     * Get startEnrollment
-     *
-     * @return \DateTime
+     * @return \Time
      */
-    public function getStartEnrollment()
+    public function getStartTimeEnrollment()
     {
-        return $this->startEnrollment;
+        return $this->startTimeEnrollment;
     }
 
     /**
-     * Set endEnrollment
-     *
-     * @param \DateTime $endEnrollment
-     *
-     * @return Test
+     * @return \Date
      */
-    public function setEndEnrollment($endEnrollment)
+    public function getEndDateEnrollment()
     {
-        $this->endEnrollment = $endEnrollment;
-
-        return $this;
+        return $this->endDateEnrollment;
     }
 
     /**
-     * Get endEnrollment
-     *
-     * @return \DateTime
+     * @return \Time
      */
-    public function getEndEnrollment()
+    public function getEndTimeEnrollment()
     {
-        return $this->endEnrollment;
+        return $this->endTimeEnrollment;
     }
-
     /**
      * Set score
      *

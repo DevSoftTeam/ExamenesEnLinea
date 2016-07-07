@@ -1,7 +1,8 @@
 <?php
 
 namespace EvaluationsBundle\Form;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,33 +19,53 @@ class TestType extends AbstractType
             ->add('title')
             ->add('matter')
             ->add('institution')
-            ->add('startTime', DateTimeType::class, array(
+            ->add('startTime', TimeType::class, array(
                 'widget' => 'single_text',
-                'html5' => false,
-                'required' => false,
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['type' => 'time'],
+                'label' => ' ',
             ))
-            ->add('endTime', DateTimeType::class, array(
+            ->add('startDate',DateType::class, array(
                 'widget' => 'single_text',
-                'html5' => true,
-                'required' => false,
+                'format' => 'yyyy-MM-dd',
                 'attr' => ['class' => 'datepicker'],
+                'required' => false,
             ))
-            ->add('startEnrollment', DateTimeType::class, array(
+            ->add('endTime', TimeType::class, array(
                 'widget' => 'single_text',
-                'html5' => true,
-                'required' => false,
-                'attr' => ['class' => 'datepicker'],
+                'attr' => ['type' => 'time'],
+                'label' => ' ',
             ))
-            ->add('endEnrollment', DateTimeType::class, array(
+            ->add('endDate',DateType::class, array(
                 'widget' => 'single_text',
-                'html5' => true,
-                'required' => false,
+                'format' => 'yyyy-MM-dd',
                 'attr' => ['class' => 'datepicker'],
+                'required' => false,
+            ))
+            ->add('startTimeEnrollment', TimeType::class, array(
+                'widget' => 'single_text',
+                'attr' => ['type' => 'time'],
+                'label' => ' ',
+            ))
+            ->add('startDateEnrollment',DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'datepicker'],
+                'required' => false,
+            ))
+            ->add('endTimeEnrollment', TimeType::class, array(
+                'widget' => 'single_text',
+                'attr' => ['type' => 'time'],
+                'label' => ' ',
+            ))
+            ->add('endDateEnrollment',DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'datepicker'],
+                'required' =>false
             ))
             ->add('score')
             ->add('percentage')
-           // ->add('idUser')
+//            ->add('idUser')
         ;
     }
     
