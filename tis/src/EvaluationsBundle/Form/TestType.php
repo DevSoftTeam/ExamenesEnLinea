@@ -23,6 +23,7 @@ class TestType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['type' => 'time'],
                 'label' => ' ',
+                'required' =>false
             ))
             ->add('startDate',DateType::class, array(
                 'widget' => 'single_text',
@@ -34,6 +35,7 @@ class TestType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['type' => 'time'],
                 'label' => ' ',
+                'required' =>false
             ))
             ->add('endDate',DateType::class, array(
                 'widget' => 'single_text',
@@ -45,6 +47,7 @@ class TestType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['type' => 'time'],
                 'label' => ' ',
+                'required' =>false
             ))
             ->add('startDateEnrollment',DateType::class, array(
                 'widget' => 'single_text',
@@ -56,6 +59,7 @@ class TestType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['type' => 'time'],
                 'label' => ' ',
+                'required' =>false
             ))
             ->add('endDateEnrollment',DateType::class, array(
                 'widget' => 'single_text',
