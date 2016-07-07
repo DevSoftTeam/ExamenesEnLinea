@@ -1,35 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Question</h1>
+    <h1>Datos de la Pregunta</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Idquestion</th>
-                <td>{{ question.idQuestion }}</td>
-            </tr>
-            <tr>
-                <th>Statementquestion</th>
-                <td>{{ question.statementQuestion }}</td>
-            </tr>
-            <tr>
-                <th>Pathimagequestion</th>
-                <td>{{ question.pathImageQuestion }}</td>
-            </tr>
-            <tr>
-                <th>Pathfilequestion</th>
-                <td>{{ question.pathFileQuestion }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div>
+        <h5>Enunciado</h4>
+        <h6>{{ question.statementQuestion }}</h6>
+    </div>
+    <p>{{question.pathImageQuestion}}</p>
+    <h5>imagen</h5>
+    <img height="30%" width="50%" src="{{asset('uploads/images')}}{{question.pathImageQuestion}}">
+    
+    <h5>Archivo</h5>
+    <a href="{{asset('uploads/')}}{{ question.pathFileQuestion }}" download>archivo</a>
+    
     <ul>
         <li>
-            <a href="{{ path('question_index') }}">Back to the list</a>
+            <a href="{{ path('question_index') }}">Volver Banco de Preguntas</a>
         </li>
         <li>
-            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Edit</a>
+            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

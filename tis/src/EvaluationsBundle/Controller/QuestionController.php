@@ -55,7 +55,7 @@ class QuestionController extends Controller
         
         if ($form->isSubmitted() && $form->isValid()) {
             // Recogemos el fichero
-           $file=$form['image']->getData();
+           $file=$form['pathImageQuestion']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
                if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
