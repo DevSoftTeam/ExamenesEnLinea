@@ -7,15 +7,13 @@
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
-    	
+    	<div class="row">
     	<div class="input-field col s11">
     	{{ form_widget(form.area) }}
     	<label>Area: </label>
     	</div>
     	<div class="col s1">
-
-    	<a class="btn-floating btn-short waves-effect waves-light pink modal-trigger" href="#modal1"><i class="material-icons aligned rigth">add</i></a></div>
-    	
+    	<a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href="#modal1"><i class="material-icons aligned rigth">add</i></a></div>	
     	</div>
 
 	      <div class="row">
@@ -48,29 +46,10 @@
 		  </div>
     <!--/form-->
     {{ form_end(form) }}
-    </div>
 
  <div id="modal1" class="modal">
     <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-
-    <h1>Creacion de area</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Crear" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('area_index') }}">Volver a la lista</a>
-        </li>
-    </ul>
-
-
-
-      
+	{% embed "area/new.html.twig" with {question:question,form:form} %}{% endembed %}     
     </div>
     <div class="modal-footer">
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
@@ -78,5 +57,10 @@
   </div>
     <script>$(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter();
-});</script>
+});
+    $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+    </script>
 {% endblock %}
