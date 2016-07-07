@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Bienvenidos</title>
+        <title>{% block title %}Bienvenidos{% endblock %}</title>
             <link href="{{ asset('http://fonts.googleapis.com/icon?family=Material+Icons') }}" rel="stylesheet" />
             <link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
