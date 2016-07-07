@@ -85,5 +85,15 @@ $collection->add('trueFalseQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('matchingQuestion_new', new Route(
+    '/matchingQuestion/{id_type}',
+    array('_controller' => 'EvaluationsBundle:matchingQuestion:mqNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
 
 return $collection;
