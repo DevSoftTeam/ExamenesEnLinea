@@ -83,7 +83,7 @@ class TestController extends Controller
             $em->persist($test);
             $em->flush();
 
-            return $this->redirectToRoute('test_edit', array('id' => $test->getId()));
+            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
         }
 
         return $this->render('test/edit.html.twig', array(
