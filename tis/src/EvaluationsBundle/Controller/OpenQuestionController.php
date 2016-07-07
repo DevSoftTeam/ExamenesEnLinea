@@ -45,7 +45,7 @@ class OpenQuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+            return $this->redirectToRoute('openQuestion_show', array('id' => $question->getId()));
           }
         }
 
@@ -63,7 +63,7 @@ class OpenQuestionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($question);
 
-        return $this->render('question/show.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:showOpenQuestion.html.twig', array(
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
         ));
