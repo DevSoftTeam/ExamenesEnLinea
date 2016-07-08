@@ -16,14 +16,14 @@
     
     <ul>
         <li>
-            <a href="{{ path('question_index') }}">Volver Banco de Preguntas</a>
+            <a href="{{ path('question_index') }}">Ver Banco de Preguntas</a>
         </li>
         <li>
-            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Editar</a>
+            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Editar pregunta</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <button class="btn waves-effect waves-light " type="submit" name="action">Eliminar</button>
             {{ form_end(delete_form) }}
         </li>
     </ul>

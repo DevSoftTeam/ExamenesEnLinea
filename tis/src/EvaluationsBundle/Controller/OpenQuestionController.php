@@ -84,10 +84,10 @@ class OpenQuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('question_edit', array('id' => $question->getId()));
+            return $this->redirectToRoute('openQquestion_edit', array('id' => $question->getId()));
         }
 
-        return $this->render('question/edit.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:editOpenQuestion.html.twig', array(
             'question' => $question,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
