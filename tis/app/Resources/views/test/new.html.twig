@@ -1,31 +1,30 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Crear Examen</h1>
-
+    <label class="teal-text lighten-4" ><h3>Crear Examen</h3></label>
+    <div></div>
     {{ form_start(form) }}
     <div class="row">
         <div class="row input-field ">
-            {{ form_widget(form.title)}}
-            <label for="input_text">Titulo</label>
+            <label class="teal-text darken-4"><h6>Titulo :</h6></label>
+            {{ form_widget(form.title, {'attr':{'placeholder':"Introduzca Texto", 'type':"text"}})}}
         </div>
-        <div class="row input-field">
-            {{ form_widget(form.matter)}}
-            <label for="input_text">Materia</label>
+        <div class="row input-field ">
+            <label class="teal-text darken-4"><h6>Materia :</h6></label>
+            {{ form_widget(form.matter, {'attr':{'placeholder':"Introduzca Texto", 'type':"text"}})}}
         </div>
-        <div class="row input-field">
-            {{ form_widget(form.institution)}}
-            <label for="input_text">Institucion</label>
+        <div class="row input-field ">
+            <label class="teal-text darken-4"><h6>Institucion :</h6></label>
+            {{ form_widget(form.institution, {'attr':{'placeholder':"Introduzca Texto", 'type':"text"}})}}
         </div>
-
 
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Inicio</label>
-                {{ form_widget(form.startDate)}}
+                <label for="input_date " class="teal-text darken-4"><h6>Fecha Inicio</h6></label>
+                {{ form_widget(form.startDate, {'attr':{'placeholder':"Seleccione Fecha", 'type':"text"}})}}
             </div>
             <div class="input-field col s6">
-            <label class="active">Hora Inicio</label>
+            <label class="active teal-text darken-4">Hora Inicio</label>
             {{ form_row(form.startTime,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
 
@@ -33,11 +32,11 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Fin</label>
-                {{ form_widget(form.endDate)}}
+                <label for="input_date" class="teal-text darken-4"><h6>Fecha Fin</h6></label>
+                {{ form_widget(form.endDate, {'attr':{'placeholder':"Seleccione Fecha", 'type':"text"}})}}
             </div>
             <div class="input-field col s6">
-                <label  class="active">Hora Fin</label>
+                <label  class="active teal-text darken-4">Hora Fin</label>
                 {{ form_row(form.endTime,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
 
@@ -45,11 +44,11 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Inicio Inscripcion</label>
-                {{ form_widget(form.startDateEnrollment)}}
+                <label for="input_date" class="teal-text darken-4"><h6>Fecha Inicio Inscripcion</h6></label>
+                {{ form_widget(form.startDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
             </div>
             <div class="input-field col s6">
-                <label class="active">Hora Inicio Inscripcion</label>
+                <label class="active teal-text darken-4"><h6>Hora Inicio Inscripcion</h6></label>
                 {{ form_row(form.startTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
 
@@ -57,11 +56,11 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Fin Inscripcion</label>
-                {{ form_widget(form.endDateEnrollment)}}
+                <label for="input_date" class="teal-text darken-4"><h6>Fecha Fin Inscripcion</h6></label>
+                {{ form_widget(form.endDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
             </div>
             <div class="input-field col s6">
-                <label class="active">Hora Fin Inscripcion</label>
+                <label class="active teal-text darken-4"><h6>Hora Fin Inscripcion</h6></label>
                 {{ form_row(form.endTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
 
@@ -76,20 +75,19 @@
         </script>
 
         <div class="row input-field">
-            {{ form_widget(form.score)}}
-            <label for="input_text">Puntuacion Maxima</label>
+            <label for="input_text" class="teal-text darken-4"><h6>Puntuacion Maxima</h6></label>
+            {{ form_widget(form.score, {'attr':{'placeholder':'Introduzca Puntuacion', 'type':"text"}})}}
         </div>
 
         <div class="row input-field">
-            {{ form_widget(form.percentage)}}
-            <label for="input_text">Procentaje Total</label>
+            <label for="input_text" class="teal-text darken-4"><h6>Procentaje Total</h6></label>
+            {{ form_widget(form.percentage, {'attr':{'placeholder':"Introduzca Porcentaje % ", 'type': "text"}})}}
         </div>
     </div>
-    {#{{ form_widget(form) }}#}
-    {#<input type="submit" value="Create" />#}
 
-    <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    {#<input type="submit" value="Guardar" />#}
+    {#{{ form_end(form) }}#}
+    <button class="btn waves-effect waves-light " type="submit" name="action">Guardar</button>
 
     <ul>
         <li>

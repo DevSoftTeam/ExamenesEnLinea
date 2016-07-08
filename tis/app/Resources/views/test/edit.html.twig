@@ -1,25 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{#{% block body %}#}
-    {#<h1>Editar Examen</h1>#}
-
-    {#{{ form_start(edit_form) }}#}
-        {#{{ form_widget(edit_form) }}#}
-        {#<input type="submit" value="Edit" />#}
-    {#{{ form_end(edit_form) }}#}
-
-    {#<ul>#}
-        {#<li>#}
-            {#<a href="{{ path('test_index') }}">Atras</a>#}
-        {#</li>#}
-        {#<li>#}
-            {#{{ form_start(delete_form) }}#}
-                {#<input type="submit" value="Delete">#}
-            {#{{ form_end(delete_form) }}#}
-        {#</li>#}
-    {#</ul>#}
-{#{% endblock %}#}
-
 {% block body %}
     <h1>Crear Examen</h1>
 
@@ -29,6 +9,7 @@
             {{ form_widget(edit_form.title)}}
             <label for="input_text">Titulo</label>
         </div>
+
         <div class="row input-field">
             {{ form_widget(edit_form.matter)}}
             <label for="input_text">Materia</label>
@@ -110,12 +91,12 @@
 
     <ul>
     <li>
-    <a href="{{ path('test_index') }}">Atras</a>
+        <a href="{{ path('test_index') }}">Atras</a>
     </li>
     <li>
-    {{ form_start(delete_form) }}
-    <input type="submit" value="Eliminar">
-    {{ form_end(delete_form) }}
+        {{ form_start(delete_form) }}
+            <input type="submit" value="Eliminar">
+        {{ form_end(delete_form) }}
     </li>
     </ul>
 
