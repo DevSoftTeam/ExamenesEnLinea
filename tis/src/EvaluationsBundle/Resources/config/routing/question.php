@@ -95,7 +95,7 @@ $collection->add('trueFalseQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
-<<<<<<< HEAD
+
 $collection->add('uniqueAnswerQuestion_new', new Route(
     '/uniqueAnswerQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:uaqNew'),
@@ -109,11 +109,6 @@ $collection->add('uniqueAnswerQuestion_new', new Route(
 $collection->add('multipleQuestion_new', new Route(
     '/multipleQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:multipleQuestion:mqNew'),
-=======
-$collection->add('matchingQuestion_new', new Route(
-    '/matchingQuestion/{id_type}',
-    array('_controller' => 'EvaluationsBundle:matchingQuestion:mqNew'),
->>>>>>> 853081c1924c171edb53e561c77126dab3679f41
     array(),
     array(),
     '',
