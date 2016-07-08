@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-	<h4>Pregunta respuesta unica: </h4>
+	<h3>Pregunta respuesta unica: </h3>
 	<div class="row">
 
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
@@ -35,77 +35,84 @@
 	      </div>
 	    </div>
 
+
+		<h5>RESPUESTAS:</h5>
+		<form action="#">
+
+		<label><a class="col s12">*Las respuestas se mostraran en el orden ingresado.</label>
+
+		<div class="row">
+    	<form class="col s12">
+     	<div class="row">
+      	<div class="input-field col s10">
+        <input placeholder="" id="first_name" type="text" class="validate">
+        <label for="first_name">Respuesta 1:</label>
+        </div>
+        <div class="input-field col s2">
+        <input name="group1" type="radio" id="correct1" />
+     	<label for="correct1">Correcta</label>
+        </div>
+      	</div>
+
+      	<form class="col s12">
+     	<div class="row">
+      	<div class="input-field col s10">
+        <input placeholder="" id="first_name" type="text" class="validate">
+        <label for="first_name">Respuesta 2:</label>
+        </div>
+        <div class="input-field col s2">
+        <input name="group1" type="radio" id="correct1" />
+     	<label for="correct1">Correcta</label>
+        </div>
+        </div>
+
+     	<form class="col s12">
+     	<div class="row">
+      	<div class="input-field col s10">
+        <input placeholder="" id="first_name" type="text" class="validate">
+        <label for="first_name">Respuesta 3:</label>
+        </div>
+        <div class="input-field col s2">
+        <input name="group1" type="radio" id="correct1" />
+     	<label for="correct1">Correcta</label>
+        </div>
+     	</div>
+
+    	<form class="col s12">
+     	<div class="row">
+      	<div class="input-field col s10">
+        <input placeholder="" id="first_name" type="text" class="validate">
+        <label for="first_name">Respuesta 4:</label>
+        </div>
+        <div class="input-field col s2">
+        <input name="group1" type="radio" id="correct1" />
+     	<label for="correct1">Correcta</label>
+        </div>
+        </div>
+
+    	<form class="col s12">
+     	<div class="row">
+      	<div class="input-field col s10">
+        <input placeholder="" id="first_name" type="text" class="validate">
+        <label for="first_name">Respuesta 5:</label>
+        </div>
+        <div class="input-field col s2">
+        <input name="group1" type="radio" id="correct1" />
+     	<label for="correct1">Correcta</label>
+        </div>
+     	</div>
+
+    		
+
+    	</div>
+
+
+	      
 	      <div class=" alight center">
 	      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Guardar</a>
 		  <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
 		  <br>
 		  </div>
-
-		<h5>RESPUESTAS:</h5>
-		<form action="#">
-
-		<label>*Las respuestas se mostraran en el orden ingresado.</label>
-
-			
-			<div class="input-field">
-			<input type="text" id="respuesta1">
-			<label for="respuesta1">Respuesta 1:</label>
-			 
-     	 	<input name="group1" type="radio" id="correct1" />
-     	 	<label for="correct1">RESPUESTA CORRECTA</label><br>
-    		
-
-    		<a class="input-field">
-			<input type="text" id="respuesta1">
-			<label for="respuesta1">Respuesta 1:</label>
-			 
-     	 	<input name="group1" type="radio" id="correct1" />
-     	 	<label for="correct1">RESPUESTA CORRECTA</label>
-    		
-
-			<a class="input-field">
-			<input type="text" id="respuesta2">
-			<label for="respuesta2">Respuesta 2:</label>
-
-			 
-     	 	<input name="group1" type="radio" id="correct2" />
-     	 	<label for="correct2">RESPUESTA CORRECTA</label>
-    		
-
-			<a class="input-field">
-			<input type="text" id="respuesta3">
-			<label for="respuesta3">Respuesta 3:</label>
-
-			
-     	 	<input name="group1" type="radio" id="correct3" />
-     	 	<label for="correct3">RESPUESTA CORRECTA</label>
-    		
-
-
-    		<a class="input-field">
-			<input type="text" id="respuesta4">
-			<label for="respuesta4">Respuesta 4:</label>
-
-			 
-     	 	<input name="group1" type="radio" id="correct4" />
-     	 	<label for="correct4">RESPUESTA CORRECTA</label>
-    		
-
-			<a class="input-field">
-			<input type="text" id="respuesta5">
-			<label for="respuesta5">Respuesta 5:</label>
-
-			
-     	 	<input name="group1" type="radio" id="correct5" />
-     	 	<label for="correct5">RESPUESTA CORRECTA</label>
-    		
-
-    		</div>
-
-
-    		<div class=" alight center">
-	      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Guardar</a>
-		  <br>
 		  </button></div>
 
     <!--/form-->
