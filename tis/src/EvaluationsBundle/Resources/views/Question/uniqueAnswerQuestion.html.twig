@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+{% block title %} Crear pregunta {% endblock %}
+{% block body %}
+    
+	<h4>Pregunta respuesta unica: </h4>
+	<div class="row">
+
+	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
+    	
+    	<div class="input-field col s11">
+    	{{ form_widget(form.area) }}
+    	<label>Area: </label>
+    	</div>
+    	<div class="col s1">
+
+    	<a class="btn-floating btn-short waves-effect waves-light pink" href="/area/new"><i class="material-icons aligned rigth">add</i></a></div>
+    	
+    	</div>
+
+	      <div class="row">
+	        <div class="input-field col s12">
+	          	          {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000'}}) }}
+	          {{ form_errors(form.statementQuestion) }}
+	          <label for="textarea1">Enunciado</label>
+	        </div>
+	      </div>
+
+	    <div class="file-field input-field">
+	      <div class="btn">
+	        <span>Subir imagen</span>
+	        {{ form_widget(form.image) }}
+	      </div>
+	      <div class="file-path-wrapper">
+	        {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
+	      </div>
+	    </div>
+
+	      <div class=" alight center">
+	      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Guardar</a>
+		  <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+		  <br>
+		  </div>
+
+		<h5>RESPUESTAS:</h5>
+		<form action="#">
+
+		<label>*Las respuestas se mostraran en el orden ingresado.</label>
+
+			
+			<div class="input-field">
+			<input type="text" id="respuesta1">
+			<label for="respuesta1">Respuesta 1:</label>
+			 
+     	 	<input name="group1" type="radio" id="correct1" />
+     	 	<label for="correct1">RESPUESTA CORRECTA</label><br>
+    		
+
+    		<a class="input-field">
+			<input type="text" id="respuesta1">
+			<label for="respuesta1">Respuesta 1:</label>
+			 
+     	 	<input name="group1" type="radio" id="correct1" />
+     	 	<label for="correct1">RESPUESTA CORRECTA</label>
+    		
+
+			<a class="input-field">
+			<input type="text" id="respuesta2">
+			<label for="respuesta2">Respuesta 2:</label>
+
+			 
+     	 	<input name="group1" type="radio" id="correct2" />
+     	 	<label for="correct2">RESPUESTA CORRECTA</label>
+    		
+
+			<a class="input-field">
+			<input type="text" id="respuesta3">
+			<label for="respuesta3">Respuesta 3:</label>
+
+			
+     	 	<input name="group1" type="radio" id="correct3" />
+     	 	<label for="correct3">RESPUESTA CORRECTA</label>
+    		
+
+
+    		<a class="input-field">
+			<input type="text" id="respuesta4">
+			<label for="respuesta4">Respuesta 4:</label>
+
+			 
+     	 	<input name="group1" type="radio" id="correct4" />
+     	 	<label for="correct4">RESPUESTA CORRECTA</label>
+    		
+
+			<a class="input-field">
+			<input type="text" id="respuesta5">
+			<label for="respuesta5">Respuesta 5:</label>
+
+			
+     	 	<input name="group1" type="radio" id="correct5" />
+     	 	<label for="correct5">RESPUESTA CORRECTA</label>
+    		
+
+    		</div>
+
+
+    		<div class=" alight center">
+	      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Guardar</a>
+		  <br>
+		  </button></div>
+
+    <!--/form-->
+    {{ form_end(form) }}
+    </div>
+    <script>$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();});
+    </script>
+{% endblock %}

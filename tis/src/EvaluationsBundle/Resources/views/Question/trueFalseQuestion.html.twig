@@ -37,6 +37,19 @@
           {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
         </div>
       </div>
+    <div class=" alight center" >
+      <form action="#"> 
+    <p>
+      <input name="group1" class="with-gap" type="radio" id="t" />
+      <label for="true">Verdadero</label>
+    </p>
+    <p>
+      <input name="group1" class="with-gap" type="radio" id="f" />
+      <label for="false">Falso</label>
+    </p>
+   
+     </form> 
+       </div>
 
         <div class=" alight center">
         <button class="btn waves-effect waves-light " type="submit" name="action">Guardar
@@ -44,24 +57,8 @@
       </button>
       <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
       </button>
-      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Añadir respuesta</a>
       <br>
       </div>
-
-       <div class=" alight center"  style="display: none;" id="respuesta" >
-       <!-- <form action="#"> -->
-    <p>
-      <input name="groupTrue" type="radio" id="test1" />
-      <label for="true">True</label>
-    </p>
-    <p>
-      <input name="groupFalse" type="radio" id="test2" />
-      <label for="false">false</label>
-    </p>
-   
-     <!--</form> -->
-       </div>
-
 
 
     <!--/form-->
