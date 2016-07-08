@@ -66,6 +66,16 @@ $collection->add('openQuestion_show', new Route(
     array('GET')
 ));
 
+$collection->add('openQuestion_edit', new Route(
+    '/{id}/editOQ',
+    array('_controller' => 'EvaluationsBundle:OpenQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
 $collection->add('question_edit', new Route(
     '/{id}/edit',
     array('_controller' => 'EvaluationsBundle:Question:edit'),

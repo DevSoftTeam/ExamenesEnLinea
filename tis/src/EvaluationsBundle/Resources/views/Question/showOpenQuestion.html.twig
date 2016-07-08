@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
-{% Pregunta %}
+{% block title %}Pregunta{% endblock %}
 {% block body %}
-    <h3>Pregunta</h3>
+    <h3>Datos de pregunta</h3>
 
     <table>
         <tbody>
@@ -11,25 +11,23 @@
             </tr>
             <tr>
                 <th>Imagen</th>
+                {% if question.pathImageQuestion != null %}
                 <td><img src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"></td>
-            </tr>
-            <tr>
-                <th>Area</th>
-                <td></td>
+                {% endif %}
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('question_index') }}">Ver lista</a>
+            <a href="{{ path('question_index') }}">Ver Banco de preguntas</a>
         </li>
         <li>
-            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Editar</a>
+            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Editar pregunta</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <button class="btn waves-effect waves-light " type="submit" name="action">Eliminar</button>
             {{ form_end(delete_form) }}
         </li>
     </ul>
