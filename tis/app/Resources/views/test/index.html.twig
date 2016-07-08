@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Lista de examenes</h1>
+    <h1>Examenes</h1>
 
     <table>
         <thead>
             <tr>
-                <th>Nro Examen</th>
+                {#<th>Nro Examen</th>#}
                 <th>Titulo</th>
                 <th>Materia</th>
-                <th>Institucion</th>
-                <th>Inicio Examen</th>
-                <th>Fin Examen</th>
-                <th>Inicio Inscripcion</th>
-                <th>Fin Inscripcion</th>
+                {#<th>Institucion</th>#}
+                <th>Hora Inicio</th>
+                <th>Hora Fin</th>
+                <th>Fecha Inicio</th>
+                {#<th>Fecha Fin</th>#}
+                {#<th>Hora Inicio Registro</th>#}
+                {#<th>Hora Fin Registro</th>#}
+                {#<th>Fecha Inicio Registro</th>#}
+                {#<th>Fecha Fin Registro</th>#}
                 <th>Puntuacion Maxima</th>
                 <th>Porcentage Total</th>
                 <th>Funciones</th>
@@ -22,23 +26,27 @@
         <tbody>
         {% for test in tests %}
             <tr>
-                <td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>
+                {#<td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>#}
                 <td>{{ test.title }}</td>
                 <td>{{ test.matter }}</td>
-                <td>{{ test.institution }}</td>
-                <td>{% if test.startTime %}{{ test.startTime|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if test.endTime %}{{ test.endTime|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if test.startEnrollment %}{{ test.startEnrollment|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if test.endEnrollment %}{{ test.endEnrollment|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {#<td>{{ test.institution }}</td>#}
+                <td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>
+                <td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>
+                <td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>
+                {#<td>{% if test.endDate %}{{ test.endDate|date('Y-m-d') }}{% endif %}</td>#}
+                {#<td>{% if test.startTimeEnrollment %}{{ test.startTimeEnrollment|date('H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if test.endTimeEnrollment %}{{ test.endTimeEnrollment|date('H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if test.startDateEnrollment %}{{ test.startDateEnrollment|date('Y-m-d') }}{% endif %}</td>#}
+                {#<td>{% if test.endDateEnrollment %}{{ test.endDateEnrollment|date('Y-m-d') }}{% endif %}</td>#}
                 <td>{{ test.score }}</td>
                 <td>{{ test.percentage }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">mostrar</a>
+                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">Detalles</a>
                         </li>
                         <li>
-                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">editar</a>
+                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>
                         </li>
                     </ul>
                 </td>
@@ -49,7 +57,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('test_new') }}">Crear nuevo Examen</a>
+            <a href="{{ path('test_new') }}">Crear Examen</a>
         </li>
     </ul>
 {% endblock %}

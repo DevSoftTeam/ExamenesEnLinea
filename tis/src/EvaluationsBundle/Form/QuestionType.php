@@ -21,6 +21,7 @@ class QuestionType extends AbstractType
         $builder
             ->add('statementQuestion')
             ->add('pathImageQuestion')
+<<<<<<< HEAD
             ->add('pathFileQuestion')
             ->add('idType',EntityType::class, array(
                     'class' => 'EvaluationsBundle:TypeQuestion','query_builder' => function (EntityRepository $er) {
@@ -31,6 +32,8 @@ class QuestionType extends AbstractType
                     'required' => true,
                 ))
             ->add('idType', HiddenType::class)
+=======
+>>>>>>> 853081c1924c171edb53e561c77126dab3679f41
             ->add('area', EntityType::class, array(
                     'class' => 'EvaluationsBundle:Area',
                     'query_builder' => function (EntityRepository $er) {

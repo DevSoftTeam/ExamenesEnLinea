@@ -7,15 +7,13 @@
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
-    	
+    	<div class="row">
     	<div class="input-field col s11">
     	{{ form_widget(form.area) }}
     	<label>Area: </label>
     	</div>
     	<div class="col s1">
-
-    	<a class="btn-floating btn-short waves-effect waves-light pink" href="/area/new"><i class="material-icons aligned rigth">add</i></a></div>
-    	
+    	<a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href=""><i class="material-icons aligned rigth">add</i></a></div>	
     	</div>
 
 	      <div class="row">
@@ -45,11 +43,16 @@
 		  </button>
 		  <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
 		  <br>
-		  </div>
+		  </div>  
     <!--/form-->
     {{ form_end(form) }}
-    </div>
+
     <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();});
+    $('input#input_text, textarea#textarea1').characterCounter();
+});
+    $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
     </script>
 {% endblock %}

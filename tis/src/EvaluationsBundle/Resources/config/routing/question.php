@@ -56,6 +56,16 @@ $collection->add('openQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('openQuestion_show', new Route(
+    '/{id}/showOQ',
+    array('_controller' => 'EvaluationsBundle:OpenQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
 $collection->add('question_edit', new Route(
     '/{id}/edit',
     array('_controller' => 'EvaluationsBundle:Question:edit'),
@@ -85,6 +95,7 @@ $collection->add('trueFalseQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
+<<<<<<< HEAD
 $collection->add('uniqueAnswerQuestion_new', new Route(
     '/uniqueAnswerQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:uaqNew'),
@@ -98,6 +109,11 @@ $collection->add('uniqueAnswerQuestion_new', new Route(
 $collection->add('multipleQuestion_new', new Route(
     '/multipleQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:multipleQuestion:mqNew'),
+=======
+$collection->add('matchingQuestion_new', new Route(
+    '/matchingQuestion/{id_type}',
+    array('_controller' => 'EvaluationsBundle:matchingQuestion:mqNew'),
+>>>>>>> 853081c1924c171edb53e561c77126dab3679f41
     array(),
     array(),
     '',

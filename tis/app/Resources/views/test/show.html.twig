@@ -1,7 +1,7 @@
- {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Examen</h1>
+    <h1>Examenes</h1>
 
     <table>
         <tbody>
@@ -22,27 +22,43 @@
                 <td>{{ test.institution }}</td>
             </tr>
             <tr>
-                <th>Inicio Examen</th>
-                <td>{% if test.startTime %}{{ test.startTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Hora Inicio</th>
+                <td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Fin Examen</th>
-                <td>{% if test.endTime %}{{ test.endTime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Hora Fin</th>
+                <td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Inicio Inscripcion</th>
-                <td>{% if test.startEnrollment %}{{ test.startEnrollment|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Fecha Inicio</th>
+                <td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Fin Inscripcion</th>
-                <td>{% if test.endEnrollment %}{{ test.endEnrollment|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Fecha Fin</th>
+                <td>{% if test.endDate %}{{ test.endDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Hora inicio Inscripcion</th>
+                <td>{% if test.startTimeEnrollment %}{{ test.startTimeEnrollment|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Hora Fin Inscripcion</th>
+                <td>{% if test.endTimeEnrollment %}{{ test.endTimeEnrollment|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fecha Inicio Inscripcion</th>
+                <td>{% if test.startDateEnrollment %}{{ test.startDateEnrollment|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fecha Fin Inscripcion</th>
+                <td>{% if test.endDateEnrollment %}{{ test.endDateEnrollment|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Puntuacion Maxima</th>
                 <td>{{ test.score }}</td>
             </tr>
             <tr>
-                <th>Porcentage Total</th>
+                <th>Porcentaje Total</th>
                 <td>{{ test.percentage }}</td>
             </tr>
         </tbody>
@@ -50,7 +66,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('test_index') }}">Ver Examenes</a>
+            <a href="{{ path('test_index') }}">Atras</a>
         </li>
         <li>
             <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>

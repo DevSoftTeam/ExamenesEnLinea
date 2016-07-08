@@ -51,6 +51,7 @@ class TestController extends Controller
             'test' => $test,
             'form' => $form->createView(),
         ));
+//        form['nombreDelElemento']->getData()
     }
 
     /**
@@ -82,7 +83,7 @@ class TestController extends Controller
             $em->persist($test);
             $em->flush();
 
-            return $this->redirectToRoute('test_edit', array('id' => $test->getId()));
+            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
         }
 
         return $this->render('test/edit.html.twig', array(
@@ -124,20 +125,5 @@ class TestController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
-
-    public function guardarDatos() {
-        $test = new Test();
-        $test->setTitle("nohayexamen");
-        $test->setMatter("materia");
-        $test->setInstitution("insittucion");
-        $test -> setStartTime(new \DateTime("2016 06 06 17:15"));
-        $test -> setEndTime(new \DateTime("2016 06 06 18:45"));
-        $test -> setStartEnrollment(new \DateTime("2016 06 04 17:15"));
-        $test -> setEndEnrollment(new \DateTime("2016 06 06 17:15"));
-
-        $entityManager = $this -> getDoctrine()-> getEntityManager();
-        $entityManager->persist($test);
-        $entityManager->flush();
     }
 }

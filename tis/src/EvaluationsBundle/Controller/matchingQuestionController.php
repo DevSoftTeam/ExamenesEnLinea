@@ -1,61 +1,26 @@
 <?php
 
 namespace EvaluationsBundle\Controller;
-
+ 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Question;
-use EvaluationsBundle\Form\QuestionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-/**
- * Question controller.
- *
- */
-class QuestionController extends Controller
-{
-    /**
-     * Lists all Question entities.
-     *
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+class matchingQuestionController extends Controller
 
-        $questions = $em->getRepository('EvaluationsBundle:Question')->findAll();
-
-        return $this->render('question/index.html.twig', array(
-            'questions' => $questions,
-        ));
-    }
-
-    /**
-     * Creates a new Question entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $types = $em->getRepository('EvaluationsBundle:TypeQuestion')->findAll();
-
-        return $this->render('question/new.html.twig', array(
-            'types' => $types,
-        ));
-    }
-
-    /*  fileQuestionNew
-     *
-     */
-    public function fileQuestionNewAction(Request $request, $id_type)
-    {
+{public function mqNewAction($id_type, Request $request){
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm('EvaluationsBundle\Form\FileQuestionType', $question);
+        $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            // Recogemos el fichero
-           $file=$form['pathImageQuestion']->getData();
+          if(!is_null($form['statementQuestion']->getData())){
+            $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
+            $idArea = $em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
+            $file=$form['image']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
                if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
@@ -68,24 +33,19 @@ class QuestionController extends Controller
                }else{
                 $question->setPathImageQuestion(null);
                }
-            }
-            if ($file=$form['pathFileQuestion'] != "") {
-                $file=$form['pathFileQuestion']->getData();  
-                $ext=$file->guessExtension();
-                $file_name=time().".".$ext;
-                $file->move("uploads", $file_name);
-                $question->setpathFileQuestion($file_name);
-            }
-            $idType=$em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
-            $idArea=$em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
+             }  
+            $question->setIdType($idType);
+            $question->setIdArea($idArea);
+
             $em->persist($question);
             $em->flush();
+
             return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+          }
         }
 
-        return $this->render('question/fileQuestionNew.html.twig', array(
+ return $this->render('EvaluationsBundle:Question:matchingQuestion.html.twig', array(
             'question' => $question,
-            'type' => $id_type,
             'form' => $form->createView(),
         ));
     }
