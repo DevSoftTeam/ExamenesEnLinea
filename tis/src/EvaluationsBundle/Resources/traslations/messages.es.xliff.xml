@@ -5,7 +5,7 @@
             <trans-unit id="1"> 
                 <source>The presented password cannot be empty.</source> 
                 <target>El campo contraseña no puede estar vacío.</target> 
-            </trans-unit> 
+            </trans-unit>
         </body>
     </file>
 </xliff>

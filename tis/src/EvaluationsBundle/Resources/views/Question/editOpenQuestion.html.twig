@@ -1,7 +1,54 @@
 {% extends 'base.html.twig' %}
 {% block title %}{% endblock %}
 {% block body %}
-    <h1>Editar Pregunta</h1>
+    <h3>Editar Pregunta</h3>
+
+        <div class="row">
+
+    <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
+    {{ form_start(edit_form,{ 'enctype':"multipart/form-data"}) }}
+        <div class="row">
+        <div class="input-field col s11">
+        {{ form_widget(edit_form.area) }}
+        <label class="teal-text darken-4"><h6>Area :</h6></label>
+        </div>
+        <div class="col s1">
+        <a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href=""><i class="material-icons aligned rigth">add</i></a>
+        </div>  
+        </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+              {{ form_widget(edit_form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','value':'question.statementQuestion'}}) }}
+              {{ form_errors(edit_form.statementQuestion) }}
+            </div>
+          </div>
+
+        <td><img src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"></td>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>imagen</span>
+            <i class="material-icons right">perm_media</i>
+            <!--input type="file" name="image"-->
+            {{ form_widget(edit_form.image) }}
+          </div>
+          <div class="file-path-wrapper">
+            {{ form_widget(edit_form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
+          </div>
+        </div>
+
+          <div class=" alight center">
+          <button class="btn waves-effect waves-light " type="submit" name="action">Editar</button>
+          <br>
+          </div>  
+    <!--/form-->
+    {{ form_end(edit_form) }}
+    </div>
+    <script>$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();
+    $('.modal-trigger').leanModal(); });
+    </script>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
