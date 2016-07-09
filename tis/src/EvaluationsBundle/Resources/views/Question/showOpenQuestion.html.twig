@@ -6,13 +6,18 @@
     <table>
         <tbody>
             <tr>
-                <th>Enunciado</th>
+                <th><label class="teal-text darken-4"><h6>Area :</h6></label></th>
+                <td>{{ question.idArea.nameArea }}</td>
+            </tr>
+            <br>
+            <tr>
+                <th><label class="teal-text darken-4"><h6>Enunciado :</h6></label></th>
                 <td>{{ question.statementQuestion }}</td>
             </tr>
             <tr>
-                <th>Imagen</th>
+                <th><label class="teal-text darken-4"><h6>Imagen :</h6></label></th>
                 {% if question.pathImageQuestion != null %}
-                <td><img src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"></td>
+                <td><img height="50%" width="50%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"></td>
                 {% endif %}
             </tr>
         </tbody>

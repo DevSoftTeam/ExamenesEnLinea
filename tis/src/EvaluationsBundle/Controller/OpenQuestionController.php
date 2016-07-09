@@ -75,18 +75,39 @@ class OpenQuestionController extends Controller
      */
     public function editAction(Request $request, Question $question)
     {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $statement = $editForm['statementQuestion']->getData();
+          if(!is_null($statement) && strlen($statement)<=5000){
+            $idArea = $em->getRepository('EvaluationsBundle:Area')->find($editForm['area']->getData());
+            $file=$editForm['image']->getData();
+            if (!is_null($file)) {
+               $ext=$file->guessExtension();
+               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
+                $pathImage = $editForm['pathImageQuestion']->getData();
+                $pathImage = explode(".", $pathImage);
+                $pathImage =  $pathImage[0];
+                $file_name=$pathImage."_".time().".".$ext;
+                $file->move("uploads/images", $file_name);
+                $question->setPathImageQuestion($file_name);
+               }else{
+                $question->setPathImageQuestion(null);
+               }
+             }  
+            $question->setIdArea($idArea);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('openQquestion_edit', array('id' => $question->getId()));
+            return $this->redirectToRoute('openQuestion_show', array('id' => $question->getId()));
+          }
         }
-
         return $this->render('EvaluationsBundle:Question:editOpenQuestion.html.twig', array(
             'question' => $question,
             'edit_form' => $editForm->createView(),
