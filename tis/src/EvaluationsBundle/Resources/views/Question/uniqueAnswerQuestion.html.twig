@@ -2,14 +2,14 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-	<h3>Pregunta respuesta unica: </h3>
+	<label class="teal-text lighten-4"><h3>Pregunta respuesta unica: </h3></label>
 	<div class="row">
 
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
     	
     	<div class="input-field col s11">
     	{{ form_widget(form.area) }}
-    	<label>Area: </label>
+    	<label class="teal-text lighten-4">Area: </label>
     	</div>
     	<div class="col s1">
 
@@ -17,13 +17,16 @@
     	
     	</div>
 
-	      <div class="row">
-	        <div class="input-field col s12">
-	          	          {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000'}}) }}
-	          {{ form_errors(form.statementQuestion) }}
-	          <label for="textarea1">Enunciado</label>
-	        </div>
-	      </div>
+	     <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea placeholder="" id="textarea1" class="materialize-textarea"></textarea>
+          <label class="teal-text lighten-4" for="textarea1">Enunciado:</label>
+        </div>
+      </div>
+    </form>
+  </div>
 
 	    <div class="file-field input-field">
 	      <div class="btn">
@@ -36,21 +39,21 @@
 	    </div>
 
 
-		<h5>RESPUESTAS:</h5>
+		<label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
 		<form action="#">
 
-		<label><a class="col s12">*Las respuestas se mostraran en el orden ingresado.</label>
+		<label><a class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label>
 
 		<div class="row">
     	<form class="col s12">
      	<div class="row">
       	<div class="input-field col s10">
         <input placeholder="" id="first_name" type="text" class="validate">
-        <label for="first_name">Respuesta 1:</label>
+        <label class="teal-text lighten-4" for="first_name">Respuesta 1:</label>
         </div>
         <div class="input-field col s2">
         <input name="group1" type="radio" id="correct1" />
-     	<label for="correct1">Correcta</label>
+     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
         </div>
       	</div>
 
@@ -58,11 +61,11 @@
      	<div class="row">
       	<div class="input-field col s10">
         <input placeholder="" id="first_name" type="text" class="validate">
-        <label for="first_name">Respuesta 2:</label>
+        <label class="teal-text lighten-4" for="first_name">Respuesta 2:</label>
         </div>
         <div class="input-field col s2">
         <input name="group1" type="radio" id="correct1" />
-     	<label for="correct1">Correcta</label>
+     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
         </div>
         </div>
 
@@ -70,11 +73,11 @@
      	<div class="row">
       	<div class="input-field col s10">
         <input placeholder="" id="first_name" type="text" class="validate">
-        <label for="first_name">Respuesta 3:</label>
+        <label class="teal-text lighten-4" for="first_name">Respuesta 3:</label>
         </div>
         <div class="input-field col s2">
         <input name="group1" type="radio" id="correct1" />
-     	<label for="correct1">Correcta</label>
+     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
         </div>
      	</div>
 
@@ -82,11 +85,11 @@
      	<div class="row">
       	<div class="input-field col s10">
         <input placeholder="" id="first_name" type="text" class="validate">
-        <label for="first_name">Respuesta 4:</label>
+        <label class="teal-text lighten-4" for="first_name">Respuesta 4:</label>
         </div>
         <div class="input-field col s2">
         <input name="group1" type="radio" id="correct1" />
-     	<label for="correct1">Correcta</label>
+     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
         </div>
         </div>
 
@@ -94,11 +97,11 @@
      	<div class="row">
       	<div class="input-field col s10">
         <input placeholder="" id="first_name" type="text" class="validate">
-        <label for="first_name">Respuesta 5:</label>
+        <label class="teal-text lighten-4" for="first_name">Respuesta 5:</label>
         </div>
         <div class="input-field col s2">
         <input name="group1" type="radio" id="correct1" />
-     	<label for="correct1">Correcta</label>
+     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
         </div>
      	</div>
 
@@ -120,5 +123,10 @@
     </div>
     <script>$(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter();});
+
+    $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
     </script>
 {% endblock %}
