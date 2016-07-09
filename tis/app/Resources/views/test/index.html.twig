@@ -33,11 +33,6 @@
                 <td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>
                 <td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>
                 <td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>
-                {#<td>{% if test.endDate %}{{ test.endDate|date('Y-m-d') }}{% endif %}</td>#}
-                {#<td>{% if test.startTimeEnrollment %}{{ test.startTimeEnrollment|date('H:i:s') }}{% endif %}</td>#}
-                {#<td>{% if test.endTimeEnrollment %}{{ test.endTimeEnrollment|date('H:i:s') }}{% endif %}</td>#}
-                {#<td>{% if test.startDateEnrollment %}{{ test.startDateEnrollment|date('Y-m-d') }}{% endif %}</td>#}
-                {#<td>{% if test.endDateEnrollment %}{{ test.endDateEnrollment|date('Y-m-d') }}{% endif %}</td>#}
                 <td>{{ test.score }}</td>
                 <td>{{ test.percentage }}</td>
                 <td>
@@ -57,7 +52,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('test_new') }}">Crear Examen</a>
+            <a href="{{ path('test_new') }}">Crear</a>
         </li>
     </ul>
 {% endblock %}
