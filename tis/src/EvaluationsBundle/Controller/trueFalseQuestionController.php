@@ -1,22 +1,27 @@
 <?php
 
 namespace EvaluationsBundle\Controller;
- 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Question;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+//use EvaluationsBundle\Form\QuestionType;
 
+/**
+ * Question controller.
+ *
+ */
 class trueFalseQuestionController extends Controller
-{public function tfqNewAction($id_type, Request $request){
+{
+    public function tfqNewAction($id_type, Request $request){
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-          if(!is_null($form['statementQuestion']->getData())){
+            $statement = $form['statementQuestion']->getData();
+          if(!is_null($statement) && strlen($statement)<=5000){
             $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
             $idArea = $em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
             $file=$form['image']->getData();
@@ -39,7 +44,15 @@ class trueFalseQuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+          //  $answer= $request->request->get("group1");
+          //  print($answer);
+            $answer = $_POST['group1'];
+          //  	$answer = "radioselected";
+
+            return $this->redirectToRoute('trueFalseQuestion_show', array(
+            	'id' => $question->getId(),
+            	'ans' => $answer,
+            	));
           }
         }
 
@@ -47,6 +60,7 @@ class trueFalseQuestionController extends Controller
             'question' => $question,
             'form' => $form->createView(),
         ));
+
     }
 
     /**
@@ -56,10 +70,16 @@ class trueFalseQuestionController extends Controller
     public function showAction(Question $question)
     {
         $deleteForm = $this->createDeleteForm($question);
+      //  $answer1 = "aqui el radio button";
+       //$answer = $_POST['group1'];
+       $answer1 = $ans;
 
-        return $this->render('question/show.html.twig', array(
+
+
+        return $this->render('EvaluationsBundle:Question:showTrueFalseQuestion.html.twig', array(
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
+            'hola' => $answer1,
         ));
     }
 
@@ -78,10 +98,10 @@ class trueFalseQuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('question_edit', array('id' => $question->getId()));
+            return $this->redirectToRoute('openQquestion_edit', array('id' => $question->getId()));
         }
 
-        return $this->render('question/edit.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:editOpenQuestion.html.twig', array(
             'question' => $question,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

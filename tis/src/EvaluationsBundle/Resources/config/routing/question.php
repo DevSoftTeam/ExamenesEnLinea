@@ -105,6 +105,16 @@ $collection->add('trueFalseQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('trueFalseQuestion_show', new Route(
+    '/{id}/showTFQ',
+    array('_controller' => 'EvaluationsBundle:trueFalseQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
 
 $collection->add('uniqueAnswerQuestion_new', new Route(
     '/uniqueAnswerQuestion/{id_type}',

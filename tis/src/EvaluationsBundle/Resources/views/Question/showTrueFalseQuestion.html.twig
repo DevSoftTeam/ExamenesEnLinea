@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}Pregunta{% endblock %}
+{% block body %}
+    <h3>Datos de pregunta </h3>
+    <p> {{hola}}</p>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Enunciado</th>
+                <td>{{ question.statementQuestion }}</td>
+            </tr>
+            <tr>
+                <th>Imagen</th>
+                {% if question.pathImageQuestion != null %}
+                <td><img src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"></td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('question_index') }}">Ver Banco de preguntas</a>
+        </li>
+        <li>
+            <a href="{{ path('openQuestion_edit', { 'id': question.idQuestion }) }}">Editar pregunta</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <button class="btn waves-effect waves-light " type="submit" name="action">Eliminar</button>
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

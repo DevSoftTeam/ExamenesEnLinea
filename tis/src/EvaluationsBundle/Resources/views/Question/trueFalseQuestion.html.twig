@@ -2,33 +2,34 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-  <h4>Pregunta con respuesta verdadero falso: </h4>
+  <h3>Pregunta abierta con respuesta falso verdadero: </h3>
   <div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
   {{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
-      
+      <div class="row">
       <div class="input-field col s11">
       {{ form_widget(form.area) }}
-      <label>Area: </label>
+      <label class="teal-text darken-4"><h6>Area :</h6></label>
       </div>
       <div class="col s1">
-
-      <a class="btn-floating btn-short waves-effect waves-light pink" href="/area/new"><i class="material-icons aligned rigth">add</i></a></div>
-      
+      <a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href=""><i class="material-icons aligned rigth">add</i></a>
+      </div>  
       </div>
 
         <div class="row">
           <div class="input-field col s12">
+            <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
             <!--textarea id="textarea1" class="materialize-textarea" name="statementQuestion"></textarea-->
-            {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000'}}) }}
-            <label for="textarea1">Enunciado</label>
+            {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
+            {{ form_errors(form.statementQuestion) }}
           </div>
         </div>
 
       <div class="file-field input-field">
         <div class="btn">
-          <span>Subir imagen</span>
+          <span>imagen</span>
+          <i class="material-icons right">perm_media</i>
           <!--input type="file" name="image"-->
           {{ form_widget(form.image) }}
         </div>
@@ -37,34 +38,28 @@
           {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
         </div>
       </div>
-    <div class=" alight center" >
-      <form action="#"> 
-    <p>
-      <input name="group1" class="with-gap" type="radio" id="t" />
-      <label for="true">Verdadero</label>
-    </p>
-    <p>
-      <input name="group1" class="with-gap" type="radio" id="f" />
-      <label for="false">Falso</label>
-    </p>
-   
-     </form> 
-       </div>
 
-        <div class=" alight center">
-        <button class="btn waves-effect waves-light " type="submit" name="action">Guardar
-        <i class="material-icons">send</i>
-      </button>
-      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
-      </button>
-      <br>
+      <div>
+        <p>
+      <input name="group1" type="radio" id="f" value="0" />
+      <label for="f">Falso</label>
+    </p>
+    <p>
+      <input name="group1" type="radio" id="t" value="1" />
+      <label for="t">Verdadero</label>
+    </p>
       </div>
 
-
+        <div class=" alight center">
+        <button class="btn waves-effect waves-light " type="submit" name="action">Guardar</button>
+      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+      <br>
+      </div>  
     <!--/form-->
     {{ form_end(form) }}
     </div>
     <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();});
+    $('input#input_text, textarea#textarea1').characterCounter();
+    $('.modal-trigger').leanModal(); });
     </script>
 {% endblock %}
