@@ -20,9 +20,6 @@ class FileQuestionType extends AbstractType
     {
         $builder
             ->add('statementQuestion')
-            //->add('pathImageQuestion')
-            //->add('pathFileQuestion')
-            ->add('idType', HiddenType::class)
             ->add('area', EntityType::class, array(
                     'class' => 'EvaluationsBundle:Area',
                     'query_builder' => function (EntityRepository $er) {
@@ -33,15 +30,21 @@ class FileQuestionType extends AbstractType
                     'choice_value' => 'idArea',
                     'required' => true,
             ))
-            ->add('pathImageQuestion', FileType::class,array(
+            ->add('image', FileType::class,array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),
                 "required" => false
             ))
-            ->add('pathFileQuestion', FileType::class,array(
-                "label" => "File:",
+            ->add('file', FileType::class,array(
+                "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),
-                "required" => true
+                "required" => false
+            ))
+            ->add('pathImageQuestion', HiddenType::class,array(
+                "required" => false
+            ))
+            ->add('pathFileQuestion', HiddenType::class,array(
+                "required" => false
             ))
         ;
     }
