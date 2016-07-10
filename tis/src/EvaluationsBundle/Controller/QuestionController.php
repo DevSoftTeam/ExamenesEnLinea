@@ -54,8 +54,7 @@ class QuestionController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            // Recogemos el fichero
-           $file=$form['pathImageQuestion']->getData();
+           $file=$form['image']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
                if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
@@ -68,9 +67,10 @@ class QuestionController extends Controller
                }else{
                 $question->setPathImageQuestion(null);
                }
-            }
-            if ($file=$form['pathFileQuestion'] != "") {
-                $file=$form['pathFileQuestion']->getData();  
+            } 
+            $file=$form['file']->getData();
+            if ($file=$form['file'] != "") {
+                $file=$form['file']->getData();  
                 $ext=$file->guessExtension();
                 $file_name=time().".".$ext;
                 $file->move("uploads", $file_name);
@@ -87,6 +87,51 @@ class QuestionController extends Controller
             'question' => $question,
             'type' => $id_type,
             'form' => $form->createView(),
+        ));
+    }
+
+     public function editFileAction(Request $request, Question $question)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $deleteForm = $this->createDeleteForm($question);
+        $editForm = $this->createForm('EvaluationsBundle\Form\FileQuestionType', $question);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            // Recogemos el fichero
+           $file=$editForm['image']->getData();
+            if (!is_null($file)) {
+               $ext=$file->guessExtension();
+               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
+                $pathImage = $editForm['pathImageQuestion']->getData();
+                $pathImage = explode(".", $pathImage);
+                $pathImage =  $pathImage[0];
+                $file_name=$pathImage."_".time().".".$ext;
+                $file->move("uploads/images", $file_name);
+                $question->setPathImageQuestion($file_name);
+               }else{
+                $question->setPathImageQuestion(null);
+               }
+            } 
+            $file=$editForm['file']->getData();
+            if (!is_null($file)) {
+                $file=$editForm['file']->getData();  
+                $ext=$file->guessExtension();
+                $file_name=time().".".$ext;
+                $file->move("uploads", $file_name);
+                $question->setpathFileQuestion($file_name);
+            }
+            $idArea=$em->getRepository('EvaluationsBundle:Area')->find($editForm['area']->getData());
+            $em->persist($question);
+            $em->flush();
+            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+            // return $this->redirectToRoute('questionfile_edit', array('id' => $question->getId()));
+        }
+
+        return $this->render('question/fileQuestionEdit.html.twig', array(
+            'question' => $question,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -108,6 +153,7 @@ class QuestionController extends Controller
      * Displays a form to edit an existing Question entity.
      *
      */
+
     public function editAction(Request $request, Question $question)
     {
         $deleteForm = $this->createDeleteForm($question);

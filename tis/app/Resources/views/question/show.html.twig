@@ -9,7 +9,7 @@
     </div>
     <p>{{question.pathImageQuestion}}</p>
     <h5>imagen</h5>
-    <img height="30%" width="50%" src="{{asset('uploads/images')}}{{question.pathImageQuestion}}">
+    <img height="30%" width="50%" src="{{asset('uploads/images/')}}{{question.pathImageQuestion}}">
     
     <h5>Archivo</h5>
     <a href="{{asset('uploads/')}}{{ question.pathFileQuestion }}" download>archivo</a>
@@ -19,7 +19,7 @@
             <a href="{{ path('question_index') }}">Ver Banco de Preguntas</a>
         </li>
         <li>
-            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Editar pregunta</a>
+            <a href="{{ path('questionfile_edit', { 'id': question.idQuestion }) }}">Editar pregunta</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
