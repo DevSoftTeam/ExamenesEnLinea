@@ -1,27 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>pregunta subir archivo</h1>
-        
-    {{ form_start(form) }}
-        <div class="row">
+    <h1>Editar Pregunta</h1>
+{#{{ form_widget(edit_form) }} #}
+
+{{ form_start(edit_form) }}
+         <div class="row">
             <div class="input-field">
             <i class="material-icons prefix">mode_edit</i>
-            {{ form_widget(form.statementQuestion, {'attr': {'class':"materialize-textarea"}}) }}
-            {{ form_errors(form.statementQuestion) }}
+            {{ form_widget(edit_form.statementQuestion, {'attr': {'class':"materialize-textarea"}}) }}
+            {{ form_errors(edit_form.statementQuestion) }}
                 <label for="question_statementQuestion">Enunciado</label>
             </div>
         </div>
         
         <label for="question_area">Area</label>
-        {{ form_errors(form.area) }}
-        {{ form_widget(form.area) }}
+        {{ form_errors(edit_form.area) }}
+        {{ form_widget(edit_form.area) }}
 
         <div class="file-field input-field">
           <div class="btn">
             <span>imagen</span>
             <i class="material-icons right">perm_media</i>
-                {{ form_widget(form.image) }}
+                {{ form_widget(edit_form.image) }}
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text">
@@ -32,7 +33,7 @@
           <div class="btn">
             <span>archivo</span>
             <i class="material-icons right">description</i>
-                {{ form_widget(form.file) }}
+                {{ form_widget(edit_form.file) }}
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text">
@@ -40,17 +41,17 @@
         </div>
 
         <br>
-        <input type="submit" value="crear" class="btn waves-effect waves-light" /> 
-    {{ form_end(form) }}
-    
-{#    <input list="browsers" name="browser">
-        <datalist id="browsers">
-            <option value="Internet Explorer">
-        </datalist>#}
+        <input type="submit" value="Edit" class="btn waves-effect waves-light" /> 
+    {{ form_end(edit_form) }}
 
     <ul>
         <li>
-            <a href="{{ path('question_index') }}">Volver a la lista</a>
+            <a href="{{ path('question_index') }}">Atras</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
         </li>
     </ul>
 {% endblock %}
