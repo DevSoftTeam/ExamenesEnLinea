@@ -7,13 +7,14 @@
             <link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body  style ="background-color:#e0f2f1 ;">
 
+    <body  style ="background-color:#e0f2f1;">
         <ul id="dropfunctions" class="dropdown-content teal">
             <li><a class="white-text" href="/test">Crear Examenes</a></li>
             <li><a class="white-text" href="#">Crear Preguntas</a></li>
             <li><a class="white-text" href="/openQuestion">Pregunta Abierta</a></li>
         </ul>
+        
         <nav >
             <div class="nav-wrapper teal ">
                 <a href="#" class="brand-logo center"><b>Evaluaciones En Linea</b></a>
@@ -24,12 +25,23 @@
                 </ul>
             </div>
         </nav>
+        
         <script src="{{asset('js/jquery-3.0.0.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/materialize.min.js')}}" type="text/javascript" ></script>
-        <div class="container z-depth-1 row">
+        
+        <div class="container">
             {% block body %}
             {% endblock %}
         </div>
+
+        {#<div class="row">
+            <div class="col s12 m4 l1"></div>
+            <div class="z-depth-1 col s12 m4 l10">
+                {% block body %}
+                {% endblock %}
+            </div>
+            <div class="col s12 m4 l1"></div>
+        </div>#}
 
         <footer class="page-footer teal">
             <div class="footer-copyright">
@@ -39,7 +51,6 @@
                 </div>
             </div>
         </footer>
-
             <script>
                 $(".dropdown-button").dropdown();
                 $(".dropdown-collapse").sideNav();
