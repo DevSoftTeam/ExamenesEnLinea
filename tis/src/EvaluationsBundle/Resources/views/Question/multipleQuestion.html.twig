@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-  <label class="teal-text lighten-4"><h3>Pregunta respuesta unica: </h3></label>
+  <label class="teal-text lighten-4"><h3>Pregunta respuesta multiple:</h3></label>
   <div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
@@ -46,11 +46,12 @@
 
     <label><a class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label><br>
 
+
     <div class="row">
       <form class="col s12">
       <div class="row">
         <div class="input-field col s10">
-        <input placeholder="" id="first_name" type="text" class="validate">
+        <input placeholder="" name="answer1" id="first_name" type="text" class="validate">
         <label class="teal-text lighten-4" for="first_name">Respuesta 1:</label>
         </div>
         <div class="input-field col s2">
@@ -64,7 +65,7 @@
         <form class="col s12">
       <div class="row">
         <div class="input-field col s10">
-        <input placeholder="" id="first_name" type="text" class="validate">
+        <input placeholder="" name="answer2" id="first_name" type="text" class="validate">
         <label class="teal-text lighten-4" for="first_name">Respuesta 2:</label>
         </div>
         <div class="input-field col s2">
@@ -78,7 +79,7 @@
       <form class="col s12">
       <div class="row">
         <div class="input-field col s10">
-        <input placeholder="" id="first_name" type="text" class="validate">
+        <input placeholder="" name="answer3" id="first_name" type="text" class="validate">
         <label class="teal-text lighten-4" for="first_name">Respuesta 3:</label>
         </div>
         <div class="input-field col s2">
@@ -92,7 +93,7 @@
       <form class="col s12">
       <div class="row">
         <div class="input-field col s10">
-        <input placeholder="" id="first_name" type="text" class="validate">
+        <input placeholder="" name="answer4" id="first_name" type="text" class="validate">
         <label class="teal-text lighten-4" for="first_name">Respuesta 4:</label>
         </div>
         <div class="input-field col s2">
@@ -106,7 +107,7 @@
       <form class="col s12">
       <div class="row">
         <div class="input-field col s10">
-        <input placeholder="" id="first_name" type="text" class="validate">
+        <input placeholder="" name="answer5" id="first_name" type="text" class="validate">
         <label class="teal-text lighten-4" for="first_name">Respuesta 5:</label>
         </div>
         <div class="input-field col s2">
