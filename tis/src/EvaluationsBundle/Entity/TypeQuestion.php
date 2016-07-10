@@ -44,8 +44,7 @@ class TypeQuestion
         return $this->nameType;   
     }
 
-
-    public function __call($name, $arguments)
+        public function __call($name, $arguments)
     {
         // Nota: el valor $name es sensible a mayúsculas.
         echo "Llamando al método de objeto '$name' "
@@ -64,6 +63,5 @@ class TypeQuestion
         }
         return $this;
     }
-
 }
 
