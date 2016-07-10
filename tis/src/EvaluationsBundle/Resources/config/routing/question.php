@@ -35,6 +35,26 @@ $collection->add('question_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('question_edit', new Route(
+    '/{id}/edit',
+    array('_controller' => 'EvaluationsBundle:Question:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('question_delete', new Route(
+    '/{id}/delete',
+    array('_controller' => 'EvaluationsBundle:Question:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
 $collection->add('questionFile_new', new Route(
     '/fileQuestion/{id_type}',
     /*array('_controller' => 'EvaluationsBundle:Question:fileQuestionNew'),*/
@@ -87,25 +107,16 @@ $collection->add('openQuestion_edit', new Route(
     array('GET', 'POST')
 ));
 
-$collection->add('question_edit', new Route(
-    '/{id}/edit',
-    array('_controller' => 'EvaluationsBundle:Question:edit'),
-    array(),
-    array(),
-    '',
-    array(),
-    array('GET', 'POST')
-));
-
-$collection->add('question_delete', new Route(
-    '/{id}/delete',
-    array('_controller' => 'EvaluationsBundle:Question:delete'),
+$collection->add('openQuestion_delete', new Route(
+    '/{id}/deleteOQ',
+    array('_controller' => 'EvaluationsBundle:OpenQuestion:delete'),
     array(),
     array(),
     '',
     array(),
     array('DELETE')
 ));
+
 $collection->add('trueFalseQuestion_new', new Route(
     '/trueFalseQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:trueFalseQuestion:tfqNew'),
