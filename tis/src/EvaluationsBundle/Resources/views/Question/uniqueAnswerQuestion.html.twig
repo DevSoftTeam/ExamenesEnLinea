@@ -2,47 +2,49 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-	<label class="teal-text lighten-4"><h3>Pregunta respuesta unica: </h3></label>
-	<div class="row">
+  <label class="teal-text lighten-4"><h3>Pregunta respuesta unica: </h3></label>
+  <div class="row">
 
-	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
-    	
-    	<div class="input-field col s11">
-    	{{ form_widget(form.area) }}
-    	<label class="teal-text lighten-4">Area: </label>
-    	</div>
-    	<div class="col s1">
-
-    	<a class="btn-floating btn-short waves-effect waves-light pink" href="/area/new"><i class="material-icons aligned rigth">add</i></a></div>
-    	
-    	</div>
-
-	     <div class="row">
-    <form class="col s12">
+    <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
+  {{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
       <div class="row">
-        <div class="input-field col s12">
-          <textarea placeholder="" id="textarea1" class="materialize-textarea"></textarea>
-          <label class="teal-text lighten-4" for="textarea1">Enunciado:</label>
+      <div class="input-field col s11">
+      {{ form_widget(form.area) }}
+      <label class="teal-text darken-4"><h6>Area :</h6></label>
+      </div>
+      <div class="col s1">
+      <a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href=""><i class="material-icons aligned rigth">add</i></a>
+      </div>  
+      </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+            <!--textarea id="textarea1" class="materialize-textarea" name="statementQuestion"></textarea-->
+            {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
+            {{ form_errors(form.statementQuestion) }}
+          </div>
+        </div>
+
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>imagen</span>
+          <i class="material-icons right">perm_media</i>
+          <!--input type="file" name="image"-->
+          {{ form_widget(form.image) }}
+        </div>
+        <div class="file-path-wrapper">
+          <!--input class="file-path validate" type="text" name="pathImageQuestion"-->
+          {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
         </div>
       </div>
-    </form>
-  </div>
 
-	    <div class="file-field input-field">
-	      <div class="btn">
-	        <span>Subir imagen</span>
-	        {{ form_widget(form.image) }}
-	      </div>
-	      <div class="file-path-wrapper">
-	        {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
-	      </div>
-	    </div>
 
 
 		<label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
 		<form action="#">
 
-		<label><a class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label>
+		<label><a class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label><br>
 
 		<div class="row">
     	<form class="col s12">
@@ -52,8 +54,10 @@
         <label class="teal-text lighten-4" for="first_name">Respuesta 1:</label>
         </div>
         <div class="input-field col s2">
-        <input name="group1" type="radio" id="correct1" />
-     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
+        <p>
+        <input type="checkbox" id="test5" />
+        <label class="teal-text lighten-4" for="test5">Correcta</label>
+      </p>
         </div>
       	</div>
 
@@ -64,8 +68,10 @@
         <label class="teal-text lighten-4" for="first_name">Respuesta 2:</label>
         </div>
         <div class="input-field col s2">
-        <input name="group1" type="radio" id="correct1" />
-     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
+        <p>
+        <input type="checkbox" id="test5" />
+        <label class="teal-text lighten-4" for="test5">Correcta</label>
+      </p>
         </div>
         </div>
 
@@ -76,8 +82,10 @@
         <label class="teal-text lighten-4" for="first_name">Respuesta 3:</label>
         </div>
         <div class="input-field col s2">
-        <input name="group1" type="radio" id="correct1" />
-     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
+        <p>
+        <input type="checkbox" id="test5" />
+        <label class="teal-text lighten-4" for="test5">Correcta</label>
+      </p>
         </div>
      	</div>
 
@@ -88,8 +96,10 @@
         <label class="teal-text lighten-4" for="first_name">Respuesta 4:</label>
         </div>
         <div class="input-field col s2">
-        <input name="group1" type="radio" id="correct1" />
-     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
+        <p>
+        <input type="checkbox" id="test5" />
+        <label class="teal-text lighten-4" for="test5">Correcta</label>
+      </p>
         </div>
         </div>
 
@@ -100,8 +110,10 @@
         <label class="teal-text lighten-4" for="first_name">Respuesta 5:</label>
         </div>
         <div class="input-field col s2">
-        <input name="group1" type="radio" id="correct1" />
-     	<label class="teal-text lighten-4" for="correct1">Correcta</label>
+        <p>
+        <input type="checkbox" id="test5" />
+        <label class="teal-text lighten-4" for="test5">Correcta</label>
+      </p>
         </div>
      	</div>
 
@@ -110,23 +122,16 @@
     	</div>
 
 
-	      
-	      <div class=" alight center">
-	      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Guardar</a>
-		  <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
-		  <br>
-		  </div>
-		  </button></div>
-
+	      <div class="alight center">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
+          <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+            <br>
+           </div>  
     <!--/form-->
     {{ form_end(form) }}
     </div>
     <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();});
-
-    $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-  });
+    $('input#input_text, textarea#textarea1').characterCounter();
+    $('.modal-trigger').leanModal(); });
     </script>
 {% endblock %}
