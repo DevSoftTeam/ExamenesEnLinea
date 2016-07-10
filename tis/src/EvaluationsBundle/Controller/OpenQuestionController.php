@@ -75,6 +75,7 @@ class OpenQuestionController extends Controller
      */
     public function editAction(Request $request, Question $question)
     {
+        $oldImage = $question->getPathImageQuestion();
         $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
@@ -94,7 +95,13 @@ class OpenQuestionController extends Controller
                 $pathImage =  $pathImage[0];
                 $file_name=$pathImage."_".time().".".$ext;
                 $file->move("uploads/images", $file_name);
-                $question->setPathImageQuestion($file_name);
+
+                if ($oldImage!=null) {
+                    $oldImage = "uploads/images/".$oldImage;
+                    unlink($oldImage);
+                } 
+
+                $question->setPathImageQuestion($file_name);          
                }else{
                 $question->setPathImageQuestion(null);
                }
@@ -121,10 +128,17 @@ class OpenQuestionController extends Controller
      */
     public function deleteAction(Request $request, Question $question)
     {
+        $oldImage = $question->getPathImageQuestion();
         $form = $this->createDeleteForm($question);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($oldImage!=null) {
+                    $oldImage = "uploads/images/".$oldImage;
+                    unlink($oldImage);
+                }
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($question);
             $em->flush();
@@ -143,7 +157,7 @@ class OpenQuestionController extends Controller
     private function createDeleteForm(Question $question)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('question_delete', array('id' => $question->getId())))
+            ->setAction($this->generateUrl('openQuestion_delete', array('id' => $question->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
