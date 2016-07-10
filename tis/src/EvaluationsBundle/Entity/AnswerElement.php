@@ -48,11 +48,73 @@ class AnswerElement
      *
      * @ORM\ManyToOne(targetEntity="Question")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_question", referencedColumnName="id_question")
+     *   @ORM\JoinColumn(name="id_question", referencedColumnName="id_question", nullable=false)
      * })
      */
     private $idQuestion;
 
+    public function getId()
+    {
+        return $this->idAnswerElement;
+    }
+
+    public function getIdAnswerElement($idAnswerElement)
+    {
+        return $this->idAnswerElement;
+    }
+
+    public function getContent($content)
+    {
+        return $this->content;
+    }
+    
+    public function setContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+    public function getOrderVar($orderVar)
+    {
+        return $this->orderVar;
+    }
+    public function setOrderVar($orderVar)
+    {
+        $this->orderVar = $orderVar;
+        return $this;
+    }
+
+    public function getIsCorrect($isCorrect){
+        return $this->isCorrect;
+    }
+    public function setIsCorrect($isCorrect){
+        $this->isCorrect = $isCorrect;
+        return $this;
+    }
+    
+    public function getIdQuestion()
+    {
+        return $this->idQuestion;
+    }
+
+    
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+          return $this->$property;
+        }
+    }
+
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+          $this->$property = $value;
+        }
+        return $this;
+    }
+
+    public function __call($name, $arguments){
+        echo "Llamando al método de objeto '$name' "
+            . implode(', ', $arguments). "\n";
+    }
 
 }
 

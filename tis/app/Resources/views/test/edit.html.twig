@@ -1,104 +1,122 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Crear Examen</h1>
-
     {{ form_start(edit_form) }}
     <div class="row">
+    <labeln class="teal-text lighten-4"><h3>Editar Examen</h3></labeln>
+    </br>
         <div class="row input-field ">
-            {{ form_widget(edit_form.title)}}
-            <label for="input_text">Titulo</label>
+            <label class="teal-text darken-4"><h6>Titulo :</h6></label>
+            {{ form_widget(edit_form.title, {'attr':{'placeholder':"Introduzca Texto", 'type':"text"}})}}
         </div>
-
-        <div class="row input-field">
-            {{ form_widget(edit_form.matter)}}
-            <label for="input_text">Materia</label>
+        <div class="row input-field ">
+            <label class="teal-text darken-4"><h6>Materia :</h6></label>
+            {{ form_widget(edit_form.matter, {'attr':{'placeholder':"Introduzca Texto", 'type':"text"}})}}
         </div>
-        <div class="row input-field">
-            {{ form_widget(edit_form.institution)}}
-            <label for="input_text">Institucion</label>
+        <div class="row input-field ">
+            <label class="teal-text darken-4"><h6>Institucion :</h6></label>
+            {{ form_widget(edit_form.institution, {'attr':{'placeholder':"Introduzca Texto", 'type':"text"}})}}
         </div>
 
 
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Inicio</label>
-                {{ form_widget(edit_form.startDate)}}
+                <label for="input_text" class="teal-text darken-4"><h6>Fecha Inicio: </h6></label>
+                </br>
+                {{ form_widget(edit_form.startDate, {'attr':{'placeholder':"Seleccione Fecha", 'type':"text"}})}}
             </div>
+            </br>
             <div class="input-field col s6">
-                <label class="active">Hora Inicio</label>
+                <label for="input_text" class="active teal-text darken-4">Hora Inicio: (Hr:Min)</label>
                 {{ form_row(edit_form.startTime,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
-
         </div>
 
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Fin</label>
-                {{ form_widget(edit_form.endDate)}}
+                <label for="input_text" class="teal-text darken-4"><h6>Fecha Fin: </h6></label>
+                </br>
+                {{ form_widget(edit_form.endDate, {'attr':{'placeholder':"Seleccione Fecha", 'type':"text"}})}}
             </div>
+            </br>
             <div class="input-field col s6">
-                <label  class="active">Hora Fin</label>
+                <label  for="input_text" class="active teal-text darken-4">Hora Fin: (Hr:Min)</label>
                 {{ form_row(edit_form.endTime,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
-
         </div>
-
+        {#</br>#}
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Inicio Inscripcion</label>
-                {{ form_widget(edit_form.startDateEnrollment)}}
+                <label for="input_text" class="teal-text darken-4"><h6>Fecha Inicio Inscripcion: </h6></label>
+                </br>
+                {{ form_widget(edit_form.startDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
             </div>
+            </br>
             <div class="input-field col s6">
-                <label class="active">Hora Inicio Inscripcion</label>
+                <label for="input_text" class="active teal-text darken-4">Hora Inicio Inscripcion: (Hr:Min)</label>
                 {{ form_row(edit_form.startTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
-
         </div>
-
+        {#</br>#}
         <div class="row">
             <div class="input-field col s6">
-                <label for="input_date">Fecha Fin Inscripcion</label>
-                {{ form_widget(edit_form.endDateEnrollment)}}
+                <label for="input_text" class="teal-text darken-4"><h6>Fecha Fin Inscripcion: </h6></label>
+                </br>
+                {{ form_widget(edit_form.endDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
             </div>
+            </br>
             <div class="input-field col s6">
-                <label class="active">Hora Fin Inscripcion</label>
+                <label for="input_text" class="active teal-text darken-4">Hora Fin Inscripcion: (HH:mm)</label>
                 {{ form_row(edit_form.endTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
             </div>
-
         </div>
-
+        </br>
         <script>
             $(document).ready(function() {
                 $('.datepicker').datepicker({
-                    format: 'yyyy-mm-dd H:i'
+                    format: 'yyyy-mm-dd'
                 });
             });
         </script>
 
         <div class="row input-field">
-            {{ form_widget(edit_form.score)}}
-            <label for="input_text">Puntuacion Maxima</label>
+            <label for="input_text" class="teal-text darken-4"><h6>Puntuacion Maxima</h6></label>
+            {{ form_widget(edit_form.score, {'attr':{'placeholder':'Introduzca Puntuacion', 'type':"text"}})}}
         </div>
-
+        </br>
         <div class="row input-field">
-            {{ form_widget(edit_form.percentage)}}
-            <label for="input_text">Procentaje Total</label>
+            <label for="input_text" class="teal-text darken-4"><h6>Procentaje Total</h6></label>
+            {{ form_widget(edit_form.percentage, {'attr':{'placeholder':"Introduzca Porcentaje % ", 'type': "text"}})}}
         </div>
+        </br>
     </div>
-    <input type="submit" value="Editar" />
+
     {{ form_end(edit_form) }}
 
-    <ul>
-    <li>
-        <a href="{{ path('test_index') }}">Atras</a>
-    </li>
-    <li>
-        {{ form_start(delete_form) }}
-            <input type="submit" value="Eliminar">
-        {{ form_end(delete_form) }}
-    </li>
-    </ul>
+        <div class="row">{#class="center-align row">#}
+            <div class="col ">
+                <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Cancelar</a>
+            </div>
+            <div class="col push-s5">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
+            </div>
+            <div class="col push-s5">
+                {{ form_start(delete_form) }}
+                    <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
+                {{ form_end(delete_form) }}
+            </div>
+        </div>
+
+    {#<ul>#}
+    {#<li>#}
+        {#<a href="{{ path('test_index') }}">Atras</a>#}
+    {#</li>#}
+    {#<li>#}
+        {#{{ form_start(delete_form) }}#}
+            {#<input type="submit" value="Eliminar">#}
+        {#{{ form_end(delete_form) }}#}
+    {#</li>#}
+    {#</ul>#}
 
     <script>
         $('.datepicker').pickadate({

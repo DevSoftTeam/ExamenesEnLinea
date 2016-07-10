@@ -4,7 +4,7 @@ namespace EvaluationsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use EvaluationsBundle\Entity\AnswerElement;
 use EvaluationsBundle\Entity\Question;
 //use EvaluationsBundle\Form\QuestionType;
 
@@ -43,6 +43,17 @@ class multipleQuestionController extends Controller
             $question->setIdArea($idArea);
 
             $em->persist($question);
+            $em->flush();
+            $a1 =$question->getid;
+            $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
+            $answer = new AnswerElement();
+            $answer= $a1;
+            $answer= $answer1;
+            $answer=1;
+            //if()traer el valor del check de una para enviar a ISCORRECT
+            $answer ="True";
+
+            $em->persist($answer);
             $em->flush();
 
             return $this->redirectToRoute('question_show', array('id' => $question->getId()));

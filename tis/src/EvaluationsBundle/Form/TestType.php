@@ -21,7 +21,7 @@ class TestType extends AbstractType
             ->add('institution')
             ->add('startTime', TimeType::class, array(
                 'widget' => 'single_text',
-                'attr' => ['type' => 'time'],
+//                'attr' => ['type' => 'time'],
                 'label' => ' ',
                 'required' =>false
             ))
@@ -33,7 +33,7 @@ class TestType extends AbstractType
             ))
             ->add('endTime', TimeType::class, array(
                 'widget' => 'single_text',
-                'attr' => ['type' => 'time'],
+//                'attr' => ['type' => 'time'],
                 'label' => ' ',
                 'required' =>false
             ))
@@ -45,7 +45,7 @@ class TestType extends AbstractType
             ))
             ->add('startTimeEnrollment', TimeType::class, array(
                 'widget' => 'single_text',
-                'attr' => ['type' => 'time'],
+//                'attr' => ['type' => 'time'],
                 'label' => ' ',
                 'required' =>false
             ))
@@ -57,7 +57,7 @@ class TestType extends AbstractType
             ))
             ->add('endTimeEnrollment', TimeType::class, array(
                 'widget' => 'single_text',
-                'attr' => ['type' => 'time'],
+//                'attr' => ['type' => 'time'],
                 'label' => ' ',
                 'required' =>false
             ))
