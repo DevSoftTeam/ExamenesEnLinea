@@ -20,7 +20,7 @@
           <div class="row">
             <div class="input-field col s12">
               <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
-              {{ form_widget(edit_form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','value':'question.statementQuestion'}}) }}
+              {{ form_widget(edit_form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','value':'question.statementQuestion','placeholder':'Introduzca texto'}}) }}
               {{ form_errors(edit_form.statementQuestion) }}
             </div>
           </div>
