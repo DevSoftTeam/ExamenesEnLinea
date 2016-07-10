@@ -8,13 +8,15 @@
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
     	<div class="row">
-    	<div class="input-field col s11">
-    	{{ form_widget(form.area) }}
-    	<label class="teal-text darken-4"><h6>Area :</h6></label>
-    	</div>
-    	<div class="col s1">
-    	<a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href=""><i class="material-icons aligned rigth">add</i></a>
-    	</div>	
+    		<div class="col s12">
+    		<label class="teal-text darken-4"><h6>Area :</h6></label>
+    		<input list="areas" name="area" placeholder="seleccione o introzca nombre de area" required>
+			  <datalist id="areas">
+			  {% for area in areas %}
+			    <option value={{ area.nameArea }}>
+			  {% endfor %}
+			  </datalist>
+			</div>
     	</div>
 
 	      <div class="row">

@@ -7,14 +7,15 @@
 
     {{ form_start(edit_form,{ 'enctype':"multipart/form-data"}) }}
         <div class="row">
-        <div class="input-field col s11">
-        {{ form_widget(edit_form.area) }}
-        <!--option value={{ question.idArea.idArea }} selected>{{ question.idArea.nameArea }}</option-->
-        <label class="teal-text darken-4"><h6>Area :</h6></label>
-        </div>
-        <div class="col s1">
-        <a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href=""><i class="material-icons aligned rigth">add</i></a>
-        </div>  
+            <div class="col s12">
+            <label class="teal-text darken-4"><h6>Area :</h6></label>
+            <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" value={{question.idArea.nameArea}} required>
+              <datalist id="areas">
+              {% for area in areas %}
+                <option value={{ area.nameArea }}>
+              {% endfor %}
+              </datalist>
+            </div>
         </div>
 
           <div class="row">
