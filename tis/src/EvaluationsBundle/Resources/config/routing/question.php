@@ -35,10 +35,41 @@ $collection->add('question_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('question_edit', new Route(
+    '/{id}/edit',
+    array('_controller' => 'EvaluationsBundle:Question:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('question_delete', new Route(
+    '/{id}/delete',
+    array('_controller' => 'EvaluationsBundle:Question:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
 $collection->add('questionFile_new', new Route(
     '/fileQuestion/{id_type}',
     /*array('_controller' => 'EvaluationsBundle:Question:fileQuestionNew'),*/
     array('_controller' => 'EvaluationsBundle:Question:fileQuestionNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+
+$collection->add('questionfile_edit', new Route(
+    '/{id}/editFile',
+    array('_controller' => 'EvaluationsBundle:Question:editFile'),
     array(),
     array(),
     '',
@@ -76,25 +107,16 @@ $collection->add('openQuestion_edit', new Route(
     array('GET', 'POST')
 ));
 
-$collection->add('question_edit', new Route(
-    '/{id}/edit',
-    array('_controller' => 'EvaluationsBundle:Question:edit'),
-    array(),
-    array(),
-    '',
-    array(),
-    array('GET', 'POST')
-));
-
-$collection->add('question_delete', new Route(
-    '/{id}/delete',
-    array('_controller' => 'EvaluationsBundle:Question:delete'),
+$collection->add('openQuestion_delete', new Route(
+    '/{id}/deleteOQ',
+    array('_controller' => 'EvaluationsBundle:OpenQuestion:delete'),
     array(),
     array(),
     '',
     array(),
     array('DELETE')
 ));
+
 $collection->add('trueFalseQuestion_new', new Route(
     '/trueFalseQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:trueFalseQuestion:tfqNew'),
@@ -124,6 +146,36 @@ $collection->add('uniqueAnswerQuestion_new', new Route(
     '',
     array(),
     array('GET', 'POST')
+));
+
+$collection->add('uniqueAnswerQuestion_show', new Route(
+    '/{id}/showUAQ',
+    array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('uniqueAnswerQuestion_edit', new Route(
+    '/{id}/editUAQ',
+    array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('uniqueAnswerQuestion_delete', new Route(
+    '/{id}/deleteOQ',
+    array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
 ));
 
 $collection->add('multipleQuestion_new', new Route(

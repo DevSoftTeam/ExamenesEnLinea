@@ -4,12 +4,11 @@
 {% block body %}
     <h1>Lista de preguntas</h1>
 
-    <table>
+    <table class="striped">
         <thead>
             <tr>
-                <th>Nro. pregunta</th>
+                <th>Nro.</th>
                 <th>Enunciado</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -17,16 +16,6 @@
             <tr>
                 <td><a href="{{ path('question_show', { 'id': question.idQuestion }) }}">{{ question.idQuestion }}</a></td>
                 <td>{{ question.statementQuestion }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('question_show', { 'id': question.idQuestion }) }}">Ver</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('question_edit', { 'id': question.idQuestion }) }}">Editar</a>
-                        </li>
-                    </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -38,3 +27,4 @@
         </li>
     </ul>
 {% endblock %}
+    
