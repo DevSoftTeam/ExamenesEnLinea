@@ -138,6 +138,36 @@ $collection->add('uniqueAnswerQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('uniqueAnswerQuestion_show', new Route(
+    '/{id}/showUAQ',
+    array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('uniqueAnswerQuestion_edit', new Route(
+    '/{id}/editUAQ',
+    array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('uniqueAnswerQuestion_delete', new Route(
+    '/{id}/deleteOQ',
+    array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
 $collection->add('multipleQuestion_new', new Route(
     '/multipleQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:multipleQuestion:mqNew'),
