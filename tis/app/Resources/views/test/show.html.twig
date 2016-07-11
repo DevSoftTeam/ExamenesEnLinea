@@ -1,80 +1,94 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Examenes</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Nro Examen</th>
-                <td>{{ test.idTest }}</td>
-            </tr>
-            <tr>
-                <th>Titulo</th>
-                <td>{{ test.title }}</td>
-            </tr>
-            <tr>
-                <th>Materia</th>
-                <td>{{ test.matter }}</td>
-            </tr>
-            <tr>
-                <th>Institucion</th>
-                <td>{{ test.institution }}</td>
-            </tr>
-            <tr>
-                <th>Hora Inicio</th>
-                <td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Hora Fin</th>
-                <td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Fecha Inicio</th>
-                <td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Fecha Fin</th>
-                <td>{% if test.endDate %}{{ test.endDate|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Hora inicio Inscripcion</th>
-                <td>{% if test.startTimeEnrollment %}{{ test.startTimeEnrollment|date('H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Hora Fin Inscripcion</th>
-                <td>{% if test.endTimeEnrollment %}{{ test.endTimeEnrollment|date('H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Fecha Inicio Inscripcion</th>
-                <td>{% if test.startDateEnrollment %}{{ test.startDateEnrollment|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Fecha Fin Inscripcion</th>
-                <td>{% if test.endDateEnrollment %}{{ test.endDateEnrollment|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Puntuacion Maxima</th>
-                <td>{{ test.score }}</td>
-            </tr>
-            <tr>
-                <th>Porcentaje Total</th>
-                <td>{{ test.percentage }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div >
+    <label class="teal-text lighten-4"><h3>Detalles del Examenen</h3></label>
 
-    <ul>
-        <li>
-            <a href="{{ path('test_index') }}">Atras</a>
-        </li>
-        <li>
-            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>
-        </li>
-        <li>
+        <div class="row">
+            <div class="row">
+                <label class="teal-text darken-4"><h6>Titulo :</h6></label>
+                <div>{{ test.title }}</div>
+            </div>
+            <div class="col s3">
+                <label class="teal-text darken-4"><h6>Materia :</h6></label>
+                <div>{{ test.matter }}</div>
+            </div>
+            <div class="col s3">
+                <label class="teal-text darken-4"><h6>Institucion :</h6></label>
+                {% if test.institution%}
+                    {{ test.institution }}
+                {% else %}
+                    {{ 'No Definido'}}
+                {% endif %}
+            </div>
+            <div class="col s3">
+                <label class="teal-text darken-4"><h6>Puntuacion Maxima :</h6></label>
+                {% if test.score%}
+                    {{ test.score }}
+                {% else %}
+                    {{ 'No Definido'}}
+                {% endif %}
+            </div>
+            <div class="col s3">
+                <label class="teal-text darken-4"><h6>Porcentaje Total :</h6></label>
+                {% if test.percentage%}
+                    {{ test.percentage }}
+                {% else %}
+                    {{ 'No Definido'}}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="teal-text lighten-4"><h6>Tiempo De Registro</h6></label>
+            <p >
+                {{'La inscripcion iniciara a partir del: '}}
+                {% if test.startDateEnrollment and  test.startTimeEnrollment%}
+                    {{ test.startDateEnrollment|date('d / m /d')}}{{ test.startTimeEnrollment|date(' H:i')  }}
+                {% else %}
+                    <b class="pink-text"> No Definido </b>
+                {% endif %}
+                {{ 'hasta el' }}
+                {% if test.endDateEnrollment and  test.endTimeEnrollment%}
+                    {{ test.endDateEnrollment|date('d/m/d')}}{{ test.endTimeEnrollment|date('H:i')  }}
+                {% else %}
+                    <b class="pink-text"> No Definido </b>
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="row">
+            <label class="teal-text lighten-4"><h6>Tiempo De Duracion</h6></label>
+            <p>
+                {{'El examen iniciara a partir del: '}}
+                {% if test.startDate and  test.startTime%}
+                    {{ test.startDate|date('d / m /d')}}{{ test.startTime|date(' H:i')  }}
+                {% else %}
+                    <b class="pink-text"> No Definido </b>
+                {% endif %}
+                {{ 'hasta el' }}
+                {% if test.endDate and  test.endTime%}
+                    {{ test.endDate|date('d/m/d')}}{{ test.endTime|date('H:i')  }}
+                {% else %}
+                    <b class="pink-text"> No Definido </b>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Atras</a>
+        </div>
+
+        <div class="col push-s5">
+            <a class="waves-effect waves-light btn" href={{ path('test_edit', {'id': test.idTest}) }}>Editar</a>
+        </div>
+        <div class="col push-s5" >
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}
