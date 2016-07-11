@@ -51,11 +51,21 @@ class AnswerElement
      *   @ORM\JoinColumn(name="id_question", referencedColumnName="id_question", nullable=false)
      * })
      */
+
+    public function getIdQuestion()
+    {
+        return $this->idQuestion;
+    }
+    public function setIdQuestion($idQuestion)
+    {
+        $this->idQuestion=$idQuestion;
+        return $this->idQuestion;
+    }
     private $idQuestion;
 
     public function getId()
     {
-        return $this->idAnswerElement;
+        return $this->id;
     }
 
     public function getIdAnswerElement($idAnswerElement)
@@ -91,10 +101,7 @@ class AnswerElement
         return $this;
     }
     
-    public function getIdQuestion()
-    {
-        return $this->idQuestion;
-    }
+    
 
     
 

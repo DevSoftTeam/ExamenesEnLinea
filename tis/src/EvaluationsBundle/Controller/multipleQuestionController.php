@@ -44,14 +44,14 @@ class multipleQuestionController extends Controller
 
             $em->persist($question);
             $em->flush();
-            $a1 =$question->getid;
+            $var= $question->getIdQuestion();
             $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
             $answer = new AnswerElement();
-            $answer= $a1;
-            $answer= $answer1;
-            $answer=1;
+            $answer->setIdQuestion($var);
+            $answer->setContent($answer1);
+            $answer->setOrderVar("1");
             //if()traer el valor del check de una para enviar a ISCORRECT
-            $answer ="True";
+            $answer->setIsCorrect("True");
 
             $em->persist($answer);
             $em->flush();
