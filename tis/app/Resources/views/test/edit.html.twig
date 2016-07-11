@@ -93,7 +93,7 @@
 
     {{ form_end(edit_form) }}
 
-        <div class="row">{#class="center-align row">#}
+        <div class="row">
             <div class="col ">
                 <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Cancelar</a>
             </div>
@@ -106,18 +106,6 @@
                 {{ form_end(delete_form) }}
             </div>
         </div>
-
-    {#<ul>#}
-    {#<li>#}
-        {#<a href="{{ path('test_index') }}">Atras</a>#}
-    {#</li>#}
-    {#<li>#}
-        {#{{ form_start(delete_form) }}#}
-            {#<input type="submit" value="Eliminar">#}
-        {#{{ form_end(delete_form) }}#}
-    {#</li>#}
-    {#</ul>#}
-
     <script>
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
