@@ -47,6 +47,11 @@ class Area
         return $this->nameArea;
     }
 
+    public function setNameArea($nameArea){
+        $this->nameArea = $nameArea;
+        return $this;
+    }
+
     public function getDescriptionArea() {
         return $this->descriptionArea;
     }
