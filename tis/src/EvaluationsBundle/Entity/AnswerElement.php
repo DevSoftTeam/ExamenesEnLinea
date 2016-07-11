@@ -73,7 +73,7 @@ class AnswerElement
         return $this->idAnswerElement;
     }
 
-    public function getContent($content)
+    public function getContent()
     {
         return $this->content;
     }
@@ -83,7 +83,7 @@ class AnswerElement
         $this->content = $content;
         return $this;
     }
-    public function getOrderVar($orderVar)
+    public function getOrderVar()
     {
         return $this->orderVar;
     }
@@ -93,7 +93,7 @@ class AnswerElement
         return $this;
     }
 
-    public function getIsCorrect($isCorrect){
+    public function getIsCorrect(){
         return $this->isCorrect;
     }
     public function setIsCorrect($isCorrect){
@@ -103,7 +103,10 @@ class AnswerElement
     
     
 
-    
+    public function setIdQuestion($idQuestion){
+        $this->idQuestion = $idQuestion;
+        return $this;
+    }    
 
     public function __get($property) {
         if (property_exists($this, $property)) {

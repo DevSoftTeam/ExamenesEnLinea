@@ -21,16 +21,6 @@ class QuestionType extends AbstractType
         $builder
             ->add('statementQuestion')
             ->add('pathImageQuestion')
-            ->add('area', EntityType::class, array(
-                    'class' => 'EvaluationsBundle:Area',
-                    'query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('u')
-                            ->orderBy('u.idArea', 'DESC');
-                    },
-                    'choice_label' => 'nameArea',
-                    'choice_value' => 'idArea',
-                    'required' => true,
-            ))
             ->add('image', FileType::class,array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),

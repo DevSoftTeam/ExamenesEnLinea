@@ -1,58 +1,70 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Examenes</h1>
+    <label class="teal-text lighten-4">
+        <h3>Examenes</h3>
+    </label>
 
-    <table>
+    <table class="striped">
         <thead>
             <tr>
                 {#<th>Nro Examen</th>#}
-                <th>Titulo</th>
-                <th>Materia</th>
+                <th class="teal-text lighten-4">Titulo</th>
+                <th class="teal-text lighten-4">Materia</th>
                 {#<th>Institucion</th>#}
-                <th>Hora Inicio</th>
-                <th>Hora Fin</th>
-                <th>Fecha Inicio</th>
+                {#<th>Hora Inicio</th>#}
+                {#<th>Hora Fin</th>#}
+                {#<th>Fecha Inicio</th>#}
                 {#<th>Fecha Fin</th>#}
                 {#<th>Hora Inicio Registro</th>#}
                 {#<th>Hora Fin Registro</th>#}
                 {#<th>Fecha Inicio Registro</th>#}
                 {#<th>Fecha Fin Registro</th>#}
-                <th>Puntuacion Maxima</th>
-                <th>Porcentage Total</th>
-                <th>Funciones</th>
+                {#<th>Puntuacion Maxima</th>#}
+                {#<th>Porcentage Total</th>#}
+                {#<th>Funciones</th>#}
             </tr>
         </thead>
-        <tbody>
+        <tbody >
         {% for test in tests %}
             <tr>
                 {#<td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>#}
-                <td>{{ test.title }}</td>
-                <td>{{ test.matter }}</td>
-                {#<td>{{ test.institution }}</td>#}
-                <td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>
-                <td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>
-                <td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ test.score }}</td>
-                <td>{{ test.percentage }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('test_show', { 'id': test.idTest }) }}">Detalles</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>
-                        </li>
-                    </ul>
+                    <a  href="{{ path('test_show', { 'id': test.idTest }) }}"><font color="black">{{test.title}}</font></a>
                 </td>
-            </tr>
+                <td>
+                    <a href="{{ path('test_show', { 'id': test.idTest }) }}"><FONT COLOR="black">{{test.matter}}</FONT></a>
+                </td>
+
+                {#<td>#}
+                    {#<a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.title }}</a>#}
+                {#</td>#}
+                {#<td>{{ test.mat}}#}
+
+                {#<td>{{ test.institution }}</td>#}
+                {#<td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>#}
+                {#<td>{{ test.score }}</td>#}
+                {#<td>{{ test.percentage }}</td>#}
+                {#<td>#}
+                    {#<ul>#}
+                        {#<li>#}
+                            {#<a href="{{ path('test_show', { 'id': test.idTest }) }}">Detalles</a>#}
+                        {#</li>#}
+                        {#<li>#}
+                            {#<a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>#}
+                        {#</li>#}
+                    {#</ul>#}
+                {#</td>#}
+            {#</tr>#}
         {% endfor %}
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('test_new') }}">Crear</a>
+            <a class="waves-effect waves-light btn" href="{{ path('test_new') }}">Crear Examen</a>
         </li>
     </ul>
 {% endblock %}
