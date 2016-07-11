@@ -117,6 +117,46 @@ $collection->add('openQuestion_delete', new Route(
     array('DELETE')
 ));
 
+$collection->add('orderQuestion_new', new Route(
+    '/orderQuestion/{id_type}',
+    array('_controller' => 'EvaluationsBundle:OrderQuestion:oqNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('orderQuestion_show', new Route(
+    '/{id}/showOrQ',
+    array('_controller' => 'EvaluationsBundle:OrderQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('orderQuestion_edit', new Route(
+    '/{id}/editOrQ',
+    array('_controller' => 'EvaluationsBundle:OrderQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('orderQuestion_delete', new Route(
+    '/{id}/deleteOrQ',
+    array('_controller' => 'EvaluationsBundle:OrderQuestion:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
 $collection->add('trueFalseQuestion_new', new Route(
     '/trueFalseQuestion/{id_type}',
     array('_controller' => 'EvaluationsBundle:trueFalseQuestion:tfqNew'),
