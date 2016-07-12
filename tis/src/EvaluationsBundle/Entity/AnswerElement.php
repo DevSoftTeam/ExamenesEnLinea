@@ -95,7 +95,10 @@ class AnswerElement
     {
         return $this->idQuestion;
     }
-
+    public function setIdQuestion($id_question){
+        $this->id_question = $id_question;
+        return $this;
+    }
     
 
     public function __get($property) {

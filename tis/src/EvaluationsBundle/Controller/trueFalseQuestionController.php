@@ -3,6 +3,7 @@
 namespace EvaluationsBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EvaluationsBundle\Entity\AnswerElement;
 
 use EvaluationsBundle\Entity\Question;
 //use EvaluationsBundle\Form\QuestionType;
@@ -41,17 +42,31 @@ class trueFalseQuestionController extends Controller
             $question->setIdType($idType);
             $question->setIdArea($idArea);
 
+            //guardar respuesta
+
             $em->persist($question);
             $em->flush();
+            $idq = $question->getId();
+
+            $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
+            $answer = new AnswerElement(); 
+            $answer -> setContent($answer1);
+            $answer -> setIsCorrect("true");
+            $answer -> setOrderVar(1);
+            $answer -> setIdQuestion($question);
+
+            $em->persist($answer);
+            $em->flush();
+
 
           //  $answer= $request->request->get("group1");
-          //  print($answer);
-            $answer = $_POST['group1'];
+
+           //$answer = $_POST['group1'];
           //  	$answer = "radioselected";
 
             return $this->redirectToRoute('trueFalseQuestion_show', array(
             	'id' => $question->getId(),
-            	'ans' => $answer,
+            	//'ans' => $answer,
             	));
           }
         }
@@ -71,15 +86,15 @@ class trueFalseQuestionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($question);
       //  $answer1 = "aqui el radio button";
-       //$answer = $_POST['group1'];
-       $answer1 = $ans;
+      // $answer = $_POST['group1'];
+      // $answer1 = $ans;
 
 
 
         return $this->render('EvaluationsBundle:Question:showTrueFalseQuestion.html.twig', array(
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
-            'hola' => $answer1,
+           // 'hola' => $answer1,
         ));
     }
 
