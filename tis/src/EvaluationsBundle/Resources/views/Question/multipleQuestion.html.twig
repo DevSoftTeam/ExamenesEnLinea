@@ -8,13 +8,15 @@
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
   {{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
       <div class="row">
-      <div class="input-field col s11">
-      {{ form_widget(form.area) }}
-      <label class="teal-text darken-4"><h6>Area :</h6></label>
+        <div class="col s12">
+        <label class="teal-text darken-4"><h6>Area :</h6></label>
+        <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" required>
+        <datalist id="areas">
+        {% for area in areas %}
+          <option value={{ area.nameArea }}>
+        {% endfor %}
+        </datalist>
       </div>
-      <div class="col s1">
-      <a class="btn-floating btn-short waves-effect waves-light pink modal-trigger"data-toggle="modal" data-target="#modal1" href=""><i class="material-icons aligned rigth">add</i></a>
-      </div>  
       </div>
 
         <div class="row">
@@ -44,7 +46,7 @@
     <label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
     <form action="#">
 
-    <label><a class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label><br>
+    <label class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label><br>
 
 
     <div class="row">
@@ -56,8 +58,8 @@
         </div>
         <div class="input-field col s2">
         <p>
-        <input type="checkbox" id="test5" />
-        <label class="teal-text lighten-4" for="test5">Correcta</label>
+        <input name="chec1" type="checkbox" id="test1" />
+        <label class="teal-text lighten-4" for="test1">Correcta</label>
         </p>
         </div>
         </div>
@@ -70,8 +72,8 @@
         </div>
         <div class="input-field col s2">
         <p>
-        <input type="checkbox" id="test6" />
-        <label class="teal-text lighten-4" for="test6">Correcta</label>
+        <input name="chec2" type="checkbox" id="test2" />
+        <label class="teal-text lighten-4" for="test2">Correcta</label>
          </p>
         </div>
         </div>
@@ -84,8 +86,8 @@
         </div>
         <div class="input-field col s2">
         <p>
-        <input type="checkbox" id="test7" />
-        <label class="teal-text lighten-4" for="test7">Correcta</label>
+        <input name="chec3" type="checkbox" id="test3" />
+        <label class="teal-text lighten-4" for="test3">Correcta</label>
         </p>
         </div>
       </div>
@@ -98,8 +100,8 @@
         </div>
         <div class="input-field col s2">
         <p>
-        <input type="checkbox" id="test8" />
-        <label class="teal-text lighten-4" for="test8">Correcta</label>
+        <input name="chec4" type="checkbox" id="test4" />
+        <label class="teal-text lighten-4" for="test4">Correcta</label>
       </p>
         </div>
         </div>
@@ -112,8 +114,8 @@
         </div>
         <div class="input-field col s2">
         <p>
-        <input type="checkbox" id="test9" />
-        <label class="teal-text lighten-4" for="test9">Correcta</label>
+        <input name="chec5" type="checkbox" id="test5" />
+        <label class="teal-text lighten-4" for="test5">Correcta</label>
       </p>
         </div>
       </div>
