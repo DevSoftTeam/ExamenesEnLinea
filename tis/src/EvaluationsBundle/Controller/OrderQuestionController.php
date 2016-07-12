@@ -7,12 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Entity\Area;
+use EvaluationsBundle\Entity\AnswerElement;
 
 /**
  * OpenQuestion controller.
  *
  */
-class OpenQuestionController extends Controller
+class OrderQuestionController extends Controller
 {
     public function oqNewAction($id_type, Request $request){
         $question = new Question();
@@ -48,15 +49,25 @@ class OpenQuestionController extends Controller
              }  
             $question->setIdType($idType);
             $question->setIdArea($idArea);
-
             $em->persist($question);
+
+            for ($i=1; $i <= 3; $i++) { 
+                $answer = new AnswerElement();
+                $contentAns = $request->request->get('answer'.$i);
+                $order = $request->request->get('order'.$i);
+                $answer->setIdQuestion($question);
+                $answer->setContent($contentAns);
+                $answer->setOrderVar($order);
+                $answer->setIsCorrect('True');
+                $em->persist($answer);
+            }
             $em->flush();
 
-            return $this->redirectToRoute('openQuestion_show', array('id' => $question->getId()));
+            return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
           }
         }
 
-        return $this->render('EvaluationsBundle:Question:newOpenQuestion.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:newOrderQuestion.html.twig', array(
             'areas' => $areas,
             'question' => $question,
             'form' => $form->createView(),
@@ -70,8 +81,10 @@ class OpenQuestionController extends Controller
     public function showAction(Question $question)
     {
         $deleteForm = $this->createDeleteForm($question);
-
-        return $this->render('EvaluationsBundle:Question:showOpenQuestion.html.twig', array(
+        $em = $this->getDoctrine()->getManager();
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
+        return $this->render('EvaluationsBundle:Question:showOrderQuestion.html.twig', array(
+            'answers' => $answers,
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
         ));

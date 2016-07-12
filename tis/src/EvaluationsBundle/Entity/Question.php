@@ -49,7 +49,7 @@ class Question
      * @var \Area
      * @ORM\ManyToOne(targetEntity="Area")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_area", referencedColumnName="id_area")
+     *   @ORM\JoinColumn(name="id_area", referencedColumnName="id_area", nullable=false)
      * })
      */
     private $idArea;
@@ -66,6 +66,7 @@ class Question
     {
         return $this->idQuestion;
     }
+
     public function setStatementQuestion($statementQuestion)
     {
         $this->statementQuestion = $statementQuestion;

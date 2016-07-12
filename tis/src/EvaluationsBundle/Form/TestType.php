@@ -22,7 +22,6 @@ class TestType extends AbstractType
             ->add('startTime', TimeType::class, array(
                 'widget' => 'single_text',
 //                'attr' => ['type' => 'time'],
-//                'format' => 'HH:ii',
                 'label' => ' ',
                 'required' =>false
             ))

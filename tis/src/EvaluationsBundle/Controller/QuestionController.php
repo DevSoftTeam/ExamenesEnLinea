@@ -23,7 +23,7 @@ class QuestionController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $questions = $em->getRepository('EvaluationsBundle:Question')->findAll();
-
+//select id_question statement_question, name_area from question INNER JOIN area ON (question.id_area = area.id_area)
         return $this->render('question/index.html.twig', array(
             'questions' => $questions,
         ));

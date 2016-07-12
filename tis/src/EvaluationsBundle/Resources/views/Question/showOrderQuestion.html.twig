@@ -20,6 +20,17 @@
                 <td><img height="50%" width="50%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"></td>
                 {% endif %}
             </tr>
+            
+            {% for ans in answers %}
+            <tr>
+                <th><label class="teal-text darken-4"><h6>Respuesta :</h6></label></th>
+                <td>{{ ans.content }}</td>
+
+                <th><label class="teal-text darken-4"><h6>Secuencia de orden :</h6></label></th>
+                <td>{{ ans.orderVar }}</td>
+            </tr>
+            {% endfor %}
+            
         </tbody>
     </table>
     <div class="row">

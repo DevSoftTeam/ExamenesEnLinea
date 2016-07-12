@@ -64,6 +64,7 @@ class AnswerElement
     }
 
     public function getContent($content)
+    public function getContent()
     {
         return $this->content;
     }
@@ -74,6 +75,7 @@ class AnswerElement
         return $this;
     }
     public function getOrderVar($orderVar)
+    public function getOrderVar()
     {
         return $this->orderVar;
     }
@@ -84,6 +86,7 @@ class AnswerElement
     }
 
     public function getIsCorrect($isCorrect){
+    public function getIsCorrect(){
         return $this->isCorrect;
     }
     public function setIsCorrect($isCorrect){
