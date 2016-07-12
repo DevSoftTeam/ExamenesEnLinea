@@ -31,7 +31,7 @@ class OrderQuestionController extends Controller
                 $idArea = new Area();
                 $idArea->setNameArea($request->request->get('area'));
                 $em->persist($idArea);
-                $em->flush();
+                //$em->flush();
             }
             $file=$form['image']->getData();
             if (!is_null($file)) {
@@ -51,7 +51,7 @@ class OrderQuestionController extends Controller
             $question->setIdArea($idArea);
             $em->persist($question);
 
-            for ($i=1; $i <= 3; $i++) { 
+            for ($i=1; $i <= 5; $i++) { 
                 $answer = new AnswerElement();
                 $contentAns = $request->request->get('answer'.$i);
                 $order = $request->request->get('order'.$i);
@@ -113,7 +113,7 @@ class OrderQuestionController extends Controller
                 $idArea = new Area();
                 $idArea->setNameArea($request->request->get('area'));
                 $em->persist($idArea);
-                $em->flush();
+                //$em->flush();
             }
             $file=$editForm['image']->getData();
             if (!is_null($file)) {
