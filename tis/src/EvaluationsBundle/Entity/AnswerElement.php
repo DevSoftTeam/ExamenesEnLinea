@@ -1,9 +1,6 @@
 <?php
-
 namespace EvaluationsBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * AnswerElement
  *
@@ -21,28 +18,24 @@ class AnswerElement
      * @ORM\SequenceGenerator(sequenceName="answer_element_id_answer_element_seq", allocationSize=1, initialValue=1)
      */
     private $idAnswerElement;
-
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=false)
      */
     private $content;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="order_var", type="string", length=24, nullable=false)
+     * @ORM\Column(name="order_var", type="string", length=24, nullable=true)
      */
     private $orderVar;
-
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_correct", type="boolean", nullable=false)
+     * @ORM\Column(name="is_correct", type="boolean", nullable=true)
      */
     private $isCorrect;
-
     /**
      * @var \Question
      *
@@ -52,17 +45,14 @@ class AnswerElement
      * })
      */
     private $idQuestion;
-
     public function getId()
     {
         return $this->idAnswerElement;
     }
-
     public function getIdAnswerElement($idAnswerElement)
     {
         return $this->idAnswerElement;
     }
-
     public function getContent()
     {
         return $this->content;
@@ -82,7 +72,6 @@ class AnswerElement
         $this->orderVar = $orderVar;
         return $this;
     }
-
     public function getIsCorrect(){
         return $this->isCorrect;
     }
@@ -95,29 +84,23 @@ class AnswerElement
     {
         return $this->idQuestion;
     }
-
     public function setIdQuestion($idQuestion){
         $this->idQuestion = $idQuestion;
         return $this;
     }    
-
     public function __get($property) {
         if (property_exists($this, $property)) {
           return $this->$property;
         }
     }
-
     public function __set($property, $value) {
         if (property_exists($this, $property)) {
           $this->$property = $value;
         }
         return $this;
     }
-
     public function __call($name, $arguments){
         echo "Llamando al método de objeto '$name' "
             . implode(', ', $arguments). "\n";
     }
-
 }
-

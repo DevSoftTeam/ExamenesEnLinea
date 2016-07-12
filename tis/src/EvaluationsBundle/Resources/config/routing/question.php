@@ -218,5 +218,35 @@ $collection->add('multipleQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('multipleQuestion_show', new Route(
+    '/{id}/showMQ',
+    array('_controller' => 'EvaluationsBundle:multipleQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('multipleQuestion_edit', new Route(
+    '/{id}/editMQ',
+    array('_controller' => 'EvaluationsBundle:multipleQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('multipleQuestion_delete', new Route(
+    '/{id}/deleteMQ',
+    array('_controller' => 'EvaluationsBundle:multipleQuestion:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
 
 return $collection;
