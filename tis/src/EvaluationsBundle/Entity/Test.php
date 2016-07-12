@@ -112,6 +112,14 @@ class Test
     private $percentage;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="available", type="boolean", nullable=true)
+     */
+    private $available;
+
+
+    /**
      * @var \UserSystem
      *
      * @ORM\ManyToOne(targetEntity="UserSystem")
@@ -121,6 +129,7 @@ class Test
      */
     private $idUser;
 
+ 
     /**
      * Get id
      *
@@ -327,6 +336,30 @@ class Test
     public function getPercentage()
     {
         return $this->percentage;
+    }
+
+    /**
+     * Set available
+     *
+     * @param boolean $available
+     *
+     * @return PruebaD
+     */
+    public function setAvailable($available)
+    {
+        $this->available = $available;
+
+        return $this;
+    }
+
+    /**
+     * Get available
+     *
+     * @return bool
+     */
+    public function getAvailable()
+    {
+        return $this->available;
     }
 
     /**
