@@ -34,9 +34,8 @@
                 <div class="col s2">
                 <label class="teal-text darken-4"><h6>Secuencia de orden :</h6></label>
                 <select>
-                  <option value="" selected>{{ ans.orderVar }}</option>
                   {% for ans1 in answers %}
-                  <option value="" disabled>{{ ans1.orderVar }}</option>
+                  <option value="" {% if ans.orderVar==ans1.orderVar %} selected {% endif %}disabled>{{ ans1.orderVar }}</option>
                   {% endfor %}
                 </select>
                 </div>
@@ -49,7 +48,7 @@
                 <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
             </div>
             <div class="col push-s5">
-                <a class="waves-effect waves-light btn" href={{path('openQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
+                <a class="waves-effect waves-light btn" href={{path('orderQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
             </div>
             <div class="col push-s5">
                 {{ form_start(delete_form) }}
