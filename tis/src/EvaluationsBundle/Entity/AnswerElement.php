@@ -53,6 +53,7 @@ class AnswerElement
     {
         return $this->idAnswerElement;
     }
+
     public function getContent()
     {
         return $this->content;

@@ -167,6 +167,37 @@ $collection->add('trueFalseQuestion_new', new Route(
     array('GET', 'POST')
 ));
 
+$collection->add('trueFalseQuestion_show', new Route(
+    '/{id}/showTFQ',
+    array('_controller' => 'EvaluationsBundle:trueFalseQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+
+$collection->add('trueFalseQuestion_edit', new Route(
+    '/{id}/editTFQ',
+    array('_controller' => 'EvaluationsBundle:trueFalseQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('trueFalseQuestion_delete', new Route(
+    '/{id}/deleteTFQ',
+    array('_controller' => 'EvaluationsBundle:trueFalseQuestion:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
 
 $collection->add('uniqueAnswerQuestion_new', new Route(
     '/uniqueAnswerQuestion/{id_type}',
@@ -241,6 +272,48 @@ $collection->add('multipleQuestion_edit', new Route(
 $collection->add('multipleQuestion_delete', new Route(
     '/{id}/deleteMQ',
     array('_controller' => 'EvaluationsBundle:multipleQuestion:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
+
+$collection->add('matchingQuestion_new', new Route(
+    '/matchingQuestion/{id_type}',
+    array('_controller' => 'EvaluationsBundle:matchingQuestion:mqNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('matchingQuestion_show', new Route(
+    '/{id}/showMQ',
+    array('_controller' => 'EvaluationsBundle:matchingQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+
+$collection->add('matchingQuestion_edit', new Route(
+    '/{id}/editMQ',
+    array('_controller' => 'EvaluationsBundle:matchingQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('matchingQuestion_delete', new Route(
+    '/{id}/deleteMQ',
+    array('_controller' => 'EvaluationsBundle:matchingQuestion:delete'),
     array(),
     array(),
     '',
