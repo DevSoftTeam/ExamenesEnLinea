@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Form\QuestionType;
+use EvaluationsBundle\Entity\Area;
 
 /**
  * Question controller.
@@ -20,10 +21,10 @@ class QuestionController extends Controller
      */
     public function indexAction()
     {
+        //select id_question statement_question, name_area from question INNER JOIN area ON (question.id_area = area.id_area)
         $em = $this->getDoctrine()->getManager();
 
         $questions = $em->getRepository('EvaluationsBundle:Question')->findAll();
-//select id_question statement_question, name_area from question INNER JOIN area ON (question.id_area = area.id_area)
         return $this->render('question/index.html.twig', array(
             'questions' => $questions,
         ));
@@ -52,9 +53,19 @@ class QuestionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm('EvaluationsBundle\Form\FileQuestionType', $question);
         $form->handleRequest($request);
-        
+        $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
         if ($form->isSubmitted() && $form->isValid()) {
-           $file=$form['image']->getData();
+            $statement = $form['statementQuestion']->getData();
+          if(!is_null($statement) && strlen($statement)<=5000){
+            $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
+            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
+            if(is_null($idArea)){
+                $idArea = new Area();
+                $idArea->setNameArea($request->request->get('area'));
+                $em->persist($idArea);
+                //$em->flush();
+            }
+            $file=$form['image']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
                if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
@@ -67,24 +78,26 @@ class QuestionController extends Controller
                }else{
                 $question->setPathImageQuestion(null);
                }
-            } 
+             } 
             $file=$form['file']->getData();
-            if ($file=$form['file'] != "") {
+            if (!is_null($file)) {
                 $file=$form['file']->getData();  
                 $ext=$file->guessExtension();
                 $file_name=time().".".$ext;
                 $file->move("uploads", $file_name);
                 $question->setpathFileQuestion($file_name);
-            }
-            $idType=$em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
-            $idArea=$em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
+            } 
+            $question->setIdType($idType);
+            $question->setIdArea($idArea);
             $em->persist($question);
             $em->flush();
-            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
-        }
 
+            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+          }
+        }
         return $this->render('question/fileQuestionNew.html.twig', array(
             'question' => $question,
+            'areas' => $areas,
             'type' => $id_type,
             'form' => $form->createView(),
         ));
@@ -94,6 +107,7 @@ class QuestionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($question);
+        $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
         $editForm = $this->createForm('EvaluationsBundle\Form\FileQuestionType', $question);
         $editForm->handleRequest($request);
 
@@ -130,6 +144,7 @@ class QuestionController extends Controller
 
         return $this->render('question/fileQuestionEdit.html.twig', array(
             'question' => $question,
+            'areas' => $areas,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
