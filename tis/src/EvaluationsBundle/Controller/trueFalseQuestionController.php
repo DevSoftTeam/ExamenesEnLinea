@@ -1,15 +1,16 @@
 <?php
 
 namespace EvaluationsBundle\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EvaluationsBundle\Entity\AnswerElement;
-
 use EvaluationsBundle\Entity\Question;
+use EvaluationsBundle\Entity\Area;
 //use EvaluationsBundle\Form\QuestionType;
 
 /**
- * Question controller.
+ * OpenQuestion controller.
  *
  */
 class trueFalseQuestionController extends Controller
@@ -17,6 +18,7 @@ class trueFalseQuestionController extends Controller
     public function tfqNewAction($id_type, Request $request){
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
+        $areas = $em->getRepository("EvaluationsBundle:Area")->findAll();//areas
         $form = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $form->handleRequest($request);
         
@@ -24,7 +26,15 @@ class trueFalseQuestionController extends Controller
             $statement = $form['statementQuestion']->getData();
           if(!is_null($statement) && strlen($statement)<=5000){
             $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
-            $idArea = $em->getRepository('EvaluationsBundle:Area')->find($form['area']->getData());
+            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
+
+            if(is_null($idArea)){
+                $idArea = new Area();
+                $idArea->setNameArea($request->request->get('area'));
+                $em->persist($idArea);
+                $em->flush();
+            }
+
             $file=$form['image']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
@@ -42,40 +52,27 @@ class trueFalseQuestionController extends Controller
             $question->setIdType($idType);
             $question->setIdArea($idArea);
 
-            //guardar respuesta
-
             $em->persist($question);
-            $em->flush();
-            $idq = $question->getId();
-
+            
             $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
-            $answer = new AnswerElement(); 
-            $answer -> setContent($answer1);
-            $answer -> setIsCorrect("true");
-            $answer -> setOrderVar(1);
-            $answer -> setIdQuestion($question);
-
+            $answer = new AnswerElement();
+            $answer->setIdQuestion($question);
+            $answer->setContent($answer1);
+            $answer->setOrderVar("1");
+            $answer->setIsCorrect("true");
             $em->persist($answer);
             $em->flush();
 
-
-          //  $answer= $request->request->get("group1");
-
-           //$answer = $_POST['group1'];
-          //  	$answer = "radioselected";
-
-            return $this->redirectToRoute('trueFalseQuestion_show', array(
-            	'id' => $question->getId(),
-            	//'ans' => $answer,
-            	));
+       
+            return $this->redirectToRoute('trueFalseQuestion_show', array('id' => $question->getId()));
           }
         }
 
         return $this->render('EvaluationsBundle:Question:trueFalseQuestion.html.twig', array(
+            'areas' => $areas,
             'question' => $question,
             'form' => $form->createView(),
         ));
-
     }
 
     /**
@@ -85,16 +82,10 @@ class trueFalseQuestionController extends Controller
     public function showAction(Question $question)
     {
         $deleteForm = $this->createDeleteForm($question);
-      //  $answer1 = "aqui el radio button";
-      // $answer = $_POST['group1'];
-      // $answer1 = $ans;
-
-
 
         return $this->render('EvaluationsBundle:Question:showTrueFalseQuestion.html.twig', array(
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
-           // 'hola' => $answer1,
         ));
     }
 
@@ -104,19 +95,57 @@ class trueFalseQuestionController extends Controller
      */
     public function editAction(Request $request, Question $question)
     {
+       $oldImage = $question->getPathImageQuestion();
+        $em = $this->getDoctrine()->getManager();
+        $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $statement = $editForm['statementQuestion']->getData();
+          if(!is_null($statement) && strlen($statement)<=5000){
+            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
+            /// si no exisite el area lo crea
+            if(is_null($idArea)){
+                $idArea = new Area();
+                $idArea->setNameArea($request->request->get('area'));
+                $em->persist($idArea);
+                $em->flush();
+            }
+            $file=$editForm['image']->getData();
+            if (!is_null($file)) {
+               $ext=$file->guessExtension();
+               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
+                $pathImage = $editForm['pathImageQuestion']->getData();
+                $pathImage = explode(".", $pathImage);
+                $pathImage =  $pathImage[0];
+                $file_name=$pathImage."_".time().".".$ext;
+                $file->move("uploads/images", $file_name);
+
+                if ($oldImage!=null) {
+                    $oldImage = "uploads/images/".$oldImage;
+                    unlink($oldImage);
+                } 
+
+                $question->setPathImageQuestion($file_name);          
+               }else{
+                $question->setPathImageQuestion(null);
+               }
+             }  
+            $question->setIdArea($idArea);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('openQquestion_edit', array('id' => $question->getId()));
+            return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
+          }
         }
 
-        return $this->render('EvaluationsBundle:Question:editOpenQuestion.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:editTrueFalseQuestion.html.twig', array(
+            'areas' => $areas,
             'question' => $question,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -153,7 +182,6 @@ class trueFalseQuestionController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('question_delete', array('id' => $question->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

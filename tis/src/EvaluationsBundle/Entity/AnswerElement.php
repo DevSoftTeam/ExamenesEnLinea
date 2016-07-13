@@ -68,7 +68,6 @@ class AnswerElement
         $this->content = $content;
         return $this;
     }
-    public function getOrderVar($orderVar)
     public function getOrderVar()
     {
         return $this->orderVar;
@@ -78,11 +77,6 @@ class AnswerElement
         $this->orderVar = $orderVar;
         return $this;
     }
-<<<<<<< HEAD
-
-    public function getIsCorrect($isCorrect){
-=======
->>>>>>> e45064031e098becd48fea30ace70243b4cac1c2
     public function getIsCorrect(){
         return $this->isCorrect;
     }
@@ -95,12 +89,6 @@ class AnswerElement
     {
         return $this->idQuestion;
     }
-    public function setIdQuestion($id_question){
-        $this->id_question = $id_question;
-        return $this;
-    }
-    
-
     public function setIdQuestion($idQuestion){
         $this->idQuestion = $idQuestion;
         return $this;
