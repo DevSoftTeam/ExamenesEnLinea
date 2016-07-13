@@ -53,11 +53,7 @@ class AnswerElement
     {
         return $this->idAnswerElement;
     }
-<<<<<<< HEAD
 
-    public function getContent($content)
-=======
->>>>>>> e45064031e098becd48fea30ace70243b4cac1c2
     public function getContent()
     {
         return $this->content;
