@@ -51,15 +51,16 @@ class OrderQuestionController extends Controller
             $question->setIdArea($idArea);
             $em->persist($question);
 
-            for ($i=1; $i <= 5; $i++) { 
-                $answer = new AnswerElement();
+            for ($i=1; $i <= 5; $i++) {
                 $contentAns = $request->request->get('answer'.$i);
                 $order = $request->request->get('order'.$i);
-                $answer->setIdQuestion($question);
-                $answer->setContent($contentAns);
-                $answer->setOrderVar($order);
-                $answer->setIsCorrect('True');
-                $em->persist($answer);
+                if(strlen(trim($contentAns))>0 && strlen(trim($order))>0){
+                    $answer = new AnswerElement();
+                    $answer->setIdQuestion($question);
+                    $answer->setContent($contentAns);
+                    $answer->setOrderVar($order);
+                    $em->persist($answer);
+                }
             }
             $em->flush();
 
@@ -99,6 +100,7 @@ class OrderQuestionController extends Controller
         $oldImage = $question->getPathImageQuestion();
         $em = $this->getDoctrine()->getManager(); /// para enviar las areas
         $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
@@ -139,14 +141,32 @@ class OrderQuestionController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
+
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
+
+            for ($i=1; $i <= 5; $i++) {
+                $contentAns = $request->request->get('answer'.$i);
+                $order = $request->request->get('order'.$i);
+                if(strlen(trim($contentAns))>0 && strlen(trim($order))>0){
+                    $answer = new AnswerElement();
+                    $answer->setIdQuestion($question);
+                    $answer->setContent($contentAns);
+                    $answer->setOrderVar($order);
+                    $em->persist($answer);
+                }
+            }
             $em->flush();
 
-            return $this->redirectToRoute('openQuestion_show', array('id' => $question->getId()));
+            return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
           }
         }
-        return $this->render('EvaluationsBundle:Question:editOpenQuestion.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:editOrderQuestion.html.twig', array(
             'areas' => $areas,
             'question' => $question,
+            'answers' => $answers,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -170,6 +190,10 @@ class OrderQuestionController extends Controller
                 }
 
             $em = $this->getDoctrine()->getManager();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
             $em->remove($question);
             $em->flush();
         }
@@ -187,7 +211,7 @@ class OrderQuestionController extends Controller
     private function createDeleteForm(Question $question)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('openQuestion_delete', array('id' => $question->getId())))
+            ->setAction($this->generateUrl('orderQuestion_delete', array('id' => $question->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

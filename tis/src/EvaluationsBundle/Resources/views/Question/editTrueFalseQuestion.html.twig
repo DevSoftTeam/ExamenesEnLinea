@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title %}Editar Pregunta{% endblock %}
+{% block body %}
+    <label class="teal-text lighten-4"><h3>Editar Pregunta vf</h3></label>
+        <div class="row">
+
+    {{ form_start(edit_form,{ 'enctype':"multipart/form-data"}) }}
+        <div class="row">
+            <div class="col s12">
+            <label class="teal-text darken-4"><h6>Area :</h6></label>
+            <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" value={{question.idArea.nameArea}} required>
+              <datalist id="areas">
+              {% for area in areas %}
+                <option value={{ area.nameArea }}>
+              {% endfor %}
+              </datalist>
+            </div>
+        </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+              {{ form_widget(edit_form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','value':'question.statementQuestion','placeholder':'Introduzca texto'}}) }}
+              {{ form_errors(edit_form.statementQuestion) }}
+            </div>
+          </div>
+        {% if question.pathImageQuestion != null %}
+        <img height="50%" width="50%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+        {% endif %}
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>imagen</span>
+            <i class="material-icons right">perm_media</i>
+            {{ form_widget(edit_form.image) }}
+          </div>
+          <div class="file-path-wrapper">
+            {{ form_widget(edit_form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
+          </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col">
+                <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Cancelar</a>
+            </div>
+            <div class="col push-s7">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
+            </div>
+    {{ form_end(edit_form) }}
+
+            <div class="col push-s7">
+                {{ form_start(delete_form) }}
+                    <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
+                {{ form_end(delete_form) }}
+            </div>
+        </div>
+
+    </div>
+    <script>$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();});
+    </script>
+{% endblock %}a
