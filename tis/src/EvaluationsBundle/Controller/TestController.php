@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Form\TestType;
+use Symfony\Component\Validator\Constraints\Time;
 
 /**
  * Test controller.
@@ -41,6 +42,12 @@ class TestController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+//            $startTime = $form['startTime']->getData();
+//            if(!is_null($form['startDate']->getData())) {
+//                if(is_null($startTime)) {
+//                    $test->setStartTime('00:00');
+//                }
+//            }
             $em->persist($test);
             $em->flush();
 

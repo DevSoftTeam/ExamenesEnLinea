@@ -29,6 +29,22 @@ class UserSystemController extends Controller
         ));
     }
 
+    public function indexAmction(Request $request)
+    {
+        $session = $request->getSession();
+        if($session->has("id"))
+        {
+            return $this->render('EvaluationsBundle:Login:index.html.twig');
+        }else{
+            $this->get('session')->getFlashBag()->add(
+                'mensaje',
+                'Debe estar logeado para ver este contenido'
+            );
+            return$this->render('EvaluationsBundle:Login:index.html.twig');
+        }
+
+    }
+    
     /**
      * Creates a new UserSystem entity.
      *

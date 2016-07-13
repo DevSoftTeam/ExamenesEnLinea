@@ -19,6 +19,14 @@ evaluations_usersystem:
         resource: "@EvaluationsBundle/Resources/config/routing/usersystem.php"
         prefix:   /usersystem
 
+login_homepage:
+    path:     /login
+    defaults: { _controller: EvaluationsBundle:Login:login }
+
+validate_homepage:
+    path:     /validate
+    defaults: { _controller: EvaluationsBundle:Login:validate }
+
 evaluations_homepage:
-    path:     /
+    path:     /home
     defaults: { _controller: EvaluationsBundle:Default:index }
