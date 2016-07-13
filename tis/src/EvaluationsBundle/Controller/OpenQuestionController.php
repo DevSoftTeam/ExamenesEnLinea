@@ -30,7 +30,7 @@ class OpenQuestionController extends Controller
                 $idArea = new Area();
                 $idArea->setNameArea($request->request->get('area'));
                 $em->persist($idArea);
-                $em->flush();
+                //$em->flush();
             }
             $file=$form['image']->getData();
             if (!is_null($file)) {
@@ -100,7 +100,7 @@ class OpenQuestionController extends Controller
                 $idArea = new Area();
                 $idArea->setNameArea($request->request->get('area'));
                 $em->persist($idArea);
-                $em->flush();
+                //$em->flush();
             }
             $file=$editForm['image']->getData();
             if (!is_null($file)) {

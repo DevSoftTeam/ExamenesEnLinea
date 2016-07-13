@@ -2,26 +2,29 @@
 {% block title %}Pregunta{% endblock %}
 {% block body %}
 
-    <label class="teal-text lighten-4"><h3>Datos de pregunta</h3></label>
-    <table>
-        <tbody>
-            <tr>
-                <th><label class="teal-text darken-4"><h6>Area :</h6></label></th>
-                <td>{{ question.idArea.nameArea }}</td>
-            </tr>
-            <br>
-            <tr>
-                <th><label class="teal-text darken-4"><h6>Enunciado :</h6></label></th>
-                <td>{{ question.statementQuestion }}</td>
-            </tr>
-            <tr>
-                <th><label class="teal-text darken-4"><h6>Imagen :</h6></label></th>
+    <div >
+    <label class="teal-text lighten-4"><h3>Detalles de Prergunta</h3></label>
+
+        <div class="row">
+            <div class="col s12">
+                <label class="teal-text darken-4"><h6>Area :</h6></label>
+                <div>{{ question.idArea.nameArea }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+                <div>{{ question.statementQuestion }}</div>
+            </div><br><br><br>
+            <div class="col s12 alight center">
                 {% if question.pathImageQuestion != null %}
-                <td><img height="50%" width="50%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"></td>
+                <img height="40%" width="40%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
                 {% endif %}
-            </tr>
-        </tbody>
-    </table>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
             <div class="col ">
                 <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
