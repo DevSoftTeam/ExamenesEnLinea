@@ -29,14 +29,10 @@ class LoginController extends Controller
 
     public function validateAction(Request $request)
     {
-//        if ($request->getMethod()=="POST")
-//        {
-
             $login = $request->request->get("login");
             $pass = $request->request->get("password");
             $user = $this->getDoctrine()->getRepository('EvaluationsBundle:UserSystem')
                 -> findOneBy(array("login"=>$login, "password"=>$pass));
-//            $user = $this->getDoctrine()->getRepository('EvaluationsBundle:UserSystem')->findOneBy(array("login"=>'user', "password"=>'user'));
             if(!is_null($user))
             {
 //                die("hola");
@@ -45,7 +41,6 @@ class LoginController extends Controller
                 $session->set("name", $user->getName());
                 $idUser = $user->getId();
 //                echo $session->get("name");exit;
-//                return$this->render('EvaluationsBundle:Login:index.html.twig');
               return $this->redirect($this->generateUrl('usersystem_show', array("id"=> $idUser)));
             }else
             {
@@ -56,16 +51,13 @@ class LoginController extends Controller
                     'Datos de Usuario y/o contraseña no válidos, intente de nuevo');
             }
             return $this->redirect($this->generateUrl('login_homepage'));
-//        }
-
-//            return$this->render('EvaluationsBundle:Login:index.html.twig');
     }
 
     public function logoutAction(Request $request)
     {
         $session=$request->getSession();
         $session->clear();
-        $this->getFlashBag()->add(
+        $this->get('session')->getFlashBag()->add(
             'mensaje',
             'Se ha cerrado sesion exitosamente'
         );
