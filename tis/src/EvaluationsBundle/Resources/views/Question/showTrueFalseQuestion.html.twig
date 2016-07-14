@@ -34,13 +34,6 @@
 
                 <p>{{ ans.content }}</p>
                 </div>
-                <div class="col s2">
-                <label class="teal-text darken-4"><h6>Estado :</h6></label>
-                     {% if ans.isCorrect %}
-                    <p>Correcta</p>
-                {% else %}
-                    <p>Incorrecta</p>
-                {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -56,7 +49,7 @@
                 <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
             </div>
             <div class="col push-s5">
-                <a class="waves-effect waves-light btn" href={{path('multipleQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
+                <a class="waves-effect waves-light btn" href={{path('trueFalseQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
             </div>
             <div class="col push-s5">
                 {{ form_start(delete_form) }}

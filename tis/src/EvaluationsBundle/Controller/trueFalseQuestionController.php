@@ -145,6 +145,26 @@ class trueFalseQuestionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $em->flush();
+//for
+
+         //  $answer=$answers->first();
+         //   $answer
+
+                        foreach ($answers as $answer) {
+                $em->remove($answer);
+            }       
+                 $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
+            $answer = new AnswerElement();
+            $answer->setIdQuestion($question);
+            $answer->setContent($answer1);
+            $answer->setOrderVar("1");
+            $answer->setIsCorrect("true");
+            $answer->setIdType(4);
+            $em->persist($answer);
+            $em->flush();
+
+
+//for
 
             return $this->redirectToRoute('trueFalseQuestion_show', array('id' => $question->getId()
                 ));
@@ -169,11 +189,16 @@ class trueFalseQuestionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+      
+      $em = $this->getDoctrine()->getManager();
+           $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+     // $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy($question->idQuestion);
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
             $em->remove($question);
             $em->flush();
         }
-
         return $this->redirectToRoute('question_index');
     }
 
@@ -187,7 +212,7 @@ class trueFalseQuestionController extends Controller
     private function createDeleteForm(Question $question)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('question_delete', array('id' => $question->getId())))
+            ->setAction($this->generateUrl('trueFalseQuestion_delete', array('id' => $question->getId())))
             ->setMethod('DELETE')
             ->getForm();
     }
