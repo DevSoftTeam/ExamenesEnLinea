@@ -98,7 +98,8 @@ class UserSystemController extends Controller
             $em->persist($userSystem);
             $em->flush();
 
-            return $this->redirectToRoute('usersystem_edit', array('id' => $userSystem->getId()));
+//            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+            return $this->redirectToRoute('usersystem_show', array('id' => $userSystem->getId()));
         }
 
         return $this->render('usersystem/edit.html.twig', array(

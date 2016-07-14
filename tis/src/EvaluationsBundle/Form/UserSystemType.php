@@ -17,7 +17,7 @@ class UserSystemType extends AbstractType
         $builder
             ->add('login')
             ->add('password')
-            ->add('name')
+//            ->add('name')
             ->add('mail')
             ->add('lastName')
         ;
