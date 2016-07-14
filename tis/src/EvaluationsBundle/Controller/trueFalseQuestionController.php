@@ -60,6 +60,7 @@ class trueFalseQuestionController extends Controller
             $answer->setContent($answer1);
             $answer->setOrderVar("1");
             $answer->setIsCorrect("true");
+            $answer->setIdType(4);
             $em->persist($answer);
             $em->flush();
 
@@ -82,9 +83,13 @@ class trueFalseQuestionController extends Controller
     public function showAction(Question $question)
     {
         $deleteForm = $this->createDeleteForm($question);
+        $em = $this->getDoctrine()->getManager();
+         $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
+        
 
         return $this->render('EvaluationsBundle:Question:showTrueFalseQuestion.html.twig', array(
             'question' => $question,
+            'answers' => $answers,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -98,6 +103,7 @@ class trueFalseQuestionController extends Controller
        $oldImage = $question->getPathImageQuestion();
         $em = $this->getDoctrine()->getManager();
         $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
@@ -140,7 +146,8 @@ class trueFalseQuestionController extends Controller
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
+            return $this->redirectToRoute('trueFalseQuestion_show', array('id' => $question->getId()
+                ));
           }
         }
 
