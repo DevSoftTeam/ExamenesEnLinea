@@ -65,7 +65,7 @@ class QuestionController extends Controller
                 $em->persist($idArea);
                 //$em->flush();
             }
-            $file=$form['image']->getData();
+            /*$file=$form['image']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
                if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
@@ -78,7 +78,7 @@ class QuestionController extends Controller
                }else{
                 $question->setPathImageQuestion(null);
                }
-             } 
+             }*/ 
             $file=$form['file']->getData();
             if (!is_null($file)) {
                 $file=$form['file']->getData();  
@@ -112,8 +112,7 @@ class QuestionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            // Recogemos el fichero
-           $file=$editForm['image']->getData();
+           /*$file=$editForm['image']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
                if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
@@ -126,7 +125,7 @@ class QuestionController extends Controller
                }else{
                 $question->setPathImageQuestion(null);
                }
-            } 
+            }*/ 
             $file=$editForm['file']->getData();
             if (!is_null($file)) {
                 $file=$editForm['file']->getData();  
