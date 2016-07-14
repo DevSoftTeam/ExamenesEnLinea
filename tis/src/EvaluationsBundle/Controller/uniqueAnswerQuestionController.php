@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EvaluationsBundle\Entity\AnswerElement;
 use EvaluationsBundle\Entity\Question;
+use EvaluationsBundle\Entity\Area;
 //use EvaluationsBundle\Form\QuestionType;
 
 /**
@@ -50,52 +51,77 @@ class uniqueAnswerQuestionController extends Controller
             $question->setIdArea($idArea);
 
 
+
             $em->persist($question);
 
+            $var = $request->request->get("chec1");
             $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
             $answer = new AnswerElement();
+            if($answer1!="" && strlen(trim($answer1))>0){
             $answer->setIdQuestion($question);
             $answer->setContent($answer1);
             $answer->setOrderVar("1");
-            $answer->setIsCorrect(isset($_POST['chec1']));
+            if($var == 1){
+                $answer->setIsCorrect(True);
+            }
+            else{$answer->setIsCorrect(False);}
             $em->persist($answer);
-            $em->flush();
+            $em->flush();}
 
+            
+            $var = $request->request->get("chec2");
             $answer2 = $request->request->get('answer2');//PARA RESPUESTA 2
             $answer = new AnswerElement();
+            if($answer2!="" && strlen(trim($answer2))>0){
             $answer->setIdQuestion($question);
             $answer->setContent($answer2);
             $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec2']));
+            if($var == 1){
+                $answer->setIsCorrect(True);
+            }
+            else{$answer->setIsCorrect(False);}
             $em->persist($answer);
-            $em->flush();
+            $em->flush();}
 
             $answer3 = $request->request->get('answer3');//PARA RESPUESTA 3
             $answer = new AnswerElement();
+            if($answer2!="" && strlen(trim($answer3))>0){
             $answer->setIdQuestion($question);
             $answer->setContent($answer3);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec3']));
+            $answer->setOrderVar("3");
+            if($var == 1){
+                $answer->setIsCorrect(True);
+            }
+            else{$answer->setIsCorrect(False);}
             $em->persist($answer);
-            $em->flush();
+            $em->flush();}
 
             $answer4 = $request->request->get('answer4');//PARA RESPUESTA 4
             $answer = new AnswerElement();
+            if($answer4!="" && strlen(trim($answer4))>0){
             $answer->setIdQuestion($question);
             $answer->setContent($answer4);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec4']));
+            $answer->setOrderVar("4");
+            if($var == 1){
+                $answer->setIsCorrect(True);
+            }
+            else{$answer->setIsCorrect(False);}
             $em->persist($answer);
-            $em->flush();
+            $em->flush();}
 
-            $answer5 = $request->request->get('answer2');//PARA RESPUESTA 5
+            $answer5 = $request->request->get('answer5');//PARA RESPUESTA 5
             $answer = new AnswerElement();
+            if($answer5!="" && strlen(trim($answer5))>0){
             $answer->setIdQuestion($question);
             $answer->setContent($answer5);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec5']));
+            $answer->setOrderVar("5");
+            if($var == 1){
+                $answer->setIsCorrect(True);
+            }
+            else{$answer->setIsCorrect(False);}
             $em->persist($answer);
-            $em->flush();
+            $em->flush();}
+
 
              return $this->redirectToRoute('uniqueAnswerQuestion_show', array('id' => $question->getId()));
           }
@@ -113,10 +139,12 @@ class uniqueAnswerQuestionController extends Controller
      *
      */
     public function showAction(Question $question)
-    {
+    {   
         $deleteForm = $this->createDeleteForm($question);
-
+        $em = $this->getDoctrine()->getManager();
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
         return $this->render('EvaluationsBundle:Question:showUniqueAnswerQuestion.html.twig', array(
+            'answers' => $answers,
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -129,8 +157,9 @@ class uniqueAnswerQuestionController extends Controller
     public function editAction(Request $request, Question $question)
    {
         $oldImage = $question->getPathImageQuestion();
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager(); /// para enviar las areas
         $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
@@ -145,7 +174,7 @@ class uniqueAnswerQuestionController extends Controller
                 $idArea = new Area();
                 $idArea->setNameArea($request->request->get('area'));
                 $em->persist($idArea);
-                $em->flush();
+                //$em->flush();
             }
             $file=$editForm['image']->getData();
             if (!is_null($file)) {
@@ -171,15 +200,32 @@ class uniqueAnswerQuestionController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
+
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
+
+            for ($i=1; $i <= 5; $i++) {
+                $contentAns = $request->request->get('answer'.$i);
+                $order = $request->request->get('order'.$i);
+                if(strlen(trim($contentAns))>0 && strlen(trim($order))>0){
+                    $answer = new AnswerElement();
+                    $answer->setIdQuestion($question);
+                    $answer->setContent($contentAns);
+                    $answer->setOrderVar($order);
+                    $em->persist($answer);
+                }
+            }
             $em->flush();
 
-            return $this->redirectToRoute('uniqueQuestion_show', array('id' => $question->getId()));
+            return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
           }
         }
-
         return $this->render('EvaluationsBundle:Question:editUniqueAnswerQuestion.html.twig', array(
             'areas' => $areas,
             'question' => $question,
+            'answers' => $answers,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -203,8 +249,12 @@ class uniqueAnswerQuestionController extends Controller
                 }
 
             $em = $this->getDoctrine()->getManager();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
             $em->remove($question);
-            $em-> flush();
+            $em->flush();
         }
 
         return $this->redirectToRoute('question_index');

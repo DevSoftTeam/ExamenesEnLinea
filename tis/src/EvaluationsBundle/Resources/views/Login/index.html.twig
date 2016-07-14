@@ -24,14 +24,14 @@
             <form class="col s12 center-on-small-only" method="post" action="{{ path('validate_homepage') }}" >
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="login" id="login" type="text" placeholder="Ingrese nombre de usuario">
+                        <input name="login" id="login" type="text" placeholder="Ingrese nombre de usuario" required>
                         <label for="login" class="teal-text lighten-4"><h6><b>Nombre De Usuario</b></h6></label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="password" id="password" type="password" placeholder="Ingrese su contraceña">
-                        <label for="password" class="teal-text lighten-4"><h6><b>Contraceña</b></h6></label>
+                        <input name="password" id="password" type="password" placeholder="Ingrese su contraseña" required>
+                        <label for="password" class="teal-text lighten-4"><h6><b>Contraseña</b></h6></label>
                     </div>
                 </div>
                 <button class="btn waves-effect  teal" type="submit" name="action">Ingresar</button>
