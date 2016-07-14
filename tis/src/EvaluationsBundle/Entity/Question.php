@@ -67,6 +67,15 @@ class Question
         return $this->idQuestion;
     }
 
+    public function getURL()
+    {
+        $idT = $this->idType->idType;
+        $id = $this->idQuestion;
+        $links = array(1=>'showOQ',2 =>'orderQuestion',3=> 'show',4=>'showTFQ',5=>'showUAQ',6=>'showMQ',7=>'showMQ');
+        $link = "/question/".$id."/".$links[$idT];
+        return $link;
+    }
+
     public function setStatementQuestion($statementQuestion)
     {
         $this->statementQuestion = $statementQuestion;

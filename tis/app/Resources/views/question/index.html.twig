@@ -16,7 +16,8 @@
         <tbody>
         {% for question in questions %}
             <tr>
-                <td><a href="{{ path('question_show', { 'id': question.idQuestion }) }}">{{ question.idQuestion }}</a></td>
+                {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#}
+                <td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{{ question.idArea.nameArea }}</td>
                 <td>{{ question.idType.name_type }}</td>
