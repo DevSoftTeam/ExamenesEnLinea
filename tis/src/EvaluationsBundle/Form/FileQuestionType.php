@@ -20,19 +20,19 @@ class FileQuestionType extends AbstractType
     {
         $builder
             ->add('statementQuestion')
-            ->add('image', FileType::class,array(
+            /*->add('image', FileType::class,array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),
                 "required" => false
-            ))
+            ))*/
             ->add('file', FileType::class,array(
                 "label" => "File:",
                 "attr" =>array("class" => "form-control"),
                 "required" => true
             ))
-            ->add('pathImageQuestion', HiddenType::class,array(
+            /*->add('pathImageQuestion', HiddenType::class,array(
                 "required" => false
-            ))
+            ))*/
             ->add('pathFileQuestion', HiddenType::class,array(
                 "required" => false
             ))

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Editar Pregunta</h1>
+  <label class="teal-text lighten-4"><h3>Editar pregunta subir archivo</h3></label>
 {#{{ form_widget(edit_form) }} #}
 
 {{ form_start(edit_form) }}
@@ -19,24 +19,23 @@
     </div>
         
     <div class="row">
-        <div class="input-field">
-        <i class="material-icons prefix">mode_edit</i>
-        {{ form_widget(edit_form.statementQuestion, {'attr': {'class':"materialize-textarea"}}) }}
+      <div class="input-field col s12">
+        <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+        {{ form_widget(edit_form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
         {{ form_errors(edit_form.statementQuestion) }}
-            <label for="question_statementQuestion">Enunciado</label>
-        </div>
+      </div>
     </div>
         
-    <div class="file-field input-field">
+    {#<div class="file-field input-field">
       <div class="btn">
         <span>imagen</span>
         <i class="material-icons right">perm_media</i>
             {{ form_widget(edit_form.image) }}
-      </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
     </div>
+    </div>#}
 
     <div class="file-field input-field">
       <div class="btn">
