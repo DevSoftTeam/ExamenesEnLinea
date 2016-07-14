@@ -70,19 +70,21 @@ class uniqueAnswerQuestionController extends Controller
                 $em->flush();}
 
                 
-                //$var = $request->request->get("chec2");
+                $var2 = $request->request->get("chec1");
                 $answer2 = $request->request->get('answer2');//PARA RESPUESTA 2
                 $answer = new AnswerElement();
                 if($answer2!="" && strlen(trim($answer2))>0){
                 $answer->setIdQuestion($question);
                 $answer->setContent($answer2);
                 $answer->setOrderVar("2");
-                if($var == 1){
+                if($var2 == 2){
                     $answer->setIsCorrect(True);
                 }
                 else{$answer->setIsCorrect(False);}
                 $em->persist($answer);
                 $em->flush();}
+
+                $var3 = $request->request->get("chec1");
 
                 $answer3 = $request->request->get('answer3');//PARA RESPUESTA 3
                 $answer = new AnswerElement();
@@ -90,33 +92,36 @@ class uniqueAnswerQuestionController extends Controller
                 $answer->setIdQuestion($question);
                 $answer->setContent($answer3);
                 $answer->setOrderVar("3");
-                if($var == 1){
+                if($var3 == 3){
                     $answer->setIsCorrect(True);
                 }
                 else{$answer->setIsCorrect(False);}
                 $em->persist($answer);
                 $em->flush();}
 
+
+                $var4 = $request->request->get("chec1");
                 $answer4 = $request->request->get('answer4');//PARA RESPUESTA 4
                 $answer = new AnswerElement();
                 if($answer4!="" && strlen(trim($answer4))>0){
                 $answer->setIdQuestion($question);
                 $answer->setContent($answer4);
                 $answer->setOrderVar("4");
-                if($var == 1){
+                if($var4 == 4){
                     $answer->setIsCorrect(True);
                 }
                 else{$answer->setIsCorrect(False);}
                 $em->persist($answer);
                 $em->flush();}
 
+                $var5 = $request->request->get("chec1");
                 $answer5 = $request->request->get('answer5');//PARA RESPUESTA 5
                 $answer = new AnswerElement();
                 if($answer5!="" && strlen(trim($answer5))>0){
                 $answer->setIdQuestion($question);
                 $answer->setContent($answer5);
                 $answer->setOrderVar("5");
-                if($var == 1){
+                if($var5 == 5){
                     $answer->setIsCorrect(True);
                 }
                 else{$answer->setIsCorrect(False);}
@@ -209,18 +214,78 @@ class uniqueAnswerQuestionController extends Controller
                 $em->remove($answer);
             }
 
-            for ($i=1; $i <= 5; $i++) {
-                $contentAns = $request->request->get('answer'.$i);
-                $chec = $request->request->get('chec1');
-                if(strlen(trim($contentAns))>0){
-                    $answer = new AnswerElement();
-                    $answer->setIdQuestion($question);
-                    $answer->setContent($contentAns);
-                    $answer->setIsCorrect($chec);
-                    $em->persist($answer);
+            $var = $request->request->get("chec1");
+                $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
+                $answer = new AnswerElement();
+                if($answer1!="" && strlen(trim($answer1))>0){
+                $answer->setIdQuestion($question);
+                $answer->setContent($answer1);
+                $answer->setOrderVar("1");
+                if($var == 1){
+                    $answer->setIsCorrect(True);
                 }
-            }
-            $em->flush();
+                else{$answer->setIsCorrect(False);}
+                $em->persist($answer);
+                $em->flush();}
+
+                
+                $var2 = $request->request->get("chec1");
+                $answer2 = $request->request->get('answer2');//PARA RESPUESTA 2
+                $answer = new AnswerElement();
+                if($answer2!="" && strlen(trim($answer2))>0){
+                $answer->setIdQuestion($question);
+                $answer->setContent($answer2);
+                $answer->setOrderVar("2");
+                if($var2 == 2){
+                    $answer->setIsCorrect(True);
+                }
+                else{$answer->setIsCorrect(False);}
+                $em->persist($answer);
+                $em->flush();}
+
+                $var3 = $request->request->get("chec1");
+
+                $answer3 = $request->request->get('answer3');//PARA RESPUESTA 3
+                $answer = new AnswerElement();
+                if($answer2!="" && strlen(trim($answer3))>0){
+                $answer->setIdQuestion($question);
+                $answer->setContent($answer3);
+                $answer->setOrderVar("3");
+                if($var3 == 3){
+                    $answer->setIsCorrect(True);
+                }
+                else{$answer->setIsCorrect(False);}
+                $em->persist($answer);
+                $em->flush();}
+
+
+                $var4 = $request->request->get("chec1");
+                $answer4 = $request->request->get('answer4');//PARA RESPUESTA 4
+                $answer = new AnswerElement();
+                if($answer4!="" && strlen(trim($answer4))>0){
+                $answer->setIdQuestion($question);
+                $answer->setContent($answer4);
+                $answer->setOrderVar("4");
+                if($var4 == 4){
+                    $answer->setIsCorrect(True);
+                }
+                else{$answer->setIsCorrect(False);}
+                $em->persist($answer);
+                $em->flush();}
+
+                $var5 = $request->request->get("chec1");
+                $answer5 = $request->request->get('answer5');//PARA RESPUESTA 5
+                $answer = new AnswerElement();
+                if($answer5!="" && strlen(trim($answer5))>0){
+                $answer->setIdQuestion($question);
+                $answer->setContent($answer5);
+                $answer->setOrderVar("5");
+                if($var5 == 5){
+                    $answer->setIsCorrect(True);
+                }
+                else{$answer->setIsCorrect(False);}
+                $em->persist($answer);
+                $em->flush();}
 
             return $this->redirectToRoute('uniqueAnswerQuestion_show', array('id' => $question->getId()));
           }
