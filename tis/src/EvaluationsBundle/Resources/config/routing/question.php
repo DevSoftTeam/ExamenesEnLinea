@@ -230,7 +230,7 @@ $collection->add('uniqueAnswerQuestion_edit', new Route(
 ));
 
 $collection->add('uniqueAnswerQuestion_delete', new Route(
-    '/{id}/deleteOQ',
+    '/{id}/deleteUAQ',
     array('_controller' => 'EvaluationsBundle:uniqueAnswerQuestion:delete'),
     array(),
     array(),

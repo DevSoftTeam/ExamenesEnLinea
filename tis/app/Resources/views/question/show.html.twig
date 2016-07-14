@@ -1,30 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Datos de la Pregunta</h1>
+    <label class="teal-text lighten-4"><h3>Detalles de Prergunta subir archivo</h3></label>
 
-    <div>
-        <h5>Enunciado</h4>
-        <h6>{{ question.statementQuestion }}</h6>
+    <div class="row">
+        <div class="col s12">
+            <label class="teal-text darken-4"><h6>Area :</h6></label>
+            <div>{{ question.idArea.nameArea }}</div>
+        </div>
     </div>
-    <p>{{question.pathImageQuestion}}</p>
-    <h5>imagen</h5>
-    <img height="30%" width="50%" src="{{asset('uploads/images/')}}{{question.pathImageQuestion}}">
-    
-    <h5>Archivo</h5>
-    <a href="{{asset('uploads/')}}{{ question.pathFileQuestion }}" download>archivo</a>
-    
-    <ul>
-        <li>
-            <a href="{{ path('question_index') }}">Ver Banco de Preguntas</a>
-        </li>
-        <li>
-            <a href="{{ path('questionfile_edit', { 'id': question.idQuestion }) }}">Editar pregunta</a>
-        </li>
-        <li>
+
+    <div class="row">
+        <div class="col s12">
+            <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+            <div><pre>{{ question.statementQuestion }}</pre></div>
+        </div><br><br><br>
+        <div class="col s12 alight center">
+            {% if question.pathImageQuestion != null %}
+            <img height="40%" width="40%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col s12">
+        <label class="teal-text darken-4"><h6>Archivo :</h6></label>
+        <a class="waves-effect waves-light btn" href="{{asset('uploads/')}}{{ question.pathFileQuestion }}" download>Download</a>
+    </div><br><br><br>
+        
+    <div class="row">
+        <div class="col ">
+            <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
+        </div>
+        <div class="col push-s5">
+            <a class="waves-effect waves-light btn" href="{{ path('questionfile_edit', { 'id': question.idQuestion }) }}">Editar</a>
+        </div>
+        <div class="col push-s5">
             {{ form_start(delete_form) }}
-                <button class="btn waves-effect waves-light " type="submit" name="action">Eliminar</button>
+                <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}

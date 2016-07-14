@@ -33,10 +33,13 @@
 
     <body  style ="background-color:#e0f2f1;">
         <ul id="questionTypes" class="dropdown-content teal">
-            <li><a class="white-text" href="/question/openQuestion/1">Pregunta Abierta</a></li>
-            <li><a class="white-text" href="/question/openQuestion/2">Crear Preguntas</a></li>
-            <li><a class="white-text" href="/question/openQuestion/3">Crear Examenes</a></li>
-            <li><a class="white-text" href="/question/openQuestion/4">Crear Examenes</a></li>
+            <li><a class="white-text" href="/question/openQuestion/1">Abierta</a></li>
+            <li><a class="white-text" href="/question/fileQuestion/3">Con Archivo</a></li>
+            <li><a class="white-text" href="/question/trueFalseQuestion/4">Falso Verdadero</a></li>
+            <li><a class="white-text" href="/question/uniqueAnswerQuestion/5">Respuesta Unica</a></li>
+            <li><a class="white-text" href="/question/multipleQuestion/6">Respustas Multiples</a></li>
+            <li><a class="white-text" href="/question/matchingQuestion/7">Emparejamiento</a></li>
+            <li><a class="white-text" href="/question/orderQuestion/2">Ordenamineto</a></li>
         </ul>
         
         <nav >
@@ -45,7 +48,7 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/question/new">Crear Pregunta</a></li>
                     <li><a href="/test/new">Crear Examen</a></li>
-                    <li><a class="dropdown-button" href="/question/new" data-activates="questionTypes">Crear Pregunta<i class="material-icons right">arrow_drop_down</i></a></li>
+                    {#<li><a class="dropdown-button" href="/question/new" data-activates="questionTypes">Crear Pregunta<i class="material-icons right">arrow_drop_down</i></a></li>#}
                     <li><a>Salir</a></li>
                 </ul>
             </div>

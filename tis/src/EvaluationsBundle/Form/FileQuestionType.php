@@ -20,29 +20,19 @@ class FileQuestionType extends AbstractType
     {
         $builder
             ->add('statementQuestion')
-            ->add('area', EntityType::class, array(
-                    'class' => 'EvaluationsBundle:Area',
-                    'query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('u')
-                            ->orderBy('u.idArea', 'DESC');
-                    },
-                    'choice_label' => 'nameArea',
-                    'choice_value' => 'idArea',
-                    'required' => true,
-            ))
-            ->add('image', FileType::class,array(
+            /*->add('image', FileType::class,array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),
                 "required" => false
-            ))
+            ))*/
             ->add('file', FileType::class,array(
-                "label" => "Imagen:",
+                "label" => "File:",
                 "attr" =>array("class" => "form-control"),
-                "required" => false
+                "required" => true
             ))
-            ->add('pathImageQuestion', HiddenType::class,array(
+            /*->add('pathImageQuestion', HiddenType::class,array(
                 "required" => false
-            ))
+            ))*/
             ->add('pathFileQuestion', HiddenType::class,array(
                 "required" => false
             ))
