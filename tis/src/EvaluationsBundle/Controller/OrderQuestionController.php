@@ -26,46 +26,48 @@ class OrderQuestionController extends Controller
             $statement = $form['statementQuestion']->getData();
           if(!is_null($statement) && strlen($statement)<=5000){
             $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
-            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
-            if(is_null($idArea)){
-                $idArea = new Area();
-                $idArea->setNameArea($request->request->get('area'));
-                $em->persist($idArea);
-                //$em->flush();
-            }
-            $file=$form['image']->getData();
-            if (!is_null($file)) {
-               $ext=$file->guessExtension();
-               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
-                $pathImage = $form['pathImageQuestion']->getData();
-                $pathImage = explode(".", $pathImage);
-                $pathImage =  $pathImage[0];
-                $file_name=$pathImage."_".time().".".$ext;
-                $file->move("uploads/images", $file_name);
-                $question->setPathImageQuestion($file_name);
-               }else{
-                $question->setPathImageQuestion(null);
-               }
-             }  
-            $question->setIdType($idType);
-            $question->setIdArea($idArea);
-            $em->persist($question);
-
-            for ($i=1; $i <= 5; $i++) {
-                $contentAns = $request->request->get('answer'.$i);
-                $order = $request->request->get('order'.$i);
-                if(strlen(trim($contentAns))>0 && strlen(trim($order))>0){
-                    $answer = new AnswerElement();
-                    $answer->setIdQuestion($question);
-                    $answer->setContent($contentAns);
-                    $answer->setOrderVar($order);
-                    $em->persist($answer);
+            $nameArea = trim($request->request->get('area'));//para validar area
+            if(strlen($nameArea)>0){
+                $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $nameArea));
+                if(is_null($idArea)){
+                    $idArea = new Area();
+                    $idArea->setNameArea($nameArea);
+                    $em->persist($idArea);
                 }
-            }
-            $em->flush();
+                $file=$form['image']->getData();
+                if (!is_null($file)) {
+                   $ext=$file->guessExtension();
+                   if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
+                    $pathImage = $form['pathImageQuestion']->getData();
+                    $pathImage = explode(".", $pathImage);
+                    $pathImage =  $pathImage[0];
+                    $file_name=$pathImage."_".time().".".$ext;
+                    $file->move("uploads/images", $file_name);
+                    $question->setPathImageQuestion($file_name);
+                   }else{
+                    $question->setPathImageQuestion(null);
+                   }
+                 }  
+                $question->setIdType($idType);
+                $question->setIdArea($idArea);
+                $em->persist($question);
 
-            return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
-          }
+                for ($i=1; $i <= 5; $i++) {
+                    $contentAns = trim($request->request->get('answer'.$i));
+                    $order = trim($request->request->get('order'.$i));
+                    if(strlen($contentAns)>0 && strlen($contentAns)<=600 && strlen($order)>0 && strlen($order)<=50){
+                        $answer = new AnswerElement();
+                        $answer->setIdQuestion($question);
+                        $answer->setContent($contentAns);
+                        $answer->setOrderVar($order);
+                        $em->persist($answer);
+                    }
+                }
+                $em->flush();
+
+                return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
+                }
+           }
         }
 
         return $this->render('EvaluationsBundle:Question:newOrderQuestion.html.twig', array(
@@ -109,58 +111,62 @@ class OrderQuestionController extends Controller
 
             $statement = $editForm['statementQuestion']->getData();
           if(!is_null($statement) && strlen($statement)<=5000){
-            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
-            /// si no exisite el area lo crea
-            if(is_null($idArea)){
-                $idArea = new Area();
-                $idArea->setNameArea($request->request->get('area'));
-                $em->persist($idArea);
-                //$em->flush();
-            }
-            $file=$editForm['image']->getData();
-            if (!is_null($file)) {
-               $ext=$file->guessExtension();
-               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
-                $pathImage = $editForm['pathImageQuestion']->getData();
-                $pathImage = explode(".", $pathImage);
-                $pathImage =  $pathImage[0];
-                $file_name=$pathImage."_".time().".".$ext;
-                $file->move("uploads/images", $file_name);
+            $nameArea = trim($request->request->get('area'));
+            if(strlen($nameArea)>0){
 
-                if ($oldImage!=null) {
-                    $oldImage = "uploads/images/".$oldImage;
-                    unlink($oldImage);
-                } 
-
-                $question->setPathImageQuestion($file_name);          
-               }else{
-                $question->setPathImageQuestion(null);
-               }
-             }  
-            $question->setIdArea($idArea);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($question);
-
-            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
-            foreach ($answers as $answer) {
-                $em->remove($answer);
-            }
-
-            for ($i=1; $i <= 5; $i++) {
-                $contentAns = $request->request->get('answer'.$i);
-                $order = $request->request->get('order'.$i);
-                if(strlen(trim($contentAns))>0 && strlen(trim($order))>0){
-                    $answer = new AnswerElement();
-                    $answer->setIdQuestion($question);
-                    $answer->setContent($contentAns);
-                    $answer->setOrderVar($order);
-                    $em->persist($answer);
+                $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $nameArea));
+                /// si no exisite el area lo crea
+                if(is_null($idArea)){
+                    $idArea = new Area();
+                    $idArea->setNameArea($nameArea);
+                    $em->persist($idArea);
+                    //$em->flush();
                 }
-            }
-            $em->flush();
+                $file=$editForm['image']->getData();
+                if (!is_null($file)) {
+                   $ext=$file->guessExtension();
+                   if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
+                    $pathImage = $editForm['pathImageQuestion']->getData();
+                    $pathImage = explode(".", $pathImage);
+                    $pathImage =  $pathImage[0];
+                    $file_name=$pathImage."_".time().".".$ext;
+                    $file->move("uploads/images", $file_name);
 
-            return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
+                    if ($oldImage!=null) {
+                        $oldImage = "uploads/images/".$oldImage;
+                        unlink($oldImage);
+                    } 
+
+                    $question->setPathImageQuestion($file_name);          
+                   }else{
+                    $question->setPathImageQuestion(null);
+                   }
+                 }  
+                $question->setIdArea($idArea);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($question);
+
+                $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                foreach ($answers as $answer) {
+                    $em->remove($answer);
+                }
+
+                for ($i=1; $i <= 5; $i++) {
+                    $contentAns = trim($request->request->get('answer'.$i));
+                    $order = trim($request->request->get('order'.$i));
+                    if(strlen($contentAns)>0 && strlen($contentAns)<=600 && strlen($order)>0 && strlen($order)<=50){
+                        $answer = new AnswerElement();
+                        $answer->setIdQuestion($question);
+                        $answer->setContent($contentAns);
+                        $answer->setOrderVar($order);
+                        $em->persist($answer);
+                    }
+                }
+                $em->flush();
+
+                return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
+            }
           }
         }
         return $this->render('EvaluationsBundle:Question:editOrderQuestion.html.twig', array(

@@ -49,12 +49,13 @@
               <div class="col s12">
                 <div class="input-field col s10">
                 <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
-                <textarea class="materialize-textarea validate" name="answer{{i}}" placeholder="Introduzca texto" length="250">
+                <textarea class="materialize-textarea validate" name="answer{{i}}" placeholder="Introduzca texto" length="600">
                 {% if answers|length >= i %} {{ answers[i-1].content }} {% endif %}</textarea>
                 <label class="teal-text lighten-4"><h6>Respuesta {{ i }} :</h6></label>
                 </div>
                 <div class="input-field col s2">
-                <input placeholder="" name="order{{i}}" type="text" class="validate" value="{% if answers|length >= i %} {{answers[i-1].orderVar}} {% endif %}">
+                <br><br>
+                <input placeholder="" name="order{{i}}" type="text" class="validate" value="{% if answers|length >= i %} {{answers[i-1].orderVar}} {% endif %}" length="50">
                 <label class="teal-text lighten-4"><h6> Secuencia de orden :</h6></label>
               </div>
               </div>
