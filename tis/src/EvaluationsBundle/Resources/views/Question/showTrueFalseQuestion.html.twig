@@ -25,6 +25,30 @@
         </div>
         <div class="row">
             {# //// aqui fal la resp #}
+        <div class="row">
+            <div class="col s12">
+                <label class="teal-text darken-4"><h6>Respuesta :</h6></label>
+                <div>{% for ans in answers %}
+            <div class="col s12">
+                <div class="col s10">
+
+                <p>{{ ans.content }}</p>
+                </div>
+                <div class="col s2">
+                <label class="teal-text darken-4"><h6>Estado :</h6></label>
+                     {% if ans.isCorrect %}
+                    <p>Correcta</p>
+                {% else %}
+                    <p>Incorrecta</p>
+                {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+            </div>
+        </div>
+
         </div>
     </div>
     <div class="row">
