@@ -60,6 +60,7 @@ class trueFalseQuestionController extends Controller
             $answer->setContent($answer1);
             $answer->setOrderVar("1");
             $answer->setIsCorrect("true");
+            $answer->setIdType(4);
             $em->persist($answer);
             $em->flush();
 

@@ -51,50 +51,111 @@ class matchingQuestionController extends Controller
 
             $em->persist($question);
             
-            $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
+            $answer1 = $request->request->get('answerA1');//PARA RESPUESTA 1
             $answer = new AnswerElement();
             $answer->setIdQuestion($question);
             $answer->setContent($answer1);
             $answer->setOrderVar("1");
-            $answer->setIsCorrect(isset($_POST['chec1']));
+            $answer->setIdType("7");
+           // $answer->setIsCorrect();
             $em->persist($answer);
             $em->flush();
 
-            $answer2 = $request->request->get('answer2');//PARA RESPUESTA 2
+            $answer2 = $request->request->get('answerA2');//PARA RESPUESTA 2
             $answer = new AnswerElement();
             $answer->setIdQuestion($question);
             $answer->setContent($answer2);
             $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec2']));
+            $answer->setIdType("7");
+           // $answer->setIsCorrect(isset($_POST['chec2']));
             $em->persist($answer);
             $em->flush();
 
-            $answer3 = $request->request->get('answer3');//PARA RESPUESTA 3
+            $answer3 = $request->request->get('answerA3');//PARA RESPUESTA 3
             $answer = new AnswerElement();
             $answer->setIdQuestion($question);
             $answer->setContent($answer3);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec3']));
+            $answer->setOrderVar("3");
+            $answer->setIdType("7");
+       //     $answer->setIsCorrect(isset($_POST['chec3']));
             $em->persist($answer);
             $em->flush();
 
-            $answer4 = $request->request->get('answer4');//PARA RESPUESTA 4
+            $answer4 = $request->request->get('answerA4');//PARA RESPUESTA 4
             $answer = new AnswerElement();
             $answer->setIdQuestion($question);
             $answer->setContent($answer4);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec4']));
+            $answer->setOrderVar("4");
+            $answer->setIdType("7");
+         //   $answer->setIsCorrect(isset($_POST['chec4']));
             $em->persist($answer);
             $em->flush();
 
-            $answer5 = $request->request->get('answer2');//PARA RESPUESTA 5
+            $answer5 = $request->request->get('answerA5');//PARA RESPUESTA 5
             $answer = new AnswerElement();
             $answer->setIdQuestion($question);
             $answer->setContent($answer5);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec5']));
+            $answer->setOrderVar("5");
+            $answer->setIdType("7");
+        //    $answer->setIsCorrect(isset($_POST['chec5']));
             $em->persist($answer);
             $em->flush();
+
+
+
+            $answerB1 = $request->request->get('answerB1');//PARA RESPUESTA 1
+            $answer = new AnswerElement();
+            $answer->setIdQuestion($question);
+            $answer->setContent($answer1B);
+            $ord1 = $request->request->get('orderB1');
+            $answer->setOrderVar($ord1);
+            $answer->setIdType("7");
+        //  $answer->setIsCorrect());
+            $em->persist($answer);
+            $em->flush();
+
+            $answerB2 = $request->request->get('answerB2');//PARA RESPUESTA 2
+            $answer = new AnswerElement();
+            $answer->setIdQuestion($question);
+            $answer->setContent($answerB2);
+            $answer->setOrderVar("2");
+            $answer->setIdType("7");
+         //   $answer->setIsCorrect(isset($_POST['chec2']));
+            $em->persist($answer);
+            $em->flush();
+
+            $answerB3 = $request->request->get('answerB3');//PARA RESPUESTA 3
+            $answer = new AnswerElement();
+            $answer->setIdQuestion($question);
+            $answer->setContent($answerB3);
+            $answer->setOrderVar("2");
+            $answer->setIdType("7");
+         //   $answer->setIsCorrect(isset($_POST['chec3']));
+            $em->persist($answer);
+            $em->flush();
+
+            $answerB4 = $request->request->get('answerB4');//PARA RESPUESTA 4
+            $answer = new AnswerElement();
+            $answer->setIdQuestion($question);
+            $answer->setContent($answerB4);
+            $answer->setOrderVar("2");
+            $answer->setIdType("7");
+        //    $answer->setIsCorrect(isset($_POST['chec4']));
+            $em->persist($answer);
+            $em->flush();
+
+            $answerB5 = $request->request->get('answerB5');//PARA RESPUESTA 5
+            $answer = new AnswerElement();
+            $answer->setIdQuestion($question);
+            $answer->setContent($answerB5);
+            $answer->setOrderVar("2");
+            $answer->setIdType("7");
+        //    $answer->setIsCorrect(isset($_POST['chec5']));
+            $em->persist($answer);
+            $em->flush();
+
+
+
 
             return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
           }
