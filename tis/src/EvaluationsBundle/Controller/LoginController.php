@@ -53,7 +53,7 @@ class LoginController extends Controller
 //                die("acceso denegado");
                 $this->get('session')->getFlashBag()->add(
                     'mensaje',
-                    'Los datos son incorrectos, intente de nuevo');
+                    'Datos de Usuario y/o contraseña no válidos, intente de nuevo');
             }
             return $this->redirect($this->generateUrl('login_homepage'));
 //        }
