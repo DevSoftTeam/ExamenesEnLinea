@@ -289,7 +289,7 @@ class multipleQuestionController extends Controller
     private function createDeleteForm(Question $question)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('question_delete', array('id' => $question->getId())))
+            ->setAction($this->generateUrl('multipleQuestion_delete', array('id' => $question->getId())))
             ->setMethod('DELETE')
             ->getForm();
     }
