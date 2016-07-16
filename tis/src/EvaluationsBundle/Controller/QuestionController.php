@@ -57,7 +57,6 @@ class QuestionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $statement = $form['statementQuestion']->getData();
           if(!is_null($statement) && strlen($statement)<=5000){
-            $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type);
             $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
             if(is_null($idArea)){
                 $idArea = new Area();
@@ -112,6 +111,15 @@ class QuestionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $statement = $editForm['statementQuestion']->getData();
+            if(!is_null($statement) && strlen($statement)<=5000){
+            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
+            if(is_null($idArea)){
+                $idArea = new Area();
+                $idArea->setNameArea($request->request->get('area'));
+                $em->persist($idArea);
+                //$em->flush();
+            }
            /*$file=$editForm['image']->getData();
             if (!is_null($file)) {
                $ext=$file->guessExtension();
@@ -134,9 +142,10 @@ class QuestionController extends Controller
                 $file->move("uploads", $file_name);
                 $question->setpathFileQuestion($file_name);
             }
-            $idArea=$em->getRepository('EvaluationsBundle:Area')->find($editForm['area']->getData());
+            $question->setIdArea($idArea);
             $em->persist($question);
             $em->flush();
+            }
             return $this->redirectToRoute('question_show', array('id' => $question->getId()));
             // return $this->redirectToRoute('questionfile_edit', array('id' => $question->getId()));
         }

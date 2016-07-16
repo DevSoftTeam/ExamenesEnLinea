@@ -42,7 +42,7 @@
                 {{ form_widget(form.file) }}
           </div>
           <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
+            {{ form_widget(form.pathFileQuestion,{'attr':{'class':'file-path validate',disabled:''}}) }}          
           </div>
         </div>
 
