@@ -30,6 +30,10 @@ class TestController extends Controller
         ));
     }
 
+    private function validateDateTimes(Date $startDate, Time $startTime, Date $entDate, Time $endTime, Form $form)
+    {
+
+    }
     /**
      * Creates a new Test entity.
      *
@@ -42,16 +46,29 @@ class TestController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-//            $startTime = $form['startTime']->getData();
-//            if(!is_null($form['startDate']->getData())) {
-//                if(is_null($startTime)) {
-//                    $test->setStartTime('00:00');
-//                }
-//            }
-            $em->persist($test);
-            $em->flush();
+            $sDate = $form['startDate']->getData();
+            $sTime = $form['startTime']->getData();
 
-            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+            $eDate = $form['endDate']->getData();
+            $eTime = $form['endTime']->getData();
+
+            $sEDate = $form['startDateEnrollment']->getData();
+            $sETime = $form['startTimeEnrollment']->getData();
+
+            $eEDate = $form['endDateEnrollment']->getData();
+            $eETime = $form['endTimeEnrollment']->getData();
+
+            if($sDate >= $eEDate and $sTime >= $eETime)
+            {
+                if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
+                    ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
+                {
+                    $em->persist($test);
+                    $em->flush();
+                    return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+                }
+            }
+
         }
 
         return $this->render('test/new.html.twig', array(

@@ -19,54 +19,52 @@ class TestType extends AbstractType
             ->add('title')
             ->add('matter')
             ->add('institution')
+
             ->add('startTime', TimeType::class, array(
                 'widget' => 'single_text',
-//                'attr' => ['type' => 'time'],
                 'label' => ' ',
-                'required' =>false
+//                'required' =>false
             ))
             ->add('startDate',DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => ['class' => 'datepicker'],
-                'required' => false,
+//                'required' => false,
             ))
             ->add('endTime', TimeType::class, array(
                 'widget' => 'single_text',
-//                'attr' => ['type' => 'time'],
                 'label' => ' ',
-                'required' =>false
+//                'required' =>false
             ))
             ->add('endDate',DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => ['class' => 'datepicker'],
-                'required' => false,
+//                'required' => false,
             ))
             ->add('startTimeEnrollment', TimeType::class, array(
                 'widget' => 'single_text',
-//                'attr' => ['type' => 'time'],
                 'label' => ' ',
-                'required' =>false
+//                'required' =>false
             ))
             ->add('startDateEnrollment',DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => ['class' => 'datepicker'],
-                'required' => false,
+//                'required' => false,
             ))
             ->add('endTimeEnrollment', TimeType::class, array(
                 'widget' => 'single_text',
-//                'attr' => ['type' => 'time'],
                 'label' => ' ',
-                'required' =>false
+//                'required' =>false
             ))
             ->add('endDateEnrollment',DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => ['class' => 'datepicker'],
-                'required' =>false
+//                'required' =>false
             ))
+
             ->add('score')
             ->add('percentage')
 //            ->add('idUser')

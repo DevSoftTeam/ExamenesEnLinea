@@ -13,7 +13,7 @@
         <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" required>
         <datalist id="areas">
         {% for area in areas %}
-          <option value={{ area.nameArea }}>
+          <option value="{{ area.nameArea }}">
         {% endfor %}
         </datalist>
       </div>
