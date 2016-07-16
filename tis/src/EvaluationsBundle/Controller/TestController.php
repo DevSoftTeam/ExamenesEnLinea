@@ -30,10 +30,11 @@ class TestController extends Controller
         ));
     }
 
-    private function validateDateTimes(Date $startDate, Time $startTime, Date $entDate, Time $endTime, Form $form)
-    {
+//    public function indexErrorAction()
+//    {
+//        return $this->render('EvaluationsBundle:Test:errorFormTest.html.twig');
+//    }
 
-    }
     /**
      * Creates a new Test entity.
      *
@@ -67,7 +68,14 @@ class TestController extends Controller
                     $em->flush();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
                 }
+//                echo 'las fechas de examen con respecto a las de inscripcion son inconsistentes'; exit;
+//                echo "<script>alert('mostrar mi ventana popup');</script>";
             }
+//                return $this->redirect($this->generateUrl('indexerror_homepage'));
+            return $this->render('test/errorFormTest.html.twig', array(
+                'test' => $test,
+                'form' => $form->createView(),
+            ));
 
         }
 
@@ -75,7 +83,6 @@ class TestController extends Controller
             'test' => $test,
             'form' => $form->createView(),
         ));
-//        form['nombreDelElemento']->getData()
     }
 
     /**
@@ -103,11 +110,30 @@ class TestController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($test);
-            $em->flush();
+            $sDate = $editForm['startDate']->getData();
+            $sTime = $editForm['startTime']->getData();
 
-            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+            $eDate = $editForm['endDate']->getData();
+            $eTime = $editForm['endTime']->getData();
+
+            $sEDate = $editForm['startDateEnrollment']->getData();
+            $sETime = $editForm['startTimeEnrollment']->getData();
+
+            $eEDate = $editForm['endDateEnrollment']->getData();
+            $eETime = $editForm['endTimeEnrollment']->getData();
+
+            if($sDate >= $eEDate and $sTime >= $eETime)
+            {
+                if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
+                    ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
+                {
+                $em = $this->getDoctrine()->getManager();
+                    $em->persist($test);
+                    $em->flush();
+                    return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+                }
+                echo 'las fechas de examen con respecto a las de inscripcion son inconsistentes'; exit;
+            }
         }
 
         return $this->render('test/edit.html.twig', array(
@@ -150,4 +176,5 @@ class TestController extends Controller
             ->getForm()
         ;
     }
+
 }

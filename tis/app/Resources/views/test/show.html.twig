@@ -51,7 +51,7 @@
                 {% endif %}
                 {{ 'hasta el' }}
                 {% if test.endDateEnrollment and  test.endTimeEnrollment%}
-                    {{ test.endDateEnrollment|date('d/m/d')}}{{ test.endTimeEnrollment|date('H:i')  }}
+                    {{ test.endDateEnrollment|date('d/m/d')}}{{ test.endTimeEnrollment|date(' H:i')  }}
                 {% else %}
                     <b class="pink-text"> No Definido o Incompleto</b>
                 {% endif %}
@@ -69,7 +69,7 @@
                 {% endif %}
                 {{ 'hasta el' }}
                 {% if test.endDate and  test.endTime%}
-                    {{ test.endDate|date('d/m/d')}}{{ test.endTime|date('H:i')  }}
+                    {{ test.endDate|date('d/m/d')}}{{ test.endTime|date(' H:i')  }}
                 {% else %}
                     <b class="pink-text"> No Definido o Incompleto </b>
                 {% endif %}
