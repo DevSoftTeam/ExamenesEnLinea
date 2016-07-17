@@ -45,23 +45,17 @@
 	    <div class="row">
 	    <div class="col s12">
 	    <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
-	    <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran en el orden ingresado. Debe completar minimo tres elementos de respuestas.</h6></label>
+	    <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran de forma aleatoria. Debe completar minimo tres elementos de respuestas.</h6></label>
 	    </div>
 	    </div>
 	    {% for i in 1..5 %}
 	    <div class="row">
-	    	<div class="col s12">
-	      	<div class="input-field col s10">
+	      	<div class="input-field col s12">
 	        <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
-	        <textarea class="materialize-textarea validate" name="answer{{i}}" placeholder="Introduzca texto" length="600"></textarea>
+	        <textarea class="materialize-textarea validate" name="answer{{i}}" placeholder="Introduzca texto" length="600" 
+	        {% if i <= 3 %}required{% endif %}></textarea>
 	        <label class="teal-text lighten-4"><h6>Respuesta {{ i }} :</h6></label>
 	        </div>
-	        <div class="input-field col s2">
-	        <br><br>
-	        <input placeholder="" name="order{{i}}" type="text" class="validate" length="50">
-	        <label class="teal-text lighten-4"><h6> Secuencia de orden :</h6></label>
-	     	</div>
-	     	</div>
         </div>
         {% endfor %}
         </div>
