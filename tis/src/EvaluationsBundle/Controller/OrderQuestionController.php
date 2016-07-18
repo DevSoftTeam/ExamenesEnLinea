@@ -54,12 +54,11 @@ class OrderQuestionController extends Controller
 
                 for ($i=1; $i <= 5; $i++) {
                     $contentAns = trim($request->request->get('answer'.$i));
-                    $order = trim($request->request->get('order'.$i));
-                    if(strlen($contentAns)>0 && strlen($contentAns)<=600 && strlen($order)>0 && strlen($order)<=50){
+                    if(strlen($contentAns)>0 && strlen($contentAns)<=600){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
-                        $answer->setOrderVar($order);
+                        $answer->setOrderVar($i);
                         $em->persist($answer);
                     }
                 }
@@ -154,12 +153,11 @@ class OrderQuestionController extends Controller
 
                 for ($i=1; $i <= 5; $i++) {
                     $contentAns = trim($request->request->get('answer'.$i));
-                    $order = trim($request->request->get('order'.$i));
-                    if(strlen($contentAns)>0 && strlen($contentAns)<=600 && strlen($order)>0 && strlen($order)<=50){
+                    if(strlen($contentAns)>0 && strlen($contentAns)<=600){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
-                        $answer->setOrderVar($order);
+                        $answer->setOrderVar($i);
                         $em->persist($answer);
                     }
                 }
