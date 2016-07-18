@@ -15,6 +15,16 @@ $collection->add('test_index', new Route(
     array('GET')
 ));
 
+$collection->add('test_asosiation', new Route(
+    '/{id}/asignar',
+    array('_controller' => 'EvaluationsBundle:Test:asosiation'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
 $collection->add('test_show', new Route(
     '/{id}/show',
     array('_controller' => 'EvaluationsBundle:Test:show'),
