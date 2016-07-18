@@ -33,3 +33,7 @@ validate_homepage:
 evaluations_homepage:
     path:     /home
     defaults: { _controller: EvaluationsBundle:Default:index }
+
+#indexerror_homepage:
+#    path:     /Test
+#    defaults: { _controller: EvaluationsBundle:Test:indexError }
