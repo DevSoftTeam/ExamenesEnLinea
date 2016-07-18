@@ -4,10 +4,9 @@
 
     <div class="center-align">
         <h6>Los Datos De la Fecha de examen y de inscrpcion, son inconsistentes, porfavor modifiquelos</h6>
-        
-        {#<a href="<?=$_SERVER["HTTP_REFERER"]?>">Atras</a>#}
-        {#<script>history.go(-1);</script>#}
-        {#<a href="<?php echo sfContent->getRequest()->getReferer() ?>" >atras</a>#}
     </div>
+    <div align="center">
+  		<input class="btn waves-effect waves-light"  type="button" value="VOLVER A EDITAR" name="Back2" onclick="history.back()" />
+  	</div>
 
 {% endblock %}
