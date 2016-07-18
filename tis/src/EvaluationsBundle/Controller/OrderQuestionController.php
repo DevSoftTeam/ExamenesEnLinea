@@ -52,16 +52,20 @@ class OrderQuestionController extends Controller
                 $question->setIdArea($idArea);
                 $em->persist($question);
 
-                for ($i=1; $i <= 5; $i++) {
-                    $contentAns = trim($request->request->get('answer'.$i));
-                    if(strlen($contentAns)>0 && strlen($contentAns)<=600){
+                $i = 1;
+                $contentAns = trim($request->request->get('answer'.$i));
+                while(strlen($contentAns)>0) {
+                    if(strlen($contentAns)<=600){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
                         $em->persist($answer);
                     }
+                    $i=$i+1;
+                    $contentAns = trim($request->request->get('answer'.$i));
                 }
+
                 $em->flush();
 
                 return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
@@ -151,16 +155,20 @@ class OrderQuestionController extends Controller
                     $em->remove($answer);
                 }
 
-                for ($i=1; $i <= 5; $i++) {
-                    $contentAns = trim($request->request->get('answer'.$i));
-                    if(strlen($contentAns)>0 && strlen($contentAns)<=600){
+                $i = 1;
+                $contentAns = trim($request->request->get('answer'.$i));
+                while(strlen($contentAns)>0) {
+                    if(strlen($contentAns)<=600){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
                         $em->persist($answer);
                     }
+                    $i=$i+1;
+                    $contentAns = trim($request->request->get('answer'.$i));
                 }
+                
                 $em->flush();
 
                 return $this->redirectToRoute('orderQuestion_show', array('id' => $question->getId()));
