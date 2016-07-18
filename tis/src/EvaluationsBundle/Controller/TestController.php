@@ -20,14 +20,22 @@ class TestController extends Controller
      *
      */
     public function indexAction()
-    {
+    { 
         $em = $this->getDoctrine()->getManager();
-
         $tests = $em->getRepository('EvaluationsBundle:Test')->findAll();
-
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
         ));
+    }
+
+    public function asosiationAction(Test $test){
+        $em = $this->getDoctrine()->getManager();
+        $questions = $em->getRepository('EvaluationsBundle:Question')->findAll();
+        return $this->render('test/asign.html.twig', array(
+            'test' => $test,
+            'questions' => $questions,
+        ));
+
     }
 
     private function validateDateTimes(Date $startDate, Time $startTime, Date $entDate, Time $endTime, Form $form)

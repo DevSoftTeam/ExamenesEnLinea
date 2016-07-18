@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+    <label class="teal-text lighten-4"><h3>Asignar preguntas a un examen</h3></label>
+
+        <div class="row">
+            <div class="col s6">
+                <label class="teal-text darken-4"><h6>Titulo :</h6></label>
+                <div>{{ test.title }}</div>
+            </div>
+            <div class="col s6">
+                <label class="teal-text darken-4"><h6>Materia :</h6></label>
+                <div>{{ test.matter }}</div>
+            </div>
+        </div>
+    </div>
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Enunciado</th>
+                <th>area</th>
+                <th>Tipo de pregunta</th>
+                <th>accion asignar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr  >
+                <td>{{ question.statementQuestion[0:15] }}</td>
+                <td>{{ question.idArea.nameArea }}</td>
+                <td>{{ question.idType.name_type }}</td>
+                <td><button onclick="toast()" class="waves-effect waves-light btn">asignar</button></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col">
+            <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+  });
+    var toast = function(){
+    Materialize.toast('por implementar!', 2000);
+    }
+    </script>    	
+{% endblock %}
