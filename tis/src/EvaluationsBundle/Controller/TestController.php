@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Form\TestType;
 use Symfony\Component\Validator\Constraints\Time;
-
 /**
  * Test controller.
  *
@@ -59,7 +58,8 @@ class TestController extends Controller
             $eEDate = $form['endDateEnrollment']->getData();
             $eETime = $form['endTimeEnrollment']->getData();
 
-            if($sDate >= $eEDate and $sTime >= $eETime)
+            $now = new \DateTime();
+            if($now<= $sEDate and $now <= $sETime and $sDate >= $eEDate and $sTime >= $eETime)
             {
                 if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
                     ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
@@ -69,7 +69,6 @@ class TestController extends Controller
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
                 }
 //                echo 'las fechas de examen con respecto a las de inscripcion son inconsistentes'; exit;
-//                echo "<script>alert('mostrar mi ventana popup');</script>";
             }
 //                return $this->redirect($this->generateUrl('indexerror_homepage'));
             return $this->render('test/errorFormTest.html.twig', array(
@@ -122,6 +121,7 @@ class TestController extends Controller
             $eEDate = $editForm['endDateEnrollment']->getData();
             $eETime = $editForm['endTimeEnrollment']->getData();
 
+            $now = new \DateTime();
             if($sDate >= $eEDate and $sTime >= $eETime)
             {
                 if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
@@ -132,8 +132,12 @@ class TestController extends Controller
                     $em->flush();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
                 }
-                echo 'las fechas de examen con respecto a las de inscripcion son inconsistentes'; exit;
             }
+            return $this->render('test/errorFormTest.html.twig', array(
+                'test' => $test,
+                'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            ));
         }
 
         return $this->render('test/edit.html.twig', array(
