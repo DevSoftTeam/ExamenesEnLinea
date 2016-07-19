@@ -53,7 +53,7 @@ class uniqueAnswerQuestionController extends Controller
                 $em->persist($question);
 
 
-                $var="var";
+                $var="";
             
 
                 for ($i=1; $i <= 5; $i++){
@@ -75,9 +75,10 @@ class uniqueAnswerQuestionController extends Controller
 
                 $i = 1;
                 $ans = trim($request->request->get('answer'.$i));
-                $var = $request->request->get("chec1");
+                
                 while(strlen($ans)>0) {
                     if(strlen($ans)<=250){
+                        $var.$i = $request->request->get("chec1");
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($ans);
