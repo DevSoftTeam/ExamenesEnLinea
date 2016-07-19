@@ -46,33 +46,22 @@
     <label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
     <form action="#">
 
-    <label class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label><br>
+    <label class="grey-text lighten-1 col s12">*Colocar las respuestas en orden correcto.</label><br>
 
 
       {% for i in 1..5 %}
       <div class="row">
         <div class="col s12">
-          <div class="input-field col s5">
+          <div class="input-field col s6">
           <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
           <textarea class="materialize-textarea validate" name="answerA{{i}}" placeholder="Introduzca texto" length="250"></textarea>
           <label class="teal-text lighten-4"><h6>Columna A elemento {{ i }} :</h6></label>
           </div>
-          <div class="input-field col s5">
+          <div class="input-field col s6">
            <textarea class="materialize-textarea validate" name="answerB{{i}}" placeholder="Introduzca texto" length="250"></textarea>
           <label class="teal-text lighten-4"><h6>Columna B elemento {{ i }} :</h6></label>        
         </div>
            <div class="input-field col s2">
-          
-          
-          
-  <select class="browser-default" name="orderB{{i}}">
-    <option value="" disabled selected>pareja correcta</option>
-    <option value="1">A 1</option>
-    <option value="2">A 2</option>
-    <option value="3">A 3</option>
-    <option value="3">A 4</option>
-    <option value="3">A 5</option>
-  </select>
 
           </div>
         </div>
