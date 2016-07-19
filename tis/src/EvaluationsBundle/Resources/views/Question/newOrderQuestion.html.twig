@@ -7,10 +7,10 @@
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
-    	<div class="row">
+    	<div class="row" id="divArea">
     		<div class="col s12">
     		<label class="teal-text darken-4"><h6>Area :</h6></label>
-    		<input list="areas" name="area" placeholder="seleccione o introzca nombre de area" required>
+    		<input list="areas" name="area" placeholder="seleccione o introzca nombre de area" id="area">
 			  <datalist id="areas">
 			  {% for area in areas %}
 			    <option value="{{ area.nameArea }}">
@@ -48,31 +48,48 @@
 	    <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran de forma aleatoria. Debe completar minimo tres elementos de respuestas.</h6></label>
 	    </div>
 	    </div>
-	    {% for i in 1..5 %}
-	    <div class="row">
+
+	    <div class="row" id="answers">
+	    {% for i in 1..4 %}
 	      	<div class="input-field col s12">
 	        <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
 	        <textarea class="materialize-textarea validate" name="answer{{i}}" placeholder="Introduzca texto" length="600" 
 	        {% if i <= 3 %}required{% endif %}></textarea>
 	        <label class="teal-text lighten-4"><h6>Respuesta {{ i }} :</h6></label>
 	        </div>
-        </div>
+        
         {% endfor %}
         </div>
+        </div>
+
 	      <br><br>
 	      <div class="row">
+          <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
 	      <div class=" alight center">
-	      <button class="btn waves-effect waves-light " type="submit" name="action">Guardar</button>
+	      <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
 		  <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
 		  </div>  
 		  </div>
     <!--/form-->
     {{ form_end(form) }}
     </div>
+    <script> var i = 5;
+    	var addElement = function(){
+    	var answers = document.getElementById("answers");
+    	$(answers).append('<div class="input-field col s12" id="col'+i+'"></div>');
+    	var div = document.getElementById("col"+i);
+    	$(div).append('<textarea class="materialize-textarea validate" name="answer'+i+'" placeholder="Introduzca texto" length="600"></textarea>');
+    	$(div).append('<label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label>');
+    	i++;
+    };</script>
     <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();
-    $('.collapsible').collapsible({
-      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    }); });
+    $('input#input_text, textarea#textarea1').characterCounter(); });
+    var validation = function(){
+    	var valor = (document.getElementById("area").value).trim();
+		if( valor == null || valor.length == 0 ) {
+			var divArea = document.getElementById("divArea");
+			$(divArea).append('<h6> Este valor no debería estar vacío </h6>');
+		}
+    };
     </script>
 {% endblock %}

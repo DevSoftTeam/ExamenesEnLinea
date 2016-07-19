@@ -291,7 +291,7 @@ $collection->add('matchingQuestion_new', new Route(
 ));
 
 $collection->add('matchingQuestion_show', new Route(
-    '/{id}/showMQ',
+    '/{id}/showMMQ',
     array('_controller' => 'EvaluationsBundle:matchingQuestion:show'),
     array(),
     array(),
@@ -302,7 +302,7 @@ $collection->add('matchingQuestion_show', new Route(
 
 
 $collection->add('matchingQuestion_edit', new Route(
-    '/{id}/editMQ',
+    '/{id}/editMMQ',
     array('_controller' => 'EvaluationsBundle:matchingQuestion:edit'),
     array(),
     array(),
@@ -312,7 +312,7 @@ $collection->add('matchingQuestion_edit', new Route(
 ));
 
 $collection->add('matchingQuestion_delete', new Route(
-    '/{id}/deleteMQ',
+    '/{id}/deleteMMQ',
     array('_controller' => 'EvaluationsBundle:matchingQuestion:delete'),
     array(),
     array(),
