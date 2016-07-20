@@ -291,7 +291,7 @@ $collection->add('matchingQuestion_new', new Route(
 ));
 
 $collection->add('matchingQuestion_show', new Route(
-    '/{id}/showMQ',
+    '/{id}/showMMQ',
     array('_controller' => 'EvaluationsBundle:matchingQuestion:show'),
     array(),
     array(),
@@ -302,7 +302,7 @@ $collection->add('matchingQuestion_show', new Route(
 
 
 $collection->add('matchingQuestion_edit', new Route(
-    '/{id}/editMQ',
+    '/{id}/editMMQ',
     array('_controller' => 'EvaluationsBundle:matchingQuestion:edit'),
     array(),
     array(),
@@ -312,7 +312,7 @@ $collection->add('matchingQuestion_edit', new Route(
 ));
 
 $collection->add('matchingQuestion_delete', new Route(
-    '/{id}/deleteMQ',
+    '/{id}/deleteMMQ',
     array('_controller' => 'EvaluationsBundle:matchingQuestion:delete'),
     array(),
     array(),
@@ -320,6 +320,47 @@ $collection->add('matchingQuestion_delete', new Route(
     array(),
     array('DELETE')
 ));
+
+$collection->add('wordCompletionQuestion_new', new Route(
+    '/wordCompletionQuestion/{id_type}',
+    array('_controller' => 'EvaluationsBundle:WordCompletionQuestion:wcqNew'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('wordCompletionQuestion_show', new Route(
+    '/{id}/showWCQ',
+    array('_controller' => 'EvaluationsBundle:WordCompletionQuestion:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('wordCompletionQuestion_edit', new Route(
+    '/{id}/editWCQ',
+    array('_controller' => 'EvaluationsBundle:WordCompletionQuestion:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('wordCompletionQuestion_delete', new Route(
+    '/{id}/deleteWCQ',
+    array('_controller' => 'EvaluationsBundle:WordCompletionQuestion:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
+
 
 
 return $collection;

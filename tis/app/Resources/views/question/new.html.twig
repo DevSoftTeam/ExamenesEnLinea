@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Seleccione el tipo de pregunta</h1>
+    <h3 class="teal-text lighten-4">Seleccione el tipo de pregunta</h3>
     {#}
     <ul>
         {% for type in types %}
@@ -16,33 +16,66 @@
             dentro la tabla de tipos
         */
     </ul>#}
+    <br>
+    <div class="row">
+    <div class="col s12">
+    <div class="col s4 alight center">
+    <a href="openQuestion/1">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: ABIERTA " align="middle"> </a>
+      </div>
+      <div class="col s4 alight center">
+        <a href="fileQuestion/3">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: SUBIR ARCHIVO " align="middle"> </a>
+      </div>
+      <div class="col s4 alight center">
+    <a href="trueFalseQuestion/4">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: VERDADERO Y FALSO " align="middle"> </a>
+      </div>
+      </div>
+      </div>
+
+      <div class="row">
+    <div class="col s12">
+    <div class="col s4 alight center">
+    <a href="uniqueAnswerQuestion/5">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: RESPUESTA SIMPLE" align="middle"> </a>
+      </div>
+      <div class="col s4 alight center">
+        <a href="multipleQuestion/6">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: RESPUESTA MULTIPLE" align="middle"> </a>
+      </div>
+      <div class="col s4 alight center">
+    <a href="matchingQuestion/7">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: EMPAREJAMIENTO " align="middle"> </a>
+      </div>
+      </div>
+      </div>
+
+      <div class="row">
+      <div class="col s12">
+    <div class="col s6 alight center">
+        <a href="orderQuestion/2">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: ORDENAMIENTO" align="middle"> </a>
+    </div>
+    <div class="col s6 alight right">
+    <a href="wordCompletionQuestion/8">
+        <IMG SRC="http://www.construyehogar.com/wp-content/uploads/2015/06/Dise%C3%B1o-de-casa-moderna-de-dos-plantas.jpg"  WIDTH=250 HEIGHT=300 BORDER=5  alt="PREGUNTA TIPO: EMPAREJAMIENTO " align="middle"> </a>
+      </div>
+    </div>
+    </div>
+    <br>
+    <br>
+      
 
     <ul>
         <li>
-            <a href="openQuestion/1"> pregunta abierta </a>
-        </li>
-        <li>
-            <a href="fileQuestion/3"> pregunta subir archivo </a>
-        </li>
-        <li>
-            <a href="trueFalseQuestion/4"> pregunta verdadero falso </a>
-        </li>
-        <li>
-            <a href="uniqueAnswerQuestion/5"> Pregunta respuesta unica </a>
-        </li>
-        <li>
-            <a href="multipleQuestion/6"> Pregunta respuesta multiple </a>
-         <li>
-            <a href="matchingQuestion/7"> Pregunta de emparejamiento </a>
-        </li>
-        <li>
-            <a href="orderQuestion/2"> Pregunta de ordenamiento </a>
-        </li>
-    </ul>
 
-    <ul>
-        <li>
-            <a href="{{ path('question_index') }}">Ver Banco de preguntas</a>
+          <div class="col ">
+                <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Banco de Preguntas</a>
+            </div>
+            
         </li>
     </ul>
 {% endblock %}
+
+

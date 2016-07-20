@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Test;
+use EvaluationsBundle\Entity\TestQuestion;
 use EvaluationsBundle\Form\TestType;
 use Symfony\Component\Validator\Constraints\Time;
 /**
@@ -35,6 +36,20 @@ class TestController extends Controller
             'questions' => $questions,
         ));
 
+    }
+
+    public function asignAction($idT,$idQ){
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idT);
+        $question = $em->getRepository('EvaluationsBundle:Question')->find($idQ);
+        
+        $testQuestion = new TestQuestion();
+        $testQuestion->setIdQuestion($question);
+        $testQuestion->setIdTest($test);
+        $testQuestion->setPercent(0);
+        $em->persist($testQuestion);
+        $em->flush();
+        return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));
     }
 
     //private function validateDateTimes(Date $startDate, Time $startTime, Date $entDate, Time $endTime, Form $form)

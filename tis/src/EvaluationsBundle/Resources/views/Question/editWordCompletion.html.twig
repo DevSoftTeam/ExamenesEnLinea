@@ -37,28 +37,6 @@
             {{ form_widget(edit_form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
           </div>
         </div>
-          <div class="row">
-            <div class="row">
-            <div class="col s12">
-            <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
-            <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran en el orden ingresado.</h6></label>
-            </div>
-            </div>
-            {% for i in 0..(answers|length)/2 -1  %}
-            <div class="row">
-              <div class="col s12">
-              <div class="col s6">
-                <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ i }} :</h6></label>
-                <input class="validate" name="answerA{{i+1}}" placeholder="" length="250" value="{{ answers[i].content }}">
-                </div>
-              <div class="col s6">
-                <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ i }} :</h6></label>
-                <input class="validate" name="answerB{{i+1}}" placeholder="" length="250" value="{{(answers[i+(answers|length)/2]).content}}">
-                </div>
-              </div>
-              </div>
-            {% endfor %}
-            </div>
         <br><br>
         <div class="row">
             <div class="col">
