@@ -41,7 +41,7 @@ class Question
      * @var \TypeQuestion
      * @ORM\ManyToOne(targetEntity="TypeQuestion")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_type", referencedColumnName="id_type")
+     *   @ORM\JoinColumn(name="id_type", referencedColumnName="id_type", nullable=false)
      * })
      */
     private $idType;

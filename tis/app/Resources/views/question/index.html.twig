@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %} Banco de preguntas {% endblock %}
 {% block body %}
     <label class="teal-text lighten-4">
@@ -17,12 +16,12 @@
         </thead>
         <tbody>
         {% for question in questions %}
-            <tr onclick="javascript:location.href='{{question.getURL()}}'" >
+            <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
                 {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#}
                 {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}
                 <td>{{ question.statementQuestion[0:15] }}</td>
-                <td>{{ question.idArea.nameArea }}</td>
-                <td>{{ question.idType.name_type }}</td>
+                <td>{% if question.idArea != null %}{{ question.idArea.nameArea }} {% endif %}</td>
+                <td>{% if question.idType != null %}{{ question.idType.nameType }} {% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
