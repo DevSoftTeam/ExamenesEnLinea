@@ -42,5 +42,36 @@ class TestQuestion
     private $idTest;
 
 
+    public function setPercent($percent){
+        $this->percent = $percent;
+    }
+
+    public function setIdQuestion($question){
+        $this->idQuestion = $question;
+    }
+
+    public function setIdTest($test){
+        $this->idTest = $test;
+    }    
+
+    public function __call($name, $arguments)
+    {
+        echo "Llamando al método de objeto '$name' "
+            . implode(', ', $arguments). "\n";
+    }
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+        return $this;
+    }
+
 }
 
