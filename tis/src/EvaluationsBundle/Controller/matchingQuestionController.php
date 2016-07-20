@@ -6,7 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EvaluationsBundle\Entity\AnswerElement;
 use EvaluationsBundle\Entity\Question;
-use EvaluationsBundle\Form\Area;
+use EvaluationsBundle\Entity\Area;
+
 
 
 
