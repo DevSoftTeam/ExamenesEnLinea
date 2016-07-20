@@ -8,35 +8,59 @@
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
 
-    <body  style ="background-color:#00695c;">
+    <body  style ="background-color:white;">
 
         <script src="{{asset('js/jquery-3.0.0.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/materialize.min.js')}}" type="text/javascript" ></script>
+
+        <div class="row container">
 
         {% for flashMessage in app.session.flashbag.get('mensaje') %}
         <span class="mdi-alert-warning">
             {{ flashMessage }}</br>
         </span>
         {% endfor %}
-        <div class="row container">
             <br>
             <label class="teal-text lighten-4 lighten-5"><h3><b>Inicio De Sesion</b></h3></label></br>
-            <form class="col s12 center-on-small-only" method="post" action="{{ path('validate_homepage') }}" >
+            <form class="col s12 center-on-small-only" method="post" action="{{ path('validate_homepage') }}" onsubmit="return validation();">
                 <div class="row">
                     <div class="input-field col s6">
                         <input name="login" id="login" type="text" placeholder="Ingrese nombre de usuario" required>
                         <label for="login" class="teal-text lighten-4"><h6><b>Nombre De Usuario</b></h6></label>
+                        <span  id="errorUser"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <input name="password" id="password" type="password" placeholder="Ingrese su contraseña" required>
                         <label for="password" class="teal-text lighten-4"><h6><b>Contraseña</b></h6></label>
+                        <span id="errorPass"></span>
                     </div>
                 </div>
                 <button class="btn waves-effect  teal" type="submit" name="action">Ingresar</button>
             </form>
         </div>
-
+        <script>
+        var validation = function(){
+            var valUser = (document.getElementById("login").value).trim();
+            if( valUser == null || valUser.length < 2) {
+                var divUser = document.getElementById("errorUser");
+                divUser.textContent ='Este valor no debería contener solo espacios y el numero de caracteres debe ser mayor a 1.';
+                return false;
+            }else{
+                var valPass = (document.getElementById("password").value).trim();
+                var divPass = document.getElementById("errorPass");
+                if( valPass == null || valPass.length == 0) {
+                    divPass.textContent = 'Este valor no debería contener solo espacios.';
+                    return false;
+                }else{ divPass.textContent = ''; 
+                    if( !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(valPass)) {
+                       divPass.textContent = 'La contraseña no sigue el formato necesario: al menos un caracter mayúscula, minuscula, un digito, un caracter especial, no espacios, minimo 8 caracteres y maximo 15.';
+                        return false;
+                    }else{ divPass.textContent = '';}
+                }
+            }
+        };
+    </script>
     </body>
 </html>

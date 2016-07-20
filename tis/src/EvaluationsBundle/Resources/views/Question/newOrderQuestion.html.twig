@@ -7,7 +7,7 @@
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
 	{{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
-    	<div class="row" id="divArea">
+    	<div class="row">
     		<div class="col s12">
     		<label class="teal-text darken-4"><h6>Area :</h6></label>
     		<input list="areas" name="area" placeholder="seleccione o introzca nombre de area" id="area">
@@ -16,6 +16,7 @@
 			    <option value="{{ area.nameArea }}">
 			  {% endfor %}
 			  </datalist>
+			<span id="errorArea"></span>
 			</div>
     	</div>
 
@@ -85,10 +86,12 @@
     <script>$(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter(); });
     var validation = function(){
-    	var valor = (document.getElementById("area").value).trim();
-		if( valor == null || valor.length == 0 ) {
-			var divArea = document.getElementById("divArea");
-			$(divArea).append('<h6> Este valor no debería estar vacío </h6>');
+    	var value = (document.getElementById("area").value).trim();
+		var divArea = document.getElementById("errorArea");
+		if( value == null || value.length == 0) {
+			divArea.textContent = 'Este valor no debería estar vacío';
+		}else{
+			divArea.textContent = '';
 		}
     };
     </script>

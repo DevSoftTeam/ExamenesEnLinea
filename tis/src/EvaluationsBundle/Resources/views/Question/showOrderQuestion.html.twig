@@ -24,20 +24,24 @@
             </div>
         </div>
         <div class="row">
-            
+            <div class="col s10">
+                <label class="teal-text darken-4"><h6>Elementos de Respuesta :</h6></label>
+            </div>
+            <div class="col s2">
+                <label class="teal-text darken-4"><h6>Secuencia de orden :</h6></label>
+            </div>
             {% for ans in answers %}
             <div class="col s12">
                 <div class="col s10">
-                <label class="teal-text darken-4"><h6>Respuesta :</h6></label>
                 <pre>{{ ans.content }}</pre>
                 </div>
                 <div class="col s2">
-                <label class="teal-text darken-4"><h6>Secuencia de orden :</h6></label>
-                <select>
+                <!--select>
                   {% for ans1 in answers %}
                   <option value="" {% if ans.orderVar==ans1.orderVar %} selected {% endif %}disabled>{{ ans1.orderVar }}</option>
                   {% endfor %}
-                </select>
+                </select-->
+                <p align="center">{{ ans.orderVar }}</p>
                 </div>
             </div>
             {% endfor %}
