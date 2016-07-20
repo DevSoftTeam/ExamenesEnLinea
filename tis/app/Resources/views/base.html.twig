@@ -28,27 +28,53 @@
                  padding: 1em;
                  align-self: flex-end;
              }
-        </style>
+             
+             </style>
+            <script language="JavaScript"> 
+                function reloj(){ 
+                momentoActual = new Date() 
+                hora = momentoActual.getHours() 
+                minuto = momentoActual.getMinutes() 
+                segundo = momentoActual.getSeconds() 
+
+                str_segundo = new String (segundo) 
+                if (str_segundo.length == 1) 
+                segundo = "0" + segundo 
+
+                str_minuto = new String (minuto) 
+                if (str_minuto.length == 1) 
+                minuto = "0" + minuto 
+
+                str_hora = new String (hora) 
+                if (str_hora.length == 1) 
+                hora = "0" + hora 
+
+                var fecha =  (momentoActual.getFullYear() + "-" + (momentoActual.getMonth() +1) + "-" + momentoActual.getDate() )
+
+                horaImprimible = fecha + " / " +hora + " : " + minuto + " : " + segundo
+                                     
+                document.form_reloj.reloj.value = horaImprimible 
+
+                setTimeout("reloj()",1000) 
+                } 
+            </script> 
     </head>
 
-    <body  style ="background-color:#e0f2f1;">
-        <ul id="questionTypes" class="dropdown-content teal">
-            <li><a class="white-text" href="/question/openQuestion/1">Abierta</a></li>
-            <li><a class="white-text" href="/question/fileQuestion/3">Con Archivo</a></li>
-            <li><a class="white-text" href="/question/trueFalseQuestion/4">Falso Verdadero</a></li>
-            <li><a class="white-text" href="/question/uniqueAnswerQuestion/5">Respuesta Unica</a></li>
-            <li><a class="white-text" href="/question/multipleQuestion/6">Respustas Multiples</a></li>
-            <li><a class="white-text" href="/question/matchingQuestion/7">Emparejamiento</a></li>
-            <li><a class="white-text" href="/question/orderQuestion/2">Ordenamineto</a></li>
-        </ul>
+    <body  style ="background-color:#e0f2f1;" onload="reloj()">
         
         <nav >
             <div class="nav-wrapper teal ">
+                <ul class="left hide-on-med-and-down">
+                    <li>
+                        <form name="form_reloj"> 
+                            <input type="text" name="reloj" size="30" style="border-bottom: 0px solid teal; color : White; text-align : center;" onfocus="window.document.formc_reloj.reloj.blur()"> 
+                        </form> 
+                    </li>
+                </ul>
                 <a href="#" class="brand-logo center"><b>Evaluaciones En Linea</b></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/question/new">Crear Pregunta</a></li>
                     <li><a href="/test/new">Crear Examen</a></li>
-                    {#<li><a class="dropdown-button" href="/question/new" data-activates="questionTypes">Crear Pregunta<i class="material-icons right">arrow_drop_down</i></a></li>#}
                     <li><a  href={{ path('logout_homepage') }} >Salir</a></li>
                 </ul>
             </div>
@@ -58,6 +84,7 @@
         <script src="{{asset('js/materialize.min.js')}}" type="text/javascript" ></script>
         
         <div class="container">
+
             {% block body %}
             {% endblock %}
         </div>
