@@ -84,7 +84,7 @@ class TestController extends Controller
             $eETime = $form['endTimeEnrollment']->getData();
 
             $now = new \DateTime();
-            if($now<= $sEDate and $now <= $sETime and $sDate >= $eEDate and $sTime >= $eETime)
+            if( $sDate >= $eEDate and $sTime >= $eETime)
             {
                 if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
                     ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
