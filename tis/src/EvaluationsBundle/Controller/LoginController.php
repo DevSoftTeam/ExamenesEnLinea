@@ -23,8 +23,25 @@ class LoginController extends Controller
 
     }
 
-    public function loginAction() {
-        return $this->render('EvaluationsBundle:Login:index.html.twig');
+    public function loginAction(Request $request) {
+            //Llamamos al servicio de autenticacion
+            $authenticationUtils = $this->get('security.authentication_utils');
+             
+            // conseguir el error del login si falla
+            $error = $authenticationUtils->getLastAuthenticationError();
+         
+            // ultimo nombre de usuario que se ha intentado identificar
+            $lastUsername = $authenticationUtils->getLastUsername();
+             /*
+            return $this->render(
+                    'MiBundle:user:login.html.twig', array(
+                        'last_username' => $lastUsername,
+                        'error' => $error,
+                    ));*/
+        return $this->render('EvaluationsBundle:Login:index.html.twig', array(
+                        'last_username' => $lastUsername,
+                        'error' => $error,
+                    ));
     }
 
     public function validateAction(Request $request)

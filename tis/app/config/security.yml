@@ -1,13 +1,31 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        EvaluationsBundle\Entity\UserSystem: plaintext
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
+        our_db_provider:
+            entity: { class: EvaluationsBundle\Entity\UserSystem, property: username }
         in_memory:
             memory: ~
 
     firewalls:
+        secured_area:
+            pattern:    ^/
+            anonymous: ~
+            http_basic:
+                realm: "Secured Demo Area"
+
+            form_login:
+              login_path: /login
+              check_path: /login_check
+              target_path_parameter: _target_path
+            logout:
+              path: /logout
+              target: /login
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -22,3 +40,9 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            provider: our_db_provider
+
+    access_control:
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/, roles: ROLE_ADMIN }
+    - { path: ^/admin, roles: ROLE_ADMIN }
