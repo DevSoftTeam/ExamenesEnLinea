@@ -83,24 +83,41 @@ class TestController extends Controller
             $eEDate = $form['endDateEnrollment']->getData();
             $eETime = $form['endTimeEnrollment']->getData();
 
-            $now = new \DateTime();
-            if( $sDate >= $eEDate and $sTime >= $eETime)
+            if( $sDate >= $eEDate && $sTime >= $eETime)//control de registro e inicio examen
             {
-                if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
-                    ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
-                {
-                    $em->persist($test);
-                    $em->flush();
-                    return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+                if( $sEDate < $eEDate || ($sEDate == $eEDate && $sETime < $eETime) ) {
+
+                    if($sDate < $eDate){
+                        if($sEDate == $eEDate && $sETime < $eETime ) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));   
+                        }
+                        if($sEDate < $eEDate) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));    
+                        }
+                    }
+                    if($sDate == $eDate && $sTime < $eTime) {
+                        if($sEDate == $eEDate && $sETime < $eETime ) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));   
+                        }
+                        if($sEDate < $eEDate) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));    
+                        }
+                    }
+                    echo('fecha de examen inconsistente');exit;
                 }
-//                echo 'las fechas de examen con respecto a las de inscripcion son inconsistentes'; exit;
             }
-//                return $this->redirect($this->generateUrl('indexerror_homepage'));
             return $this->render('test/errorFormTest.html.twig', array(
                 'test' => $test,
                 'form' => $form->createView(),
             ));
-
         }
 
         return $this->render('test/new.html.twig', array(
@@ -147,23 +164,37 @@ class TestController extends Controller
             $eETime = $editForm['endTimeEnrollment']->getData();
 
             $now = new \DateTime();
-            if($sDate >= $eEDate and $sTime >= $eETime)
+            if( $sDate >= $eEDate && $sTime >= $eETime)//control de registro e inicio examen
             {
-                if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
-                    ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
-                {
-                $em = $this->getDoctrine()->getManager();
-                    $em->persist($test);
-                    $em->flush();
-                    return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+                if( $sEDate < $eEDate || ($sEDate == $eEDate && $sETime < $eETime) ) {
+
+                    if($sDate < $eDate){
+                        if($sEDate == $eEDate && $sETime < $eETime ) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));   
+                        }
+                        if($sEDate < $eEDate) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));    
+                        }
+                    }
+                    if($sDate == $eDate && $sTime < $eTime) {
+                        if($sEDate == $eEDate && $sETime < $eETime ) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));   
+                        }
+                        if($sEDate < $eEDate) {
+                            $em->persist($test);
+                            $em->flush();
+                            return $this->redirectToRoute('test_show', array('id' => $test->getId()));    
+                        }
+                    }
+                    echo('fecha de examen inconsistente');exit;
                 }
             }
-            return $this->render('test/errorFormTest.html.twig', array(
-                'test' => $test,
-                'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-            ));
-        }
 
         return $this->render('test/edit.html.twig', array(
             'test' => $test,
