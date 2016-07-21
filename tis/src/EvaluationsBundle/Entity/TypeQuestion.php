@@ -34,12 +34,12 @@ class TypeQuestion
         return $this->idType;
     }
 
-    public function getId_type()
+    public function getIdType()
     {
         return $this->idType;
     }
 
-    public function getName_type()
+    public function getNameType()
     {
         return $this->nameType;   
     }
