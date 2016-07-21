@@ -86,6 +86,7 @@ class QuestionController extends Controller
                 $file->move("uploads", $file_name);
                 $question->setpathFileQuestion($file_name);
             } 
+            $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type); 
             $question->setIdType($idType);
             $question->setIdArea($idArea);
             $em->persist($question);

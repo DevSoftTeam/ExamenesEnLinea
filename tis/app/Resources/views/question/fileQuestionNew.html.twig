@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <label class="teal-text lighten-4"><h3>Crear Pregunta abierta con respuesta párrafo</h3></label>
+    <label class="teal-text lighten-4"><h3>Crear Pregunta con opcion subir archivo</h3></label>
         
     {{ form_start(form) }}
         <div class="row">
@@ -23,17 +23,6 @@
             {{ form_errors(form.statementQuestion) }}
           </div>
         </div>
-
-        {#<div class="file-field input-field">
-          <div class="btn">
-            <span>imagen</span>
-            <i class="material-icons right">perm_media</i>
-                {{ form_widget(form.image) }}
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>#}
 
         <div class="file-field input-field">
           <div class="btn">
