@@ -30,6 +30,16 @@ class TestController extends Controller
 
     public function asosiationAction(Test $test){
         $em = $this->getDoctrine()->getManager();
+        //select * from question LEFT JOIN test_question ON (question.id_question = test_question.id_question) where id_test is null
+        /*$query = $this->createQueryBuilder('r')
+           ->leftJoin('r.user', 'u')
+           ->leftJoin('r.answer', 'a')
+           ->leftJoin('r.vote', 'v')
+           ->where('r.vote = :vote')
+           ->setParameter('vote', $vote)
+           ->getQuery();
+        */
+        //$questions = $em->createQuery("select * from question LEFT JOIN test_question ON (question.id_question = test_question.id_question) where id_test is null");       
         $questions = $em->getRepository('EvaluationsBundle:Question')->findAll();
         return $this->render('test/asign.html.twig', array(
             'test' => $test,
