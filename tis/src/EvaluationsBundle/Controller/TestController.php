@@ -64,10 +64,6 @@ class TestController extends Controller
 
     //private function validateDateTimes(Date $startDate, Time $startTime, Date $entDate, Time $endTime, Form $form)
     //{
-//    public function indexErrorAction()
-//    {
-//        return $this->render('EvaluationsBundle:Test:errorFormTest.html.twig');
-//    }
 
     /**
      * Creates a new Test entity.
@@ -93,24 +89,21 @@ class TestController extends Controller
             $eEDate = $form['endDateEnrollment']->getData();
             $eETime = $form['endTimeEnrollment']->getData();
 
-            $now = new \DateTime();
-            if( $sDate >= $eEDate and $sTime >= $eETime)
+            if(($sDate > $eEDate) || ($sDate == $eEDate and $sTime >= $eETime))
             {
                 if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
                     ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
                 {
+                $em = $this->getDoctrine()->getManager();
                     $em->persist($test);
                     $em->flush();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
                 }
-//                echo 'las fechas de examen con respecto a las de inscripcion son inconsistentes'; exit;
             }
-//                return $this->redirect($this->generateUrl('indexerror_homepage'));
             return $this->render('test/errorFormTest.html.twig', array(
                 'test' => $test,
                 'form' => $form->createView(),
             ));
-
         }
 
         return $this->render('test/new.html.twig', array(
@@ -142,22 +135,17 @@ class TestController extends Controller
         $deleteForm = $this->createDeleteForm($test);
         $editForm = $this->createForm('EvaluationsBundle\Form\TestType', $test);
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $sDate = $editForm['startDate']->getData();
             $sTime = $editForm['startTime']->getData();
-
             $eDate = $editForm['endDate']->getData();
             $eTime = $editForm['endTime']->getData();
-
             $sEDate = $editForm['startDateEnrollment']->getData();
             $sETime = $editForm['startTimeEnrollment']->getData();
-
             $eEDate = $editForm['endDateEnrollment']->getData();
             $eETime = $editForm['endTimeEnrollment']->getData();
-
             $now = new \DateTime();
-            if($sDate >= $eEDate and $sTime >= $eETime)
+            if(($sDate > $eEDate) || ($sDate == $eEDate and $sTime >= $eETime))
             {
                 if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
                     ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
@@ -174,14 +162,12 @@ class TestController extends Controller
             'delete_form' => $deleteForm->createView(),
             ));
         }
-
         return $this->render('test/edit.html.twig', array(
             'test' => $test,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
     /**
      * Deletes a Test entity.
      *

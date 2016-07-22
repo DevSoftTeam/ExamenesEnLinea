@@ -22,17 +22,23 @@ login_homepage:
     path:     /login
     defaults: { _controller: EvaluationsBundle:Login:login }
 
-logout_homepage:
-    path:     /logout
-    defaults: { _controller: EvaluationsBundle:Login:logout }
+#logout_homepage:
+#    path:     /logout
+#    defaults: { _controller: EvaluationsBundle:Login:logout }
 
-validate_homepage:
-    path:     /validate
-    defaults: { _controller: EvaluationsBundle:Login:validate }
+#validate_homepage:
+#    path:     /validate
+#    defaults: { _controller: EvaluationsBundle:Login:validate }
 
 evaluations_homepage:
     path:     /home
     defaults: { _controller: EvaluationsBundle:Default:index }
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
 
 #indexerror_homepage:
 #    path:     /Test

@@ -20,23 +20,25 @@
             {{ flashMessage }}</br>
         </span>
         {% endfor %}
+        <span>{% if error %} {{ error.messageKey|trans(error.messageData, 'security') }}{% endif %}</span>
             <br>
             <label class="teal-text lighten-4 lighten-5"><h3><b>Inicio De Sesion</b></h3></label></br>
-            <form class="col s12 center-on-small-only" method="post" action="{{ path('validate_homepage') }}" onsubmit="return validation();">
+            <form class="col s12 center-on-small-only" method="post" action="{{ path('login_check') }}" onsubmit="return validation();">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="login" id="login" type="text" placeholder="Ingrese nombre de usuario" required>
+                        <input name="_username" id="login" type="text" placeholder="Ingrese nombre de usuario" value="{{ last_username }}" required>
                         <label for="login" class="teal-text lighten-4"><h6><b>Nombre De Usuario</b></h6></label>
                         <span  id="errorUser"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input name="password" id="password" type="password" placeholder="Ingrese su contraseña" required>
+                        <input name="_password" id="password" type="password" placeholder="Ingrese su contraseña" required>
                         <label for="password" class="teal-text lighten-4"><h6><b>Contraseña</b></h6></label>
                         <span id="errorPass"></span>
                     </div>
                 </div>
+                <input type="hidden" name='_target_path' value="/usersystem/2/show" />
                 <button class="btn waves-effect  teal" type="submit" name="action">Ingresar</button>
             </form>
         </div>

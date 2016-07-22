@@ -3,6 +3,7 @@
 namespace EvaluationsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * UserSystem
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_system", uniqueConstraints={@ORM\UniqueConstraint(name="user_pk", columns={"id_user"})})
  * @ORM\Entity
  */
-class UserSystem
+class UserSystem implements UserInterface
 {
     /**
      * @var integer
@@ -25,9 +26,9 @@ class UserSystem
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=25, nullable=false)
+     * @ORM\Column(name="username", type="string", length=25, nullable=false)
      */
-    private $login;
+    private $username;
 
     /**
      * @var string
@@ -81,14 +82,6 @@ class UserSystem
     /**
      * @return string
      */
-    public function getLogin()
-    {
-        return $this->login;
-    }
-
-    /**
-     * @return string
-     */
     public function getMail()
     {
         return $this->mail;
@@ -100,14 +93,6 @@ class UserSystem
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /**
@@ -124,14 +109,6 @@ class UserSystem
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-    }
-
-    /**
-     * @param string $login
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
     }
 
     /**
@@ -157,6 +134,52 @@ class UserSystem
     {
         $this->password = $password;
     }
+    /////////////////
+        /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array('ROLE_ADMIN');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+        return false;
+    }
+
+     public function equals(UserInterface $user)
+    {
+        return $this->idUser === $user->getId();
+    }
+    ////////////
 
     public function __call($name, $arguments)
     {
