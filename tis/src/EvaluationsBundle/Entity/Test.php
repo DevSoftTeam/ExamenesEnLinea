@@ -373,9 +373,9 @@ class Test
     /**
      * @param \UserSystem $idUser
      */
-    public function setIdUser()//$idUser)
+    public function setIdUser($idUser)
     {
-        $this->idUser = 1;//$idUser;
+        $this->idUser = $idUser;
     }
 
     public function __call($name, $arguments)
