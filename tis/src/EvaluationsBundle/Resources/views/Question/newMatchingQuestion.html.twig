@@ -48,37 +48,60 @@
 
     <label class="grey-text lighten-1 col s12">*Colocar las respuestas en orden correcto.</label><br>
 
+<div class="row" id="answers">
+      {% for i in 1..3 %}
 
-      {% for i in 1..5 %}
-      <div class="row">
-        <div class="col s12">
           <div class="input-field col s6">
-          <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
-          <textarea class="materialize-textarea validate" name="answerA{{i}}" placeholder="Introduzca texto" length="250"></textarea>
+          <textarea class="materialize-textarea validate" name="answerA{{i}}" placeholder="Introduzca texto" length="250" {% if i <= 3 %}required{% endif %}></textarea>
           <label class="teal-text lighten-4"><h6>Columna A elemento {{ i }} :</h6></label>
           </div>
           <div class="input-field col s6">
-           <textarea class="materialize-textarea validate" name="answerB{{i}}" placeholder="Introduzca texto" length="250"></textarea>
+           <textarea class="materialize-textarea validate" name="answerB{{i}}" placeholder="Introduzca texto" length="250" 
+           {% if i <= 3 %}required{% endif %}></textarea>
           <label class="teal-text lighten-4"><h6>Columna B elemento {{ i }} :</h6></label>        
         </div>
-           <div class="input-field col s2">
 
-          </div>
-        </div>
-        </div>
         {% endfor %}
 
-
-        <div class="alight center">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
-          <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
-            <br>
-           </div>  
+        </div>
+     
+        <br><br>
+        <div class="row">
+          <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
+        <div class=" alight center">
+        <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
+      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+      </div>  
+      </div>
     <!--/form-->
     {{ form_end(form) }}
     </div>
+    </div>
+    <script> var i = 4;
+      var addElement = function(){
+      var answers = document.getElementById("answers");
+      $(answers).append('<div class="input-field col s6" id="col'+i+'"></div>');
+      var div = document.getElementById("col"+i);
+      $(div).append(' <textarea class="materialize-textarea validate" name="answerA'+i+'" placeholder="Introduzca texto" length="250" ></textarea>');
+      $(div).append('<label class="teal-text lighten-4"><h6>Columna A elemento '+i+':</h6></label>');
+ 
+      $(answers).append('<div class="input-field col s6" id="col'+i+1+'"></div>');
+      var div2 = document.getElementById("col"+i+1);
+      $(div2).append(' <textarea class="materialize-textarea validate" name="answerB'+i+'" placeholder="Introduzca texto" length="250" ></textarea>');
+      $(div2).append('<label class="teal-text lighten-4"><h6>Columna B elemento '+i+':</h6></label>');
+
+      i++;
+    };</script>
     <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();
-    $('.modal-trigger').leanModal(); });
+    $('input#input_text, textarea#textarea1').characterCounter(); });
+    var validation = function(){
+      var value = (document.getElementById("area").value).trim();
+    var divArea = document.getElementById("errorArea");
+    if( value == null || value.length == 0) {
+      divArea.textContent = 'Este valor no debería estar vacío';
+    }else{
+      divArea.textContent = '';
+    }
+    };
     </script>
 {% endblock %}
