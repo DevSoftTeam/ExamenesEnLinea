@@ -22,7 +22,8 @@ class TestController extends Controller
     public function indexAction()
     { 
         $em = $this->getDoctrine()->getManager();
-        $tests = $em->getRepository('EvaluationsBundle:Test')->findAll();
+        $idUser = $this->getUser();
+        $tests = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
         ));
@@ -110,7 +111,6 @@ class TestController extends Controller
     public function showAction(Test $test)
     {
         $deleteForm = $this->createDeleteForm($test);
-
         return $this->render('test/show.html.twig', array(
             'test' => $test,
             'delete_form' => $deleteForm->createView(),
