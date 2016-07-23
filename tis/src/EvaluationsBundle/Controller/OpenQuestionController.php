@@ -51,6 +51,9 @@ class OpenQuestionController extends Controller
                  }  
                 $question->setIdType($idType);
                 $question->setIdArea($idArea);
+                
+                $userSession = $this->getUser();
+                $question->setIdUser($userSession);
 
                 $em->persist($question);
                 $em->flush();
