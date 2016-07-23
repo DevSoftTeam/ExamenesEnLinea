@@ -31,7 +31,7 @@
             <tr  >
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{{ question.idArea.nameArea }}</td>
-                <td>{{ question.idType.name_type }}</td>
+                <td>{{ question.idType.nameType }}</td>
                 <td><a class="waves-effect waves-light btn" href={{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion})}}>asignar</a></td>
                 {#<td><button onclick="toast()" class="waves-effect waves-light btn">asignar</button></td>#}
             </tr>
