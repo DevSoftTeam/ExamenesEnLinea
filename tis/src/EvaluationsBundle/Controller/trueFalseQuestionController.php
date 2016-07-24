@@ -52,6 +52,9 @@ class trueFalseQuestionController extends Controller
             $question->setIdType($idType);
             $question->setIdArea($idArea);
 
+            $userSession = $this->getUser();
+            $question->setIdUser($userSession);
+
             $em->persist($question);
             
             $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
