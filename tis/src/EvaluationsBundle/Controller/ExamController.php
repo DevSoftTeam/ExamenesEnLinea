@@ -23,12 +23,19 @@ class ExamController extends Controller
     { 
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
-        $testQuestions = $em->getRepository('EvaluationsBundle:TestQuestion')->findBy(array('idTest'=>$test));
-        $questions = $em->getRepository('EvaluationsBundle:Question')->findBy()array('idQuestion');
-        $questions
-        return $this->render('TestForm/test.html.twig', array(
+        //$testQuestions = $em->getRepository('EvaluationsBundle:TestQuestion')->findBy(array('idTest'=>$test));
+        //$questions = $em->getRepository('EvaluationsBundle:Question')->findBy()array('idQuestion');
+        $result = $em->createQueryBuilder();
+        $questions = $result->select(array('q'))
+            ->from('EvaluationsBundle:Question', 'q')
+            ->innerJoin('EvaluationsBundle:TestQuestion','t', 'WITH', 't.idQuestion = q.idQuestion and t.idTest = :idT')
+            ->where('t.idTest = '.$idTest)
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+        return $this->render('EvaluationsBundle:TestForm:test.html.twig', array(
             'test' => $test,
-            'questions' => $questions;
+            'questions' => $questions,
         ));
     }
     public function newAction(Request $request)
