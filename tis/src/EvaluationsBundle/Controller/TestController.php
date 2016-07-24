@@ -132,9 +132,19 @@ class TestController extends Controller
      */
     public function showAction(Test $test)
     {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->createQueryBuilder();
+        $questions = $result->select(array('q'))
+            ->from('EvaluationsBundle:Question', 'q')
+            ->innerjoin('EvaluationsBundle:TestQuestion','t', 'WITH', 't.idQuestion = q.idQuestion and t.idTest = :idT')
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+
         $deleteForm = $this->createDeleteForm($test);
         return $this->render('test/show.html.twig', array(
             'test' => $test,
+            'questions' => $questions,
             'delete_form' => $deleteForm->createView(),
         ));
     }

@@ -1,87 +1,79 @@
 {% extends 'base.html.twig' %}
 {% block title %}Editar Pregunta{% endblock %}
 {% block body %}
-    <label class="teal-text lighten-4"><h3>Editar Pregunta</h3></label>
-        <div class="row">
-
+  <label class="teal-text lighten-4"><h3>Editar Pregunta</h3></label>
+  <div class="row">
     {{ form_start(edit_form,{ 'enctype':"multipart/form-data"}) }}
-        <div class="row">
-            <div class="col s12">
-            <label class="teal-text darken-4"><h6>Area :</h6></label>
-            <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" value="{{question.idArea.nameArea}}" required>
-              <datalist id="areas">
-              {% for area in areas %}
-                <option value="{{ area.nameArea }}">
-              {% endfor %}
-              </datalist>
-            </div>
+    <div class="row">
+      <div class="col s12">
+        <label class="teal-text darken-4"><h6>Area :</h6></label>
+        <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" value="{{question.idArea.nameArea}}" required>
+        <datalist id="areas">
+        {% for area in areas %}
+          <option value="{{ area.nameArea }}">
+          {% endfor %}
+          </datalist>
         </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
-              {{ form_widget(edit_form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','value':'question.statementQuestion','placeholder':'Introduzca texto'}}) }}
-              {{ form_errors(edit_form.statementQuestion) }}
-            </div>
-          </div>
-        {% if question.pathImageQuestion != null %}
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+          {{ form_widget(edit_form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','value':'question.statementQuestion','placeholder':'Introduzca texto'}}) }}
+          {{ form_errors(edit_form.statementQuestion) }}
+        </div>
+      </div>
+      {% if question.pathImageQuestion != null %}
         <img height="50%" width="50%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
-        {% endif %}
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>imagen</span>
-            <i class="material-icons right">perm_media</i>
-            {{ form_widget(edit_form.image) }}
-          </div>
-          <div class="file-path-wrapper">
-            {{ form_widget(edit_form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
-          </div>
+      {% endif %}
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>imagen</span>
+          <i class="material-icons right">perm_media</i>
+          {{ form_widget(edit_form.image) }}
         </div>
-          <div class="row">
-
-            <div class="col s12">
-            <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
-            <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran en el orden ingresado.</h6></label>
-            </div>
-<div class="row" id="answers">
-            {% for i in 0..(answers|length)/2 -1  %}
+        <div class="file-path-wrapper">
+          {{ form_widget(edit_form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
+          <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran en el orden ingresado.</h6></label>
+        </div>
+        <div class="row" id="answers">
+          {% set foo = 1 %}
+          {% for i in range(0, ((answers|length)-2),2) %}
             <div class="row">
               <div class="col s12">
-              <div class="col s6">
-                <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ i +1 }} :</h6></label>
-                <input class="validate" name="answerA{{i+1}}" placeholder="" length="250" value="{{ answers[i].content }}" {% if i <= 3 %}required{% endif %}>
+                <div class="col s6">
+                  <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ foo }} :</h6></label>
+                  <textarea class="materialize-textarea validate" name="answerA{{i+1}}" placeholder="Introduzca texto" length="250" {% if i <= 3 %}required{% endif %}>{{answers[i].content}}</textarea>
                 </div>
-              <div class="col s6">
-                <label class="teal-text lighten-4 col s10"><h6>pareja {{ i+1 }} :</h6></label>
-                <input class="validate" name="answerB{{i+1}}" placeholder="" length="250" value="{{(answers[i+(answers|length)/2]).content}}" {% if i <= 3 %}required{% endif %}>
+                <div class="col s6">
+                  <label class="teal-text lighten-4 col s10"><h6>pareja {{ foo }} :</h6></label>
+                  <textarea class="materialize-textarea validate" name="answerB{{i+1}}" placeholder="Introduzca texto" length="250"  {% if i <= 3 %}required{% endif %} >{{(answers[i+1]).content}}</textarea>
                 </div>
               </div>
-              </div>
-            {% endfor %}
-                 </div>
-
+            </div>
+            {% set foo = foo +1%}
+          {% endfor %}
+        </div>
         <div class="row">
           <a class="btn waves-effect waves-light " onClick="addElement();" style="float: left;">Agregar respuesta </a>
-
-        <button align="center" class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
-      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
-      
-   
-    {{ form_end(edit_form) }}
-
-            <div class="col push-s7">
-                {{ form_start(delete_form) }}
-                    <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
-                {{ form_end(delete_form) }}
-            </div>
+          <button align="center" class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
+          <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+          
+          
+          {{ form_end(edit_form) }}
+          <div class="col push-s7">
+            {{ form_start(delete_form) }}
+            <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
+            {{ form_end(delete_form) }}
+          </div>
         </div>   </div>
-
-    </div>
-
-    <script> 
-
-    var i =  {{ (answers|length)/2 }}+1;
-
+      </div>
+      <script>
+      var i =  {{ (answers|length)/2 }}+1;
       var addElement = function(){
       
       var answers = document.getElementById("answers");
@@ -89,25 +81,24 @@
       var div = document.getElementById("col"+i);
       $(div).append(' <textarea class="materialize-textarea validate" name="answerA'+i+'" placeholder="Introduzca texto" length="250" ></textarea>');
       $(div).append('<label class="teal-text lighten-4"><h6>respuesta '+i+':</h6></label>');
- 
+      
       $(answers).append('<div class="input-field col s6" id="col'+i+1+'"></div>');
       var div2 = document.getElementById("col"+i+1);
       $(div2).append(' <textarea class="materialize-textarea validate" name="answerB'+i+'" placeholder="Introduzca texto" length="250" ></textarea>');
       $(div2).append('<label class="teal-text lighten-4"><h6>pareja'+i+':</h6></label>');
       i++;
-    };
-    </script>
-    <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter(); });
-    var validation = function(){
+      };
+      </script>
+      <script>$(document).ready(function() {
+      $('input#input_text, textarea#textarea1').characterCounter(); });
+      var validation = function(){
       var value = (document.getElementById("area").value).trim();
-    var divArea = document.getElementById("errorArea");
-    if( value == null || value.length == 0) {
+      var divArea = document.getElementById("errorArea");
+      if( value == null || value.length == 0) {
       divArea.textContent = 'Este valor no debería estar vacío';
-    }else{
+      }else{
       divArea.textContent = '';
-    }
-    };
-    </script>
-
-{% endblock %}
+      }
+      };
+      </script>
+    {% endblock %}

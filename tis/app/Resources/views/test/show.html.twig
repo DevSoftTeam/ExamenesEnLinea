@@ -92,4 +92,28 @@
             {{ form_end(delete_form) }}
         </div>
     </div>
+
+    <h2>preguntas</h2>
+
+        <table class="striped">
+        <thead>
+            <tr>
+                {#<th>Nro.</th>#}
+                <th>Enunciado</th>
+                <th>area</th>
+                <th>Tipo de pregunta</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
+                {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#}
+                {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}
+                <td>{{ question.statementQuestion[0:15] }}</td>
+                <td>{% if question.idArea != null %}{{ question.idArea.nameArea }} {% endif %}</td>
+                <td>{% if question.idType != null %}{{ question.idType.nameType }} {% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
