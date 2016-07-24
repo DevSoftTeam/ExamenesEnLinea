@@ -85,15 +85,15 @@
             $(div).append('<input placeholder="Introduzca Texto" name="answer1" id="first_name" type="text"> ');
             $(div).append('<label class="teal-text lighten-4" for="first_name">Respuesta :</label>');
 
-            {#$(answers).append('<div class="input-field col s2" id="col'+i+'"><p></p></div>');#}
-            {#var true_false = document.getElementById("col"+i);#}
-            {#$(true_false).append('<input name="group{{ i }}" type="radio" id="test{{ i }}" />');#}
-            {#$(true_false).append('<label for="test{{ i }}">Verdadero</label>');#}
-            {#$(true_false).append('<input name="group{{ i }}" type="radio" id="test{{ i+1 }}" checked="checked" />');#}
-            {#$(true_false).append('<label for="test{{ i+1 }}">Falso</label>');#}
+            var true_false = document.getElementById("col"+i);
+            $(true_false).append('<input name="group'+i+'" type="radio" id="test'+i+'" />');
+            $(true_false).append('<label for="test'+i+'">Verdadero</label>');
+            $(true_false).append('<input name="group'+i+'" type="radio" id="test'+i+1+'" checked="checked" />');
+            $(true_false).append('<label for="test'+i+1+'">Falso</label>');
 
-            {#i = i + 2;#}
-            i++;
+            i = i + 2;
+
+//            i++;
         };
     </script>
     <script>$(document).ready(function() {
