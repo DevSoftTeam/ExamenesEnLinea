@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    
+  <label class="teal-text lighten-4"><h3>Ramillete de falsos y verdaderos</h3></label>
+
+  <div class="row">
+
+    <!--form action={{ path('tframillete_new',{ 'id_type': 9}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
+    {{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
+        <div class="row">
+          <div class="col s12">
+            <label class="teal-text darken-4"><h6>Area :</h6></label>
+            <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" required>
+            <datalist id="areas">
+            {% for area in areas %}
+              <option value="{{ area.nameArea }}">
+            {% endfor %}
+            </datalist>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+            <!--textarea id="textarea1" class="materialize-textarea" name="statementQuestion"></textarea-->
+            {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
+            {{ form_errors(form.statementQuestion) }}
+          </div>
+        </div>
+
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>imagen</span>
+            <i class="material-icons right">perm_media</i>
+            <!--input type="file" name="image"-->
+            {{ form_widget(form.image) }}
+          </div>
+          <div class="file-path-wrapper">
+            <!--input class="file-path validate" type="text" name="pathImageQuestion"-->
+            {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
+          </div>
+        </div>
+
+        <label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
+        <label class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label><br>
+
+          <div class="row" id="answers">
+              {% for i in range(1, 10, 2) %}
+                  {#<div class="row">#}
+                      <div class="input-field col s10">
+                          <input placeholder="" name="answer1" id="first_name" type="text">
+                          <label class="teal-text lighten-4" for="first_name">Respuesta :</label>
+                      </div>
+                      <div class="input-field col s2">
+                          <p>
+                              <input name="group{{ i }}" type="radio" id="test{{ i }}" />
+                              <label for="test{{ i }}">Verdadero</label>
+                              <input name="group{{ i }}" type="radio" id="test{{ i+1 }}" checked="checked" />
+                              <label for="test{{ i+1 }}">Falso</label>
+                          </p>
+                      </div>
+                  {#</div>#}
+              {% endfor %}
+          </div>
+
+        <div class="row">
+            <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
+            <div class=" alight center">
+                <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
+                <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+  </div>
+    <script>$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();
+    $('.modal-trigger').leanModal(); });
+    </script>
+    <script> var i = 10;
+        var addElement = function(){
+            var answers = document.getElementById("answers");
+            $(answers).append('<div class="input-field col s10" id="col'+i+'"></div>');
+            var div = document.getElementById("col"+i);
+            $(div).append('<input placeholder="Introduzca Texto" name="answer1" id="first_name" type="text"> ');
+            $(div).append('<label class="teal-text lighten-4" for="first_name">Respuesta :</label>');
+
+            {#$(answers).append('<div class="input-field col s2" id="col'+i+'"><p></p></div>');#}
+            {#var true_false = document.getElementById("col"+i);#}
+            {#$(true_false).append('<input name="group{{ i }}" type="radio" id="test{{ i }}" />');#}
+            {#$(true_false).append('<label for="test{{ i }}">Verdadero</label>');#}
+            {#$(true_false).append('<input name="group{{ i }}" type="radio" id="test{{ i+1 }}" checked="checked" />');#}
+            {#$(true_false).append('<label for="test{{ i+1 }}">Falso</label>');#}
+
+            {#i = i + 2;#}
+            i++;
+        };
+    </script>
+    <script>$(document).ready(function() {
+            $('input#input_text, textarea#textarea1').characterCounter(); });
+        var validation = function(){
+            var value = (document.getElementById("area").value).trim();
+            var divArea = document.getElementById("errorArea");
+            if( value == null || value.length == 0) {
+                divArea.textContent = 'Este valor no debería estar vacío';
+            }else{
+                divArea.textContent = '';
+            }
+        };
+    </script>
+{% endblock %}
+
+    {#<div class="row">#}
+    {#<form class="col s12">#}
+    {#<div class="row">#}
+    {#<div class="input-field col s10">#}
+    {#<input placeholder="" name="answer1" id="first_name" type="text" class="validate">#}
+    {#<label class="teal-text lighten-4" for="first_name">Respuesta 1:</label>#}
+    {#</div>#}
+    {#<div class="input-field col s2">#}
+    {#<p>#}
+    {#<input name="chec1" type="checkbox" id="test1" />#}
+    {#<label class="teal-text lighten-4" for="test1">Correcta</label>#}
+    {#</p>#}
+    {#</div>#}
+    {#</div>#}
+
+    {#<form class="col s12">#}
+    {#<div class="row">#}
+    {#<div class="input-field col s10">#}
+    {#<input placeholder="" name="answer2" id="first_name" type="text" class="validate">#}
+    {#<label class="teal-text lighten-4" for="first_name">Respuesta 2:</label>#}
+    {#</div>#}
+    {#<div class="input-field col s2">#}
+    {#<p>#}
+    {#<input name="chec2" type="checkbox" id="test2" />#}
+    {#<label class="teal-text lighten-4" for="test2">Correcta</label>#}
+    {#</p>#}
+    {#</div>#}
+    {#</div>#}
+
+    {#<form class="col s12">#}
+    {#<div class="row">#}
+    {#<div class="input-field col s10">#}
+    {#<input placeholder="" name="answer3" id="first_name" type="text" class="validate">#}
+    {#<label class="teal-text lighten-4" for="first_name">Respuesta 3:</label>#}
+    {#</div>#}
+    {#<div class="input-field col s2">#}
+    {#<p>#}
+    {#<input name="chec3" type="checkbox" id="test3" />#}
+    {#<label class="teal-text lighten-4" for="test3">Correcta</label>#}
+    {#</p>#}
+    {#</div>#}
+    {#</div>#}
+
+    {#<form class="col s12">#}
+    {#<div class="row">#}
+    {#<div class="input-field col s10">#}
+    {#<input placeholder="" name="answer4" id="first_name" type="text" class="validate">#}
+    {#<label class="teal-text lighten-4" for="first_name">Respuesta 4:</label>#}
+    {#</div>#}
+    {#<div class="input-field col s2">#}
+    {#<p>#}
+    {#<input name="chec4" type="checkbox" id="test4" />#}
+    {#<label class="teal-text lighten-4" for="test4">Correcta</label>#}
+    {#</p>#}
+    {#</div>#}
+    {#</div>#}
+
+    {#<form class="col s12">#}
+    {#<div class="row">#}
+    {#<div class="input-field col s10">#}
+    {#<input placeholder="" name="answer5" id="first_name" type="text" class="validate">#}
+    {#<label class="teal-text lighten-4" for="first_name">Respuesta 5:</label>#}
+    {#</div>#}
+
+    {#<div class="input-field col s2">#}
+    {#<p>#}
+    {#<input name="chec5" type="checkbox" id="test5" />#}
+    {#<label class="teal-text lighten-4" for="test5">Correcta</label>#}
+    {#</p>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+
+
+
+    {#<div class="alight center">#}
+    {#<button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>#}
+    {#<a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>#}
+    {#<br>#}
+    {#</div>#}
+    {#<!--/form-->#}
+{#{{ form_end(form) }}#}
