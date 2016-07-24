@@ -50,6 +50,10 @@ class TestQuestion
         $this->idQuestion = $question;
     }
 
+    public function getIdQuestion(){
+        return $this->idQuestion->idQuestion; 
+    }
+
     public function setIdTest($test){
         $this->idTest = $test;
     }    

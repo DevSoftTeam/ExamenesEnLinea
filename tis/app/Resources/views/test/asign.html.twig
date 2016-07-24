@@ -27,6 +27,7 @@
             </tr>
         </thead>
         <tbody>
+        
         {% for question in questions %}
             <tr  >
                 <td>{{ question.statementQuestion[0:15] }}</td>
@@ -48,9 +49,18 @@
     <script>
     $(document).ready(function(){
     $('.tooltipped').tooltip({delay: 50});
-  });
-    var toast = function(){
-    Materialize.toast('por implementar!', 2000);
+     });
+    
+    var toast = function(msg){
+        Materialize.toast(msg, 2000);
     }
+
+    var agregado = function () {
+        var msg = window.location.search.substr(1); 
+        if (msg != "") {
+            toast("la pregunta fue agregada");
+        }
+    };
+    (agregado(),2000);
     </script>    	
 {% endblock %}

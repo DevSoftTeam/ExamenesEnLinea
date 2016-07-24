@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Entity\TestQuestion;
+use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Form\TestType;
 use Symfony\Component\Validator\Constraints\Time;
 /**
@@ -29,15 +30,36 @@ class TestController extends Controller
         ));
     }
 
-    public function asosiationAction(Test $test){
+    public function asosiationAction(Test $test){        
         $em = $this->getDoctrine()->getManager();
-        $questions = $em->getRepository('EvaluationsBundle:Question')->findAll();
+        $result = $em->createQueryBuilder(); 
+
+        $questions = $result->select(array('q'))
+            ->from('EvaluationsBundle:Question', 'q')
+            ->leftjoin('EvaluationsBundle:TestQuestion','t', 'WITH', 't.idQuestion = q.idQuestion and t.idTest = :idT')
+            ->where('t.idTest IS NULL')
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+        //$questions=$em->getRepository('EvaluationsBundle:Question')->findAll();
         return $this->render('test/asign.html.twig', array(
             'test' => $test,
             'questions' => $questions,
         ));
 
     }
+
+    /*public function asosiationAction(Test $test){
+        $em = $this->getDoctrine()->getManager();
+        //"select q from Question q LEFT JOIN test_question ON (q.id_question = test_question.id_question) where id_test is null"
+
+        $questions=$em->getRepository('EvaluationsBundle:Question')->findAll();
+        return $this->render('test/asign.html.twig', array(
+            'test' => $test,
+            'questions' => $questions,
+        ));
+
+    }*/
 
     public function asignAction($idT,$idQ){
         $em = $this->getDoctrine()->getManager();
