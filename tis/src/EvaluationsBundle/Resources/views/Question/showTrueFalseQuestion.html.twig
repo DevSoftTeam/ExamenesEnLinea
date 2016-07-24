@@ -29,10 +29,13 @@
                 <label class="teal-text darken-4"><h6>Respuesta :</h6></label>
                 <div>{% for ans in answers %}
             <div class="col s12">
-                <div class="col s10">
 
-                <p>{{ ans.content }}</p>
-                </div>
+                {% if  ans.content == "true"  %}
+                <p>Verdadero</p>
+                {% else %}
+                <p>Falso</p>
+                {% endif %}
+
                 </div>
             </div>
             {% endfor %}
