@@ -23,7 +23,8 @@ class TestController extends Controller
     public function indexAction()
     { 
         $em = $this->getDoctrine()->getManager();
-        $tests = $em->getRepository('EvaluationsBundle:Test')->findAll();
+        $idUser = $this->getUser();
+        $tests = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
         ));
@@ -106,7 +107,8 @@ class TestController extends Controller
                 if($sDate < $eDate || ($sDate == $eDate and $sTime < $eTime) and
                     ($sEDate == $eEDate and $sETime < $eETime )|| $sEDate < $eEDate)
                 {
-                $em = $this->getDoctrine()->getManager();
+                    $userSession = $this->getUser();
+                    $test->setIdUser($userSession);
                     $em->persist($test);
                     $em->flush();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
@@ -131,7 +133,6 @@ class TestController extends Controller
     public function showAction(Test $test)
     {
         $deleteForm = $this->createDeleteForm($test);
-
         return $this->render('test/show.html.twig', array(
             'test' => $test,
             'delete_form' => $deleteForm->createView(),

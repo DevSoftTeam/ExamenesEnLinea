@@ -53,6 +53,18 @@ class Question
      * })
      */
     private $idArea;
+
+
+    /**
+     * @var \UserSystem
+     *
+     * @ORM\ManyToOne(targetEntity="UserSystem")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user", nullable=true)
+     * })
+     */
+    private $idUser;
+
     /**
      * Get id
      *
@@ -71,7 +83,7 @@ class Question
     {
         $idT = $this->idType->idType;
         $id = $this->idQuestion;
-        $links = array(1=>'showOQ',2 =>'showOrQ',3=> 'show',4=>'showTFQ',5=>'showUAQ',6=>'showMQ',7=>'showMQ');
+        $links = array(1=>'showOQ',2 =>'showOrQ',3=> 'show',4=>'showTFQ',5=>'showUAQ',6=>'showMQ',7=>'showMMQ');
         $link = "/question/".$id."/".$links[$idT];
         return $link;
     }
@@ -120,6 +132,21 @@ class Question
     public function getIdArea()
     {
         return $this->idArea;
+    }
+    /**
+     * @return \UserSystem
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * @param \UserSystem $idUser
+     */
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
     }
 
     public function __get($property) {

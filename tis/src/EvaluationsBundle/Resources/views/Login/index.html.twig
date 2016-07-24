@@ -38,7 +38,7 @@
                         <span id="errorPass"></span>
                     </div>
                 </div>
-                <input type="hidden" name='_target_path' value="/usersystem/2/show" />
+                <input type="hidden" name='_target_path' value="/test" />
                 <button class="btn waves-effect  teal" type="submit" name="action">Ingresar</button>
             </form>
         </div>
@@ -56,8 +56,8 @@
                     divPass.textContent = 'Este valor no debería contener solo espacios.';
                     return false;
                 }else{ divPass.textContent = ''; 
-                    if( !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(valPass)) {
-                       divPass.textContent = 'La contraseña no sigue el formato necesario: al menos un caracter mayúscula, minuscula, un digito, un caracter especial, no espacios, minimo 8 caracteres y maximo 15.';
+                    if( !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d]|[^ ]){8,50}$/.test(valPass)) {
+                       divPass.textContent = 'La contraseña no sigue el formato necesario: al menos un caracter mayúscula, minuscula, un digito, no espacios, minimo 8 caracteres y maximo 50.';
                         return false;
                     }else{ divPass.textContent = '';}
                 }
