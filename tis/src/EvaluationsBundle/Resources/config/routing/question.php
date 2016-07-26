@@ -371,7 +371,7 @@ $collection->add('tframillete_new', new Route(
 ));
 
 $collection->add('tframillete_show', new Route(
-    '/{id}/show',
+    '/{id}/showTFRamillete',
     array('_controller' => 'EvaluationsBundle:TFRamillete:show'),
     array(),
     array(),
@@ -381,7 +381,7 @@ $collection->add('tframillete_show', new Route(
 ));
 
 $collection->add('tframillete_edit', new Route(
-    '/{id}/edit',
+    '/{id}/editTFRamillete',
     array('_controller' => 'EvaluationsBundle:TFRamillete:edit'),
     array(),
     array(),
@@ -391,7 +391,7 @@ $collection->add('tframillete_edit', new Route(
 ));
 
 $collection->add('tframillete_delete', new Route(
-    '/{id}/delete',
+    '/{id}/deleteTFRamillete',
     array('_controller' => 'EvaluationsBundle:TFRamillete:delete'),
     array(),
     array(),
