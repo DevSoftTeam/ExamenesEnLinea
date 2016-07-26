@@ -2,6 +2,7 @@
 
 namespace EvaluationsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use EvaluationsBundle\Entity\AnswerElement;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
@@ -77,6 +78,129 @@ class Question
     public function getIdQuestion()
     {
         return $this->idQuestion;
+    }
+
+    public function getQuestionView($elements){
+        $idT = $this->idType->idType;
+        $html = "";
+        switch ($idT) {
+            case 1:
+                $html = $this->getViewStatement();
+                break;
+            case 2:
+                $html = $this->getViewOrdenamiento($elements);
+                    break;
+            case 3:
+                $html = $this->getViewFileQuestion();
+                break;
+            case 4:
+                $html = $this->getTrueFalse($elements);
+                break;
+            case 6:
+                $html = $this->getViewMultipleQuestion($elements);
+                break;
+            case 7:
+                $html = $this->getViewEmparejamiento($elements);
+                    break;
+
+            default:
+                $html = $this->getViewStatement();
+                break;
+        }
+        return $html;
+    }
+
+    public function getViewStatement(){
+        $html = "";
+        if ($this->pathImageQuestion != null) {
+            $html = "<div class=\"row\">
+                    <div class=\"col s12\">
+                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
+                        <div><pre>".$this->statementQuestion."</pre></div>
+                    </div><br><br><br>
+                    <div class=\"col s12 alight center\">
+                        {% if question.pathImageQuestion != null %}
+                        <img height=\"40%\" width=\"40%\" src=\"{{ asset('uploads/images/')}}{{question.pathImageQuestion}}\">
+                        {% endif %}
+                    </div>";
+        }
+        else{
+            $html = "<div class=\"row\">
+                    <div class=\"col s12\">
+                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
+                    <pre>".$this->statementQuestion."</pre>
+                    </div>
+                </div>";
+        }
+        return $html;
+    }
+
+    public function getViewEmparejamiento($elements){
+        $html = $this->getViewStatement()."<div class=\"row\">";  
+        foreach ($elements as $value) {
+            $el = "
+                <div class=\"col s12\">
+                    <p>".$value->content."</p>
+                </div>";
+            $html = $html.$el;
+        }
+        return $html."</div>";
+    }
+
+    public function getViewOrdenamiento($elements){
+        $html = $this->getViewStatement()."<div class=\"row\">";  
+        foreach ($elements as $value) {
+            $el = "
+                <div class=\"col s12\">
+                    <p>".$value->content."</p>
+                </div>";
+            $html = $html.$el;
+        }
+        return $html."</div>";
+    }
+
+    public function getViewMultipleQuestion($elements){
+        $html = $this->getViewStatement()."<div class=\"row\">";  
+        foreach ($elements as $value) {
+            $el = "
+                <div class=\"col s12\">
+                    <p>
+                      <input type=\"checkbox\" class=\"filled-in\"/>
+                      <label>".$value->content."</label>
+                    </p>
+                </div>";
+            $html = $html.$el;
+        }
+        return $html."</div>";
+    }
+
+    public function getViewFileQuestion(){
+        $html = "<div class=\"row\">
+                    <div class=\"col s12\">
+                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
+                    <pre>".$this->statementQuestion."</pre>
+                    </div>
+                </div>
+                <div class=\"col s12\">
+                <label class=\"teal-text darken-4\"><h6>Archivo :</h6></label>
+                <a class=\"waves-effect waves-light btn\" href=\"/uploads/".$this->pathFileQuestion."\" download>Download</a>
+            </div>"
+        ;
+        return $html;
+
+    }
+
+    public function getTrueFalse($elements){
+        $html = $this->getViewStatement();
+ 
+        $answerEl = " <div id=\"TrueFalse\">
+            <input type=\"radio\" id=\"t\" disabled>
+              <label for=\"t\">Verdadero</label>
+ 
+              <input type=\"radio\" id=\"f\" disabled>
+              <label for=\"f\">Falso</label>
+        </div>";
+        return $html.$answerEl;
     }
 
     public function getURL()

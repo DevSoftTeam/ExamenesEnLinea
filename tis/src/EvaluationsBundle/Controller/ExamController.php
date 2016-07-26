@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Entity\TestQuestion;
 use EvaluationsBundle\Form\TestType;
+use EvaluationsBundle\Entity\AnswerElement;
 use Symfony\Component\Validator\Constraints\Time;
 /**
  * Test controller.
@@ -33,9 +34,16 @@ class ExamController extends Controller
             ->setParameter('idT' , $test->getIdTest())
             ->getQuery()
             ->getResult();
+
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$questions[3]));
+        /**foreach ($questions as $question) {
+            $answersQ = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            array_push($answers, $answersQ);
+        }**/
         return $this->render('EvaluationsBundle:TestForm:test.html.twig', array(
             'test' => $test,
             'questions' => $questions,
+            'answers' => $answers,
         ));
     }
     public function newAction(Request $request)

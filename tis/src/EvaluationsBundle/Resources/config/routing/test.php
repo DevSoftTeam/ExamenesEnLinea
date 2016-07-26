@@ -25,6 +25,16 @@ $collection->add('test_asign', new Route(
     array('GET')
 ));
 
+$collection->add('test_preview', new Route(
+    '/{id}/preview',
+    array('_controller' => 'EvaluationsBundle:Test:preview'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
 $collection->add('test_asosiation', new Route(
     '/{id}/asignar',
     array('_controller' => 'EvaluationsBundle:Test:asosiation'),
