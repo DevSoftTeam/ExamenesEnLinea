@@ -61,7 +61,7 @@ class WordCompletionQuestionController extends Controller
 
                 $i = 1;
                 if($ques!="" ){
-                    if(strpos($ques, '--') != FALSE and $ques = ' /^.[*/*]$ ' ){
+                    if(strpos($ques, '[*') != FALSE and $ques = ' /^.[*/*]$ ' ){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($ques);
