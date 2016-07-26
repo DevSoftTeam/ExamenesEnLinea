@@ -14,9 +14,32 @@
 		<form action="">
 			<div class="row">
 				<div class="col s12">
-					{% for question in questions %}
-						{% if question.idType.idType == 2 %}
+					{% for question in data %}
+						<pre>{{ question['question'].statementQuestion }}</pre>
+						{% if question['question'].pathImageQuestion != null %}
+					        <img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+					    {% endif %}
+						{% if question['question'].idType.idType == 1 %}
+							<div class="input-field col s12">
+								<textarea class="materialize-textarea validate" name="answer" placeholder="Introduzca texto"></textarea>
+								<label class="teal-text lighten-4"><h6>Respuesta :</h6></label>
+					        </div>
+						{% elseif question['question'].idType.idType == 2 %}
 							{{ include('EvaluationsBundle:TestForm:templateOrderQuestion.html.twig') }}
+						{% elseif question['question'].idType.idType == 3 %}
+							{{ include('EvaluationsBundle:TestForm:templateFileQuestion.html.twig') }}
+						{% elseif question['question'].idType.idType == 4 %}
+							<div class="row">
+							<label class="grey-text lighten-1 col s12">*Seleccione la respuesta correcta.</label><br>
+							      <input name="group1" type="radio" id="t" value="true" />
+							      <label for="t">Verdadero</label>
+							      <input name="group1" type="radio" id="f" value="false" checked />
+							      <label for="f">Falso</label>
+							</div>
+						{% elseif question['question'].idType.idType == 5 %}
+						{% elseif question['question'].idType.idType == 6 %}
+						{% elseif question['question'].idType.idType == 7 %}
+						{% elseif question['question'].idType.idType == 8 %}
 						{% endif %}
 					{% endfor %}
 				</div>

@@ -35,15 +35,17 @@ class ExamController extends Controller
             ->getQuery()
             ->getResult();
 
-        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$questions[3]));
-        /**foreach ($questions as $question) {
-            $answersQ = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
-            array_push($answers, $answersQ);
-        }**/
+        $data = array();
+        foreach ($questions as $question) {
+            $resp = array();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
+            $resp['question'] = $question;
+            $resp['answers'] = $answers;
+            $data[] = $resp;
+        }
         return $this->render('EvaluationsBundle:TestForm:test.html.twig', array(
             'test' => $test,
-            'questions' => $questions,
-            'answers' => $answers,
+            'data' => $data,
         ));
     }
     public function newAction(Request $request)
