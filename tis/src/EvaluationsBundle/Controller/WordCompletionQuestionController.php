@@ -4,7 +4,7 @@ namespace EvaluationsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use EvaluationsBundle\Entity\AnswerElement;
 use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Entity\Area;
 
@@ -15,6 +15,7 @@ use EvaluationsBundle\Entity\Area;
 class WordCompletionQuestionController extends Controller
 {
     public function wcqNewAction($id_type, Request $request){
+
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
         $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
@@ -53,6 +54,20 @@ class WordCompletionQuestionController extends Controller
                 $question->setIdArea($idArea);
 
                 $em->persist($question);
+                $ques=$question->getStatementQuestion();
+
+                $i = 1;
+                if($ques!="" ){
+                    if(strpos($ques, '--') != FALSE and $ques = ' /^.[*/*]$ ' ){
+                        $answer = new AnswerElement();
+                        $answer->setIdQuestion($question);
+                        $answer->setContent($ques);
+                        $answer->setOrderVar($i);
+                        $answer->setIsCorrect(True);
+                        $em->persist($answer);
+                        }
+                }
+
                 $em->flush();
 
                 return $this->redirectToRoute('wordCompletionQuestion_show', array('id' => $question->getId()));
@@ -74,8 +89,10 @@ class WordCompletionQuestionController extends Controller
     public function showAction(Question $question)
     {
         $deleteForm = $this->createDeleteForm($question);
-
+        $em = $this->getDoctrine()->getManager();
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
         return $this->render('EvaluationsBundle:Question:showWordCompletionQuestion.html.twig', array(
+            'answers' => $answers,
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
         ));

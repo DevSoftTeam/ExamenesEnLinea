@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-	<label class="teal-text lighten-4"><h3>Crear Pregunta abierta con respuesta párrafo</h3></label>
+	<label class="teal-text lighten-4"><h3>Crear pregunta completar palabra:</h3></label>
 	<div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
@@ -22,9 +22,13 @@
 	      <div class="row">
 	        <div class="input-field col s12">
 	          <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+
 	          {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
 	          {{ form_errors(form.statementQuestion) }}
 	        </div>
+	        <br>
+	          <br>
+	          <label class="grey-text lighten-1 col s12">*El enunciado debe incluir las palabras reservadas entre [**]</label>
 	      </div>
 
 	    <div class="file-field input-field">
@@ -38,6 +42,7 @@
 	        {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
 	      </div>
 	    </div>
+	    
 	    <br><br>
 	      <div class=" alight center">
 	      <button class="btn waves-effect waves-light " type="submit" name="action">Guardar</button>
