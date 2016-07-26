@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Editar Pregunta{% endblock %}
 {% block body %}
-    <label class="teal-text lighten-4"><h3>Editar Pregunta vf</h3></label>
+    <label class="teal-text lighten-4"><h3>Editar Pregunta</h3></label>
         <div class="row">
 
     {{ form_start(edit_form,{ 'enctype':"multipart/form-data"}) }}
@@ -36,32 +36,34 @@
           <div class="file-path-wrapper">
             {{ form_widget(edit_form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
           </div>
-
-          {% for ans in answers %}
-          <div>
-      {% if  ans.content == "true"  %}
-       <p>
-      <input name="group1" type="radio" id="t" value="true" checked />
-      <label for="t">Verdadero</label>
-    </p>
-    <p>
-      <input name="group1" type="radio" id="f" value="false" />
-      <label for="f">Falso</label>
-    </p>
-    {% else %}
-       <p>
-      <input name="group1" type="radio" id="t" value="true"/>
-      <label for="t">Verdadero</label>
-    </p>
-    <p>
-      <input name="group1" type="radio" id="f" value="false"  checked />
-      <label for="f">Falso</label>
-    </p>
-     {% endif %}
-    
-</div>
-          {% endfor %}
         </div>
+          <div class="row">
+            <div class="row">
+            <div class="col s12">
+            <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
+            <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran en el orden ingresado.</h6></label>
+            </div>
+            </div>
+            {% for i in 1..5 %}
+            <div class="row">
+              <div class="col s12">
+              <div class="col s10">
+                <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ i }} :</h6></label>
+                <input class="validate" name="answer{{i}}" placeholder="" length="250" value="{% if answers|length >= i %} {{answers[i-1].content}} {% endif %}">
+                </div>
+                <div class="input-field col s2">
+                
+                <p>
+                <input class="with-gap" name="chec{{i}}" value="1" type="checkbox" id="test{{i}}" 
+                {% if i<= answers|length %} {% if answers[i-1].isCorrect %}
+                checked="checked"{% endif %} {% endif %}/>
+                <label class="teal-text lighten-4" for="test{{i}}">Correcta</label></p>
+                
+              </div>
+              </div>
+              </div>
+            {% endfor %}
+            </div>
         <br><br>
         <div class="row">
             <div class="col">

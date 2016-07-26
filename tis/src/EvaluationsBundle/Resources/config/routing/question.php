@@ -66,7 +66,6 @@ $collection->add('questionFile_new', new Route(
     array('GET', 'POST')
 ));
 
-
 $collection->add('questionfile_edit', new Route(
     '/{id}/editFile',
     array('_controller' => 'EvaluationsBundle:Question:editFile'),
@@ -361,6 +360,44 @@ $collection->add('wordCompletionQuestion_delete', new Route(
     array('DELETE')
 ));
 
+$collection->add('tframillete_new', new Route(
+    '/TFRamillete/{id_type}',
+    array('_controller' => 'EvaluationsBundle:TFRamillete:newRamillete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
 
+$collection->add('tframillete_show', new Route(
+    '/{id}/show',
+    array('_controller' => 'EvaluationsBundle:TFRamillete:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('tframillete_edit', new Route(
+    '/{id}/edit',
+    array('_controller' => 'EvaluationsBundle:TFRamillete:edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET', 'POST')
+));
+
+$collection->add('tframillete_delete', new Route(
+    '/{id}/delete',
+    array('_controller' => 'EvaluationsBundle:TFRamillete:delete'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('DELETE')
+));
 
 return $collection;

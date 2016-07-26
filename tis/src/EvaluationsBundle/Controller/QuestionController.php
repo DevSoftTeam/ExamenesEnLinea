@@ -23,8 +23,8 @@ class QuestionController extends Controller
     {
         //select id_question statement_question, name_area from question INNER JOIN area ON (question.id_area = area.id_area)
         $em = $this->getDoctrine()->getManager();
-
-        $questions = $em->getRepository('EvaluationsBundle:Question')->findAll();
+        $idUser = $this->getUser();
+        $questions = $em->getRepository('EvaluationsBundle:Question')->findBy(array('idUser'=>$idUser));
         return $this->render('question/index.html.twig', array(
             'questions' => $questions,
         ));
@@ -89,6 +89,10 @@ class QuestionController extends Controller
             $idType = $em->getRepository('EvaluationsBundle:TypeQuestion')->find($id_type); 
             $question->setIdType($idType);
             $question->setIdArea($idArea);
+
+            $userSession = $this->getUser();
+            $question->setIdUser($userSession);
+            
             $em->persist($question);
             $em->flush();
 

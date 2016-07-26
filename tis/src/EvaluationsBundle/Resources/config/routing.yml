@@ -40,6 +40,10 @@ login_check:
 logout:
     path: /logout
 
+exam_homepage:
+    path: /exam/{idTest}
+    defaults: {_controller: EvaluationsBundle:Exam:form}
+
 #indexerror_homepage:
 #    path:     /Test
 #    defaults: { _controller: EvaluationsBundle:Test:indexError }

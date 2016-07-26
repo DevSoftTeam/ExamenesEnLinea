@@ -52,6 +52,9 @@ class trueFalseQuestionController extends Controller
             $question->setIdType($idType);
             $question->setIdArea($idArea);
 
+            $userSession = $this->getUser();
+            $question->setIdUser($userSession);
+
             $em->persist($question);
             
             $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
@@ -145,15 +148,11 @@ class trueFalseQuestionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $em->flush();
-//for
-
-         //  $answer=$answers->first();
-         //   $answer
 
                         foreach ($answers as $answer) {
                 $em->remove($answer);
             }       
-                 $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
+            $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
             $answer = new AnswerElement();
             $answer->setIdQuestion($question);
             $answer->setContent($answer1);
@@ -174,6 +173,7 @@ class trueFalseQuestionController extends Controller
         return $this->render('EvaluationsBundle:Question:editTrueFalseQuestion.html.twig', array(
             'areas' => $areas,
             'question' => $question,
+            'answers' => $answers,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));

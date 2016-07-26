@@ -53,6 +53,18 @@ class Question
      * })
      */
     private $idArea;
+
+
+    /**
+     * @var \UserSystem
+     *
+     * @ORM\ManyToOne(targetEntity="UserSystem")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user", nullable=true)
+     * })
+     */
+    private $idUser;
+
     /**
      * Get id
      *
@@ -120,6 +132,21 @@ class Question
     public function getIdArea()
     {
         return $this->idArea;
+    }
+    /**
+     * @return \UserSystem
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * @param \UserSystem $idUser
+     */
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
     }
 
     public function __get($property) {

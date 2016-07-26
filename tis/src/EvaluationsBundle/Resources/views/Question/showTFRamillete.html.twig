@@ -3,7 +3,7 @@
 {% block body %}
 
     <div >
-    <label class="teal-text lighten-4"><h3>Detalles de Pregunta</h3></label>
+    <label class="teal-text lighten-4"><h3>Detalles de Pregunta:</h3></label>
 
         <div class="row">
             <div class="col s12">
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col s12">
                 <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
-                <div><pre>{{ question.statementQuestion }}</pre></div>
+                <div>{{ question.statementQuestion }}</div>
             </div><br><br><br>
             <div class="col s12">
                 {% if question.pathImageQuestion != null %}
@@ -23,25 +23,24 @@
                 {% endif %}
             </div>
         </div>
-
         <div class="row">
+            
+            {% for ans in answers %}
             <div class="col s12">
+                <div class="col s10">
                 <label class="teal-text darken-4"><h6>Respuesta :</h6></label>
-                <div>{% for ans in answers %}
-            <div class="col s12">
-
-                {% if  ans.content == "true"  %}
-                <p>Verdadero</p>
+                <p>{{ ans.content }}</p>
+                </div>
+                <div class="col s2">
+                <label class="teal-text darken-4"><h6>Estado :</h6></label>
+                {% if ans.isCorrect %}
+                    <p>Correcta</p>
                 {% else %}
-                <p>Falso</p>
+                    <p>Incorrecta</p>
                 {% endif %}
-
                 </div>
             </div>
             {% endfor %}
-        </div>
-    </div>
-
         </div>
     </div>
     <div class="row">
@@ -49,7 +48,7 @@
                 <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
             </div>
             <div class="col push-s5">
-                <a class="waves-effect waves-light btn" href={{path('trueFalseQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
+                <a class="waves-effect waves-light btn" href={{path('multipleQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
             </div>
             <div class="col push-s5">
                 {{ form_start(delete_form) }}
@@ -57,5 +56,6 @@
                 {{ form_end(delete_form) }}
             </div>
     </div>
+    <script>$('select').material_select('destroy');</script>
 
 {% endblock %}
