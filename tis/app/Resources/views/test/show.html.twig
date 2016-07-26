@@ -78,16 +78,15 @@
     </div>
 
     <div class="row">
-        <div class="col s4">
+        <div class="col">
             <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
             <a class="waves-effect waves-light btn" href={{ path('test_asosiation', {'id': test.idTest}) }}>asignar preguntas</a>
-            <a class="waves-effect waves-light btn" href={{ path('test_preview', {'id': test.idTest}) }}>vista Previa</a>
         </div>
 
-        <div class="col push-s4">
-            
+        <div class="col push-s5">
+            <a class="waves-effect waves-light btn" href={{ path('test_edit', {'id': test.idTest}) }}>Editar</a>
         </div>
-        <div class="col push-s4" >
+        <div class="col push-s5" >
             {{ form_start(delete_form) }}
                 <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
             {{ form_end(delete_form) }}
@@ -103,18 +102,40 @@
                 <th>Enunciado</th>
                 <th>area</th>
                 <th>Tipo de pregunta</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for question in questions %}
-            <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
-                {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#}
-                {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}
+            <!-- <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
+               {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#} -->
+
+             <!--     {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}-->
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{% if question.idArea != null %}{{ question.idArea.nameArea }} {% endif %}</td>
                 <td>{% if question.idType != null %}{{ question.idType.nameType }} {% endif %}</td>
+                <td> <a class="btn-floating btn-large waves-effect waves-light gray"{% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}><i class="material-icons">edit</i></a></td>
+                <td> <a  class="btn-floating btn-large waves-effect waves-light gray" href={{ path('test_drop', {idT:test.idTest, idQ:question.idQuestion})}}><i class="material-icons" >delete</i></a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <script>
+    $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+     });
+    
+    var toast = function(msg){
+        Materialize.toast(msg, 2000);
+    }
+
+    var agregado = function () {
+        var msg = window.location.search.substr(1); 
+        if (msg != "") {
+            toast("la pregunta fue eliminada del examen");
+        }
+    };
+    (eliminado(),2000);
+    </script>   
+
 {% endblock %}

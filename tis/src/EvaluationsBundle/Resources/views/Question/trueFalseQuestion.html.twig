@@ -4,7 +4,7 @@
   
   <label class="teal-text lighten-4"><h3>Pregunta respuesta falso verdadero:</h3></label>
   <div class="row">
-    <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
+
     {{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
     <div class="row">
       <div class="col s12">
@@ -20,7 +20,6 @@
       <div class="row">
         <div class="input-field col s12">
           <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
-          <!--textarea id="textarea1" class="materialize-textarea" name="statementQuestion"></textarea-->
           {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
           {{ form_errors(form.statementQuestion) }}
         </div>
@@ -29,12 +28,10 @@
         <div class="btn">
           <span>imagen</span>
           <i class="material-icons right">perm_media</i>
-          <!--input type="file" name="image"-->
-          {{ form_widget(form.image) }}
+         {{ form_widget(form.image) }}
         </div>
         <div class="file-path-wrapper">
-          <!--input class="file-path validate" type="text" name="pathImageQuestion"-->
-          {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
+         {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
         </div>
       </div>
       <label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>

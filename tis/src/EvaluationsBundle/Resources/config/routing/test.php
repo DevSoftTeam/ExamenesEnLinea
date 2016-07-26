@@ -85,4 +85,23 @@ $collection->add('test_delete', new Route(
     array('DELETE')
 ));
 
+
+$collection->add('test_drop', new Route(
+    '/drop/{idT}/{idQ}',
+    array('_controller' => 'EvaluationsBundle:Test:drop'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+$collection->add('test_data', new Route(
+    '/{id}/show',
+    array('_controller' => 'EvaluationsBundle:Test:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
 return $collection;
