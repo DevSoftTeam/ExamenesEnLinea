@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <label class="teal-text lighten-4"><h3>Detalles del Examenen</h3></label>
+
+        <div class="row">
+            <div class="row">
+                <label class="teal-text darken-4"><h6>Titulo :</h6></label>
+                <div>{{ test.title }}</div>
+            </div>
+            <div class="col s3">
+                <label class="teal-text darken-4"><h6>Materia :</h6></label>
+                <div>{{ test.matter }}</div>
+            </div>
+            <div class="col s3">
+                <label class="teal-text darken-4"><h6>Institucion :</h6></label>
+                {% if test.institution%}
+                    {{ test.institution }}
+                {% else %}
+                    {{ 'No Definido'}}
+                {% endif %}
+            </div>
+        </div>
+
+   
+    <h2>preguntas</h2>
+    {% for value in data %}
+
+        {{ value['question'].getQuestionView(value['answerEl'])  | raw }}
+        {#{ value['question'].getViewStatement()  | raw }#}
+        <hr>
+    {% endfor %}
+
+     <div class="row">
+        <div class="col">
+            <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
+        </div>
+    </div>
+
+    <script>
+        
+    </script>
+{% endblock %}

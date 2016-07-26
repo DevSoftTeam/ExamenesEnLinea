@@ -87,9 +87,8 @@ class trueFalseQuestionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($question);
         $em = $this->getDoctrine()->getManager();
-         $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
         
-
         return $this->render('EvaluationsBundle:Question:showTrueFalseQuestion.html.twig', array(
             'question' => $question,
             'answers' => $answers,

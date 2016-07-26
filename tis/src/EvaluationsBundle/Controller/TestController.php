@@ -30,6 +30,39 @@ class TestController extends Controller
         ));
     }
 
+    public function previewAction(Test $test)
+    {
+        $data = array();
+
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->createQueryBuilder();
+        $questions = $result->select(array('q'))
+            ->from('EvaluationsBundle:Question', 'q')
+            ->innerjoin('EvaluationsBundle:TestQuestion','t', 'WITH', 't.idQuestion = q.idQuestion and t.idTest = :idT')
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+        $size = count($questions);
+        $data = array();
+        foreach ($questions as $value) {
+            $resp = array();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$value));
+            $resp['question'] = $value;
+            $resp['answerEl'] = $answers;
+            $data[] = $resp;
+        }
+        //var_dump($resp['answerEl'][4]);
+        //exit;
+
+        $deleteForm = $this->createDeleteForm($test);
+        return $this->render('test/preview.html.twig', array(
+            'test' => $test,
+            'data' => $data,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
     public function asosiationAction(Test $test){        
         $em = $this->getDoctrine()->getManager();
         $result = $em->createQueryBuilder(); 
