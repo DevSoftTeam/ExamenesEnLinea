@@ -1,0 +1,13 @@
+<div class="row" id="answers">
+      {% for ans in question['answers'] %}
+      <div class="col s12">
+          <div class="col s10"><pre>{{ ans.content }}</pre></div>
+          <div class="input-field col s2">
+            <p>
+            <input class="with-gap" name="radio{{numQ}}"value="{{ans.orderVar}}"type="radio" id="test{{ans.idAnswerElement}}"/>
+            <label class="teal-text lighten-4" for="test{{ans.idAnswerElement}}">Correcta</label>
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+</div>

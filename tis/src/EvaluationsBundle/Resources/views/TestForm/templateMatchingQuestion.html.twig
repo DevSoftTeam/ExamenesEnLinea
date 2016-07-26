@@ -1,0 +1,22 @@
+<div class="row" id="answers">
+          {% set foo = 1 %}
+          {% for i in range(0, ((question['answers']|length)-2),2) %}
+            <div class="row">
+              <div class="col s12">
+                <div class="col s6">
+                  <label class="teal-text lighten-4"><h6>{{ foo }}. </h6></label>
+                  <pre>{{question['answers'][i].content}}</pre>
+                </div>
+                <div class="col s6">
+                  <select name="select{{question['answers'][i].idAnswerElement}}">
+                    {% for j in range(0, ((question['answers']|length)-2), 2) %}
+                    <option value="{{ question['answers'][j].orderVar}}" >{{ question['answers'][j].orderVar }}</option>
+                    {% endfor %}
+                  </select>
+                  <pre>{{(question['answers'][i+1]).content}}</pre>
+                </div>
+              </div>
+            </div>
+            {% set foo = foo +1%}
+          {% endfor %}
+        </div>

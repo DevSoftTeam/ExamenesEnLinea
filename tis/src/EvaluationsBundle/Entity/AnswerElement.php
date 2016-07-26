@@ -49,7 +49,7 @@ class AnswerElement
     {
         return $this->idAnswerElement;
     }
-    public function getIdAnswerElement($idAnswerElement)
+    public function getIdAnswerElement()
     {
         return $this->idAnswerElement;
     }

@@ -12,9 +12,9 @@
                 <pre>{{ ans.content }}</pre>
                 </div>
                 <div class="col s2">
-                <select>
+                <select name="select{{ans.idAnswerElement}}">
                   {% for ans1 in question['answers'] %}
-                  <option value="{{ ans1.orderVar}}" >{{ ans1.orderVar }}</option>
+                  <option value="{{ ans1.idAnswerElement}}">{{ ans1.orderVar }}</option>
                   {% endfor %}
                 </select>
                 </div>
