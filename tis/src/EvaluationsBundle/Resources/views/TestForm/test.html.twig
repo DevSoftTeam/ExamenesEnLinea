@@ -14,9 +14,10 @@
 		<form action="">
 			<div class="row">
 				<div class="col s12">
-					{% for question in questions%}
-						
-						<pre>{{ question.statementQuestion }}</pre>
+					{% for question in questions %}
+						{% if question.idType.idType == 2 %}
+							{{ include('EvaluationsBundle:TestForm:templateOrderQuestion.html.twig') }}
+						{% endif %}
 					{% endfor %}
 				</div>
 			</div>

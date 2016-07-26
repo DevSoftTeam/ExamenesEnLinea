@@ -1,0 +1,28 @@
+<div class="row">
+	<pre>{{ question.statementQuestion }}</pre>
+	{% if question.pathImageQuestion != null %}
+        <img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+    {% endif %}
+    <div class="row">
+            <div class="col s7">
+                <label class="teal-text darken-4"><h6>Elementos de Respuesta :</h6></label>
+            </div>
+            <div class="col s2">
+                <label class="teal-text darken-4"><h6>Secuencia de orden :</h6></label>
+            </div>
+            {% for ans in answers %}
+            <div class="col s12">
+                <div class="col s7">
+                <pre>{{ ans.content }}</pre>
+                </div>
+                <div class="col s2">
+                <select>
+                  {% for ans1 in answers %}
+                  <option value="{{ ans1.orderVar}}" >{{ ans1.orderVar }}</option>
+                  {% endfor %}
+                </select>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+</div>
