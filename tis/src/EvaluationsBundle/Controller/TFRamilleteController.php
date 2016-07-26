@@ -7,15 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EvaluationsBundle\Entity\AnswerElement;
 use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Entity\Area;
-//use EvaluationsBundle\Form\QuestionType;
 
 /**
- * OpenQuestion controller.
+ * TFRamilleteController controller.
  *
  */
-class multipleQuestionController extends Controller
+class TFRamilleteController extends Controller
 {
-    public function mqNewAction($id_type, Request $request){
+    public function newRamilleteAction($id_type, Request $request){
         $question = new Question();
         $em = $this->getDoctrine()->getManager();
         $areas = $em->getRepository("EvaluationsBundle:Area")->findAll();//areas
@@ -52,13 +51,10 @@ class multipleQuestionController extends Controller
             $question->setIdType($idType);
             $question->setIdArea($idArea);
 
-            $userSession = $this->getUser();
-            $question->setIdUser($userSession);
-
             $em->persist($question);
 
             
-            /*$answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
+            $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
             $answer = new AnswerElement();
             if($answer1!="" && strlen(trim($answer1))>0){
             $answer->setIdQuestion($question);
@@ -67,34 +63,52 @@ class multipleQuestionController extends Controller
             $answer->setIsCorrect(isset($_POST['chec1']));
             $em->persist($answer);
             $em->flush();}
-*/
-            $i = 1;
-                //$var="var";
-                $contentAns = trim($request->request->get('answer'.$i));
-                while(strlen($contentAns)>0) {
-                    if(strlen($contentAns)<=600){
-                       // $var.$i = $request->request->get("chec1");
-                        $answer = new AnswerElement();
-                        $answer->setIdQuestion($question);
-                        $answer->setContent($contentAns);
-                        $answer->setOrderVar($i);
-                        $answer->setIsCorrect(isset($_POST['chec'.$i]));
-                        /*if($var.$i == 1){
-                            $answer->setIsCorrect(True);
-                        }
-                        else{$answer->setIsCorrect(False);}*/
-                        $em->persist($answer);
-                    }
-                    $i=$i+1;
-                    $contentAns = trim($request->request->get('answer'.$i));
-                }
-                $em->flush();
+
+            $answer2 = $request->request->get('answer2');//PARA RESPUESTA 2
+            $answer = new AnswerElement();
+            if($answer2!="" && strlen(trim($answer2))>0){
+            $answer->setIdQuestion($question);
+            $answer->setContent($answer2);
+            $answer->setOrderVar("2");
+            $answer->setIsCorrect(isset($_POST['chec2']));
+            $em->persist($answer);
+            $em->flush();}
+
+            $answer3 = $request->request->get('answer3');//PARA RESPUESTA 3
+            $answer = new AnswerElement();
+            if($answer3!="" && strlen(trim($answer3))>0){
+            $answer->setIdQuestion($question);
+            $answer->setContent($answer3);
+            $answer->setOrderVar("2");
+            $answer->setIsCorrect(isset($_POST['chec3']));
+            $em->persist($answer);
+            $em->flush();}
+
+            $answer4 = $request->request->get('answer4');//PARA RESPUESTA 4
+            $answer = new AnswerElement();
+            if($answer4!="" && strlen(trim($answer4))>0){
+            $answer->setIdQuestion($question);
+            $answer->setContent($answer4);
+            $answer->setOrderVar("2");
+            $answer->setIsCorrect(isset($_POST['chec4']));
+            $em->persist($answer);
+            $em->flush();}
+
+            $answer5 = $request->request->get('answer5');//PARA RESPUESTA 5
+            $answer = new AnswerElement();
+            if($answer5!="" && strlen(trim($answer5))>0){
+            $answer->setIdQuestion($question);
+            $answer->setContent($answer5);
+            $answer->setOrderVar("2");
+            $answer->setIsCorrect(isset($_POST['chec5']));
+            $em->persist($answer);
+            $em->flush();}
 
             return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
           }
         }
 
-        return $this->render('EvaluationsBundle:Question:multipleQuestion.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:newTFRamillete.html.twig', array(
             'areas' => $areas,
             'question' => $question,
             'form' => $form->createView(),
@@ -110,7 +124,7 @@ class multipleQuestionController extends Controller
         $deleteForm = $this->createDeleteForm($question);
         $em = $this->getDoctrine()->getManager();
         $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
-        return $this->render('EvaluationsBundle:Question:showMultipleQuestion.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:showTFRamillete.html.twig', array(
             'answers' => $answers,
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
@@ -227,7 +241,7 @@ class multipleQuestionController extends Controller
             return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
           }
         }
-        return $this->render('EvaluationsBundle:Question:editMultipleQuestion.html.twig', array(
+        return $this->render('EvaluationsBundle:Question:editTFRamillete.html.twig', array(
             'areas' => $areas,
             'question' => $question,
             'answers' => $answers,
@@ -274,7 +288,7 @@ class multipleQuestionController extends Controller
     private function createDeleteForm(Question $question)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('multipleQuestion_delete', array('id' => $question->getId())))
+            ->setAction($this->generateUrl('tframillete_delete', array('id' => $question->getId())))
             ->setMethod('DELETE')
             ->getForm();
     }

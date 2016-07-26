@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-  <label class="teal-text lighten-4"><h3>Pregunta respuesta unica: </h3></label>
+  <label class="teal-text lighten-4"><h3>Crear pregunta de respuesta simple:</h3></label>
   <div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
@@ -10,12 +10,13 @@
       <div class="row">
         <div class="col s12">
         <label class="teal-text darken-4"><h6>Area :</h6></label>
-        <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" required>
+        <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" id="area">
         <datalist id="areas">
         {% for area in areas %}
           <option value="{{ area.nameArea }}">
         {% endfor %}
         </datalist>
+      <span id="errorArea"></span>
       </div>
       </div>
 
@@ -41,96 +42,72 @@
         </div>
       </div>
 
+      <div class="row">
+      <div class="row">
+      <div class="col s12">
+      <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
+      <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran de forma aleatoria. Debe completar minimo tres elementos de respuestas.</h6></label>
+      </div>
+      </div>
 
+      <div class="row" id="answers">
+      {% for i in 1..4 %}
+      <div class="input-field col s12">
+          <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
+          <div><label class="teal-text lighten-4  "><h6>Respuesta {{ i }} :</h6></label></div>
+          <br>
+          <br>
+          <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="" length="600" 
+          {% if i <= 3 %}required{% endif %}></textarea>
+          <div></div>
+          
+          <div class="input-field col s2">
+          <p>
+          <input class="with-gap" name="chec1" value="{{i}}" type="radio" id="test{{i}}"  />
+          <label class="teal-text lighten-4" for="test{{i}}">Correcta</label>
+          </p>
+          </div>
+          </div>
+        
 
-		<label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
-		
-		<label class="grey-text lighten-1 col s12">*Las respuestas se mostraran en el orden ingresado.</label><br>
+        {% endfor %}
+        </div>
+        </div>
 
-		<div class="row">
-    	<div class="col s12">
-     	<div class="row">
-      	<div class="input-field col s10">
-        <input placeholder="" name="answer1" id="first_name" type="text" class="validate">
-        <label class="teal-text lighten-4" for="first_name">Respuesta 1:</label>
-        </div>
-        <div class="input-field col s2">
-        <p>
-        <input class="with-gap" name="chec1" value="1" type="radio" id="test1"  />
-        <label class="teal-text lighten-4" for="test1">Correcta</label>
-      </p>
-        </div>
-      	</div></div>
-
-      	<div class="col s12">
-     	<div class="row">
-      	<div class="input-field col s10">
-        <input placeholder="" name="answer2" id="first_name" type="text" class="validate">
-        <label class="teal-text lighten-4" for="first_name">Respuesta 2:</label>
-        </div>
-        <div class="input-field col s2">
-        <p>
-        <input class="with-gap" name="chec1" value="2" type="radio" id="test2"  />
-        <label class="teal-text lighten-4" for="test2">Correcta</label>
-      </p>
-        </div>
-        </div></div>
-
-     	<div class="col s12">
-     	<div class="row">
-      	<div class="input-field col s10">
-        <input placeholder="" name="answer3" id="first_name" type="text" class="validate">
-        <label class="teal-text lighten-4" for="first_name">Respuesta 3:</label>
-        </div>
-        <div class="input-field col s2">
-        <p>
-        <input class="with-gap" name="chec1" value="3" type="radio" id="test3" />
-        <label class="teal-text lighten-4" for="test3">Correcta</label>
-      </p>
-        </div>
-     	</div></div>
-
-    	<div class="col s12">
-     	<div class="row">
-      	<div class="input-field col s10">
-        <input placeholder="" name="answer4" id="first_name" type="text" class="validate">
-        <label class="teal-text lighten-4" for="first_name">Respuesta 4:</label>
-        </div>
-        <div class="input-field col s2">
-        <p>
-        <input class="with-gap" name="chec1" value="4" type="radio" id="test4"  />
-        <label class="teal-text lighten-4" for="test4">Correcta</label>
-      </p>
-        </div>
-        </div></div>
-
-    	<div class="col s12">
-     	<div class="row">
-      	<div class="input-field col s10">
-        <input placeholder="" name="answer5" id="first_name" type="text" class="validate">
-        <label class="teal-text lighten-4" for="first_name">Respuesta 5:</label>
-        </div>
-        <div class="input-field col s2">
-        <p>
-        <input class="with-gap" name="chec1" value="5" type="radio" id="test5"  />
-        <label class="teal-text lighten-4" for="test5">Correcta</label>
-      </p>
-        </div>
-     	</div>
-    	</div></div>
-
-      <a class="btn" onclick="Materialize.toast('I am a toast', 4000)">Toast!</a>
-
-	      <div class="alight center">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
-          <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
-            <br>
-           </div>  
+        <br><br>
+        <div class="row">
+          <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
+        <div class=" alight center">
+        <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
+      <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+      </div>  
+      </div>
     <!--/form-->
     {{ form_end(form) }}
     </div>
+    <script> var i = 5;
+      var addElement = function(){
+      var answers = document.getElementById("answers");
+      $(answers).append('<br><div class="input-field col s12" id="col'+i+'"><br>');
+      var div = document.getElementById("col"+i);
+      $(div).append('<br><textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea><br>');
+      $(div).append('<br><label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label><br>');
+      i++;
+
+      $(div).append('<div class="input-field col s2"><p><input class="with-gap" name="chec1" value=""'+i+' type="radio" id="test"'+i+'/><label class="teal-text lighten-4" for="test">Correcta</label></p></div></div>');
+      i++;
+      
+    };</script>
     <script>$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();
-    $('.modal-trigger').leanModal(); });
+    $('input#input_text, textarea#textarea1').characterCounter(); });
+    var validation = function(){
+      var value = (document.getElementById("area").value).trim();
+    var divArea = document.getElementById("errorArea");
+    if( value == null || value.length == 0) {
+      divArea.textContent = 'Este valor no debería estar vacío';
+    }else{
+      divArea.textContent = '';
+    }
+    };
     </script>
 {% endblock %}

@@ -24,13 +24,24 @@
             </div>
         </div>
     </div>
+        
+        <label class="teal-text darken-4"><h6>Lista de palabras clave:</h6></label>
+        <div class="row">
+         {% for ans in answers %}
+            <OL>
+            <LI> {{ ans.content }}
+            </OL>
+            {% endfor %}
+            </div>
+        <br>
+       
 
     <div class="row">
             <div class="col ">
                 <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
             </div>
             <div class="col push-s5">
-                <a class="waves-effect waves-light btn" href={{path('openQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
+                <a class="waves-effect waves-light btn" href={{path('wordCompletionQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
             </div>
             <div class="col push-s5">
                 {{ form_start(delete_form) }}
