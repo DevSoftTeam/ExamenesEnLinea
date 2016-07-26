@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col s12">
         <label class="teal-text darken-4"><h6>Area :</h6></label>
-        <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" id="area">
+        <input list="areas" name="area" placeholder="Seleccione o introduzca nombre de area" id="area">
         <datalist id="areas">
         {% for area in areas %}
           <option value="{{ area.nameArea }}">
@@ -57,7 +57,7 @@
           <div><label class="teal-text lighten-4  "><h6>Respuesta {{ i }} :</h6></label></div>
           <br>
           <br>
-          <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="" length="600" 
+          <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="Introduzca texto" length="600" 
           {% if i <= 3 %}required{% endif %}></textarea>
           <div></div>
           
@@ -88,11 +88,11 @@
     <script> var i = 5;
       var addElement = function(){
       var answers = document.getElementById("answers");
-      $(answers).append('<br><div class="input-field col s12" id="col'+i+'"><br>');
+      $(answers).append('<div class="row" id="answers">');
+      $(answers).append('<br><div class="input-field col s12" id="col'+i+'"><br></div>');
       var div = document.getElementById("col"+i);
       $(div).append('<br><textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea><br>');
       $(div).append('<br><label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label><br>');
-      i++;
 
       $(div).append('<div class="input-field col s2"><p><input class="with-gap" name="chec1" value=""'+i+' type="radio" id="test"'+i+'/><label class="teal-text lighten-4" for="test">Correcta</label></p></div></div>');
       i++;

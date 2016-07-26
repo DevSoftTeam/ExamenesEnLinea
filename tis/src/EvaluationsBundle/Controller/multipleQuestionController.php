@@ -49,13 +49,12 @@ class multipleQuestionController extends Controller
                 $question->setPathImageQuestion(null);
                }
              }  
-            $question->setIdType($idType);
-            $question->setIdArea($idArea);
+                $question->setIdType($idType);
+                $question->setIdArea($idArea);
 
-            $userSession = $this->getUser();
-            $question->setIdUser($userSession);
-
-            $em->persist($question);
+                $userSession = $this->getUser();
+                $question->setIdUser($userSession);
+                $em->persist($question);
 
             
             /*$answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
@@ -69,20 +68,17 @@ class multipleQuestionController extends Controller
             $em->flush();}
 */
             $i = 1;
-                //$var="var";
+                
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
                     if(strlen($contentAns)<=600){
-                       // $var.$i = $request->request->get("chec1");
+                      
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
                         $answer->setIsCorrect(isset($_POST['chec'.$i]));
-                        /*if($var.$i == 1){
-                            $answer->setIsCorrect(True);
-                        }
-                        else{$answer->setIsCorrect(False);}*/
+                        
                         $em->persist($answer);
                     }
                     $i=$i+1;
