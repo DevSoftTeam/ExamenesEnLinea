@@ -74,12 +74,12 @@ class WordCompletionQuestionController extends Controller
                 $i = 1;
                 $j=0;
                 $size=count($claves);
-                $pal="[*"
+                $pal="[*";
 
                 
-               // if($ques!="" ){
+                /*if($ques!="" ){
                    while(($size-1)>=0){
-                    if(strpos($claves[$j], $pal)){
+                    if(){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
 
@@ -90,8 +90,8 @@ class WordCompletionQuestionController extends Controller
                         $size=$size-1;
                         $j=$j+1;
                         //}
-               //}
-            }}
+               }*/
+            //}}
 
                 $em->flush();
 
