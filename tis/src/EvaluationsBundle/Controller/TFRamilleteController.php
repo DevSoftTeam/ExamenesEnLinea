@@ -60,17 +60,22 @@ class TFRamilleteController extends Controller
                     while(strlen($contentAns)>0) {
                         if(strlen($contentAns)<=600){
 //                            $isTrue = $request->request->get('group'.$i);
-                            $isTrue = 'true';
-//                            $valor = $_POST['group'.$i];
-                            $valor = isset($_POST['group' . $i]);
-                            if($valor=='falso'){
-                                $isTrue = 'false';
-                            }
+////                            $valor = $_POST['group'.$i];
+//                            $valor = isset($_POST['group' . $i]);
+//                            if($valor=='falso'){
+//                                $isTrue = 'false';
+//                            }
 
                             $answer = new AnswerElement();
                             $answer->setIdQuestion($question);
                             $answer->setContent($contentAns);
-                            $answer->setIsCorrect($isTrue);
+                            $valor = $request->request->get("group".$i);
+//                            $valor = isset($_POST['group' . $i]);
+                            if($valor=='falso'){
+                            $answer->setIsCorrect(FALSE);
+                            }else {
+                            $answer->setIsCorrect(TRUE);
+                            }
                             $answer->setOrderVar($i);
                             $em->persist($answer);
                         }
