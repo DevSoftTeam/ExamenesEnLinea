@@ -16,7 +16,7 @@
 				<div class="col s12">
 					{% set numQ = 1 %}
 					{% for question in data %}
-						<input type="hidden" name="idQuestion" value="{{question['question'].idQuestion}}">
+						<input type="hidden" name="idQuestion{{numQ}}" value="{{question['question'].idQuestion}}">
 						<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
 						<pre>{{ question['question'].statementQuestion }}</pre>
 						{% if question['question'].pathImageQuestion != null %}
@@ -34,9 +34,9 @@
 						{% elseif question['question'].idType.idType == 4 %}
 							<div class="row">
 							<label class="grey-text lighten-3 col s12">*Seleccione la respuesta correcta.</label><br>
-							      <input name="trueFalse{{numQ}}" type="radio" id="t" value="true" />
+							      <input name="trueFalse{{question['question'].idType.idType}}" type="radio" id="t" value="true" />
 							      <label for="t">Verdadero</label>
-							      <input name="trueFalse{{numQ}}" type="radio" id="f" value="false" checked />
+							      <input name="trueFalse{{question['question'].idType.idType}}" type="radio" id="f" value="false" checked />
 							      <label for="f">Falso</label>
 							</div>
 						{% elseif question['question'].idType.idType == 5 %}
