@@ -85,7 +85,7 @@ class Question
         $html = "";
         switch ($idT) {
             case 1:
-                $html = $this->getViewStatement();
+                $html = $this->getViewStatement()."<input type=\"text\" disabled>";
                 break;
             case 2:
                 $html = $this->getViewOrdenamiento($elements);
@@ -118,11 +118,9 @@ class Question
                         <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
                         <div><pre>".$this->statementQuestion."</pre></div>
                     </div><br><br><br>
-                    <div class=\"col s12 alight center\">
-                        {% if question.pathImageQuestion != null %}
-                        <img height=\"40%\" width=\"40%\" src=\"{{ asset('uploads/images/')}}{{question.pathImageQuestion}}\">
-                        {% endif %}
-                    </div>";
+                    <div class=\"col s12\">
+                        <img height=\"40%\" width=\"40%\" src=\"/uploads/images/".$this->pathImageQuestion."\">
+                    </div></div>";
         }
         else{
             $html = "<div class=\"row\">
