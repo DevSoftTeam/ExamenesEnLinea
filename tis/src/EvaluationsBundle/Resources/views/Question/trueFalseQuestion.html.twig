@@ -4,7 +4,6 @@
   
   <label class="teal-text lighten-4"><h3>Pregunta respuesta falso verdadero:</h3></label>
   <div class="row">
-
     {{ form_start(form,{ 'enctype':"multipart/form-data"}) }}
     <div class="row">
       <div class="col s12">
@@ -16,47 +15,47 @@
           {% endfor %}
           </datalist>
         </div>
-
-      <div class="row">
-        <div class="input-field col s12">
-          <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
-          {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
-          {{ form_errors(form.statementQuestion) }}
+        <div class="row">
+          <div class="input-field col s12">
+            <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
+            {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
+            {{ form_errors(form.statementQuestion) }}
+          </div>
+        </div>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>imagen</span>
+            <i class="material-icons right">perm_media</i>
+            {{ form_widget(form.image) }}
+          </div>
+          <div class="file-path-wrapper">
+            {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
+          </div>
+        </div>
+        <label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
+        <form action="#">
+          <label class="grey-text lighten-1 col s12">*Seleccione la respuesta correcta.</label><br>
+          <div>
+            <p>
+              <input name="group1" type="radio" id="t" value="true" />
+              <label for="t">Verdadero</label>
+            </p>
+            <p>
+              <input name="group1" type="radio" id="f" value="false" checked />
+              <label for="f">Falso</label>
+            </p>
+          </div>
+          <div class="alight center">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
+            <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
+            <br>
+          </div>
+          <!--/form-->
+          {{ form_end(form) }}
         </div>
       </div>
-      <div class="file-field input-field">
-        <div class="btn">
-          <span>imagen</span>
-          <i class="material-icons right">perm_media</i>
-         {{ form_widget(form.image) }}
-        </div>
-        <div class="file-path-wrapper">
-         {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
-        </div>
-      </div>
-      <label class="teal-text lighten-4"><h5>RESPUESTAS:</h5></label>
-      <form action="#">
-        <label class="grey-text lighten-1 col s12">*Seleccione la respuesta correcta.</label><br>
-        <div>
-          <p>
-            <input name="group1" type="radio" id="t" value="true" />
-            <label for="t">Verdadero</label>
-          </p>
-          <p>
-            <input name="group1" type="radio" id="f" value="false" checked />
-            <label for="f">Falso</label>
-          </p>
-        </div>
-        <div class="alight center">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Guardar</button>
-          <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
-          <br>
-        </div>
-        <!--/form-->
-        {{ form_end(form) }}
-      </div>
-      <script>$(document).ready(function() {
-      $('input#input_text, textarea#textarea1').characterCounter();
-      $('.modal-trigger').leanModal(); });
-      </script>
-    {% endblock %}
+    <script>$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();
+    $('.modal-trigger').leanModal(); });
+    </script>
+  {% endblock %}

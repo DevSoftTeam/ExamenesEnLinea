@@ -169,6 +169,7 @@ class matchingQuestionController extends Controller
                 $contentAns2 = trim($request->request->get('answerB'.$i));
                 while(strlen($contentAns)>0) {
                     if(strlen($contentAns)<=600){
+                        
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);

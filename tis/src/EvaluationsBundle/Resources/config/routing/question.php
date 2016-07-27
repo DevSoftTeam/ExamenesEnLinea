@@ -362,7 +362,7 @@ $collection->add('wordCompletionQuestion_delete', new Route(
 
 $collection->add('tframillete_new', new Route(
     '/TFRamillete/{id_type}',
-    array('_controller' => 'EvaluationsBundle:TFRamillete:newRamillete'),
+    array('_controller' => 'EvaluationsBundle:TFRamillete:newTFRamillete'),
     array(),
     array(),
     '',
@@ -382,7 +382,7 @@ $collection->add('tframillete_show', new Route(
 
 $collection->add('tframillete_edit', new Route(
     '/{id}/editTFRamillete',
-    array('_controller' => 'EvaluationsBundle:TFRamillete:edit'),
+    array('_controller' => 'EvaluationsBundle:TFRamillete:editTFRamillete'),
     array(),
     array(),
     '',

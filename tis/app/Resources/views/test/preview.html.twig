@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div id="preguntas">
+    <div class="preguntas">
     {% for value in data %}
         {{ value['question'].getQuestionView(value['answerEl'])  | raw }}
         {#{ value['question'].getViewStatement()  | raw }#}

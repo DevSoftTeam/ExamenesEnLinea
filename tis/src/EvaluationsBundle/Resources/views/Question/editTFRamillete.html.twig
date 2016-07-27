@@ -37,34 +37,37 @@
             {{ form_widget(edit_form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
           </div>
         </div>
-          <div class="row">
+
             <div class="row">
-            <div class="col s12">
-            <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
-            <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran en el orden ingresado.</h6></label>
-            </div>
-            </div>
-            {% for i in 1..5 %}
-            <div class="row">
-              <div class="col s12">
-              <div class="col s10">
-                <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ i }} :</h6></label>
-                <input class="validate" name="answer{{i}}" placeholder="" length="250" value="{% if answers|length >= i %} {{answers[i-1].content}} {% endif %}">
+                <div class="row">
+                    <div class="col s12">
+                        <label class="teal-text lighten-4 col s12"><h5>Enunciados :</h5></label>
+                    </div>
                 </div>
-                <div class="input-field col s2">
-                
-                <p>
-                <input class="with-gap" name="chec{{i}}" value="1" type="checkbox" id="test{{i}}" 
-                {% if i<= answers|length %} {% if answers[i-1].isCorrect %}
-                checked="checked"{% endif %} {% endif %}/>
-                <label class="teal-text lighten-4" for="test{{i}}">Correcta</label></p>
-                
-              </div>
-              </div>
-              </div>
-            {% endfor %}
+                <div class="row" id="answers">
+                    {% for i in 1..answers|length %}
+                        <div class="input-field col s8">
+                            <input placeholder="" name="answer{{i}}" id="first_name" type="text" value={% if answers|length >= i %} {{answers[i-1].content}} {% endif %}>
+                        </div>
+                        <div class="input-field col s4">
+                            <input name="group{{ i }}" type="radio" id="test{{ i }}" value="verdadero"
+                                    {% if i<= answers|length %} {% if answers[i-1].isCorrect %}
+                            checked="checked"{% endif %} {% endif %}/>
+                            <label for="test{{ i }}">Es Verdadero</label>
+
+                            <input name="group{{ i }}" type="radio" id="test{{ i+1 }}" value="falso"
+                                    {% if i<= answers|length %} {% if answers[i-1].isCorrect %}
+                            checked="checked"{% endif %} {% endif %}/>
+                            <label for="test{{ i+1 }}">Es Falso</label>
+                        </div>
+
+                    {% endfor %}
+                </div>
             </div>
-        <br><br>
+            <div class="row">
+                <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
+            </div>
+            </br>
         <div class="row">
             <div class="col">
                 <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Cancelar</a>
@@ -85,4 +88,25 @@
     <script>$(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter();});
     </script>
+
+    <script> var i = 11;
+        var addElement = function(){
+            $(answers).append('<div class="row" id="col'+i+'"></div>');
+            var div = document.getElementById("col"+i);
+            $(div).append('<div class="input-field col s8" id="10"></div>');
+            var div10 = document.getElementById("10");
+            $(div10).append('<input placeholder="" name="answer'+i+'" id="name'+i+'" type="text">');
+
+            $(div).append('<div class="row input-field col s4" id="2"></div>');
+            var div2 = document.getElementById("2");
+            $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+'" />');
+            $(div2).append('<label for="test'+i+'">Es Verdadero</label>');
+            $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+1+'" checked="checked" />');
+            $(div2).append('<label for="test'+i+1+'">Es Falso</label>');
+            $(div2).append('</br></br></br>');
+
+            i = i + 2;
+        };
+    </script>
+
 {% endblock %}

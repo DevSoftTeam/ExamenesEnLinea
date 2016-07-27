@@ -169,7 +169,7 @@ class multipleQuestionController extends Controller
                 $em->remove($answer);
             }
 
-            $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
+           /* $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
             $answer = new AnswerElement();
             if($answer1!="" && strlen(trim($answer1))>0){
             $answer->setIdQuestion($question);
@@ -218,7 +218,25 @@ class multipleQuestionController extends Controller
             $answer->setIsCorrect(isset($_POST['chec5']));
             $em->persist($answer);
             $em->flush();}
-            //$em->flush();
+            //$em->flush();*/
+            $i = 1;
+                
+                $contentAns = trim($request->request->get('answer'.$i));
+                while(strlen($contentAns)>0) {
+                    if(strlen($contentAns)<=600){
+                      
+                        $answer = new AnswerElement();
+                        $answer->setIdQuestion($question);
+                        $answer->setContent($contentAns);
+                        $answer->setOrderVar($i);
+                        $answer->setIsCorrect(isset($_POST['chec'.$i]));
+                        
+                        $em->persist($answer);
+                    }
+                    $i=$i+1;
+                    $contentAns = trim($request->request->get('answer'.$i));
+                }
+                $em->flush();
 
             return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
           }
