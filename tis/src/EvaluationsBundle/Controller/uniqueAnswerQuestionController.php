@@ -168,19 +168,19 @@ class uniqueAnswerQuestionController extends Controller
 
 
                 
-                $i = 1;
+               $i = 1;
                 
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
                     $var="var";
+                    $var = $request->request->get("chec1");
                     if(strlen($contentAns)<=600){
-                        //$varT = $var.$i;
-                       $var = $request->request->get("chec1");
+                        
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
-                        if($var.$i == 1){
+                        if($var == $i){
                             $answer->setIsCorrect(True);
                         }
                         else{$answer->setIsCorrect(False);}
@@ -190,7 +190,6 @@ class uniqueAnswerQuestionController extends Controller
                     $contentAns = trim($request->request->get('answer'.$i));
                 }
 
-                $em->flush();
                 $em->flush();
 
             return $this->redirectToRoute('uniqueAnswerQuestion_show', array('id' => $question->getId()));
