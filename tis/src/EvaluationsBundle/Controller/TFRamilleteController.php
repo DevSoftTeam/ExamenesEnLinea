@@ -63,7 +63,7 @@ class TFRamilleteController extends Controller
                             $isTrue = 'true';
 //                            $valor = $_POST['group'.$i];
                             $valor = isset($_POST['group' . $i]);
-                            if($valor=='verdadero'){
+                            if($valor=='falso'){
                                 $isTrue = 'false';
                             }
 
