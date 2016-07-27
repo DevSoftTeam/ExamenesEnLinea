@@ -16,6 +16,7 @@
         </thead>
         <tbody>
         {% for question in questions %}
+
             <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
                 {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#}
                 {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}

@@ -16,7 +16,7 @@ $collection->add('test_index', new Route(
 ));
 
 $collection->add('test_asign', new Route(
-    '/asignar/{idT}/{idQ}',
+    '/asignar/{idT}/{idQ}/{percent}',
     array('_controller' => 'EvaluationsBundle:Test:asign'),
     array(),
     array(),

@@ -6,26 +6,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Test;
-use EvaluationsBundle\Entity\TestQuestion;
-use EvaluationsBundle\Form\TestType;
+use EvaluationsBundle\Entity\TestTaken;
 use EvaluationsBundle\Entity\AnswerElement;
-use Symfony\Component\Validator\Constraints\Time;
-/**
- * Test controller.
- *
- */
+use EvaluationsBundle\Entity\UserAnswer;
+
 class ExamController extends Controller
 {
-    /**
-     * Lists all Test entities.
-     *
-     */
     public function formAction($idTest)
     { 
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
-        //$testQuestions = $em->getRepository('EvaluationsBundle:TestQuestion')->findBy(array('idTest'=>$test));
-        //$questions = $em->getRepository('EvaluationsBundle:Question')->findBy()array('idQuestion');
         $result = $em->createQueryBuilder();
         $questions = $result->select(array('q'))
             ->from('EvaluationsBundle:Question', 'q')
@@ -39,10 +29,10 @@ class ExamController extends Controller
         foreach ($questions as $question) {
             $resp = array();
             $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
-            if($question->getIdQuestion()==7){
+            if($question->getIdQuestion()==7 && count($answers)>2){
                 $columA = array();
                 $columB = array();
-                for ($i=0; $i < count($answers); $i=$i+2) { 
+                for ($i=0; $i < count($answers)-1; $i=$i+2) { 
                     array_push($columA,$answers[$i]);
                     array_push($columB,$answers[$i+1]);
                 }
@@ -60,19 +50,53 @@ class ExamController extends Controller
             'data' => $data,
         ));
     }
-    public function newAction(Request $request)
+    public function saveExamAction($idTest,Request $request)
     {
-        $test = new Test();
-        $form = $this->createForm('EvaluationsBundle\Form\TestType', $test);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+        $user = $this->getUser();
+        // save test taken
+        $testTaken = new TestTaken();
+        $testTaken->setIdTest($test);
+        $testTaken->setIdUser($user);
+        $em->persist($testTaken);
+        // save answers user
+        $i = 1;
+        $idQuestion = $request->get('idQuestion'.$i);
+        while($idQuestion!=""){
+            $question = $em->getRepository('EvaluationsBundle:Question')->find($idQuestion);
+            $userAnswer = new UserAnswer();
+            $userAnswer->setIdQuestion($question);
+            $userAnswer->setIdUser($user);
+            $userAnswer->setIdTest($test);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+            switch ($idQuestion) {
+                case 1:
+                    $parrafo = $request->get('answer'.$i);
+                    $userAnswer->setResponse($parrafo);
+                    $em->persist($userAnswer);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    $answerTF = $request->get('trueFalse'.$question->getIdQuestion());
+                    $userAnswer->setResponse($answerTF);
+                    $em->persist($userAnswer);
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+            }
+            $i++;
+            $idQuestion = $request->get('idQuestion'.$i);
         }
-
-        return $this->render('test/new.html.twig', array(
-            'test' => $test,
-            'form' => $form->createView(),
-        ));
+        $em->flush();
+        return $this->redirectToRoute('test_index');
     }
 
 }

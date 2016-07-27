@@ -33,8 +33,8 @@
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{{ question.idArea.nameArea }}</td>
                 <td>{{ question.idType.nameType }}</td>
-                <td><a class="waves-effect waves-light btn" href={{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion})}}>asignar</a></td>
-                {#<td><button onclick="toast()" class="waves-effect waves-light btn">asignar</button></td>#}
+                {#<td><a class="waves-effect waves-light btn" href={{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion})}}>asignar</a></td>#}
+                <td><button onclick="abrir('{{ question.statementQuestion}}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -45,15 +45,56 @@
             <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
         </div>
     </div>
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h3 class="teal-text lighten-4">Asignar pregunta al examen</h3>
+          <p class="teal-text lighten-4">enunciado: </p>
+          <h5 id="stantment"> </h5>
+          <p class="teal-text lighten-4">tipo de pregunta: </p>
+          <h6 id="nametype"> </h6>
+          <p class="teal-text lighten-4">porcentaje de la pregunta: </p>
+          <input id="percent" value="1" min=1 type="number">
+        </div>
+        <div class="modal-footer">
+          <button id="agregar" href="" onclick="guardar()" class="modal-action modal-close waves-effect waves-green btn-flat">Agregar</button>
+          <input id="url" type="hidden" name="">
+          <button class="modal-action modal-close waves-effect waves-green btn-flat" onclick="cerrar();">cancelar</button>
+        </div>
+      </div>
 
     <script>
+    $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+    });
+
+    var abrir = function(statementQuestion, typename, url) {
+        $('#stantment').text(statementQuestion);
+        $('#nametype').text(typename);
+        $('#modal1').openModal();
+        $('#url')[0].value = url;
+    };
+
+    var guardar = function() {
+        var url = $('#url')[0].value;
+        var size = url.length-2;
+        var url = url.substring(0, size);
+        var percent = $('#percent')[0].value;
+        var url = url + '/'+ percent;
+        location.href=url;
+    };
+
+    var cerrar = function() {
+        $('#modal1').closeModal();
+    };
+    
     $(document).ready(function(){
     $('.tooltipped').tooltip({delay: 50});
      });
     
     var toast = function(msg){
         Materialize.toast(msg, 2000);
-    }
+    };
 
     var agregado = function () {
         var msg = window.location.search.substr(1); 
