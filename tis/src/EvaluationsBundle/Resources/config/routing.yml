@@ -44,6 +44,10 @@ exam_homepage:
     path: /exam/{idTest}
     defaults: {_controller: EvaluationsBundle:Exam:form}
 
+saveExam_homepage:
+    path: /saveExam/{idTest}
+    defaults: {_controller: EvaluationsBundle:Exam:saveExam}
+
 #indexerror_homepage:
 #    path:     /Test
 #    defaults: { _controller: EvaluationsBundle:Test:indexError }

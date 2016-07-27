@@ -11,11 +11,12 @@
 			<label class="teal-text lighten-4"><h5>Nombre :</h5></label>
 			<p>{{ app.user.name }} {{app.user.lastName}}</p>
 		</div>
-		<form action="">
+		<form action="/saveExam/{{test.idTest}}">
 			<div class="row">
 				<div class="col s12">
 					{% set numQ = 1 %}
 					{% for question in data %}
+						<input type="hidden" name="idQuestion" value="{{question['question'].idQuestion}}">
 						<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
 						<pre>{{ question['question'].statementQuestion }}</pre>
 						{% if question['question'].pathImageQuestion != null %}
