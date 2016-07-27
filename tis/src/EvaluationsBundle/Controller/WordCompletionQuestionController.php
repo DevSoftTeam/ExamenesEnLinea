@@ -59,16 +59,28 @@ class WordCompletionQuestionController extends Controller
                 $em->persist($question);
                 $ques=$question->getStatementQuestion();
 
+
+                //^ab$
+                //$patron ="/[~.~]/";
+                //$patron='/^ab$/';
+
+                //if (preg_match($patron, $ques)) {
+            
+                //$ques = ereg_replace("http:\/\/(.*\.(com|net|org))", "\1", $ques); 
+                 //$ques = ereg_replace("~.(.*\.(~))", "\1", $ques); 
+                 $claves = preg_split("/[\s,]+/", $ques);
+                //print_r($claves);
+
                 $i = 1;
                 if($ques!="" ){
-                    if(strpos($ques, '[*') != FALSE and $ques = ' /^.[*/*]$ ' ){
+                    //if(preg_match($patron, $ques)){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
-                        $answer->setContent($ques);
+                        $answer->setContent($claves);
                         $answer->setOrderVar($i);
                         $answer->setIsCorrect(True);
                         $em->persist($answer);
-                        }
+                        //}
                 }
 
                 $em->flush();
