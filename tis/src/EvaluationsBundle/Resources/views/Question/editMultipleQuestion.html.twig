@@ -49,15 +49,16 @@
               <div class="col s12">
               <div class="col s10">
                 <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ i }} :</h6></label>
-                <input class="validate" name="answer{{i}}" placeholder="" length="250" value="{% if answers|length >= i %} {{answers[i-1].content}} {% endif %}">
+                <input class="validate" name="answer{{i}}" placeholder="" length="250" value={% if answers|length >= i %} {{answers[i-1].content}} {% endif %}>
                 </div>
                 <div class="input-field col s2">
                 
                 <p>
-                <input class="with-gap" name="chec{{i}}" value="1" type="checkbox" id="test{{i}}" 
+                <input class="with-gap" name="chec1" value="1" type="radio" id="test{{i}}" 
                 {% if i<= answers|length %} {% if answers[i-1].isCorrect %}
                 checked="checked"{% endif %} {% endif %}/>
                 <label class="teal-text lighten-4" for="test{{i}}">Correcta</label></p>
+                
                 
               </div>
               </div>

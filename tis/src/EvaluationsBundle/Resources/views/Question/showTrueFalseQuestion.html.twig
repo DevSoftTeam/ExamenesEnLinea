@@ -1,17 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block title %}Pregunta{% endblock %}
 {% block body %}
-
+<div>
     <div >
-    <label class="teal-text lighten-4"><h3>Detalles de Pregunta</h3></label>
-
+        <label class="teal-text lighten-4"><h3>Detalles de Pregunta Falso Verdadero</h3></label>
         <div class="row">
             <div class="col s12">
                 <label class="teal-text darken-4"><h6>Area :</h6></label>
                 <div>{{ question.idArea.nameArea }}</div>
             </div>
         </div>
-
         <div class="row">
             <div class="col s12">
                 <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
@@ -19,43 +17,38 @@
             </div><br><br><br>
             <div class="col s12">
                 {% if question.pathImageQuestion != null %}
-                <img align="center" height="40%" width="40%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+                    <img align="center" height="40%" width="40%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
                 {% endif %}
             </div>
         </div>
-
         <div class="row">
             <div class="col s12">
                 <label class="teal-text darken-4"><h6>Respuesta :</h6></label>
                 <div>{% for ans in answers %}
-            <div class="col s12">
-
-                {% if  ans.content == "true"  %}
-                <p>Verdadero</p>
-                {% else %}
-                <p>Falso</p>
-                {% endif %}
-
+                    <div class="col s12">
+                        {% if  ans.content == "true"  %}
+                            <p>Verdadero</p>
+                        {% else %}
+                            <p>Falso</p>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
-
-        </div>
+</div>
+<div class="row">
+    <div class="col ">
+        <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
     </div>
-    <div class="row">
-            <div class="col ">
-                <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Ver preguntas</a>
-            </div>
-            <div class="col push-s5">
-                <a class="waves-effect waves-light btn" href={{path('trueFalseQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
-            </div>
-            <div class="col push-s5">
-                {{ form_start(delete_form) }}
-                    <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
-                {{ form_end(delete_form) }}
-            </div>
+    <div class="col push-s5">
+        <a class="waves-effect waves-light btn" href={{path('trueFalseQuestion_edit', { 'id': question.idQuestion})}}>Editar</a>
     </div>
-
+    <div class="col push-s5">
+        {{ form_start(delete_form) }}
+        <button class="btn pink waves-effect waves-light" type="submit" name="action">Eliminar</button>
+        {{ form_end(delete_form) }}
+    </div>
+</div>
+</div>
 {% endblock %}

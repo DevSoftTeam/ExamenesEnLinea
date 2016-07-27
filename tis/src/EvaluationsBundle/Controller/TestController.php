@@ -111,10 +111,25 @@ class TestController extends Controller
     //private function validateDateTimes(Date $startDate, Time $startTime, Date $entDate, Time $endTime, Form $form)
     //{
 
-    /**
-     * Creates a new Test entity.
-     *
-     */
+   
+
+     public function dropAction($idT,$idQ){
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idT);
+        $question = $em->getRepository('EvaluationsBundle:Question')->find($idQ);
+        
+        $testQuestion = $em->getRepository('EvaluationsBundle:TestQuestion')->findOneBy(array('idQuestion'=>$question,'idTest'=>$test));
+
+
+        $em->remove($testQuestion); //delete from test_question Where test_Question.id_Test = idT and test_question.id_Question= idQ
+        $em->flush();
+        return $this->redirectToRoute('test_data',array('id' => $test->getId(),'msg'=>'mensaje'));
+    }
+
+
+
+
+
     public function newAction(Request $request)
     {
         $test = new Test();

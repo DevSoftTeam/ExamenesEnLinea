@@ -41,15 +41,17 @@
         <label class="grey-text lighten-1 col s12">*Colocar las respuestas en orden correcto.</label><br>
         <div class="row" id="answers">
           {% for i in 1..3 %}
+      <div class="row">
             <div class="input-field col s6">
-              <textarea class="materialize-textarea validate" name="answerA{{i}}" placeholder="Introduzca texto" length="250" {% if i <= 3 %}required{% endif %}></textarea>
+              <textarea class="materialize-textarea validate" name="answerA{{i}}" placeholder="Introduzca texto" length="600" {% if i <= 3 %}required{% endif %}></textarea>
               <label class="teal-text lighten-4"><h6>Columna A elemento {{ i }} :</h6></label>
             </div>
             <div class="input-field col s6">
-              <textarea class="materialize-textarea validate" name="answerB{{i}}" placeholder="Introduzca texto" length="250"
+              <textarea class="materialize-textarea validate" name="answerB{{i}}" placeholder="Introduzca texto" length="600"
               {% if i <= 3 %}required{% endif %}></textarea>
               <label class="teal-text lighten-4"><h6>Columna B elemento {{ i }} :</h6></label>
             </div>
+              </div>
           {% endfor %}
         </div>
         
