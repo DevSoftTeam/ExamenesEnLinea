@@ -56,19 +56,21 @@ class uniqueAnswerQuestionController extends Controller
                 $em->persist($question);
 
                 $i = 1;
-                //$var="var";
+                
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
+                    $var="var";
+                    $var = $request->request->get("chec1");
                     if(strlen($contentAns)<=600){
-                       // $var.$i = $request->request->get("chec1");
+                        //$varT = $var.$i;
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
-                        /*if($var.$i == 1){
+                        if($var == $i){
                             $answer->setIsCorrect(True);
                         }
-                        else{$answer->setIsCorrect(False);}*/
+                        else{$answer->setIsCorrect(False);}
                         $em->persist($answer);
                     }
                     $i=$i+1;
@@ -167,26 +169,28 @@ class uniqueAnswerQuestionController extends Controller
 
                 
                 $i = 1;
-                $ans = trim($request->request->get('answer'.$i));
                 
-                while(strlen($ans)>0) {
-                    if(strlen($ans)<=250){
-                        $varT=$var.$i;
-                        $varT = $request->request->get("chec1");
+                $contentAns = trim($request->request->get('answer'.$i));
+                while(strlen($contentAns)>0) {
+                    $var="var";
+                    if(strlen($contentAns)<=600){
+                        //$varT = $var.$i;
+                       $var = $request->request->get("chec1");
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
-                        $answer->setContent($ans);
+                        $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
-                        if($varT == 1){
+                        if($var.$i == 1){
                             $answer->setIsCorrect(True);
                         }
                         else{$answer->setIsCorrect(False);}
                         $em->persist($answer);
                     }
                     $i=$i+1;
-                    $ans = trim($request->request->get('answer'.$i));
+                    $contentAns = trim($request->request->get('answer'.$i));
                 }
 
+                $em->flush();
                 $em->flush();
 
             return $this->redirectToRoute('uniqueAnswerQuestion_show', array('id' => $question->getId()));

@@ -39,6 +39,18 @@ class ExamController extends Controller
         foreach ($questions as $question) {
             $resp = array();
             $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
+            if($question->getIdQuestion()==7){
+                $columA = array();
+                $columB = array();
+                for ($i=0; $i < count($answers); $i=$i+2) { 
+                    array_push($columA,$answers[$i]);
+                    array_push($columB,$answers[$i+1]);
+                }
+                shuffle($columB);
+                $answers = array_merge($columA,$columB);
+            }else{
+                shuffle($answers);
+            }
             $resp['question'] = $question;
             $resp['answers'] = $answers;
             $data[] = $resp;
