@@ -68,20 +68,30 @@ class WordCompletionQuestionController extends Controller
             
                 //$ques = ereg_replace("http:\/\/(.*\.(com|net|org))", "\1", $ques); 
                  //$ques = ereg_replace("~.(.*\.(~))", "\1", $ques); 
-                 $claves = preg_split("/[\s,]+/", $ques);
+                 $claves = preg_split("/\\[/", $ques);
                 //print_r($claves);
 
                 $i = 1;
-                if($ques!="" ){
-                    //if(preg_match($patron, $ques)){
+                $j=0;
+                $size=count($claves);
+                $pal="[*"
+
+                
+               // if($ques!="" ){
+                   while(($size-1)>=0){
+                    if(strpos($claves[$j], $pal)){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
-                        $answer->setContent($claves);
+
+                        $answer->setContent($claves[$j]);
                         $answer->setOrderVar($i);
                         $answer->setIsCorrect(True);
                         $em->persist($answer);
+                        $size=$size-1;
+                        $j=$j+1;
                         //}
-                }
+               //}
+            }}
 
                 $em->flush();
 

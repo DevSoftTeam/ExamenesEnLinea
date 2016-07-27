@@ -27,11 +27,11 @@
         
         <label class="teal-text darken-4"><h6>Lista de palabras clave:</h6></label>
         <div class="row">
-         {% for ans in answers %}
             <OL>
-            <LI> {{ ans.content }}
-            </OL>
+         {% for ans in answers %}
+            <LI> {{ ans.content }}</LI>
             {% endfor %}
+            </OL>
             </div>
         <br>
        
