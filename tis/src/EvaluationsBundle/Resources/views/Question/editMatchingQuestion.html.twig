@@ -47,11 +47,11 @@
               <div class="col s12">
                 <div class="col s6">
                   <label class="teal-text lighten-4 col s10"><h6>Respuesta {{ foo }} :</h6></label>
-                  <textarea class="materialize-textarea validate" name="answerA{{i+1}}" placeholder="Introduzca texto" length="600" {% if i <= 3 %}required{% endif %}>{{answers[i].content}}</textarea>
+                  <textarea class="materialize-textarea validate" name="answerA{{foo}}" placeholder="Introduzca texto" length="600" {% if i <= 3 %}required{% endif %}>{{answers[i].content}}</textarea>
                 </div>
                 <div class="col s6">
                   <label class="teal-text lighten-4 col s10"><h6>pareja {{ foo }} :</h6></label>
-                  <textarea class="materialize-textarea validate" name="answerB{{i+1}}" placeholder="Introduzca texto" length="600"  {% if i <= 3 %}required{% endif %} >{{(answers[i+1]).content}}</textarea>
+                  <textarea class="materialize-textarea validate" name="answerB{{foo}}" placeholder="Introduzca texto" length="600"  {% if i <= 3 %}required{% endif %} >{{(answers[i+1]).content}}</textarea>
                 </div>
               </div>
             </div>
