@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-	<label class="teal-text lighten-4"><h3>Crear pregunta completar palabra:</h3></label>
+	<label class="teal-text lighten-4"><h3>Crear Pregunta de completar palabra:</h3></label>
 	<div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
@@ -10,25 +10,25 @@
     	<div class="row">
     		<div class="col s12">
     		<label class="teal-text darken-4"><h6>Area :</h6></label>
-    		<input list="areas" name="area" placeholder="seleccione o introzca nombre de area" required>
+    		<input list="areas" name="area" placeholder="seleccione o introduzca nombre de area" id="area">
 			  <datalist id="areas">
 			  {% for area in areas %}
 			    <option value="{{ area.nameArea }}">
 			  {% endfor %}
 			  </datalist>
+			<span id="errorArea"></span>
 			</div>
     	</div>
 
 	      <div class="row">
 	        <div class="input-field col s12">
 	          <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
-
-	          {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
+	          <!--textarea id="textarea1" class="materialize-textarea" name="statementQuestion"></textarea-->
+	          {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','name':'enun','placeholder':'Introduzca texto'}}) }}
 	          {{ form_errors(form.statementQuestion) }}
 	        </div>
-	        <br>
-	          <br>
 	          <label class="grey-text lighten-1 col s12">*El enunciado debe incluir las palabras reservadas entre [**]</label>
+	          <br>
 	      </div>
 
 	    <div class="file-field input-field">
@@ -39,19 +39,39 @@
 	        {{ form_widget(form.image) }}
 	      </div>
 	      <div class="file-path-wrapper">
+	        <!--input class="file-path validate" type="text" name="pathImageQuestion"-->
 	        {{ form_widget(form.pathImageQuestion,{'attr':{'class':'file-path validate'}}) }}
 	      </div>
 	    </div>
-	    
-	    <br><br>
-	      <div class=" alight center">
-	      <button class="btn waves-effect waves-light " type="submit" name="action">Guardar</button>
+
+	      <br><br>
+	      <div class="row">
+          <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
 		  <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
 		  </div>  
+		  </div>
     <!--/form-->
     {{ form_end(form) }}
     </div>
     <script>$(document).ready(function() {
     $('input#input_text, textarea#textarea1').characterCounter(); });
+     var validation = function(){
+    	var value = (document.getElementById("area").value).trim();
+		var divArea = document.getElementById("errorArea");
+		if( value == null || value.length == 0) {
+			divArea.textContent = 'Este valor no debería estar vacío';
+		}else{
+			divArea.textContent = '';
+		}
+
+		var value = (document.getElementById("enun").value).trim();
+		var divAr = document.getElementById("textarea1");
+		if( enun == null || value.length == 5) {
+			divArea.textContent = 'Este valor no debería estar vacío';
+		}else{
+			divArea.textContent = '';
+		}
+    };
     </script>
+    
 {% endblock %}
