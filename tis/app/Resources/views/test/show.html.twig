@@ -1,15 +1,13 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-
     <div >
-    <label class="teal-text lighten-4"><h3>Detalles del Examenen</h3></label>
-
+        <label class="teal-text lighten-4"><h3>Detalles del Examen</h3></label>
+        
         <div class="row">
-            <div class="row">
-                <label class="teal-text darken-4"><h6>Titulo :</h6></label>
-                <div>{{ test.title }}</div>
-            </div>
+            <label class="teal-text darken-4"><h6>Titulo :</h6></label>
+            <div>{{ test.title }}</div>
+        </div>
+        <div class="row">
             <div class="col s3">
                 <label class="teal-text darken-4"><h6>Materia :</h6></label>
                 <div>{{ test.matter }}</div>
@@ -39,7 +37,6 @@
                 {% endif %}
             </div>
         </div>
-
         <div class="row">
             <label class="teal-text lighten-4"><h6>Tiempo De Registro</h6></label>
             <p >
@@ -57,7 +54,6 @@
                 {% endif %}
             </p>
         </div>
-
         <div class="row">
             <label class="teal-text lighten-4"><h6>Tiempo De Duracion</h6></label>
             <p>
@@ -76,13 +72,11 @@
             </p>
         </div>
     </div>
-
     <div class="row">
         <div class="col">
             <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
             <a class="waves-effect waves-light btn" href={{ path('test_asosiation', {'id': test.idTest}) }}>asignar preguntas</a>
         </div>
-
         <div class="col push-s3">
             <a class="waves-effect waves-light btn" href={{ path('test_edit', {'id': test.idTest}) }}>Editar</a>
         </div>
@@ -91,14 +85,12 @@
         </div>
         <div class="col push-s3" >
             {{ form_start(delete_form) }}
-                <button class="btn waves-effect waves-light" type="submit" name="action">Eliminar</button>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Eliminar</button>
             {{ form_end(delete_form) }}
         </div>
     </div>
-
-    <h2>preguntas</h2>
-
-        <table class="striped">
+    <h3 class="teal-text lighten-4">preguntas</h3>
+    <table class="striped">
         <thead>
             <tr>
                 {#<th>Nro.</th>#}
@@ -109,36 +101,32 @@
             </tr>
         </thead>
         <tbody>
-        {% for question in questions %}
-            <!-- <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
-               {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#} -->
-
-             <!--     {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}-->
+            {% for question in questions %}
+                <!-- <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
+                {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#} -->
+                <!--     {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}-->
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{% if question.idArea != null %}{{ question.idArea.nameArea }} {% endif %}</td>
                 <td>{% if question.idType != null %}{{ question.idType.nameType }} {% endif %}</td>
-                <td> <a class="btn-floating btn-large waves-effect waves-light gray"{% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}><i class="material-icons">edit</i></a></td>
-                <td> <a  class="btn-floating btn-large waves-effect waves-light gray" href={{ path('test_drop', {idT:test.idTest, idQ:question.idQuestion})}}><i class="material-icons" >delete</i></a></td>
+                <td> <a class="btn-floating btn-large waves-effect waves-light gray"{% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}><i class="material-icons">edit</i></a> <a  class="btn-floating btn-large waves-effect waves-light gray" href={{ path('test_drop', {idT:test.idTest, idQ:question.idQuestion})}}><i class="material-icons" >delete</i></a></td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-    <script>
-    $(document).ready(function(){
-    $('.tooltipped').tooltip({delay: 50});
-     });
-    
-    var toast = function(msg){
-        Materialize.toast(msg, 2000);
-    }
+    </tbody>
+</table>
+<script>
+$(document).ready(function(){
+$('.tooltipped').tooltip({delay: 50});
+});
 
-    var agregado = function () {
-        var msg = window.location.search.substr(1); 
-        if (msg != "") {
-            toast("la pregunta fue eliminada del examen");
-        }
-    };
-    (eliminado(),2000);
-    </script>   
-
+var toast = function(msg){
+Materialize.toast(msg, 2000);
+}
+var agregado = function () {
+var msg = window.location.search.substr(1);
+if (msg != "") {
+toast("la pregunta fue eliminada del examen");
+}
+};
+(eliminado(),2000);
+</script>
 {% endblock %}
