@@ -178,6 +178,12 @@ class TFRamilleteController extends Controller
                             $answer = new AnswerElement();
                             $answer->setIdQuestion($question);
                             $answer->setContent($contentAns);
+                            $valor = $request->request->get("group".$i);
+                            if($valor=='falso'){
+                                $answer->setIsCorrect(FALSE);
+                            }else {
+                                $answer->setIsCorrect(TRUE);
+                            }
                             $answer->setOrderVar($i);
                             $em->persist($answer);
                         }

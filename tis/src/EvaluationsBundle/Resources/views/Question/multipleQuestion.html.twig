@@ -71,6 +71,7 @@
         
 
         {% endfor %}
+        <br>
         </div>
         </div>
 
@@ -89,14 +90,15 @@
       var addElement = function(){
       var answers = document.getElementById("answers");
       
-      $(answers).append('<br><div class="input-field col s12" id="col'+i+'"><br>');
+      $(answers).append('<br><br><div class="input-field col s12" id="col'+i+'">');
       var div = document.getElementById("col"+i);
-      $(div).append('<br><textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea><br>');
+      $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea>');
       
-      $(div).append('<br><label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label><br>');
+      $(div).append('<label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label>');
       
 
-      $(div).append('<div class="input-field col s2"><p><input class="with-gap" name="chec" '+i+'value=""'+i+' type="checkbox" id="test"'+i+'/><label class="teal-text lighten-4" for="test">Correcta</label></p></div></div>');
+      $(div).append('<div class="input-field col s2"><p><input class="with-gap" name="chec'+i+'" value="'+i+'" type="checkbox" id="test'+i+'"/><label class="teal-text lighten-4" for="test'+i+'">Correcta</label></p></div>');
+      i++;
       //var divi = document.getElementById("test"+i+);
     
       

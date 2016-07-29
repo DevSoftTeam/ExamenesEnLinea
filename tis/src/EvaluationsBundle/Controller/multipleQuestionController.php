@@ -56,17 +56,6 @@ class multipleQuestionController extends Controller
                 $question->setIdUser($userSession);
                 $em->persist($question);
 
-            
-            /*$answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
-            $answer = new AnswerElement();
-            if($answer1!="" && strlen(trim($answer1))>0){
-            $answer->setIdQuestion($question);
-            $answer->setContent($answer1);
-            $answer->setOrderVar("1");
-            $answer->setIsCorrect(isset($_POST['chec1']));
-            $em->persist($answer);
-            $em->flush();}
-*/
             $i = 1;
                 
                 $contentAns = trim($request->request->get('answer'.$i));

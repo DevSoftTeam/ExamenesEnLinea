@@ -60,38 +60,37 @@ class WordCompletionQuestionController extends Controller
                 $ques=$question->getStatementQuestion();
 
 
-                //^ab$
-                //$patron ="/[~.~]/";
-                //$patron='/^ab$/';
-
-                //if (preg_match($patron, $ques)) {
-            
-                //$ques = ereg_replace("http:\/\/(.*\.(com|net|org))", "\1", $ques); 
-                 //$ques = ereg_replace("~.(.*\.(~))", "\1", $ques); 
-                 $claves = preg_split("/\\[/", $ques);
-                //print_r($claves);
+                 $claves = preg_split("/[[:space:]]/", $ques);
+                // $claves = preg_split("/\\[+/", $ques);
+                 //$claves = preg_split("/\\[+/", $ques);
+                 
 
                 $i = 1;
                 $j=0;
                 $size=count($claves);
-                $pal="[*";
 
                 
-                /*if($ques!="" ){
+                if($ques!="" ){
                    while(($size-1)>=0){
-                    if(){
+                    $pos = strpos($claves[$j],'[*');
+                    $pos2= strpos($claves[$j],'*]');
+                    if($pos === false or $pos2 ===false){
+                        $size=$size-1;
+                        $j=$j+1;
+                    }
+                        else{
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
-
-                        $answer->setContent($claves[$j]);
+                        $answer->setContent(substr($claves[$j], 2, -2));
+                        //$answer->setContent($claves[$j]);
                         $answer->setOrderVar($i);
                         $answer->setIsCorrect(True);
                         $em->persist($answer);
                         $size=$size-1;
                         $j=$j+1;
-                        //}
-               }*/
-            //}}
+                        }
+              }
+            }
 
                 $em->flush();
 
@@ -132,6 +131,7 @@ class WordCompletionQuestionController extends Controller
         $oldImage = $question->getPathImageQuestion();
         $em = $this->getDoctrine()->getManager(); /// para enviar las areas
         $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
+        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
@@ -140,50 +140,92 @@ class WordCompletionQuestionController extends Controller
 
             $statement = $editForm['statementQuestion']->getData();
           if(!is_null($statement) && strlen($statement)<=5000){
-            $nameArea = trim($request->request->get('area'));
-            if(strlen($nameArea)>0){
 
-                $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $nameArea));
-                /// si no exisite el area lo crea
-                if(is_null($idArea)){
-                    $idArea = new Area();
-                    $idArea->setNameArea($nameArea);
-                    $em->persist($idArea);
-                    //$em->flush();
-                }
-                $file=$editForm['image']->getData();
-                if (!is_null($file)) {
-                   $ext=$file->guessExtension();
-                   if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
-                    $pathImage = $editForm['pathImageQuestion']->getData();
-                    $pathImage = explode(".", $pathImage);
-                    $pathImage =  $pathImage[0];
-                    $file_name=$pathImage."_".time().".".$ext;
-                    $file->move("uploads/images", $file_name);
 
-                    if ($oldImage!=null) {
-                        $oldImage = "uploads/images/".$oldImage;
-                        unlink($oldImage);
-                    } 
+            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
+            /// si no exisite el area lo crea
+            if(is_null($idArea)){
+                $idArea = new Area();
+                $idArea->setNameArea($request->request->get('area'));
+                $em->persist($idArea);
+                //$em->flush();
+            }
+            $file=$editForm['image']->getData();
+            if (!is_null($file)) {
+               $ext=$file->guessExtension();
+               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
+                $pathImage = $editForm['pathImageQuestion']->getData();
+                $pathImage = explode(".", $pathImage);
+                $pathImage =  $pathImage[0];
+                $file_name=$pathImage."_".time().".".$ext;
+                $file->move("uploads/images", $file_name);
 
-                    $question->setPathImageQuestion($file_name);          
-                   }else{
-                    $question->setPathImageQuestion(null);
-                   }
-                 }  
-                $question->setIdArea($idArea);
+                if ($oldImage!=null) {
+                    $oldImage = "uploads/images/".$oldImage;
+                    unlink($oldImage);
+                } 
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($question);
+                $question->setPathImageQuestion($file_name);          
+               }else{
+                $question->setPathImageQuestion(null);
+               }
+             }  
+            $question->setIdArea($idArea);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
+
+
+                
+               $ques=$question->getStatementQuestion();
+
+
+                 $claves = preg_split("/[[:space:]]/", $ques);
+                // $claves = preg_split("/\\[+/", $ques);
+                 //$claves = preg_split("/\\[+/", $ques);
+                 
+
+                $i = 1;
+                $j=0;
+                $size=count($claves);
+
+                
+                if($ques!="" ){
+                   while(($size-1)>=0){
+                    $pos = strpos($claves[$j],'[*');
+                    $pos2= strpos($claves[$j],'*]');
+                    if($pos === false or $pos2 ===false){
+                        $size=$size-1;
+                        $j=$j+1;
+                    }
+                        else{
+                        $answer = new AnswerElement();
+                        $answer->setIdQuestion($question);
+                        $answer->setContent(substr($claves[$j], 2, -2));
+                        //$answer->setContent($claves[$j]);
+                        $answer->setOrderVar($i);
+                        $answer->setIsCorrect(True);
+                        $em->persist($answer);
+                        $size=$size-1;
+                        $j=$j+1;
+                        }
+              }
+            }
+
                 $em->flush();
 
-                return $this->redirectToRoute('wordCompletionQuestion_show', array('id' => $question->getId()));
-            }
+            return $this->redirectToRoute('wordCompletionQuestion_show', array('id' => $question->getId()));
           }
         }
         return $this->render('EvaluationsBundle:Question:editWordCompletionQuestion.html.twig', array(
             'areas' => $areas,
             'question' => $question,
+            'answers' => $answers,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -207,6 +249,10 @@ class WordCompletionQuestionController extends Controller
                 }
 
             $em = $this->getDoctrine()->getManager();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
             $em->remove($question);
             $em->flush();
         }
