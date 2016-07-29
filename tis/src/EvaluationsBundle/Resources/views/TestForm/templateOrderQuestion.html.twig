@@ -13,9 +13,9 @@
                 </div>
                 <div class="col s2">
                 <select name="select{{ans.idAnswerElement}}">
-                  <option value="" disabled="disabled" selected>Seleccione</option>
-                  {% for ans1 in question['answers'] %}
-                  <option value="{{ ans1.idAnswerElement}}">{{ ans1.orderVar }}</option>
+                  <option value="" selected>Seleccione</option>
+                  {% for i in range(1,(question['answers']|length)) %}
+                  <option value="{{i}}">{{ i }}</option>
                   {% endfor %}
                 </select>
                 </div>
