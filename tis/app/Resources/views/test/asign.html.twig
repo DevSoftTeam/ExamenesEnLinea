@@ -17,6 +17,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col s12 m3">
+            <a class="waves-effect waves-light btn" href="{{ path('test_show', { 'id': test.idTest }) }}">volver al Examen</a>
+        </div>
+        <div class="col s12 m3">
+            <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
+        </div>
+    </div>
+
     <table class="striped">
         <thead>
             <tr>
@@ -33,18 +42,12 @@
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{{ question.idArea.nameArea }}</td>
                 <td>{{ question.idType.nameType }}</td>
-                {#<td><a class="waves-effect waves-light btn" href={{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion})}}>asignar</a></td>#}
                 <td><button onclick="abrir('{{ question.statementQuestion}}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col">
-            <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
-        </div>
-    </div>
       <!-- Modal Structure -->
       <div id="modal1" class="modal">
         <div class="modal-content">

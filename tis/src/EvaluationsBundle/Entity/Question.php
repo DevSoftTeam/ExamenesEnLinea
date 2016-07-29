@@ -96,12 +96,19 @@ class Question
             case 4:
                 $html = $this->getTrueFalse($elements);
                 break;
+            case 5:
+                $html = $this->getSimpleSelection($elements);
+                break;
+
             case 6:
                 $html = $this->getViewMultipleQuestion($elements);
                 break;
             case 7:
                 $html = $this->getViewEmparejamiento($elements);
                     break;
+            case 9:
+                $html = $this->getBouquetQestion($elements);
+                break;
 
             default:
                 $html = $this->getViewStatement();
@@ -116,7 +123,7 @@ class Question
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
                         <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
-                        <div><pre>".$this->statementQuestion."</pre></div>
+                        <div><h5>".$this->statementQuestion."</h5></div>
                     </div><br><br><br>
                     <div class=\"col s12\">
                         <img height=\"40%\" width=\"40%\" src=\"/uploads/images/".$this->pathImageQuestion."\">
@@ -126,7 +133,7 @@ class Question
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
                         <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
-                    <pre>".$this->statementQuestion."</pre>
+                    <h5>".$this->statementQuestion."</h5>
                     </div>
                 </div>";
         }
@@ -134,6 +141,43 @@ class Question
     }
 
     public function getViewEmparejamiento($elements){
+        $left = array();
+        $right = array();
+        $i=0;
+        $html = $this->getViewStatement()."<div class=\"row\">";
+        foreach ($elements as $value) {
+            if ($i%2 != 0) {
+              $left[] = $value;  
+            }
+            else{
+              $right[] = $value;
+            }
+            $i++;
+        }
+        $i=0;
+        shuffle($left);
+        shuffle($right);
+        foreach ($right as $value) {
+            $el = "
+                <div class=\"col s12\">
+                <div class=\"col s6 m6\">
+                    <p>
+                      ".$left[$i]->content."
+                    </p>
+                </div>
+                    
+                <div class=\"col s6 m6\">
+                    ".$value->content."
+                </div>
+                </div>";
+            $html = $html.$el;
+            $i++;
+        }
+        return $html."</div>";
+    }
+
+    public function getViewOrdenamiento($elements){
+        shuffle($elements);
         $html = $this->getViewStatement()."<div class=\"row\">";  
         foreach ($elements as $value) {
             $el = "
@@ -145,12 +189,15 @@ class Question
         return $html."</div>";
     }
 
-    public function getViewOrdenamiento($elements){
+    public function getSimpleSelection($elements){
         $html = $this->getViewStatement()."<div class=\"row\">";  
         foreach ($elements as $value) {
             $el = "
                 <div class=\"col s12\">
-                    <p>".$value->content."</p>
+                    <p>
+                      <input type=\"radio\" class=\"filled-in\"/>
+                      <label>".$value->content."</label>
+                    </p>
                 </div>";
             $html = $html.$el;
         }
@@ -166,6 +213,29 @@ class Question
                       <input type=\"checkbox\" class=\"filled-in\"/>
                       <label>".$value->content."</label>
                     </p>
+                </div>";
+            $html = $html.$el;
+        }
+        return $html."</div>";
+    }
+
+    public function getBouquetQestion($elements){
+        $html = $this->getViewStatement()."<div class=\"row\">";
+        foreach ($elements as $value) {
+            $el = "
+                <div class=\"col s12\">
+                <div class=\"col s6 m6\">
+                    <p>
+                      ".$value->content."
+                    </p>
+                </div>
+                    
+                <div class=\"col s6 m6\">
+                    <input type=\"radio\" id=\"t\" disabled>
+                      <label for=\"t\">Verdadero</label>
+                      <input type=\"radio\" id=\"f\" disabled>
+                      <label for=\"f\">Falso</label>
+                </div>
                 </div>";
             $html = $html.$el;
         }
@@ -205,7 +275,7 @@ class Question
     {
         $idT = $this->idType->idType;
         $id = $this->idQuestion;
-        $links = array(1=>'showOQ',2 =>'showOrQ',3=> 'show',4=>'showTFQ',5=>'showUAQ',6=>'showMQ',7=>'showMMQ',9=>'showTFRamillete');
+        $links = array(1=>'showOQ',2 =>'showOrQ',3=> 'show',4=>'showTFQ',5=>'showUAQ',6=>'showMQ',7=>'showMMQ',8=>'showWCQ',9=>'showTFRamillete');
         $link = "/question/".$id."/".$links[$idT];
         return $link;
     }
