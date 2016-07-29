@@ -2,30 +2,30 @@
 {% block title %} Examen {% endblock %}
 {% block body%}
 	<div class="row">
-		<label class="teal-text lighten-4"><h3>Resolviendo Examen</h3></label>
+		<label class="teal-text lighten-4"><h5>Resolviendo Examen</h5></label><br><br><br>
 	    <div class="row">
 	        <div class="col s12 center">
 	        <label class="teal-text lighten-4"><h3>{{ test.title }}</h3></label>
 	        </div>
-	        <div class="col s4">
+	        <div class="col s12">
+	        <div class="col s5">
 	            <label><h5 class="teal-text darken-4">Materia: <strong class="black-text">{{ test.matter }}</strong></h5></label>
 	        </div>
-	        <br>
-	        <div class="col s4">
+	        <div class="col s5">
 	            {% if test.institution%}
 	                <label class="teal-text darken-4"><h5>Institucion :  <strong class="black-text">{{ test.institution }}</strong></h5></label>
 	            {% else %}
 	                {{ 'No Definido'}}
 	            {% endif %}
 	        </div>
-
+	        </div>
 	        <div class="col s12">
 	            <div class="col s9">
 	            <h5 class="teal-text darken-4">Nombre completo: <strong class="black-text">{{ app.user.name }} {{app.user.lastName}}</strong></h5>
 	            </div>
 	        </div>
 	    </div>
-
+	    <br><br>
 		<form action="/saveExam/{{test.idTest}}" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col s12">
@@ -44,7 +44,6 @@
 						{% if question['question'].idType.idType == 1 %}
 							<div class="input-field col s12">
 								<textarea class="materialize-textarea validate" name="answer{{numQ}}" placeholder="Introduzca texto"></textarea>
-								<label class="teal-text lighten-4"><h6>Respuesta :</h6></label>
 					        </div>
 						{% elseif question['question'].idType.idType == 2 %}
 							{{ include('EvaluationsBundle:TestForm:templateOrderQuestion.html.twig') }}
