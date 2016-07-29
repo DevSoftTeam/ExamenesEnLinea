@@ -75,7 +75,7 @@ class WordCompletionQuestionController extends Controller
                         $size=$size-1;
                         $j=$j+1;
                     }
-                        else{
+                        else{if($claves[$j] != ""){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent(substr($claves[$j], 2, -2));
@@ -83,7 +83,7 @@ class WordCompletionQuestionController extends Controller
                         $answer->setIsCorrect(True);
                         $em->persist($answer);
                         $size=$size-1;
-                        $j=$j+1;
+                        $j=$j+1;}
                         }
               }
             }
