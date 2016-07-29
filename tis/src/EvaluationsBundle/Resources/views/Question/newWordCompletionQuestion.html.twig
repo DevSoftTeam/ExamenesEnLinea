@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-	<label class="teal-text lighten-4"><h3>Crear Pregunta de completar palabra:</h3></label>
+	<label class="teal-text lighten-4"><h3>Crear pregunta de completar palabra:</h3></label>
 	<div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
@@ -26,8 +26,9 @@
 	          <!--textarea id="textarea1" class="materialize-textarea" name="statementQuestion"></textarea-->
 	          {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','name':'enun','placeholder':'Introduzca texto'}}) }}
 	          {{ form_errors(form.statementQuestion) }}
+	          <span id="errorEnun"></span>
 	        </div>
-	          <label class="grey-text lighten-1 col s12">*El enunciado debe incluir las palabras reservadas entre [**]</label>
+	          <label class="grey-text lighten-1 col s12"><h6>*El enunciado debe incluir las palabras reservadas entre [**], [*Ejemplo*]</h6></label>
 	          <br>
 	      </div>
 
@@ -45,7 +46,7 @@
 	    </div>
 
 	      <br><br>
-	      <div class="row">
+	      <div class="row" align="center">
           <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
 		  <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
 		  </div>  
@@ -63,15 +64,24 @@
 		}else{
 			divArea.textContent = '';
 		}
+    };
+    </script>
 
-		var value = (document.getElementById("enun").value).trim();
-		var divAr = document.getElementById("textarea1");
-		if( enun == null || value.length == 5) {
-			divArea.textContent = 'Este valor no debería estar vacío';
+    <script>$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter(); });
+     var validat = function(){
+    	var val = (document.getElementById("textarea1").value).trim();
+		var divAre = document.getElementById("errorEnun");
+		var substring = "[*";
+		var substring2= "*]";
+		if(val.indexOf(substring) !== -1 && val.indexOf(substring2) !== -1) {
+			divAre.textContent = 'El enunciado deberia incluir minimo un palabra clave [*ejemplo*]';
 		}else{
-			divArea.textContent = '';
+			divAre.textContent = '';
 		}
     };
     </script>
+
+
     
 {% endblock %}
