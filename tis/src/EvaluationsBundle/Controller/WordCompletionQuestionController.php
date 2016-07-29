@@ -61,10 +61,7 @@ class WordCompletionQuestionController extends Controller
 
 
                  $claves = preg_split("/[[:space:]]/", $ques);
-                // $claves = preg_split("/\\[+/", $ques);
-                 //$claves = preg_split("/\\[+/", $ques);
-                 
-
+               
                 $i = 1;
                 $j=0;
                 $size=count($claves);
@@ -82,7 +79,6 @@ class WordCompletionQuestionController extends Controller
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent(substr($claves[$j], 2, -2));
-                        //$answer->setContent($claves[$j]);
                         $answer->setOrderVar($i);
                         $answer->setIsCorrect(True);
                         $em->persist($answer);
@@ -186,10 +182,7 @@ class WordCompletionQuestionController extends Controller
 
 
                  $claves = preg_split("/[[:space:]]/", $ques);
-                // $claves = preg_split("/\\[+/", $ques);
-                 //$claves = preg_split("/\\[+/", $ques);
-                 
-
+               
                 $i = 1;
                 $j=0;
                 $size=count($claves);
