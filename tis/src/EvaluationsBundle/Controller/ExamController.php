@@ -29,7 +29,7 @@ class ExamController extends Controller
         foreach ($questions as $question) {
             $resp = array();
             $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
-            if($question->getIdQuestion()==7 && count($answers)>2){
+            if($question->getIdType()->getIdType()==7 && count($answers)>2){
                 $columA = array();
                 $columB = array();
                 for ($i=0; $i < count($answers)-1; $i=$i+2) { 
@@ -69,27 +69,71 @@ class ExamController extends Controller
             $userAnswer->setIdQuestion($question);
             $userAnswer->setIdUser($user);
             $userAnswer->setIdTest($test);
-
-            switch ($idQuestion) {
+            $idType = $question->getIdType()->getIdType();
+            switch ($idType) {
                 case 1:
                     $parrafo = $request->get('answer'.$i);
                     $userAnswer->setResponse($parrafo);
                     $em->persist($userAnswer);
                     break;
                 case 2:
+                    $answersOrQ = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                    $resp="";
+                    foreach($answersOrQ as $ans){
+                        $select = $request->get('select'.$ans->getIdAnswerElement());
+                        $resp = $resp." ".$ans->getIdAnswerElement().",".$select;
+                    }
+                    $userAnswer->setResponse($resp);
+                    $em->persist($userAnswer);
                     break;
                 case 3:
+                    $file=$request->files->get('file'.$i);
+                    if (!is_null($file)) {
+                       $ext=$file->guessExtension();
+                       //if($ext=="pdf"){
+                        $pathFile = $request->get('pathFile'.$i);
+                        $pathFile = explode(".", $pathFile);
+                        $pathFile =  $pathFile[0];
+                        $file_name=$pathFile."_".time().".".$ext;
+                        $file->move("uploads/users", $file_name);
+                        $userAnswer->setResponse($file_name);
+                        $em->persist($userAnswer);
+                       /*}else{
+                        $question->setPathImageQuestion(null);
+                       }*/
+                     }
                     break;
                 case 4:
                     $answerTF = $request->get('trueFalse'.$question->getIdQuestion());
                     $userAnswer->setResponse($answerTF);
                     $em->persist($userAnswer);
                     break;
+                case 5:
+                    $ansUni = $request->get('radio'.$i);
+                    $userAnswer->setResponse($ansUni);
+                    $em->persist($userAnswer);
+                    break;
                 case 6:
+                    $answersMQ = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                    $resp="";
+                    foreach($answersMQ as $ans){
+                        $select = $request->get('check'.$ans->getIdAnswerElement());
+                        if($select == 1){
+                            $resp = $resp.$ans->getIdAnswerElement()." ";
+                        }
+                    }
+                    $userAnswer->setResponse($resp);
+                    $em->persist($userAnswer);
                     break;
                 case 7:
-                    break;
-                case 8:
+                    $answersMatQ = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                    $resp="";
+                    for($j=1; $j<=count($answersMatQ)-1; $j=$j+2){
+                        $select = $request->get('match'.$answersMatQ[$j]->getIdAnswerElement());
+                        $resp = $resp.$answersMatQ[$j]->getIdAnswerElement().",".$select." ";
+                    }
+                    $userAnswer->setResponse($resp);
+                    $em->persist($userAnswer);
                     break;
             }
             $i++;
