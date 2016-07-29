@@ -276,6 +276,7 @@ class Question
         $idT = $this->idType->idType;
         $id = $this->idQuestion;
         $links = array(1=>'showOQ',2 =>'showOrQ',3=> 'show',4=>'showTFQ',5=>'showUAQ',6=>'showMQ',7=>'showMMQ',8=>'showWCQ',9=>'showTFRamillete');
+
         $link = "/question/".$id."/".$links[$idT];
         return $link;
     }

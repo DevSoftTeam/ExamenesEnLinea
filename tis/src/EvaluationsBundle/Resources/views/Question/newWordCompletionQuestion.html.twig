@@ -10,7 +10,7 @@
     	<div class="row">
     		<div class="col s12">
     		<label class="teal-text darken-4"><h6>Area :</h6></label>
-    		<input list="areas" name="area" placeholder="seleccione o introduzca nombre de area" id="area">
+    		<input list="areas" name="area" placeholder="Seleccione o introduzca nombre de area" id="area">
 			  <datalist id="areas">
 			  {% for area in areas %}
 			    <option value="{{ area.nameArea }}">
@@ -28,7 +28,7 @@
 	          {{ form_errors(form.statementQuestion) }}
 	          <span id="errorEnun"></span>
 	        </div>
-	          <label class="grey-text lighten-1 col s12"><h6>*El enunciado debe incluir las palabras reservadas entre [**], [*Ejemplo*]</h6></label>
+	          <label class="black-text darken-4"><h6> *El enunciado debe incluir cada palabra reservada entre [**] -> [*Ejemplo*]</h6></label>
 	          <br>
 	      </div>
 

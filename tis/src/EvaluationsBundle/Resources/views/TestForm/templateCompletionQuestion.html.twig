@@ -1,0 +1,5 @@
+<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
+	<pre>{{ question['question'].statementQuestion }}</pre>
+	{% if question['question'].pathImageQuestion != null %}
+		<img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+	{% endif %}

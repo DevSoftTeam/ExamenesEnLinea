@@ -26,17 +26,21 @@
 	        </div>
 	    </div>
 
-		<form action="/saveExam/{{test.idTest}}">
+		<form action="/saveExam/{{test.idTest}}" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col s12">
 					{% set numQ = 1 %}
 					{% for question in data %}
 						<input type="hidden" name="idQuestion{{numQ}}" value="{{question['question'].idQuestion}}">
-						<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
-						<pre>{{ question['question'].statementQuestion }}</pre>
-						{% if question['question'].pathImageQuestion != null %}
-					        <img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+
+						{% if question['question'].idType.idType != 8 %}
+							<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
+							<pre>{{ question['question'].statementQuestion }}</pre>
+							{% if question['question'].pathImageQuestion != null %}
+						        <img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+						    {% endif %}
 					    {% endif %}
+
 						{% if question['question'].idType.idType == 1 %}
 							<div class="input-field col s12">
 								<textarea class="materialize-textarea validate" name="answer{{numQ}}" placeholder="Introduzca texto"></textarea>
@@ -49,9 +53,9 @@
 						{% elseif question['question'].idType.idType == 4 %}
 							<div class="row">
 							<label class="grey-text lighten-3 col s12">*Seleccione la respuesta correcta.</label><br>
-							      <input name="trueFalse{{question['question'].idType.idType}}" type="radio" id="t" value="true" />
+							      <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="t" value="true" />
 							      <label for="t">Verdadero</label>
-							      <input name="trueFalse{{question['question'].idType.idType}}" type="radio" id="f" value="false" checked />
+							      <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="f" value="false" checked />
 							      <label for="f">Falso</label>
 							</div>
 						{% elseif question['question'].idType.idType == 5 %}
@@ -61,7 +65,9 @@
 						{% elseif question['question'].idType.idType == 7 %}
 							{{ include('EvaluationsBundle:TestForm:templateMatchingQuestion.html.twig') }}
 						{% elseif question['question'].idType.idType == 8 %}
-							{#{ include('EvaluationsBundle:TestForm:templateCompletionQuestion.html.twig') }#}
+							{{ include('EvaluationsBundle:TestForm:templateCompletionQuestion.html.twig') }}
+						{% elseif question['question'].idType.idType == 9 %}
+							{{ include('EvaluationsBundle:TestForm:templateBucketTF.html.twig') }}
 						{% endif %}
 
 						{% set numQ = numQ+1 %}

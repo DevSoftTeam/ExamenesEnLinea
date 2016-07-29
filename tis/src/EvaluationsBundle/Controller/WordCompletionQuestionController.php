@@ -61,10 +61,7 @@ class WordCompletionQuestionController extends Controller
 
 
                  $claves = preg_split("/[[:space:]]/", $ques);
-                // $claves = preg_split("/\\[+/", $ques);
-                 //$claves = preg_split("/\\[+/", $ques);
-                 
-
+               
                 $i = 1;
                 $j=0;
                 $size=count($claves);
@@ -78,16 +75,15 @@ class WordCompletionQuestionController extends Controller
                         $size=$size-1;
                         $j=$j+1;
                     }
-                        else{
+                        else{if($claves[$j] != ""){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent(substr($claves[$j], 2, -2));
-                        //$answer->setContent($claves[$j]);
                         $answer->setOrderVar($i);
                         $answer->setIsCorrect(True);
                         $em->persist($answer);
                         $size=$size-1;
-                        $j=$j+1;
+                        $j=$j+1;}
                         }
               }
             }
@@ -186,10 +182,7 @@ class WordCompletionQuestionController extends Controller
 
 
                  $claves = preg_split("/[[:space:]]/", $ques);
-                // $claves = preg_split("/\\[+/", $ques);
-                 //$claves = preg_split("/\\[+/", $ques);
-                 
-
+               
                 $i = 1;
                 $j=0;
                 $size=count($claves);
@@ -249,6 +242,10 @@ class WordCompletionQuestionController extends Controller
                 }
 
             $em = $this->getDoctrine()->getManager();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
             $em->remove($question);
             $em->flush();
         }
