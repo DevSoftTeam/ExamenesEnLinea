@@ -18,6 +18,31 @@
             {{ form_widget(edit_form.institution, {'attr':{'placeholder':"Introduzca Texto", 'type':"text"}})}}
         </div>
 
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="input_text" class="teal-text darken-4"><h6>Fecha Inicio Inscripcion: </h6></label>
+                </br>
+                {{ form_widget(edit_form.startDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
+            </div>
+            </br>
+            <div class="input-field col s6">
+                <label for="input_text" class="active teal-text darken-4">Hora Inicio Inscripcion: (Hr:Min)</label>
+                {{ form_row(edit_form.startTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
+            </div>
+        </div>
+        {#</br>#}
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="input_text" class="teal-text darken-4"><h6>Fecha Fin Inscripcion: </h6></label>
+                </br>
+                {{ form_widget(edit_form.endDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
+            </div>
+            </br>
+            <div class="input-field col s6">
+                <label for="input_text" class="active teal-text darken-4">Hora Fin Inscripcion: (HH:mm)</label>
+                {{ form_row(edit_form.endTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
+            </div>
+        </div>
 
         <div class="row">
             <div class="input-field col s6">
@@ -45,31 +70,7 @@
             </div>
         </div>
         {#</br>#}
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="input_text" class="teal-text darken-4"><h6>Fecha Inicio Inscripcion: </h6></label>
-                </br>
-                {{ form_widget(edit_form.startDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
-            </div>
-            </br>
-            <div class="input-field col s6">
-                <label for="input_text" class="active teal-text darken-4">Hora Inicio Inscripcion: (Hr:Min)</label>
-                {{ form_row(edit_form.startTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
-            </div>
-        </div>
-        {#</br>#}
-        <div class="row">
-            <div class="input-field col s6">
-                <label for="input_text" class="teal-text darken-4"><h6>Fecha Fin Inscripcion: </h6></label>
-                </br>
-                {{ form_widget(edit_form.endDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
-            </div>
-            </br>
-            <div class="input-field col s6">
-                <label for="input_text" class="active teal-text darken-4">Hora Fin Inscripcion: (HH:mm)</label>
-                {{ form_row(edit_form.endTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
-            </div>
-        </div>
+
         </br>
         <script>
             $(document).ready(function() {
