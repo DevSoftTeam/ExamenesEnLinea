@@ -32,11 +32,15 @@
 					{% set numQ = 1 %}
 					{% for question in data %}
 						<input type="hidden" name="idQuestion{{numQ}}" value="{{question['question'].idQuestion}}">
-						<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
-						<pre>{{ question['question'].statementQuestion }}</pre>
-						{% if question['question'].pathImageQuestion != null %}
-					        <img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+
+						{% if question['question'].idType.idType != 8 %}
+							<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
+							<pre>{{ question['question'].statementQuestion }}</pre>
+							{% if question['question'].pathImageQuestion != null %}
+						        <img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+						    {% endif %}
 					    {% endif %}
+
 						{% if question['question'].idType.idType == 1 %}
 							<div class="input-field col s12">
 								<textarea class="materialize-textarea validate" name="answer{{numQ}}" placeholder="Introduzca texto"></textarea>
