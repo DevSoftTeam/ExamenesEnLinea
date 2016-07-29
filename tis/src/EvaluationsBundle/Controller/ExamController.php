@@ -135,6 +135,18 @@ class ExamController extends Controller
                     $userAnswer->setResponse($resp);
                     $em->persist($userAnswer);
                     break;
+                case 8:
+                    break;
+                case 9:
+                    $answersBTF = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                    $resp="";
+                    foreach($answersBTF as $ans){
+                        $select = $request->get('group'.$ans->getIdAnswerElement());
+                        $resp = $resp.$ans->getIdAnswerElement().",".$select." ";
+                    }
+                    $userAnswer->setResponse($resp);
+                    $em->persist($userAnswer);
+                    break;
             }
             $i++;
             $idQuestion = $request->get('idQuestion'.$i);
