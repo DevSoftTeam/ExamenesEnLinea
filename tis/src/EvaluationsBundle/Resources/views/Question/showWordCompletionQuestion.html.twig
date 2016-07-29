@@ -50,4 +50,18 @@
             </div>
     </div>
 
+
+    <script>$(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter(); });
+     var validation = function(){
+        var value = (document.getElementById("area").value).trim();
+        var divArea = document.getElementById("errorArea");
+        if( value == null || value.length == 0) {
+            divArea.textContent = 'Este valor no debería estar vacío';
+        }else{
+            divArea.textContent = '';
+        }
+    };
+    </script>
+
 {% endblock %}

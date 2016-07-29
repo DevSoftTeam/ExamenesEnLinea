@@ -249,6 +249,10 @@ class WordCompletionQuestionController extends Controller
                 }
 
             $em = $this->getDoctrine()->getManager();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }
             $em->remove($question);
             $em->flush();
         }

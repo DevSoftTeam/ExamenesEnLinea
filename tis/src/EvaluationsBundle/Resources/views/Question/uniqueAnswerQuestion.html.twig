@@ -93,8 +93,7 @@
       var div = document.getElementById("col"+i);
       $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea>');
       $(div).append(' <label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label>');
-
-      $(div).append('<div class="input-field col s2"><input class="with-gap" name="chec1" value=""'+i+' type="radio" id="test"'+i+'/><label class="teal-text lighten-4" for="test"'+i+'>Correcta</label></div>');
+      $(div).append('<div class="input-field col s2"><input class="with-gap" name="chec1" value="'+i+'" type="radio" id="test'+i+'"/><label class="teal-text lighten-4" for="test'+i+'">Correcta</label></div>');
       i++;
       
     };</script>
