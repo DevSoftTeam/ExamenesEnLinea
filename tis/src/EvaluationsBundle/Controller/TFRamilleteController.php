@@ -181,7 +181,7 @@ class TFRamilleteController extends Controller
                             $valor = $request->request->get("group".$i);
                             if($valor=='falso'){
                                 $answer->setIsCorrect(FALSE);
-                            }else if($valor=='vedadero'){
+                            }else if($valor=='verdadero'){
                                 $answer->setIsCorrect(TRUE);
                             }
                             $answer->setOrderVar($i);
@@ -204,80 +204,6 @@ class TFRamilleteController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
-//        $oldImage = $question->getPathImageQuestion();
-//        $em = $this->getDoctrine()->getManager();
-//        $areas = $em->getRepository('EvaluationsBundle:Area')->findAll();
-//        $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
-//        $deleteForm = $this->createDeleteForm($question);
-//        $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//
-//            $statement = $editForm['statementQuestion']->getData();
-//          if(!is_null($statement) && strlen($statement)<=5000){
-//            $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
-//            if(is_null($idArea)){
-//                $idArea = new Area();
-//                $idArea->setNameArea($request->request->get('area'));
-//                $em->persist($idArea);
-//            }
-//            $file=$editForm['image']->getData();
-//            if (!is_null($file)) {
-//               $ext=$file->guessExtension();
-//               if($ext=="jpg" || $ext=="jpeg" || $ext=="png"){
-//                $pathImage = $editForm['pathImageQuestion']->getData();
-//                $pathImage = explode(".", $pathImage);
-//                $pathImage =  $pathImage[0];
-//                $file_name=$pathImage."_".time().".".$ext;
-//                $file->move("uploads/images", $file_name);
-//
-//                if ($oldImage!=null) {
-//                    $oldImage = "uploads/images/".$oldImage;
-//                    unlink($oldImage);
-//                }
-//
-//                $question->setPathImageQuestion($file_name);
-//               }else{
-//                $question->setPathImageQuestion(null);
-//               }
-//             }
-//            $question->setIdArea($idArea);
-//
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($question);
-//
-//            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
-//            foreach ($answers as $answer) {
-//                $em->remove($answer);
-//            }
-//
-//              $i = 1;
-//              $contentAns = trim($request->request->get('answer'.$i));
-//              while(strlen($contentAns)>0) {
-//                  if(strlen($contentAns)<=600){
-//                      $answer = new AnswerElement();
-//                      $answer->setIdQuestion($question);
-//                      $answer->setContent($contentAns);
-//                      $answer->setIsCorrect(isset($_POST['group' . $i]));
-//                      $em->persist($answer);
-//                  }
-//                  $i=$i+2;
-//                  $contentAns = trim($request->request->get('answer'.$i));
-//              }
-//
-//              $em->flush();
-//
-//            return $this->redirectToRoute('tframillete_show', array('id' => $question->getId()));
-//          }
-//        }
-//        return $this->render('EvaluationsBundle:Question:editTFRamillete.html.twig', array(
-//            'areas' => $areas,
-//            'question' => $question,
-//            'answers' => $answers,
-//            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
-//        ));
     }
 
     /**
