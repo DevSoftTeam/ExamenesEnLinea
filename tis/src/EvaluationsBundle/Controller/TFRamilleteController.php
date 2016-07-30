@@ -73,7 +73,7 @@ class TFRamilleteController extends Controller
 //                            $valor = isset($_POST['group' . $i]);
                             if($valor=='falso'){
                             $answer->setIsCorrect(FALSE);
-                            }else {
+                            }else if($valor == 'verdadero'){
                             $answer->setIsCorrect(TRUE);
                             }
                             $answer->setOrderVar($i);
