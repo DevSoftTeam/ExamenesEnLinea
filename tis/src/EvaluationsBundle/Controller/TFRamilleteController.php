@@ -181,7 +181,7 @@ class TFRamilleteController extends Controller
                             $valor = $request->request->get("group".$i);
                             if($valor=='falso'){
                                 $answer->setIsCorrect(FALSE);
-                            }else {
+                            }else if($valor=='vedadero'){
                                 $answer->setIsCorrect(TRUE);
                             }
                             $answer->setOrderVar($i);
