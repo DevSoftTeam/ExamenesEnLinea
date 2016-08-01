@@ -1,5 +1,4 @@
 
-            <div class="row">
                 <div class="row" id="answers">
                     {% set counter = 1 %}
                     {% for ans in question['answers']%}
@@ -9,16 +8,15 @@
                         </div>
                         <div class="input-field col s4">
 
-                            <input name="group{{ ans.idAnswerElement }}" type="radio" id="test{{ counter }}" value="verdadero"/>
+                            <input name="group{{ ans.idAnswerElement }}" type="radio" id="test{{numQ}}{{counter}}" value="verdadero"/>
 
-                            <label for="test{{counter}}">Es Verdadero</label>
+                            <label for="test{{numQ}}{{counter}}">Es Verdadero</label>
 
-                            <input name="group{{ ans.idAnswerElement }}" type="radio" id="test{{ falseC }}" value="falso"/>
+                            <input name="group{{ ans.idAnswerElement }}" type="radio" id="test{{numQ}}{{falseC}}" value="falso"/>
 
-                            <label for="test{{ falseC }}">Es Falso</label>
+                            <label for="test{{numQ}}{{falseC}}">Es Falso</label>
 
                         </div>
                         {% set counter = counter + 2 %}
                     {% endfor %}
                 </div>
-            </div>

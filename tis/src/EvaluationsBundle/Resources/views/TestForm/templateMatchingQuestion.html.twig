@@ -1,16 +1,19 @@
-<div class="row" id="answers">
+
             {% set foo = 1 %}
             <div class="row">
               <div class="col s12">
-              <div class="col s6">
+              <div class="col s5">
               {% for i in range(0,((question['answers']|length) / 2)-1) %}
+                <div class="col s1">
                   <label class="teal-text lighten-4"><h6>{{ foo }}. </h6></label>
+                </div>
+                <div class="col s11">
                   <pre>{{question['answers'][i].content}}</pre>
-                
+                </div>
               {% set foo = foo +1%}
               {% endfor %}
               </div>
-              <div class="col s6">
+              <div class="col s7">
               {% for k in range((question['answers']|length)/2, (question['answers']|length)-1) %}
                 <div class="col s2">
                   <select name="match{{question['answers'][k].idAnswerElement}}">
@@ -21,10 +24,9 @@
                   </select>
                   </div>
                   <div class="col s10">
-                  <pre>{{(question['answers'][k]).content}}</pre><br>
+                  <pre>{{(question['answers'][k]).content}}</pre>
                 </div>
               {% endfor %}
               </div>
               </div>
             </div>
-        </div>
