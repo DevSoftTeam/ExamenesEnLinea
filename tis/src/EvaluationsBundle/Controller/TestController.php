@@ -74,9 +74,19 @@ class TestController extends Controller
             ->setParameter('idT' , $test->getIdTest())
             ->getQuery()
             ->getResult();
+
+        $result = $em->createQueryBuilder();
+        $score_asign = $result->select('sum(tq.percent) as score')
+            ->from('EvaluationsBundle:TestQuestion', 'tq')
+            ->where('tq.idTest = :idT')
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+        //var_dump($score_asign[0]['score']);exit;
         //$questions=$em->getRepository('EvaluationsBundle:Question')->findAll();
         return $this->render('test/asign.html.twig', array(
             'test' => $test,
+            'score_asign' => $score_asign[0]['score'],
             'questions' => $questions,
         ));
 

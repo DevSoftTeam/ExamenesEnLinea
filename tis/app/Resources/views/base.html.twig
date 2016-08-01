@@ -6,6 +6,7 @@
             <link href="{{ asset('http://fonts.googleapis.com/icon?family=Material+Icons') }}" rel="stylesheet" />
             <link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <style>
 
              body {
@@ -35,32 +36,32 @@
              
              </style>
             <script language="JavaScript"> 
-                function reloj(){ 
-                momentoActual = new Date() 
-                hora = momentoActual.getHours() 
-                minuto = momentoActual.getMinutes() 
-                segundo = momentoActual.getSeconds() 
+                function reloj(){
+                momentoActual = new Date()
+                hora = momentoActual.getHours()
+                minuto = momentoActual.getMinutes()
+                segundo = momentoActual.getSeconds()
 
-                str_segundo = new String (segundo) 
-                if (str_segundo.length == 1) 
-                segundo = "0" + segundo 
+                str_segundo = new String (segundo)
+                if (str_segundo.length == 1)
+                segundo = "0" + segundo
 
-                str_minuto = new String (minuto) 
-                if (str_minuto.length == 1) 
-                minuto = "0" + minuto 
+                str_minuto = new String (minuto)
+                if (str_minuto.length == 1)
+                minuto = "0" + minuto
 
-                str_hora = new String (hora) 
-                if (str_hora.length == 1) 
-                hora = "0" + hora 
+                str_hora = new String (hora)
+                if (str_hora.length == 1)
+                hora = "0" + hora
 
                 var fecha =  (momentoActual.getFullYear() + "-" + (momentoActual.getMonth() +1) + "-" + momentoActual.getDate() )
 
                 horaImprimible = fecha + " / " +hora + " : " + minuto + " : " + segundo
                                      
-                document.form_reloj.reloj.value = horaImprimible 
+                document.form_reloj.reloj.value = horaImprimible
 
-                setTimeout("reloj()",1000) 
-                } 
+                setTimeout("reloj()",1000)
+                }
             </script> 
     </head>
 

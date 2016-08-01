@@ -56,11 +56,12 @@
           <h5 id="stantment"> </h5>
           <p class="teal-text lighten-4">tipo de pregunta: </p>
           <h6 id="nametype"> </h6>
-          <p class="teal-text lighten-4">porcentaje de la pregunta: </p>
+          <p class="teal-text lighten-4">puntaje de la pregunta:</p>
+          <p class="teal-text lighten-4">puntaje total: {{ test.score }}, puntaje usado: {{ score_asign }}</p>
           <input id="percent" value="1" min=1 type="number">
         </div>
         <div class="modal-footer">
-          <button id="agregar" href="" onclick="guardar()" class="modal-action modal-close waves-effect waves-green btn-flat">Agregar</button>
+          <button id="agregar" href="" onclick="guardar( {{score_asign}}, {{ test.score }} )" class="modal-action modal-close waves-effect waves-green btn-flat">Agregar</button>
           <input id="url" type="hidden" name="">
           <button class="modal-action modal-close waves-effect waves-green btn-flat" onclick="cerrar();">cancelar</button>
         </div>
@@ -78,13 +79,23 @@
         $('#url')[0].value = url;
     };
 
-    var guardar = function() {
+    var guardar = function(score_asign, total_score) {
         var url = $('#url')[0].value;
         var size = url.length-2;
         var url = url.substring(0, size);
         var percent = $('#percent')[0].value;
         var url = url + '/'+ percent;
-        location.href=url;
+        if (parseInt(percent) < 1) {
+            toast('no puede asignar puntos menores a 1');
+        }
+        else{
+            if (( parseInt(score_asign) + parseInt(percent)) > parseInt(total_score)) {
+                toast('Los puntos que intenta asignar superan a los puntos del examen');
+            }
+            else{
+                location.href=url;
+            }
+        }
     };
 
     var cerrar = function() {
@@ -96,7 +107,7 @@
      });
     
     var toast = function(msg){
-        Materialize.toast(msg, 2000);
+        Materialize.toast(msg, 4000);
     };
 
     var agregado = function () {
