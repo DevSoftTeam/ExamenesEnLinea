@@ -42,7 +42,7 @@
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{{ question.idArea.nameArea }}</td>
                 <td>{{ question.idType.nameType }}</td>
-                <td><button onclick="abrir('{{ question.statementQuestion}}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
+                <td><button onclick="abrir('{{ question.statementQuestion |replace({"\n":' ', "\r":' '}) }}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
             </tr>
         {% endfor %}
         </tbody>
