@@ -94,7 +94,7 @@ class ExamController extends Controller
                         $pathFile = $request->get('pathFile'.$i);
                         $pathFile = explode(".", $pathFile);
                         $pathFile =  $pathFile[0];
-                        $file_name=$pathFile."_".time().".".$ext;
+                        $file_name=$pathFile.".".$ext;
                         $file->move("uploads/users", $file_name);
                         $userAnswer->setResponse($file_name);
                         $em->persist($userAnswer);

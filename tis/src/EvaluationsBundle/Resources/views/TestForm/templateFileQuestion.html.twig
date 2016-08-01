@@ -1,3 +1,10 @@
+    <div class="col s12">
+    {% if question['question'].pathFileQuestion != null %}
+        <label class="teal-text darken-4"><h6>Archivo adjunto :</h6></label>
+        <a class="waves-effect waves-light btn" href="/uploads/{{question['question'].pathFileQuestion}}" download>Descargar</a>
+    {% endif %}
+    </div>
+    <div class="col s12">
     <div class="file-field input-field">
           <div class="btn">
             <span>archivo</span>
@@ -7,4 +14,5 @@
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text" name="pathFile{{numQ}}" placeholder="Sube un archivo">          
           </div>
+    </div>
     </div>

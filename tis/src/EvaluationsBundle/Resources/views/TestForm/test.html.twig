@@ -50,12 +50,11 @@
 						{% elseif question['question'].idType.idType == 3 %}
 							{{ include('EvaluationsBundle:TestForm:templateFileQuestion.html.twig') }}
 						{% elseif question['question'].idType.idType == 4 %}
-							<div class="row">
-							<label class="grey-text lighten-3 col s12">*Seleccione la respuesta correcta.</label><br>
-							      <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="t" value="true" />
-							      <label for="t">Verdadero</label>
-							      <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="f" value="false" checked />
-							      <label for="f">Falso</label>
+							<div class="col s12">
+							      <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="t{{numQ}}" value="true" />
+							      <label for="t{{numQ}}">Verdadero</label>
+							      <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="f{{numQ}}" value="false"/>
+							      <label for="f{{numQ}}">Falso</label>
 							</div>
 						{% elseif question['question'].idType.idType == 5 %}
 							{{ include('EvaluationsBundle:TestForm:templateUniqueQuestion.html.twig') }}

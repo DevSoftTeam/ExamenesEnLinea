@@ -1,5 +1,20 @@
 <label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
-	<pre>{{ question['question'].statementQuestion }}</pre>
+	{% set keys = question['question'].statementQuestion|split(' ') %}
+	<div class="row">
+	<div class="col s12">
+	<label style="font-family:sans-serif; font-size:1.2em; color: black;">
+	{% set cont = 1 %}
+	{% for key in keys %}
+		{% if key starts with '[' %}
+		    	<input type="text" style="width:12em;" name="word{{numQ}}{{cont}}">
+		    	{% set cont = cont + 1 %}
+		{% else %}
+			{{ key }}
+		{% endif %}
+	{% endfor %}
+	</label>
+	</div>
+	</div>
 	{% if question['question'].pathImageQuestion != null %}
 		<img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
 	{% endif %}
