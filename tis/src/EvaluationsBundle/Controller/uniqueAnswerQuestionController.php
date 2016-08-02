@@ -56,26 +56,31 @@ class uniqueAnswerQuestionController extends Controller
                 $em->persist($question);
 
                 $i = 1;
-                
+
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
                     $var="var";
+                    
                     $var = $request->request->get("chec1");
                     if(strlen($contentAns)<=600){
-                        //$varT = $var.$i;
+                        
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
+                        if(True){
+                        $answer->setIsCorrect(Null);}
+                        else{
                         if($var == $i){
                             $answer->setIsCorrect(True);
                         }
-                        else{$answer->setIsCorrect(False);}
+                        else{$answer->setIsCorrect(False);}}
                         $em->persist($answer);
-                    }
-                    $i=$i+1;
+                        }
+                        $i=$i+1;
                     $contentAns = trim($request->request->get('answer'.$i));
                 }
+
 
                 $em->flush();
 
@@ -166,8 +171,6 @@ class uniqueAnswerQuestionController extends Controller
                 $em->remove($answer);
             }
 
-
-                
                $i = 1;
                 
                 $contentAns = trim($request->request->get('answer'.$i));
@@ -180,10 +183,13 @@ class uniqueAnswerQuestionController extends Controller
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
+                        if(True){
+                        $answer->setIsCorrect(Null);}
+                        else{
                         if($var == $i){
                             $answer->setIsCorrect(True);
                         }
-                        else{$answer->setIsCorrect(False);}
+                        else{$answer->setIsCorrect(False);}}
                         $em->persist($answer);
                     }
                     $i=$i+1;
