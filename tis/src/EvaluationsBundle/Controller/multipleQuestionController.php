@@ -66,7 +66,14 @@ class multipleQuestionController extends Controller
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
-                        $answer->setIsCorrect(isset($_POST['chec'.$i]));
+                        if(True){
+                        $answer->setIsCorrect(Null);}
+                        else{
+                            if(isset($_POST['chec'.$i]) == True){
+                                $answer->setIsCorrect(isset($_POST['chec'.$i]));
+                            }
+                            else{$answer->setIsCorrect(isset($_POST['chec'.$i]));}
+                        }
                         
                         $em->persist($answer);
                     }
@@ -158,56 +165,7 @@ class multipleQuestionController extends Controller
                 $em->remove($answer);
             }
 
-           /* $answer1 = $request->request->get('answer1');//PARA RESPUESTA 1
-            $answer = new AnswerElement();
-            if($answer1!="" && strlen(trim($answer1))>0){
-            $answer->setIdQuestion($question);
-            $answer->setContent($answer1);
-            $answer->setOrderVar("1");
-            $answer->setIsCorrect(isset($_POST['chec1']));
-            $em->persist($answer);
-            $em->flush();}
-
-            $answer2 = $request->request->get('answer2');//PARA RESPUESTA 2
-            $answer = new AnswerElement();
-            if($answer2!="" && strlen(trim($answer2))>0){
-            $answer->setIdQuestion($question);
-            $answer->setContent($answer2);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec2']));
-            $em->persist($answer);
-            $em->flush();}
-
-            $answer3 = $request->request->get('answer3');//PARA RESPUESTA 3
-            $answer = new AnswerElement();
-            if($answer3!="" && strlen(trim($answer3))>0){
-            $answer->setIdQuestion($question);
-            $answer->setContent($answer3);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec3']));
-            $em->persist($answer);
-            $em->flush();}
-
-            $answer4 = $request->request->get('answer4');//PARA RESPUESTA 4
-            $answer = new AnswerElement();
-            if($answer4!="" && strlen(trim($answer4))>0){
-            $answer->setIdQuestion($question);
-            $answer->setContent($answer4);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec4']));
-            $em->persist($answer);
-            $em->flush();}
-
-            $answer5 = $request->request->get('answer5');//PARA RESPUESTA 5
-            $answer = new AnswerElement();
-            if($answer5!="" && strlen(trim($answer5))>0){
-            $answer->setIdQuestion($question);
-            $answer->setContent($answer5);
-            $answer->setOrderVar("2");
-            $answer->setIsCorrect(isset($_POST['chec5']));
-            $em->persist($answer);
-            $em->flush();}
-            //$em->flush();*/
+           
             $i = 1;
                 
                 $contentAns = trim($request->request->get('answer'.$i));
@@ -218,7 +176,13 @@ class multipleQuestionController extends Controller
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
-                        $answer->setIsCorrect(isset($_POST['chec'.$i]));
+                        if(True){
+                        $answer->setIsCorrect(Null);}
+                        else{
+                            if(isset($_POST['chec'.$i]) == True){
+                                $answer->setIsCorrect(isset($_POST['chec'.$i]));
+                            }
+                            else{$answer->setIsCorrect(isset($_POST['chec'.$i]));}}
                         
                         $em->persist($answer);
                     }
