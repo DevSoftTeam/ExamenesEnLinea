@@ -173,20 +173,66 @@ class ExamController extends Controller
         $user = $this->getUser();
         $answersTest = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idUser'=>$user ,'idTest'=>$test));
         $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findOneBy(array('idUser'=>$user,'idTest'=>$test));
-        $score = 0;
+        $score = 0.0;
 
         foreach($answersTest as $answerQuestion){
             $question = $answerQuestion->getIdQuestion();
             $scoreQuestion = $em->getRepository('EvaluationsBundle:TestQuestion')->findOneBy(array('idTest'=>$test, 'idQuestion'=>$question))->getPercent();
+            $response = trim($answerQuestion->getResponse());
             switch($question->getIdType()->getIdType()){
                 case 2:
+                    $responses = explode(" ",$response);
+                    foreach ($responses as $resp) {
+                        $responseAE = explode(",",$resp);
+                        $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find((int)$responseAE[0]);
+                        if ($answerE->getOrderVar() == $responseAE[1]) {
+                            $score = $score + round($scoreQuestion/count($responses),2);
+                        }else{
+                            if($responseAE[1] != "" ){
+                                $score = $score - round($scoreQuestion/count($responses),2);;
+                            }
+                        }
+                    }
                     break;
                 case 4:
-                    $response = $answerQuestion->getResponse();
                     $answersElement = $em->getRepository('EvaluationsBundle:AnswerElement')->findOneBy(array('idQuestion'=>$question));
                     if($response == $answersElement->getContent()){
                         $score = $score + $scoreQuestion;
+                    }else{
+                        if($response != "" ){
+                            $score = $score - $scoreQuestion;
+                        }
                     }
+                    break;
+                case 5:
+                    if (trim($response) != "" ) {
+                        $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($response);
+                        if($answerE->getIsCorrect()){
+                            $score = $score + $scoreQuestion;
+                        }else {
+                            $score = $score - $scoreQuestion;
+                        } 
+                    }
+                    break;
+                case 6:
+                    $responses = explode(" ",$response);
+                    foreach ($responses as $resp) {
+                        $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($resp);
+                        if ($answerE->getIsCorrect()) {
+                            $score = $score + round($scoreQuestion/count($responses),2);
+                        }else{
+                            $score = $score - round($scoreQuestion/count($responses),2);;
+                        }
+                    }
+                    break;
+                case 7:
+                    
+                    break;
+                case 8:
+                    
+                    break;
+                case 9:
+                    
                     break;
             }
         }
