@@ -56,26 +56,29 @@ class uniqueAnswerQuestionController extends Controller
                 $em->persist($question);
 
                 $i = 1;
-                
+                $cont = 0;
+
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
                     $var="var";
                     $var = $request->request->get("chec1");
                     if(strlen($contentAns)<=600){
-                        //$varT = $var.$i;
+                        
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
                         if($var == $i){
                             $answer->setIsCorrect(True);
+                            $cont = $cont +1;
                         }
-                        else{$answer->setIsCorrect(False);}
+                        else{$answer->setIsCorrect(Null);}
                         $em->persist($answer);
                     }
                     $i=$i+1;
                     $contentAns = trim($request->request->get('answer'.$i));
                 }
+
 
                 $em->flush();
 
