@@ -136,6 +136,15 @@ class ExamController extends Controller
                     $em->persist($userAnswer);
                     break;
                 case 8:
+                    $answersCQ = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                    $resp=""; $cont = 1;
+                    foreach($answersCQ as $ans){
+                        $select = $request->get('word'.$i.$cont);
+                        $resp = $resp.$ans->getIdAnswerElement().",".$select." ";
+                        $cont = $cont + 1;
+                    }
+                    $userAnswer->setResponse($resp);
+                    $em->persist($userAnswer);
                     break;
                 case 9:
                     $answersBTF = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
@@ -152,7 +161,38 @@ class ExamController extends Controller
             $idQuestion = $request->get('idQuestion'.$i);
         }
         $em->flush();
+        $reviewAuto = true;
+        if($reviewAuto){
+            $this->autoCalification($test);
+        }
         return $this->redirectToRoute('test_index');
+    }
+
+    public function autoCalification($test){
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $answersTest = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idUser'=>$user ,'idTest'=>$test));
+        $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findOneBy(array('idUser'=>$user,'idTest'=>$test));
+        $score = 0;
+
+        foreach($answersTest as $answerQuestion){
+            $question = $answerQuestion->getIdQuestion();
+            $scoreQuestion = $em->getRepository('EvaluationsBundle:TestQuestion')->findOneBy(array('idTest'=>$test, 'idQuestion'=>$question))->getPercent();
+            switch($question->getIdType()->getIdType()){
+                case 2:
+                    break;
+                case 4:
+                    $response = $answerQuestion->getResponse();
+                    $answersElement = $em->getRepository('EvaluationsBundle:AnswerElement')->findOneBy(array('idQuestion'=>$question));
+                    if($response == $answersElement->getContent()){
+                        $score = $score + $scoreQuestion;
+                    }
+                    break;
+            }
+        }
+        $testTaken->setUserScore($score);
+        $em->persist($testTaken);
+        $em->flush();
     }
 
 }

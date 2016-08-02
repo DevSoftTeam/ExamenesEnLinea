@@ -48,6 +48,10 @@ class TestQuestion
         $this->percent = $percent;
     }
 
+    public function getPercent(){
+        return $this->percent;
+    }
+
     public function setIdQuestion($question){
         $this->idQuestion = $question;
     }
