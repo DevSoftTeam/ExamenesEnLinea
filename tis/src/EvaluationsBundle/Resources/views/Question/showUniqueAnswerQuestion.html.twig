@@ -36,15 +36,14 @@
                 <label class="teal-text darken-4"><h6>Estado :</h6></label>
                 
 
-                {% if ans.isCorrect == 'True' %}
-                    <p>Correcta</p>
+                {% if ans.isCorrect %}
+                 <p>Correcta</p>
+                 {% elseif ans.isCorrect == 'False' %}
+                 <p>Incorrecta</p>
                 {% else %}
-                     {% if ans.isCorrect == 'False' %}
-                         <p>Incorrecta</p>
-                        {% else %}
-                            <p>No definido</p>
-                        {% endif %}
+                <p>No definido</p>
                 {% endif %}
+                
 
                 </div>
             </div>
