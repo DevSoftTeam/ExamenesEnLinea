@@ -56,10 +56,12 @@ class uniqueAnswerQuestionController extends Controller
                 $em->persist($question);
 
                 $i = 1;
+                $cont = 0;
 
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
                     $var="var";
+
                     
                     $var = $request->request->get("chec1");
                     if(strlen($contentAns)<=600){
@@ -69,14 +71,14 @@ class uniqueAnswerQuestionController extends Controller
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
                         if(True){
-                        $answer->setIsCorrect(Null);}
-                        else{
-                        if($var == $i){
-                            $answer->setIsCorrect(True);
+                            $answer->setIsCorrect(Null);
+                            if($var == $i){
+                                $answer->setIsCorrect(True);
+                            }
+                            else{if(is_numeric($var)){
+                                $answer->setIsCorrect(False);}}
                         }
-                        else{$answer->setIsCorrect(False);}}
-                        $em->persist($answer);
-                        }
+                        $em->persist($answer);}
                         $i=$i+1;
                     $contentAns = trim($request->request->get('answer'.$i));
                 }
@@ -178,18 +180,18 @@ class uniqueAnswerQuestionController extends Controller
                     $var="var";
                     $var = $request->request->get("chec1");
                     if(strlen($contentAns)<=600){
-                        
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
                         if(True){
-                        $answer->setIsCorrect(Null);}
-                        else{
-                        if($var == $i){
-                            $answer->setIsCorrect(True);
+                            $answer->setIsCorrect(Null);
+                            if($var == $i){
+                                $answer->setIsCorrect(True);
+                            }
+                            else{if(is_numeric($var)){
+                                $answer->setIsCorrect(False);}}
                         }
-                        else{$answer->setIsCorrect(False);}}
                         $em->persist($answer);
                     }
                     $i=$i+1;

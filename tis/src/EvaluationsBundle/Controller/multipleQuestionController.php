@@ -66,14 +66,19 @@ class multipleQuestionController extends Controller
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
+
                         if(True){
-                        $answer->setIsCorrect(Null);}
-                        else{
+                            $answer->setIsCorrect(Null);
                             if(isset($_POST['chec'.$i]) == True){
-                                $answer->setIsCorrect(isset($_POST['chec'.$i]));
-                            }
-                            else{$answer->setIsCorrect(isset($_POST['chec'.$i]));}
+                                $answer->setIsCorrect(True);}
+                                else{$answer->setIsCorrect(Null);}
+                                if(isset($_POST['chec'.$i]) == False){
+                                $answer->setIsCorrect(False);}
+                                else{$answer->setIsCorrect(Null);}
+                            
+                            
                         }
+                        
                         
                         $em->persist($answer);
                     }
