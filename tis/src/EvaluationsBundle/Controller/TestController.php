@@ -30,6 +30,23 @@ class TestController extends Controller
         ));
     }
 
+    public function searchAction(Request $request)
+    { 
+        $em = $this->getDoctrine()->getManager();
+        $idUser = $this->getUser();
+
+        
+
+
+        $testsResult = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
+
+
+
+        return $this->render('test/searchResult.html.twig', array(
+            'testsResult' => $testsResult,
+        ));
+    }
+
     public function previewAction(Test $test)
     {
         $data = array();

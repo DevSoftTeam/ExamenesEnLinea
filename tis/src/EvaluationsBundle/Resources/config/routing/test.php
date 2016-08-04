@@ -15,6 +15,16 @@ $collection->add('test_index', new Route(
     array('GET')
 ));
 
+$collection->add('test_searchResult', new Route(
+    '/result',
+    array('_controller' => 'EvaluationsBundle:Test:search'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
 $collection->add('test_asign', new Route(
     '/asignar/{idT}/{idQ}/{percent}',
     array('_controller' => 'EvaluationsBundle:Test:asign'),
