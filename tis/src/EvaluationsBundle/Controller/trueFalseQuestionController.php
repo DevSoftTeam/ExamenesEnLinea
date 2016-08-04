@@ -60,7 +60,15 @@ class trueFalseQuestionController extends Controller
             $answer1 = $request->request->get('group1');//PARA RESPUESTA 1
             $answer = new AnswerElement();
             $answer->setIdQuestion($question);
-            $answer->setContent($answer1);
+
+            if ($answer1 == 'true' || $answer1 == 'false') {
+                  $answer->setContent($answer1);
+            }
+
+            else{
+              $answer->setContent('no definido');  
+            }
+          
             $answer->setOrderVar("1");
             $answer->setIsCorrect("true");
             $answer->setIdType(4);

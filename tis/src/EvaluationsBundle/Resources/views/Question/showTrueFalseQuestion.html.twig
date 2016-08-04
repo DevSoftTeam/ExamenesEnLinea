@@ -28,8 +28,10 @@
                     <div class="col s12">
                         {% if  ans.content == "true"  %}
                             <p>Verdadero</p>
+                        {% elseif  ans.content == "false"  %}
+                        <p>Falso</p>
                         {% else %}
-                            <p>Falso</p>
+                            <p>no definido</p>
                         {% endif %}
                     </div>
                 </div>
