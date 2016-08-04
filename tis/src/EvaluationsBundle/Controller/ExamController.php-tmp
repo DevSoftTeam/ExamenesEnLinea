@@ -161,7 +161,10 @@ class ExamController extends Controller {
 		if ($reviewAuto) {
 			$this->autoCalification($test);
 		}
-		return $this->redirectToRoute('test_index');
+
+		return $this->render('EvaluationsBundle:TestForm:scoreTest.html.twig', array(
+				'testTaken' => $testTaken,
+			));
 	}
 
 	public function autoCalification($test) {

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}Nota examen{% endblock %}
+{% block body %}
+	<div class="row">	
+        <label class="teal-text lighten-4"><h3>Nota de {{ testTaken.idTest.title }}</h3></label>
+        <label class="teal-text darken-4"><h5>Nombre :</h5></label>
+		<p>{{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</p>
+		<label class="teal-text darken-4"><h5>Puntuación :</h5></label>
+		<p>{{ testTaken.userScore }}</p>
+	</div>
+    <div class="row">
+        <div align="center">
+            <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver examenes</a>
+        </div>
+    </div>
+{% endblock %}
