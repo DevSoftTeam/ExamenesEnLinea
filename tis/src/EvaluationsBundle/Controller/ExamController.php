@@ -215,24 +215,70 @@ class ExamController extends Controller
                     }
                     break;
                 case 6:
-                    $responses = explode(" ",$response);
-                    foreach ($responses as $resp) {
-                        $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($resp);
-                        if ($answerE->getIsCorrect()) {
-                            $score = $score + round($scoreQuestion/count($responses),2);
-                        }else{
-                            $score = $score - round($scoreQuestion/count($responses),2);;
-                        }
+                    if (trim($response) != "" ) {
+                         $responses = explode(" ",$response);
+                        foreach ($responses as $resp) {
+                            $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($resp);
+                            if ($answerE->getIsCorrect()) {
+                                $score = $score + round($scoreQuestion/count($responses),2);
+                            }else{
+                                $score = $score - round($scoreQuestion/count($responses),2);;
+                            }
+                        }   
                     }
                     break;
                 case 7:
-                    
+                    $responses = explode(" ",$response);
+                    foreach ($responses as $resp) {
+                        $responseAE = explode(",",$resp);
+                        $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find((int)$responseAE[0]);
+                        if ($answerE->getOrderVar() == $responseAE[1]) {
+                            $score = $score + round($scoreQuestion/count($responses),2);
+                        }else{
+                            if($responseAE[1] != "" ){
+                                $score = $score - round($scoreQuestion/count($responses),2);;
+                            }
+                        }
+                    }
                     break;
                 case 8:
-                    
+                    $responses = explode(" ",$response);
+                    foreach ($responses as $resp) {
+                        $responseAE = explode(",",$resp);
+                        $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find((int)$responseAE[0]);
+                        if ($answerE->getContent() == $responseAE[1]) {
+                            $score = $score + round($scoreQuestion/count($responses),2);
+                        }else{
+                            if($responseAE[1] != "" ){
+                                $score = $score - round($scoreQuestion/count($responses),2);;
+                            }
+                        }
+                    }
                     break;
                 case 9:
-                    
+                    $responses = explode(" ",$response);
+                    foreach ($responses as $resp) {
+                        $responseAE = explode(",",$resp);
+                        $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find((int)$responseAE[0]);
+                        if ($answerE->getIsCorrect()) {
+                            if ($responseAE[1]=="TRUE") {
+                                $score = $score + round($scoreQuestion/count($responses),2);
+                            }else {
+                                if($responseAE[1] != "" ){
+                                $score = $score - round($scoreQuestion/count($responses),2);
+                                }
+                            }
+
+                        }else{
+                            if($responseAE[1] == "FALSE" ){
+                                $score = $score + round($scoreQuestion/count($responses),2);
+                            }else{
+                                if($responseAE[1] != "" ){
+                                $score = $score - round($scoreQuestion/count($responses),2);
+                                }
+                            }
+                        }
+                    }
                     break;
             }
         }
