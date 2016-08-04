@@ -57,6 +57,7 @@ class multipleQuestionController extends Controller
                 $em->persist($question);
 
             $i = 1;
+            $cont = 0;
                 
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
@@ -70,15 +71,8 @@ class multipleQuestionController extends Controller
                         if(True){
                             $answer->setIsCorrect(Null);
                             if(isset($_POST['chec'.$i]) == True){
-                                $answer->setIsCorrect(True);}
-                                else{$answer->setIsCorrect(Null);}
-                                if(isset($_POST['chec'.$i]) == False){
-                                $answer->setIsCorrect(False);}
-                                else{$answer->setIsCorrect(Null);}
-                            
-                            
-                        }
-                        
+                                $answer->setIsCorrect(True);
+                                $cont = $cont +1;}}
                         
                         $em->persist($answer);
                     }
@@ -86,6 +80,19 @@ class multipleQuestionController extends Controller
                     $contentAns = trim($request->request->get('answer'.$i));
                 }
                 $em->flush();
+
+                if($cont >= 1){
+                                 $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                                foreach ($answers as $answer) {
+                                    if($answer->getIsCorrect() == True){
+                                        $answer->setIsCorrect(True);
+                                    }
+                                    else{$answer->setIsCorrect(False);}
+                                }
+                                }
+
+                                $em->persist($answer);
+                              $em->flush();
 
             return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
           }
@@ -171,7 +178,8 @@ class multipleQuestionController extends Controller
             }
 
            
-            $i = 1;
+             $i = 1;
+            $cont = 0;
                 
                 $contentAns = trim($request->request->get('answer'.$i));
                 while(strlen($contentAns)>0) {
@@ -181,13 +189,12 @@ class multipleQuestionController extends Controller
                         $answer->setIdQuestion($question);
                         $answer->setContent($contentAns);
                         $answer->setOrderVar($i);
+
                         if(True){
-                        $answer->setIsCorrect(Null);}
-                        else{
+                            $answer->setIsCorrect(Null);
                             if(isset($_POST['chec'.$i]) == True){
-                                $answer->setIsCorrect(isset($_POST['chec'.$i]));
-                            }
-                            else{$answer->setIsCorrect(isset($_POST['chec'.$i]));}}
+                                $answer->setIsCorrect(True);
+                                $cont = $cont +1;}}
                         
                         $em->persist($answer);
                     }
@@ -195,6 +202,19 @@ class multipleQuestionController extends Controller
                     $contentAns = trim($request->request->get('answer'.$i));
                 }
                 $em->flush();
+
+                if($cont >= 1){
+                                 $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
+                                foreach ($answers as $answer) {
+                                    if($answer->getIsCorrect() == True){
+                                        $answer->setIsCorrect(True);
+                                    }
+                                    else{$answer->setIsCorrect(False);}
+                                }
+                                }
+
+                                $em->persist($answer);
+                              $em->flush();
 
             return $this->redirectToRoute('multipleQuestion_show', array('id' => $question->getId()));
           }
