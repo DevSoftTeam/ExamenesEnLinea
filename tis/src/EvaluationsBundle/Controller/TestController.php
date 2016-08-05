@@ -264,22 +264,18 @@ class TestController extends Controller
         return $this->redirectToRoute('test_index');
     }
 
-    public function convertToPdf($html) {
+    public function convertToPdfAction($idTest){//$html) {
+
+        $html = 'hello world';
+//        $html = readfile('http://www.google.com');
+//       echo $html;exit;
         $options = new Options();
         $options->set('defaultFont', 'Courier');
         $dompdf = new Dompdf($options);
-        // instantiate and use the dompdf class
-//        $dompdf = new Dompdf();
-        $dompdf->loadHtml('hello world');
-
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser
-        $dompdf->stream();
+        $dompdf->loadHtml($html);//$dompdf = new Dompdf();
+        $dompdf->setPaper('A4', 'landscape'); // (Optional) Setup the paper size and orientation
+        $dompdf->render();// Render the HTML as PDF
+        $dompdf->stream();// Output the generated PDF to Browser
     }
     /**
      * Creates a form to delete a Test entity.

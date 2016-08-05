@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{#{% set html %}#}
 {% block body %}
     <br><br>
     <div class="row">
@@ -43,7 +44,7 @@
         </div>
 
          <div class="col">
-             <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
+             <a class="waves-effect waves-light btn" href={{ path('test_convertToPdf', {'idTest': test.idTest}) }}>PDF</a>
          </div>
     </div>
 
