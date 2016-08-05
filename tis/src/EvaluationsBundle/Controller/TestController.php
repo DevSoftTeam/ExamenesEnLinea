@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Entity\TestQuestion;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Form\TestType;
 use Symfony\Component\Validator\Constraints\Time;
@@ -258,6 +260,23 @@ class TestController extends Controller
         return $this->redirectToRoute('test_index');
     }
 
+    public function convertToPdf($html) {
+        $options = new Options();
+        $options->set('defaultFont', 'Courier');
+        $dompdf = new Dompdf($options);
+        // instantiate and use the dompdf class
+//        $dompdf = new Dompdf();
+        $dompdf->loadHtml('hello world');
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+    }
     /**
      * Creates a form to delete a Test entity.
      *
