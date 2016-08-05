@@ -20,6 +20,13 @@ class TestQuestion
     private $percent;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_penalized", type="boolean", nullable=true)
+     */
+    private $isPenalized;
+
+    /**
      * @var \Question
      *
      * @ORM\Id

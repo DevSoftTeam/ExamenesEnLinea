@@ -84,11 +84,15 @@ class TestController extends Controller
             ->setParameter('idT' , $test->getIdTest())
             ->getQuery()
             ->getResult();
+            $score_asign = $score_asign[0]['score'];
+            if ($score_asign == null) {
+                $score_asign = 0;
+            }
         //var_dump($score_asign[0]['score']);exit;
         //$questions=$em->getRepository('EvaluationsBundle:Question')->findAll();
         return $this->render('test/asign.html.twig', array(
             'test' => $test,
-            'score_asign' => $score_asign[0]['score'],
+            'score_asign' => $score_asign,
             'questions' => $questions,
         ));
 
