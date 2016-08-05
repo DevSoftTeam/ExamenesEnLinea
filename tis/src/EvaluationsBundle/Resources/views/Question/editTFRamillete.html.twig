@@ -59,12 +59,12 @@
                             <input name="group{{ counter }}" type="radio" id="test{{ counter }}" value="verdadero"
                                      {%if ans.isCorrect == 1%} checked="checked"{% endif %} />
 
-                            <label for="test{{counter}}">Es Verdadero</label>
+                            <label for="test{{counter}}">Verdadero</label>
 
                             <input name="group{{ counter }}" type="radio" id="test{{ falseC }}" value="falso"
-                                    {% if ans.isCorrect == 0 %}checked="checked"{% endif %}/>
+                                    {% if ans.isCorrect is not null and ans.isCorrect != 1 %}checked="checked"{% endif %}/>
 
-                            <label for="test{{ falseC }}">Es Falso</label>
+                            <label for="test{{ falseC }}">Falso</label>
 
                         </div>
                         {% set counter = counter + 2 %}
@@ -108,7 +108,7 @@
             var div2 = document.getElementById("2");
             $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+'" value="verdadero"/>');
             $(div2).append('<label for="test'+i+'">Es Verdadero</label>');
-            $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+1+'" value= "falso" checked="checked" />');
+            $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+1+'" value= "falso"  />');
             $(div2).append('<label for="test'+i+1+'">Es Falso</label>');
             $(div2).append('</br></br></br>');
 

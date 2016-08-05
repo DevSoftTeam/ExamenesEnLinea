@@ -118,11 +118,6 @@ class TestController extends Controller
         return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));
     }
 
-    //private function validateDateTimes(Date $startDate, Time $startTime, Date $entDate, Time $endTime, Form $form)
-    //{
-
-   
-
      public function dropAction($idT,$idQ){
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idT);
@@ -135,10 +130,6 @@ class TestController extends Controller
         $em->flush();
         return $this->redirectToRoute('test_data',array('id' => $test->getId(),'msg'=>'mensaje'));
     }
-
-
-
-
 
     public function newAction(Request $request)
     {

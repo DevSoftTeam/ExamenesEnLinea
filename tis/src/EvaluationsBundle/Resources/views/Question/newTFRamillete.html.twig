@@ -47,9 +47,9 @@
                   </div>
                   <div class="input-field col s4">
                       <input name="group{{ i }}" type="radio" id="test{{ i }}" value="verdadero"/>
-                      <label for="test{{ i }}">Es Verdadero</label>
-                      <input name="group{{ i }}" type="radio" id="test{{ i+1 }}" checked="checked" value="falso" />
-                      <label for="test{{ i+1 }}">Es Falso</label>
+                      <label for="test{{ i }}">Verdadero</label>
+                      <input name="group{{ i }}" type="radio" id="test{{ i+1 }}" value="falso" />
+                      <label for="test{{ i+1 }}">Falso</label>
                   </div>
               {#</div>#}
           {% endfor %}
@@ -81,9 +81,9 @@
             $(div).append('<div class="row input-field col s4" id="2"></div>');
             var div2 = document.getElementById("2");
             $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+'" value="verdadero"/>');
-            $(div2).append('<label for="test'+i+'">Es Verdadero</label>');
-            $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+1+'" value="falso" checked="checked" />');
-            $(div2).append('<label for="test'+i+1+'">Es Falso</label>');
+            $(div2).append('<label for="test'+i+'">Verdadero</label>');
+            $(div2).append('<input name="group'+i+'" type="radio" id="test'+i+1+'" value="falso"  />');
+            $(div2).append('<label for="test'+i+1+'">Falso</label>');
             $(div2).append('</br></br></br>');
 
             i = i + 2;

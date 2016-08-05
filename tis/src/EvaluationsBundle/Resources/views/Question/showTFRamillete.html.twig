@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col s8">
-                <label class="teal-text darken-4"><h6>Enunciado: </h6></label>
+                <label class="teal-text darken-4"><h6>Enunciados: </h6></label>
             </div>
             <div class="col s4">
                 <label class="teal-text darken-4"><h6>Respuesta Correcta:</h6></label>
@@ -38,6 +38,8 @@
                     <div class="col s4">
                         {% if ans.isCorrect %}
                             <p>Verdadero</p>
+                        {% elseif ans.isCorrect is null %}
+                            <p>No definido</p>
                         {% else %}
                             <p>Falso</p>
                         {% endif %}
