@@ -30,6 +30,24 @@ class TestController extends Controller
         ));
     }
 
+    public function searchAction(Request $request)
+    { 
+        $em = $this->getDoctrine()->getManager();
+        $idUser = $this->getUser();
+
+        $text = $request->request->get('bus');
+        //Svar_dump($text);exit;
+      $text = "texto de la busqueda que aun no me sale";
+
+        $testsResult = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
+
+
+
+        return $this->render('test/searchResult.html.twig', array(
+            'testsResult' => $testsResult, 'bus' => $text,
+        ));
+    }
+
     public function previewAction(Test $test)
     {
         $data = array();

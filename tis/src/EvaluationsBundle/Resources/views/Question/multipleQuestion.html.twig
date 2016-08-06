@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col s12">
         <label class="teal-text darken-4"><h6>Area :</h6></label>
-        <input list="areas" name="area" placeholder="seleccione o introzca nombre de area" id="area">
+        <input list="areas" name="area" placeholder="Seleccione o introduzca nombre de area" id="area">
         <datalist id="areas">
         {% for area in areas %}
           <option value="{{ area.nameArea }}">
@@ -45,8 +45,8 @@
       <div class="row">
       <div class="row">
       <div class="col s12">
-      <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
-      <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran de forma aleatoria. Debe completar minimo tres elementos de respuestas.</h6></label>
+      <label class="teal-text lighten-4 col s12"><h5>Opciones :</h5></label>
+      <label class="grey-text lighten-1 col s12"><h6>*Las opciones se mostraran de forma aleatoria. Debe completar minimo tres elementos de opciones.</h6></label>
       </div>
       </div>
 
@@ -54,7 +54,7 @@
       {% for i in 1..4 %}
       <div class="input-field col s12">
           <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
-          <div><label class="teal-text lighten-4  "><h6>Respuesta {{ i }} :</h6></label></div>
+          <div><label class="teal-text lighten-4  "><h6>Opción {{ i }} :</h6></label></div>
           <br>
           <br>
           <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="" length="600" 
@@ -77,7 +77,7 @@
 
         <br><br>
         <div class="row">
-          <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
+          <a class="btn waves-effect waves-light " onClick="addElement();">Agregar opción</a>
         <div class=" alight center">
         <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
       <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
