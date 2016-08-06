@@ -234,27 +234,33 @@ class ExamController extends Controller
                     $scoreQ = 0;
                     if (trim($response) != "" ) {
                          $ansElements = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
-                         $ansTrue=$em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question,'isCorrect'=>TRUE));  
-                         print_r($ansTrue);exit;
+                         $countAE = 1;
+                         foreach ($ansElements as $ans) {
+                             if ($ans->getIsCorrect()) {
+                                 $countAE = $countAE +1;
+                             }
+                         }
+                         if ($countAE>1) {
+                            $countAE = $countAE-1; 
+                         }
+                         //var_dump($ansTrue); exit;
                          $responses = explode(" ",$response);
                         foreach ($ansElements as $ans) {
                             $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($ans);
                             $idAnsE = $answerE->getIdAnswerElement();
                             if ($answerE->getIsCorrect()) {
                                 if (in_array($idAnsE,$responses)) {
-                                    $scoreQ = $scoreQ + round($scoreQuestion/count($ansTrue),2);   
+                                    $scoreQ = $scoreQ + round($scoreQuestion/$countAE,2);   
                                 }else{
                                     if ($isPenalized) {
-                                        $scoreQ = $scoreQ - round($scoreQuestion/count($ansTrue),2);   
+                                        $scoreQ = $scoreQ - round($scoreQuestion/$countAE,2);   
                                     } 
                                 }
                             }else{
-                                if (!in_array($idAnsE,$responses)) {
-                                    $scoreQ = $scoreQ + round($scoreQuestion/count($ansTrue),2);   
-                                }else {
+                                if (in_array($idAnsE,$responses)) {
                                     if ($isPenalized) {
-                                        $scoreQ = $scoreQ - round($scoreQuestion/count($ansTrue),2);   
-                                    }   
+                                        $scoreQ = $scoreQ - round($scoreQuestion/$countAE,2);   
+                                    }     
                                 }
                             }
                         }   
