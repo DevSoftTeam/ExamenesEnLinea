@@ -94,6 +94,17 @@ class UserAnswer
     {
         return $this->response;
     }
+
+    public function setScoreQuestion($scoreQuestion)
+    {
+        $this->scoreQuestion = $scoreQuestion;
+        return $this;
+    }
+
+    public function getScoreQuestion()
+    {
+        return $this->scoreQuestion;   
+    }
     
     public function getIdQuestion()
     {

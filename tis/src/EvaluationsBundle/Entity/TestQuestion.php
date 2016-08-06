@@ -59,6 +59,16 @@ class TestQuestion
         return $this->percent;
     }
 
+    public function setIsPenalized($isPenalized)
+    {
+        $this->isPenalized = $isPenalized;
+        return $this;
+    }
+    public function getIsPenalized()
+    {
+        return $this->isPenalized;
+    }
+
     public function setIdQuestion($question){
         $this->idQuestion = $question;
     }
