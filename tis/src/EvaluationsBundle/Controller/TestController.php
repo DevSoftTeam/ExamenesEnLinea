@@ -35,15 +35,16 @@ class TestController extends Controller
         $em = $this->getDoctrine()->getManager();
         $idUser = $this->getUser();
 
-        
-
+        $text = $request->request->get('bus');
+        //Svar_dump($text);exit;
+      $text = "texto de la busqueda que aun no me sale";
 
         $testsResult = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
 
 
 
         return $this->render('test/searchResult.html.twig', array(
-            'testsResult' => $testsResult,
+            'testsResult' => $testsResult, 'bus' => $text,
         ));
     }
 

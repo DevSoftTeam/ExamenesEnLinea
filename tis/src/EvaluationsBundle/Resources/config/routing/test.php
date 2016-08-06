@@ -12,7 +12,7 @@ $collection->add('test_index', new Route(
     array(),
     '',
     array(),
-    array('GET')
+    array('GET','POST')
 ));
 
 $collection->add('test_searchResult', new Route(
@@ -22,7 +22,7 @@ $collection->add('test_searchResult', new Route(
     array(),
     '',
     array(),
-    array('GET')
+    array('GET','POST')
 ));
 
 $collection->add('test_asign', new Route(
