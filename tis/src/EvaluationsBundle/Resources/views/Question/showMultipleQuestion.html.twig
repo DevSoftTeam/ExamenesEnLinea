@@ -28,17 +28,15 @@
             {% for ans in answers %}
             <div class="col s12">
                 <div class="col s10">
-                <label class="teal-text darken-4"><h6>Respuesta :</h6></label>
+                <label class="teal-text darken-4"><h6>Opción :</h6></label>
                 <p>{{ ans.content }}</p>
                 </div>
                 <div class="col s2">
                 <label class="teal-text darken-4"><h6>Estado :</h6></label>
                 {% if ans.isCorrect %}
-                    <p>Correcta</p>
-                {% else %}
-                    <p>No definida</p>
-                {% endif %}
-                </div>
+                            <p>Verdadero</p>
+                        {% endif %}                
+                         </div>
             </div>
             {% endfor %}
         </div>

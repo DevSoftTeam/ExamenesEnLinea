@@ -45,8 +45,8 @@
       <div class="row">
       <div class="row">
       <div class="col s12">
-      <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
-      <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran de forma aleatoria. Debe completar minimo tres elementos de respuestas.</h6></label>
+      <label class="teal-text lighten-4 col s12"><h5>Opciones :</h5></label>
+      <label class="grey-text lighten-1 col s12"><h6>*Las opciones se mostraran de forma aleatoria. Debe completar minimo tres elementos de opción.</h6></label>
       </div>
       </div>
 
@@ -54,7 +54,7 @@
       {% for i in 1..4 %}
       <div class="input-field col s12">
           <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
-          <div><label class="teal-text lighten-4  "><h6>Respuesta {{ i }} :</h6></label></div>
+          <div><label class="teal-text lighten-4  "><h6>Opción {{ i }} :</h6></label></div>
           <br>
           <br>
           <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="Introduzca texto" length="600" 
@@ -63,7 +63,7 @@
           
           <div class="input-field col s2">
           <p>
-          <input class="with-gap" name="chec1" value="{{i}}" type="radio" id="test{{i}}"  />
+          <input class="" name="chec1" value="{{i}}" type="radio" id="test{{i}}"  />
           <label class="teal-text lighten-4" for="test{{i}}">Correcta</label>
           </p>
           </div>

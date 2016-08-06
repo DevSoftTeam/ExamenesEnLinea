@@ -51,7 +51,9 @@
                 <td>
                     <a href="{{ path('test_show', { 'id': test.idTest }) }}"><FONT COLOR="black">{{test.matter}}</FONT></a>
                 </td>
-
+                <td>
+                    <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Resolver</a>
+                </td>
                 {#<td>#}
                     {#<a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.title }}</a>#}
                 {#</td>#}

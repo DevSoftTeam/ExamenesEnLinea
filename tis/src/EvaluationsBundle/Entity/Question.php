@@ -232,9 +232,9 @@ class Question
                     
                 <div class=\"col s6 m6\">
                     <input type=\"radio\" id=\"t\" disabled>
-                      <label for=\"t\">Verdadero</label>
+                      <label for=\"t\">V</label>
                       <input type=\"radio\" id=\"f\" disabled>
-                      <label for=\"f\">Falso</label>
+                      <label for=\"f\">F</label>
                 </div>
                 </div>";
             $html = $html.$el;
@@ -263,10 +263,10 @@ class Question
  
         $answerEl = " <div id=\"TrueFalse\">
             <input type=\"radio\" id=\"t\" disabled>
-              <label for=\"t\">Verdadero</label>
+              <label for=\"t\">V</label>
  
               <input type=\"radio\" id=\"f\" disabled>
-              <label for=\"f\">Falso</label>
+              <label for=\"f\">F</label>
         </div>";
         return $html.$answerEl;
     }

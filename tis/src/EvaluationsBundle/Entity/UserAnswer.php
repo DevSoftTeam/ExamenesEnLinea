@@ -32,9 +32,9 @@ class UserAnswer
     /**
      * @var string
      *
-     * @ORM\Column(name="order_answer", type="string", length=24, nullable=true)
+     * @ORM\Column(name="score_question", type="decimal", precision=10, scale=0, nullable=true)
      */
-    private $orderAnswer;
+    private $scoreQuestion;
 
     /**
      * @var \Question

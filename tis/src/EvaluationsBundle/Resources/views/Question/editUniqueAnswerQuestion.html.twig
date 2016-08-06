@@ -41,8 +41,8 @@
           <div class="row">
             <div class="row">
             <div class="col s12">
-            <label class="teal-text lighten-4 col s12"><h5>Respuestas :</h5></label>
-            <label class="grey-text lighten-1 col s12"><h6>*Las respuestas se mostraran de forma aleatoria. Debe completar minimo tres elementos de respuestas.</h6></label>
+            <label class="teal-text lighten-4 col s12"><h5>Opciones :</h5></label>
+            <label class="grey-text lighten-1 col s12"><h6>*Las opciones se mostraran de forma aleatoria. Debe completar minimo tres elementos de opción.</h6></label>
             </div>
             </div>
             <div class="row" id="answers">
@@ -53,11 +53,11 @@
                 <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="" length="600"
                 {% if i <= 3 %}required{% endif %} >
                 {% if answers|length >= i %}{{answers[i-1].content}}{% endif %}</textarea>
-                <label class="teal-text lighten-4"><h6>Respuesta {{ i }} :</h6></label>
+                <label class="teal-text lighten-4"><h6>Opción {{ i }} :</h6></label>
                 
                 <div class="input-field col s2">
           <p>
-                <input class="with-gap" name="chec1" value="{{i}}" type="radio" id="test{{i}}" 
+                <input class="" name="chec1" value="{{i}}" type="radio" id="test{{i}}" 
                 {% if i<= answers|length %} {% if answers[i-1].isCorrect %}
                 checked="checked"{% endif %} {% endif %}/>
                 <label class="teal-text lighten-4" for="test{{i}}">Correcta</label></p>
@@ -68,7 +68,7 @@
             </div>
             </div>
 
-        <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
+        <a class="btn waves-effect waves-light " onClick="addElement();">Agregar opción</a>
         <br><br>
         <div class="row">
             <div class="col">

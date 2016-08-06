@@ -34,7 +34,7 @@ class WordCompletionQuestionController extends Controller
                     $idArea = new Area();
                     $idArea->setNameArea($nameArea);
                     $em->persist($idArea);
-                    //$em->flush();
+                    
                 }
                 $file=$form['image']->getData();
                 if (!is_null($file)) {
@@ -60,33 +60,33 @@ class WordCompletionQuestionController extends Controller
                 $ques=$question->getStatementQuestion();
 
 
-                 $claves = preg_split("/[[:space:]]/", $ques);
+                 $claves = "/(\[\*|^)\S*(\*\]|$)/";
+                 preg_match_all($claves, $ques, $todo);
+
+                 $sust = "________";
+                $enun = preg_replace($claves, $sust, $ques);
                
                 $i = 1;
                 $j=0;
-                $size=count($claves);
+                $size=count($todo[0])-1;
 
                 
-                if($ques!="" ){
-                   while(($size-1)>=0){
-                    $pos = strpos($claves[$j],'[*');
-                    $pos2= strpos($claves[$j],'*]');
-                    if($pos === false or $pos2 ===false){
-                        $size=$size-1;
-                        $j=$j+1;
-                    }
-                        else{if($claves[$j] != ""){
+                if($ques!=""){
+                   while(($size)>=0){
+                   if($todo[$j] != ""){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
-                        $answer->setContent(substr($claves[$j], 2, -2));
-                        $answer->setOrderVar($i);
-                        $answer->setIsCorrect(True);
+                        $answer->setContent(substr($todo[0][$j], 2, -2));
                         $em->persist($answer);
                         $size=$size-1;
                         $j=$j+1;}
-                        }
+                        
               }
             }
+
+
+            $question->setStatementQuestion($enun);
+            $em->persist($question);
 
                 $em->flush();
 
@@ -177,38 +177,37 @@ class WordCompletionQuestionController extends Controller
             }
 
 
-                
-               $ques=$question->getStatementQuestion();
+                $em->persist($question);
+                $ques=$question->getStatementQuestion();
 
 
-                 $claves = preg_split("/[[:space:]]/", $ques);
+                 $claves = "/(\[\*|^)\S*(\*\]|$)/";
+                 preg_match_all($claves, $ques, $todo);
+
+                 $sust = "________";
+                $enun = preg_replace($claves, $sust, $ques);
                
                 $i = 1;
                 $j=0;
-                $size=count($claves);
+                $size=count($todo[0])-1;
 
                 
-                if($ques!="" ){
-                   while(($size-1)>=0){
-                    $pos = strpos($claves[$j],'[*');
-                    $pos2= strpos($claves[$j],'*]');
-                    if($pos === false or $pos2 ===false){
-                        $size=$size-1;
-                        $j=$j+1;
-                    }
-                        else{
+                if($ques!=""){
+                   while(($size)>=0){
+                   if($todo[$j] != ""){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
-                        $answer->setContent(substr($claves[$j], 2, -2));
-                        //$answer->setContent($claves[$j]);
-                        $answer->setOrderVar($i);
-                        $answer->setIsCorrect(True);
+                        $answer->setContent(substr($todo[0][$j], 2, -2));
                         $em->persist($answer);
                         $size=$size-1;
-                        $j=$j+1;
-                        }
+                        $j=$j+1;}
+                        
               }
             }
+
+
+            $question->setStatementQuestion($enun);
+            $em->persist($question);
 
                 $em->flush();
 
