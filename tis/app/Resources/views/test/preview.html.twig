@@ -2,53 +2,71 @@
 
 {#{% set html %}#}
 {% block body %}
-    <br><br>
-    <div class="row">
-        <div class="col s12 center">
-        <label class="teal-text lighten-4"><h3>{{ test.title }}</h3></label>
-        </div>
-        <div class="col s4">
-            <label><h5 class="teal-text darken-4">Materia: <strong class="black-text">{{ test.matter }}</strong></h5></label>
-        </div>
-        <br>
-        <div class="col s4">
-            {% if test.institution%}
-                <label class="teal-text darken-4"><h5>Institucion :  <strong class="black-text">{{ test.institution }}</strong></h5></label>
-            {% else %}
-                {{ 'No Definido'}}
-            {% endif %}
+    <div id="dvContainer"  >
+        <div class="row">
+            <div class="col s12 center">
+            <label class="teal-text lighten-4"><h3>{{ test.title }}</h3></label>
+            </div>
+            <div class="col s4">
+                <label><h5 class="teal-text darken-4">Materia: <strong class="black-text">{{ test.matter }}</strong></h5></label>
+            </div>
+            <br>
+            <div class="col s4">
+                {% if test.institution%}
+                    <label class="teal-text darken-4"><h5>Institucion :  <strong class="black-text">{{ test.institution }}</strong></h5></label>
+                {% else %}
+                    {{ 'No Definido'}}
+                {% endif %}
+            </div>
+
+            <div class="col s12">
+                <div class="col s3">
+                <h5 class="teal-text darken-4">Nombre completo: </h5>
+                </div>
+                <div class="col s9">
+                    <input type="text" disabled name="">
+                </div>
+            </div>
         </div>
 
-        <div class="col s12">
-            <div class="col s3">
-            <h5 class="teal-text darken-4">Nombre completo: </h5>
-            </div>
-            <div class="col s9">
-                <input type="text" disabled name="">
-            </div>
+        <div class="preguntas">
+        {% for value in data %}
+            {{ value['question'].getQuestionView(value['answerEl'])  | raw }}
+            {#{ value['question'].getViewStatement()  | raw }#}
+        {% endfor %}
         </div>
     </div>
-
-    <div class="preguntas">
-    {% for value in data %}
-        {{ value['question'].getQuestionView(value['answerEl'])  | raw }}
-        {#{ value['question'].getViewStatement()  | raw }#}
-    {% endfor %}
-    </div>
-
-    </section>
 
      <div class="row">
         <div class="col">
             <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
         </div>
 
-         <div class="col">
-             <a class="waves-effect waves-light btn" href={{ path('test_convertToPdf', {'idTest': test.idTest}) }}>PDF</a>
-         </div>
+         <input class="waves-effect waves-light btn" type="button" value="Print Div Contents" id="btnPrint" />
+
+         {#<div class="col">#}
+             {#<a class="waves-effect waves-light btn" href={{ path('test_convertToPdf', {'test': test}) }}>PDF</a>#}
+         {#</div>#}
+         {#<form id="form1">#}
+             {#<div id="dvContainer">#}
+                 {#This content needs to be printed.#}
+             {#</div>#}
+             <input type="button" value="Print Div Contents" id="btnPrint" />
+         {#</form>#}
     </div>
 
-    <script>
-        
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#btnPrint").live("click", function () {
+            var divContents = $("#dvContainer").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>DIV Contents</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
     </script>
+
 {% endblock %}

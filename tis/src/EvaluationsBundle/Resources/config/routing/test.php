@@ -46,7 +46,7 @@ $collection->add('test_asosiation', new Route(
 ));
 
 $collection->add('test_convertToPdf', new Route(
-    '/{idTest}/convertToPdf',
+    '/{test}/convertToPdf',
     array('_controller' => 'EvaluationsBundle:Test:convertToPdf'),
     array(),
     array(),
