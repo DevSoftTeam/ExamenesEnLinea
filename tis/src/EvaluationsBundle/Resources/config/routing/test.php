@@ -12,7 +12,17 @@ $collection->add('test_index', new Route(
     array(),
     '',
     array(),
-    array('GET')
+    array('GET','POST')
+));
+
+$collection->add('test_searchResult', new Route(
+    '/result',
+    array('_controller' => 'EvaluationsBundle:Test:search'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET','POST')
 ));
 
 $collection->add('test_asign', new Route(
