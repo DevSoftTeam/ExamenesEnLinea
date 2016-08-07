@@ -55,6 +55,16 @@ $collection->add('test_asosiation', new Route(
     array('GET')
 ));
 
+$collection->add('test_convertToPdf', new Route(
+    '/{test}/convertToPdf',
+    array('_controller' => 'EvaluationsBundle:Test:convertToPdf'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
 $collection->add('test_show', new Route(
     '/{id}/show',
     array('_controller' => 'EvaluationsBundle:Test:show'),
@@ -108,6 +118,16 @@ $collection->add('test_drop', new Route(
 $collection->add('test_data', new Route(
     '/{id}/show',
     array('_controller' => 'EvaluationsBundle:Test:show'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('payrollQualifications_new', new Route(
+    '/{id}/show',
+    array('_controller' => 'EvaluationsBundle:PayrollQualifications:newPayrollQualifications'),
     array(),
     array(),
     '',
