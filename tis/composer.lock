@@ -1176,16 +1176,16 @@
         },
         {
             "name": "psr/cache",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3"
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
                 "shasum": ""
             },
             "require": {
@@ -1218,7 +1218,7 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2015-12-11 02:52:07"
+            "time": "2016-08-06 20:24:11"
         },
         {
             "name": "psr/log",
