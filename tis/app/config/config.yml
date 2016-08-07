@@ -83,13 +83,3 @@ materialize:
     version: 0.97.0
     html5: true
     async: false
-
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
-        options:    []
-    image:
-        enabled:    true
-        binary:      "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
-        options:    []

@@ -8,11 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Entity\TestQuestion;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Form\TestType;
 use Symfony\Component\Validator\Constraints\Time;
@@ -308,18 +303,18 @@ class TestController extends Controller
 //     * @Method("GET")
 //     * @Template("test/show.html.twig")
 //     */
-    public function convertToPdfAction($test)
-    {
-        $pageUrl = $this->generateUrl('login_homepage', array(), true); // use absolute path!
-
-        return new Response(
-            $this->get('knp_snappy.pdf')->getOutput($pageUrl),
-            200,
-            array(
-                'Content-Type'          => 'tis/',
-                'Content-Disposition'   => 'attachment; filename="file.pdf"'
-            )
-        );
+//    public function convertToPdfAction($test)
+//    {
+//        $pageUrl = $this->generateUrl('login_homepage', array(), true); // use absolute path!
+//
+//        return new Response(
+//            $this->get('knp_snappy.pdf')->getOutput($pageUrl),
+//            200,
+//            array(
+//                'Content-Type'          => 'tis/',
+//                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+//            )
+//        );
 //        $em = $this->getDoctrine()->getManager();
 ////        $entities = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
 //
@@ -350,15 +345,15 @@ class TestController extends Controller
 //            )
 //        );
 //        return $response;
-    }
+//    }
 
-    public function pdf_create($html, $filename, $paper, $orientation, $stream=TRUE) {
-        $dompdf = new Dompdf();
-        $dompdf->set_paper($paper, $orientation);
-        $dompdf->load_html($html);
-        $dompdf->render();
-        $dompdf->stream($filename.".pdf");
-    }
+//    public function pdf_create($html, $filename, $paper, $orientation, $stream=TRUE) {
+//        $dompdf = new Dompdf();
+//        $dompdf->set_paper($paper, $orientation);
+//        $dompdf->load_html($html);
+//        $dompdf->render();
+//        $dompdf->stream($filename.".pdf");
+//    }
 
     /**
      * Creates a form to delete a Test entity.
