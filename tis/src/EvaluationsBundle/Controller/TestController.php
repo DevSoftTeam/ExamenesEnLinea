@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Entity\TestQuestion;
+use Symfony\Component\HttpFoundation\Response;
 use EvaluationsBundle\Entity\Question;
 use EvaluationsBundle\Form\TestType;
 use Symfony\Component\Validator\Constraints\Time;
@@ -279,6 +280,80 @@ class TestController extends Controller
 
         return $this->redirectToRoute('test_index');
     }
+
+//    public function convertToPdfAction($idTest){ //$html) {
+//
+//////        $html = 'hello world';
+////        $html = include('http://www.google.com');
+//////       echo $html;exit;
+////        $options = new Options();
+////        $options->set('defaultFont', 'Courier');
+////        $dompdf = new Dompdf($options);
+////        $dompdf->loadHtml($html);//$dompdf = new Dompdf();
+////        $dompdf->setPaper('A4', 'landscape'); // (Optional) Setup the paper size and orientation
+////        $dompdf->render();// Render the HTML as PDF
+////        $dompdf->stream();// Output the generated PDF to Browser
+//
+////        $container->get('knp_snappy.image')->generate('http://www.google.fr', '/path/to/the/image.jpg');
+//
+//    }
+
+//    /**
+//     * @Route("/archivopdf", name="archivopdf")
+//     * @Method("GET")
+//     * @Template("test/show.html.twig")
+//     */
+//    public function convertToPdfAction($test)
+//    {
+//        $pageUrl = $this->generateUrl('login_homepage', array(), true); // use absolute path!
+//
+//        return new Response(
+//            $this->get('knp_snappy.pdf')->getOutput($pageUrl),
+//            200,
+//            array(
+//                'Content-Type'          => 'tis/',
+//                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+//            )
+//        );
+//        $em = $this->getDoctrine()->getManager();
+////        $entities = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+//
+//        $html =$this->renderView('test/show.html.twig',
+//        array(
+//        'test' => $test,
+//        ));
+//
+//        $response = new Response (
+//        $this->get('knp_snappy.pdf')->getOutputFromHtml($html,
+//        array('lowquality' => false,
+//            'print-media-type' => true,
+//            'encoding' => 'utf-8',
+//            'page-size' => 'Letter',
+//            'outline-depth' => 8,
+//            'orientation' => 'Portrait',
+//            'title'=> 'Personal con Certificado',
+//            'user-style-sheet'=> 'css/bootstrap.css',
+//            'header-right'=>'Pag. [page] de [toPage]',
+//            'header-font-size'=>7,
+//            )
+//        ),
+//        200,
+//        array(
+//            'Content-Type'=>'/home/usuario/public_html/Proyecto/web/pdf',
+//            'Content-Disposition'=> 'attachment;
+//            filename="nombredearchivo.pdf"',
+//            )
+//        );
+//        return $response;
+//    }
+
+//    public function pdf_create($html, $filename, $paper, $orientation, $stream=TRUE) {
+//        $dompdf = new Dompdf();
+//        $dompdf->set_paper($paper, $orientation);
+//        $dompdf->load_html($html);
+//        $dompdf->render();
+//        $dompdf->stream($filename.".pdf");
+//    }
 
     /**
      * Creates a form to delete a Test entity.
