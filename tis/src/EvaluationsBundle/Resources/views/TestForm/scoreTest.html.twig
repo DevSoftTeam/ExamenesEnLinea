@@ -9,6 +9,31 @@
 		<p>{{ testTaken.userScore }}</p>
 	</div>
     <div class="row">
+        <label class="teal-text lighten-4"><h5>Puntuación preguntas del examen</h5></label>
+            <div class="col s12">
+                <div class="col s10">
+                    <label class="teal-text lighten-4"><h5>Enunciado pregunta</h5></label>
+                </div>
+                <div class="col s2">
+                    <label class="teal-text lighten-4"><h5>Puntaje obtenido</h5></label>
+                </div>
+            </div>
+        {% for userQuestion in userAnswers %}
+            <div class="col s12">
+                <div class="col s10">
+                    <pre>{{ userQuestion.idQuestion.statementQuestion }}</pre>
+                </div>
+                <div class="col s2" align="center">
+                    {% if userQuestion.scoreQuestion == null %}
+                    <p>Falta calificar</p>
+                    {% else %}
+                    <p>{{ userQuestion.scoreQuestion }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
         <div align="center">
             <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver examenes</a>
         </div>
