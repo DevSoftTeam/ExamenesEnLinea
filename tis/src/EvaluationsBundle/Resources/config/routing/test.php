@@ -26,7 +26,7 @@ $collection->add('test_searchResult', new Route(
 ));
 
 $collection->add('test_asign', new Route(
-    '/asignar/{idT}/{idQ}/{percent}',
+    '/asignar/{idT}/{idQ}/{percent}/{ispenalized}',
     array('_controller' => 'EvaluationsBundle:Test:asign'),
     array(),
     array(),
