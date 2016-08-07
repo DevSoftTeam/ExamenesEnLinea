@@ -126,7 +126,7 @@ class TestController extends Controller
 
     }*/
 
-    public function asignAction($idT,$idQ, $percent){
+    public function asignAction($idT,$idQ, $percent, $ispenalized){
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idT);
         $question = $em->getRepository('EvaluationsBundle:Question')->find($idQ);
@@ -135,6 +135,7 @@ class TestController extends Controller
         $testQuestion->setIdQuestion($question);
         $testQuestion->setIdTest($test);
         $testQuestion->setPercent($percent);
+        $testQuestion->setIsPenalized($ispenalized);
         $em->persist($testQuestion);
         $em->flush();
         return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));
