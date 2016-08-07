@@ -114,4 +114,14 @@ $collection->add('test_data', new Route(
     array(),
     array('GET')
 ));
+
+$collection->add('payrollQualifications_new', new Route(
+    '/{id}/show',
+    array('_controller' => 'EvaluationsBundle:PayrollQualifications:newPayrollQualifications'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
 return $collection;
