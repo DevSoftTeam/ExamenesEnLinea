@@ -203,70 +203,72 @@ class ExamController extends Controller
                     $score = $score + $scoreQ;
                     break;
                 case 4:
-                    $scoreQ = 0;
                     $answersElement = $em->getRepository('EvaluationsBundle:AnswerElement')->findOneBy(array('idQuestion'=>$question));
-                    if($response == $answersElement->getContent()){
-                        $scoreQ = $scoreQ + $scoreQuestion;
-                    }else{
-                        if($isPenalized && $response != "" ){
-                            $scoreQ = $scoreQ - $scoreQuestion;
+                    if ($answersElement->getContent() != "no definido") {
+                        $scoreQ = 0;
+                        if($response == $answersElement->getContent()){
+                            $scoreQ = $scoreQ + $scoreQuestion;
+                        }else{
+                            if($isPenalized && $response != "" ){
+                                $scoreQ = $scoreQ - $scoreQuestion;
+                            }
                         }
+                        $answerQuestion->setScoreQuestion($scoreQ);
+                        $score = $score + $scoreQ;
                     }
-                    $answerQuestion->setScoreQuestion($scoreQ);
-                    $score = $score + $scoreQ;
                     break;
                 case 5:
-                    $scoreQ = 0;
                     if (trim($response) != "" ) {
                         $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($response);
-                        if($answerE->getIsCorrect()){
-                            $scoreQ = $scoreQ + $scoreQuestion;
-                        }else {
-                            if ($isPenalized) {
-                                $scoreQ = $scoreQ - $scoreQuestion;                               
-                            }
-                        } 
+                        if (!is_null($answerE->getIsCorrect())) {
+                           $scoreQ = 0;
+                           if($answerE->getIsCorrect()){
+                                $scoreQ = $scoreQ + $scoreQuestion;
+                            }else {
+                                if ($isPenalized) {
+                                    $scoreQ = $scoreQ - $scoreQuestion;                               
+                                }
+                            }                    
+                            $answerQuestion->setScoreQuestion($scoreQ);
+                            $score = $score + $scoreQ; 
+                        }      
                     }
-                    $answerQuestion->setScoreQuestion($scoreQ);
-                    $score = $score + $scoreQ;
                     break;
                 case 6:
-                    $scoreQ = 0;
                     if (trim($response) != "" ) {
                          $ansElements = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
-                         $countAE = 1;
+                         $countAE = 0;
                          foreach ($ansElements as $ans) {
-                             if ($ans->getIsCorrect()) {
+                             if ($ans->getIsCorrect() && !is_null($ans->getIsCorrect())) {
                                  $countAE = $countAE +1;
                              }
                          }
-                         if ($countAE>1) {
-                            $countAE = $countAE-1; 
-                         }
-                         //var_dump($ansTrue); exit;
-                         $responses = explode(" ",$response);
-                        foreach ($ansElements as $ans) {
-                            $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($ans);
-                            $idAnsE = $answerE->getIdAnswerElement();
-                            if ($answerE->getIsCorrect()) {
-                                if (in_array($idAnsE,$responses)) {
-                                    $scoreQ = $scoreQ + round($scoreQuestion/$countAE,2);   
+                         if ($countAE>=1) {
+                            $scoreQ = 0;
+                            $responses = explode(" ",$response);
+                            foreach ($ansElements as $ans) {
+                                $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find($ans);
+                                $idAnsE = $answerE->getIdAnswerElement();
+                                if ($answerE->getIsCorrect()) {
+                                    if (in_array($idAnsE,$responses)) {
+                                        $scoreQ = $scoreQ + round($scoreQuestion/$countAE,2);   
+                                    }else{
+                                        if ($isPenalized) {
+                                            $scoreQ = $scoreQ - round($scoreQuestion/$countAE,2);   
+                                        } 
+                                    }
                                 }else{
-                                    if ($isPenalized) {
-                                        $scoreQ = $scoreQ - round($scoreQuestion/$countAE,2);   
-                                    } 
-                                }
-                            }else{
-                                if (in_array($idAnsE,$responses)) {
-                                    if ($isPenalized) {
-                                        $scoreQ = $scoreQ - round($scoreQuestion/$countAE,2);   
-                                    }     
+                                    if (in_array($idAnsE,$responses)) {
+                                        if ($isPenalized) {
+                                            $scoreQ = $scoreQ - round($scoreQuestion/$countAE,2);   
+                                        }     
+                                    }
                                 }
                             }
-                        }   
+                            $answerQuestion->setScoreQuestion($scoreQ);
+                            $score = $score + $scoreQ;
+                         }     
                     }
-                    $answerQuestion->setScoreQuestion($scoreQ);
-                    $score = $score + $scoreQ;
                     break;
                 case 7:
                     $scoreQ = 0;
@@ -308,26 +310,32 @@ class ExamController extends Controller
                     foreach ($responses as $resp) {
                         $responseAE = explode(",",$resp);
                         $answerE = $em->getRepository('EvaluationsBundle:AnswerElement')->find((int)$responseAE[0]);
-                        if ($answerE->getIsCorrect()) {
-                            if ($responseAE[1]=="TRUE") {
-                                $scoreQ = $scoreQ + round($scoreQuestion/count($responses),2);
-                            }else {
-                                if($isPenalized && $responseAE[1] != "" ){
-                                $scoreQ = $scoreQ - round($scoreQuestion/count($responses),2);
-                                }
-                            }
-
+                        if (is_null($answerE->getIsCorrect())) {
+                            $answerQuestion->setScoreQuestion(null);
+                            $scoreQ = 0;
+                            break;
                         }else{
-                            if($responseAE[1] == "FALSE" ){
-                                $scoreQ = $scoreQ + round($scoreQuestion/count($responses),2);
+                            if ($answerE->getIsCorrect()) {
+                                if ($responseAE[1]=="TRUE") {
+                                    $scoreQ = $scoreQ + round($scoreQuestion/count($responses),2);
+                                }else {
+                                    if($isPenalized && $responseAE[1] != "" ){
+                                    $scoreQ = $scoreQ - round($scoreQuestion/count($responses),2);
+                                    }
+                                }
+
                             }else{
-                                if($isPenalized && $responseAE[1] != "" ){
-                                $scoreQ = $scoreQ - round($scoreQuestion/count($responses),2);
+                                if($responseAE[1] == "FALSE" ){
+                                    $scoreQ = $scoreQ + round($scoreQuestion/count($responses),2);
+                                }else{
+                                    if($isPenalized && $responseAE[1] != "" ){
+                                    $scoreQ = $scoreQ - round($scoreQuestion/count($responses),2);
+                                    }
                                 }
                             }
+                            $answerQuestion->setScoreQuestion($scoreQ);
                         }
                     }
-                    $answerQuestion->setScoreQuestion($scoreQ);
                     $score = $score + $scoreQ;
                     break;
             }
