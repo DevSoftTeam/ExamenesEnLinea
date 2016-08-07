@@ -26,8 +26,14 @@ class TestController extends Controller
         $em = $this->getDoctrine()->getManager();
         $idUser = $this->getUser();
         $tests = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
+        $testsTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idUser'=>$idUser));
+        $testsT = array();
+        foreach ($testsTaken as $testT) {
+            array_push($testsT,$testT->getIdTest());
+        }
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
+            'testsT' => $testsT,
         ));
     }
 
