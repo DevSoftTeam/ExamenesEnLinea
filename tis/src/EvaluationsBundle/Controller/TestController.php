@@ -26,8 +26,14 @@ class TestController extends Controller
         $em = $this->getDoctrine()->getManager();
         $idUser = $this->getUser();
         $tests = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
+        $testsTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idUser'=>$idUser));
+        $testsT = array();
+        foreach ($testsTaken as $testT) {
+            array_push($testsT,$testT->getIdTest());
+        }
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
+            'testsT' => $testsT,
         ));
     }
 
@@ -127,7 +133,7 @@ class TestController extends Controller
 
     }*/
 
-    public function asignAction($idT,$idQ, $percent){
+    public function asignAction($idT,$idQ, $percent, $ispenalized){
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idT);
         $question = $em->getRepository('EvaluationsBundle:Question')->find($idQ);
@@ -136,6 +142,7 @@ class TestController extends Controller
         $testQuestion->setIdQuestion($question);
         $testQuestion->setIdTest($test);
         $testQuestion->setPercent($percent);
+        $testQuestion->setIsPenalized($ispenalized);
         $em->persist($testQuestion);
         $em->flush();
         return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));

@@ -52,7 +52,11 @@
                     <a href="{{ path('test_show', { 'id': test.idTest }) }}"><FONT COLOR="black">{{test.matter}}</FONT></a>
                 </td>
                 <td>
+                {% if test in testsT %}
+                    <p>Resuelto</p>
+                {% else %}
                     <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Resolver</a>
+                {% endif %}
                 </td>
                 <td>
                     <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Planilla de calificaciones</a>

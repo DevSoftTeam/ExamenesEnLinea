@@ -42,7 +42,7 @@
                 <td>{{ question.statementQuestion[0:15] }}</td>
                 <td>{{ question.idArea.nameArea }}</td>
                 <td>{{ question.idType.nameType }}</td>
-                <td><button onclick="abrir('{{ question.statementQuestion |replace({"\n":' ', "\r":' '}) }}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
+                <td><button onclick="abrir('{{ question.statementQuestion |replace({"\n":' ', "\r":' '}) }}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0, ispenalized:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -58,7 +58,15 @@
           <h6 id="nametype"> </h6>
           <p class="teal-text lighten-4">puntaje de la pregunta:</p>
           <p class="teal-text lighten-4">puntaje total: {{ test.score }}, puntaje usado: {{ score_asign }}</p>
+          <div class="row">
+          <div class="col m9">
           <input id="percent" value="1" min=1 type="number">
+          </div>
+          <p class="col m3"> 
+          <input type="checkbox" id="penalized"/>
+          <label for="penalized">es penalizada?</label>
+          </p>
+          </div>
         </div>
         <div class="modal-footer">
           <button id="agregar" href="" onclick="guardar( {{score_asign}}, {{ test.score }} )" class="modal-action modal-close waves-effect waves-green btn-flat">Agregar</button>
@@ -81,10 +89,11 @@
 
     var guardar = function(score_asign, total_score) {
         var url = $('#url')[0].value;
-        var size = url.length-2;
+        var penalized = $('#penalized').is(":checked")
+        var size = url.length-4;
         var url = url.substring(0, size);
         var percent = $('#percent')[0].value;
-        var url = url + '/'+ percent;
+        var url = url + '/'+ percent+'/'+penalized;
         if (parseInt(percent) < 1) {
             toast('no puede asignar puntos menores a 1');
         }
