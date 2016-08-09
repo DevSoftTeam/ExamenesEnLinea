@@ -20,14 +20,15 @@
 </div>
 
 
+
     <table class="striped">
         <thead>
             <tr>
                 {#<th>Nro Examen</th>#}
                 <th class="teal-text lighten-4">Titulo</th>
                 <th class="teal-text lighten-4">Materia</th>
-                {#<th>Institucion</th>#}
-                {#<th>Hora Inicio</th>#}
+                <th class="teal-text lighten-4"> resolver</th>
+                <th class="teal-text lighten-4"> instituto</th>
                 {#<th>Hora Fin</th>#}
                 {#<th>Fecha Inicio</th>#}
                 {#<th>Fecha Fin</th>#}
@@ -50,13 +51,19 @@
                 <td>
                     <a href="{{ path('test_show', { 'id': test.idTest }) }}"><FONT COLOR="black">{{test.matter}}</FONT></a>
                 </td>
-
+                <td>
+                {% if test in testsT %}
+                    <p>Resuelto</p>
+                {% else %}
+                    <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Resolver</a>
+                {% endif %}
+                </td>
                 {#<td>#}
                     {#<a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.title }}</a>#}
                 {#</td>#}
                 {#<td>{{ test.mat}}#}
 
-                {#<td>{{ test.institution }}</td>#}
+                <td>{{ test.institution }}</td>
                 {#<td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>#}
                 {#<td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>#}
                 {#<td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>#}
@@ -77,9 +84,11 @@
         </tbody>
     </table>
 
-  <!--  <ul>
+    <ul>
         <li>
             <a class="waves-effect waves-light btn" href="{{ path('test_new') }}">Crear Examen</a>
         </li>
-    </ul> -->
+    </ul>
+
+    <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Cancelar</a>
 {% endblock %}

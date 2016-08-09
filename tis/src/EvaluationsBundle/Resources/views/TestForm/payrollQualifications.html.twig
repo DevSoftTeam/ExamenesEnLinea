@@ -2,10 +2,37 @@
 
 {% block body %}
     <h3 class="teal-text lighten-4">Planilla de calificaciones</h3>
-    
-
     <br>
-
+    <div class="row" >
+    <div class="col s12">
+    {% for  in  %}
+    <table class="striped">
+        <thead>
+            <tr>
+               
+                <th class="teal-text lighten-4">Nombre : {{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</th>
+                </tr>
+        </thead>
+        <tbody >
+                <tr>
+                {% for question in questions %}
+                <td>
+                    <font color="black">Pregunta : </font></a>
+                </td>
+                <td>
+                    <font color="black">{{TestQuestion.getPercent}} pts. </font></a>
+                </td>
+                </tr>
+                <tr>
+                  <td>
+                    <font color="black" aligh="center">Puntaje total = {{ testTaken.userScore }}   pts.</font></a>
+                </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+</div></div>
       
 
     <ul>
