@@ -122,7 +122,6 @@ class Question
         if ($this->pathImageQuestion != null) {
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
-                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
                         <div><h5>".$this->statementQuestion."</h5></div>
                     </div><br><br><br>
                     <div class=\"col s12\">
@@ -132,7 +131,6 @@ class Question
         else{
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
-                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
                     <h5>".$this->statementQuestion."</h5>
                     </div>
                 </div>";

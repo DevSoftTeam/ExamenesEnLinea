@@ -1,13 +1,60 @@
 {% extends 'base.html.twig' %}
 {% block title %}Nota examen{% endblock %}
 {% block body %}
-	<div class="row">	
+	<div class="row">
+    <div class="col s12">
         <label class="teal-text lighten-4"><h3>Nota de {{ testTaken.idTest.title }}</h3></label>
-        <label class="teal-text darken-4"><h5>Nombre :</h5></label>
-		<p>{{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</p>
-		<label class="teal-text darken-4"><h5>Puntuación :</h5></label>
-		<p>{{ testTaken.userScore }}</p>
+        <div class="col s6">
+            <div class="col s3">
+                <label class="teal-text darken-4"><h5>Nombre :</h5></label>
+            </div>
+            <div class="col s9">
+                <pre>{{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</pre> 
+            </div>
+        </div>	
+        <div class="col s6">
+            <div class="col s4">
+              <label class="teal-text darken-4"><h5>Puntuación :</h5></label>
+            </div>
+            <div class="col s8">
+                <p>{{ testTaken.userScore }}</p> 
+            </div>
+        </div>
+    </div>
 	</div>
+    <div class="row">
+            <div class="col s12">
+            <label class="teal-text lighten-4"><h5>Puntuación preguntas del examen</h5></label>
+                <div class="col s1">
+                    <label class="teal-text lighten-4"><h5>Nro. Preg.</h5></label>
+                </div>
+                <div class="col s9">
+                    <label class="teal-text lighten-4"><h5>Enunciado pregunta</h5></label>
+                </div>
+                <div class="col s2">
+                    <label class="teal-text lighten-4"><h5>Puntaje obtenido</h5></label>
+                </div>
+            </div>
+        {% set var = 1 %}
+        {% for userQuestion in userAnswers %}
+            <div class="col s12">
+                <div class="col s1">
+                    <label class="teal-text lighten-4"><h6>{{var}}</h6></label>
+                </div>
+                <div class="col s9">
+                    <pre>{{ userQuestion.idQuestion.statementQuestion }}</pre>
+                </div>
+                <div class="col s2" align="center">
+                    {% if userQuestion.scoreQuestion == null %}
+                    <p class="teal-text lighten-4">Falta calificar</p>
+                    {% else %}
+                    <p>{{ userQuestion.scoreQuestion }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% set var = var + 1 %}
+        {% endfor %}
+    </div>
     <div class="row">
         <div align="center">
             <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver examenes</a>

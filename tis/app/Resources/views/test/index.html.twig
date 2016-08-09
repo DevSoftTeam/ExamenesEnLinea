@@ -7,6 +7,31 @@
         <h3>Examenes  </h3>
     </label>
 
+
+          <div class="row" >
+           <div class="col s3">
+          <label class="grey-text lighten-1 "> <h5> buscar por: </h5> </label><br>
+          </div>
+          <div class="col s3">
+            <p>
+              <input name="group1" type="radio" id="t" value="tittle" checked />
+              <label for="t">Titulo</label>
+            </p>
+            </div>
+             <div class="col s3">
+            <p>
+              <input name="group1" type="radio" id="f" value="matter" />
+              <label for="f">Materia</label>
+            </p>
+            </div>
+             <div class="col s3">
+            <p>
+              <input name="group1" type="radio" id="i" value="institution" />
+              <label for="i">Intitucion</label>
+            </p>
+            </div>
+          </div>
+
 <div class="row" >
 <form action="result">
 
@@ -27,8 +52,8 @@
                 {#<th>Nro Examen</th>#}
                 <th class="teal-text lighten-4">Titulo</th>
                 <th class="teal-text lighten-4">Materia</th>
-                {#<th>Institucion</th>#}
-                {#<th>Hora Inicio</th>#}
+                <th class="teal-text lighten-4"> resolver</th>
+                <th class="teal-text lighten-4"> instituto</th>
                 {#<th>Hora Fin</th>#}
                 {#<th>Fecha Inicio</th>#}
                 {#<th>Fecha Fin</th>#}
@@ -58,12 +83,15 @@
                     <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Resolver</a>
                 {% endif %}
                 </td>
+                <td>
+                    <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Planilla de calificaciones</a>
+                </td>
                 {#<td>#}
                     {#<a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.title }}</a>#}
                 {#</td>#}
                 {#<td>{{ test.mat}}#}
 
-                {#<td>{{ test.institution }}</td>#}
+                <td>{{ test.institution }}</td>
                 {#<td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>#}
                 {#<td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>#}
                 {#<td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>#}

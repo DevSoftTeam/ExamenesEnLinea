@@ -35,6 +35,14 @@
 
 						{% if question['question'].idType.idType != 8 %}
 							<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
+
+							<label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
+							<label class="pink-text lighten-4">
+							{% if question['question'] in questionsPenalized %}
+							Penalización, una respuesta mala anula una buena.
+							{% endif %}
+							</label>
+							
 							<pre>{{ question['question'].statementQuestion }}</pre>
 							{% if question['question'].pathImageQuestion != null %}
 						        <img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question['question'].pathImageQuestion}}">
