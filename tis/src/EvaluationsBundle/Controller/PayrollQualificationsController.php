@@ -2,25 +2,33 @@
 
 namespace EvaluationsBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class PayrollQualificationsController
+
+class PayrollQualificationsController extends Controller
 {
-    public function showPayrollQualificationsAction($idTest) {
+    public function showPayrollQualificationsAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idTest'=>$idTest));
-        $userAnswer = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idTest'=>$idTest));
+        $testsTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idTest' => $id));
+        $testQuestions = $em->getRepository('EvaluationsBundle:TestQuestion')->findBy(array('idTest' => $id));
 
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery("SELECT u
-                                    FROM EvaluationsBundle:TestTaken c
-                                    JOIN EvaluationsBundle:UserSystem u WITH u.idUser = c.idUser");
+//        $query = $em->createQuery("SELECT u
+//                                    FROM EvaluationsBundle:TestTaken c
+//                                    JOIN EvaluationsBundle:UserSystem u
+//                                    WITH u.idUser = c.idUser");
 
-        $userSystem = $query->getResult();
+        $query = $em->createQuery("SELECT  answer
+                                    FROM EvaluationsBundle:UserAnswer answer
+                                    JOIN EvaluationsBundle:TestQuestion question
+                                    WITH question.idQuestion = answer.idQuestion
+                                    WHERE answer.idTest = ?1")->setParameter('1',$id);
+        $answersDetails = $query->getResult();
 
         return $this->render('EvaluationsBundle:TestForm:payrollQualifications.html.twig', array(
-            'testTaken' => $testTaken,
-            'userAnswewer'=>$userAnswer,
-            'userSystem'=>$userSystem
+            'testsTaken' => $testsTaken,
+            'answers'=> $answersDetails,
+            'questions'=>$testQuestions,
+            'idTest'=>$id
         ));
 
     }

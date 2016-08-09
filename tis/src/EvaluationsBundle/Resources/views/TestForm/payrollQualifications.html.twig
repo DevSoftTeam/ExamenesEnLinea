@@ -4,46 +4,49 @@
     <h3 class="teal-text lighten-4">Planilla de calificaciones</h3>
     <br>
     <div class="row" >
-    <div class="col s12">
-    {% for  in  %}
-    <table class="striped">
-        <thead>
-            <tr>
-               
-                <th class="teal-text lighten-4">Nombre : {{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</th>
-                </tr>
-        </thead>
-        <tbody >
+        <table>
+            <thead>
                 <tr>
-                {% for question in questions %}
-                <td>
-                    <font color="black">Pregunta : </font></a>
-                </td>
-                <td>
-                    <font color="black">{{TestQuestion.getPercent}} pts. </font></a>
-                </td>
+                    <th>Estudiante</th>
+                    {% for question in questions %}
+                        <th>{{ question.idQuestion }}
+                    {% endfor %}
+                    <th>Nota Total</th>
                 </tr>
-                <tr>
-                  <td>
-                    <font color="black" aligh="center">Puntaje total = {{ testTaken.userScore }}   pts.</font></a>
-                </td>
-                </tr>
+            </thead>
+            <tbody>
+                {% for taken in testsTaken %}
+                    <tr>
+                        <th>{{ taken.idUser }}</th>
+                        {% for answer in answers %}
+                            {% if taken.idUser == answer.idUser %}
+                                {#{% macro while(answer) %}#}
+                                {% if  answer.scoreQuestion is not null %}
+                                <th>
+                                    {{ answer.scoreQuestion }}
+                                </th>
+                                {% else %}
+                                <th> Calificar </th>
+                                {% endif %}
+                                {#{% endmacro %}#}
+                            {% endif %}
+                        {% endfor %}
+                        <th>{{ taken.userScore }}</th>
+                    </tr>
                 {% endfor %}
-        </tbody>
-    </table>
-    {% endfor %}
-</div></div>
-      
+            </tbody>
+        </table>
+    </div>
+
+    </br>
 
     <ul>
         <li>
 
-          <div class="col ">
-                <a class="waves-effect waves-light btn" href={{ path('question_index') }}>Banco de Preguntas</a>
+            <div class="col ">
+                <a class="waves-effect waves-light btn" href={{ path('test_preview', {'id': idTest}) }}>Ver Examen</a>
             </div>
-            
+
         </li>
     </ul>
 {% endblock %}
-
-

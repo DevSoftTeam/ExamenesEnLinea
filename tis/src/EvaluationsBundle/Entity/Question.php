@@ -122,7 +122,6 @@ class Question
         if ($this->pathImageQuestion != null) {
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
-                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
                         <div><h5>".$this->statementQuestion."</h5></div>
                     </div><br><br><br>
                     <div class=\"col s12\">
@@ -132,7 +131,6 @@ class Question
         else{
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
-                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
                     <h5>".$this->statementQuestion."</h5>
                     </div>
                 </div>";
@@ -358,6 +356,10 @@ class Question
     public function __call($name, $arguments){
         echo "Llamando al método de objeto '$name' "
             . implode(', ', $arguments). "\n";
+    }
+
+    public function __toString() {
+        return $this->idQuestion." ".substr($this->statementQuestion, 0, 5)."...";
     }
 }
 

@@ -102,11 +102,12 @@ $testsResult = $query->getResult();
         }
         //var_dump($resp['answerEl'][4]);
         //exit;
-
+        $count = 0;
         $deleteForm = $this->createDeleteForm($test);
         return $this->render('test/preview.html.twig', array(
             'test' => $test,
             'data' => $data,
+            'count' => $count,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -212,6 +213,7 @@ $testsResult = $query->getResult();
                 {
                     $userSession = $this->getUser();
                     $test->setIdUser($userSession);
+                    $test->setAvailable();
                     $em->persist($test);
                     $em->flush();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
@@ -385,6 +387,7 @@ $testsResult = $query->getResult();
 //        $dompdf->render();
 //        $dompdf->stream($filename.".pdf");
 //    }
+
 
     /**
      * Creates a form to delete a Test entity.

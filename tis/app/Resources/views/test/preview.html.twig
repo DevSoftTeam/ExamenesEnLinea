@@ -31,7 +31,10 @@
         </div>
 
         <div class="preguntas">
+        
         {% for value in data %}
+            {% set count = count + 1 %}
+            <label class=\"teal-text darken-4\"><h5>pregunta {{ count }}:</h5></label>
             {{ value['question'].getQuestionView(value['answerEl'])  | raw }}
             {#{ value['question'].getViewStatement()  | raw }#}
         {% endfor %}
