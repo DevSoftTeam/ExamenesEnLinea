@@ -179,7 +179,6 @@ class UserSystem implements UserInterface
     {
         return $this->idUser === $user->getId();
     }
-    ////////////
 
     public function __call($name, $arguments)
     {

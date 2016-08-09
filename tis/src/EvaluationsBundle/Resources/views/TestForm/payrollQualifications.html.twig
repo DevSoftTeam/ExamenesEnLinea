@@ -17,6 +17,18 @@
             
         </li>
     </ul>
+
+    {% for testTaken in testTaken %}
+        <div class="col s12">
+            <div class="col s10"><pre>{{ testTaken. }}</pre></div>
+            <div class="input-field col s2">
+                <p>
+                    <input name="radio{{numQ}}"value="{{ans.idAnswerElement}}"type="radio" id="test{{ans.idAnswerElement}}"/>
+                    <label class="teal-text lighten-4" for="test{{ans.idAnswerElement}}">Correcta</label>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
 

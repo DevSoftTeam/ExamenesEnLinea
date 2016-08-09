@@ -127,7 +127,7 @@ $collection->add('test_data', new Route(
 
 $collection->add('payrollQualifications_new', new Route(
     '/{id}/show',
-    array('_controller' => 'EvaluationsBundle:PayrollQualifications:newPayrollQualifications'),
+    array('_controller' => 'EvaluationsBundle:Test:newPayrollQualifications'),
     array(),
     array(),
     '',

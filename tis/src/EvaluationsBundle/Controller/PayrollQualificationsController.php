@@ -5,10 +5,10 @@ namespace EvaluationsBundle\Controller;
 
 class PayrollQualificationsController
 {
-    public function showPayrollQualificationsAction($idTest) {
+    public function showPayrollQualificationsAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idTest'=>$idTest));
-        $userAnswer = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idTest'=>$idTest));
+        $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idTest'=>$id));
+        $userAnswer = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idTest'=>$id));
 
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery("SELECT u
