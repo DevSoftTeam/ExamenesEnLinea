@@ -42,13 +42,9 @@ class TestController extends Controller
         $em = $this->getDoctrine()->getManager();
         $idUser = $this->getUser();
 
-        $text = $request->request->get('bus'); //palabra que se va a buscar para coincidir
-        $busq = $request->request->get('group1'); //por lo que se va a buscar (tittle, matter, institution)
+        $word = $request->get('bus'); //palabra que se va a buscar para coincidir
+        $busq = $request->get('group1'); //por lo que se va a buscar (tittle, matter, institution)
      
-      $text = "texto de la busqueda que aun no me sale"; //problemas para reccuperar parametro
-      $word = "programacion";
-       $busq = "tittle";
-
 
         $repository = $em->getRepository('EvaluationsBundle:Test');
 if ($busq == "tittle") { //buscar por titulo
@@ -60,7 +56,7 @@ $query = $repository->createQueryBuilder('p')
 $testsResult = $query->getResult();
 
 
-} elseif ($bus == "matter") {
+} elseif ($busq == "matter") {
 
 $query = $repository->createQueryBuilder('p')
                ->where('p.matter LIKE :word')
@@ -79,7 +75,7 @@ $testsResult = $query->getResult();
 }
 
         return $this->render('test/searchResult.html.twig', array(
-            'testsResult' => $testsResult, 'bus' => $text,
+            'testsResult' => $testsResult, 'busq' => $word,
         ));
     }
 
