@@ -3,7 +3,13 @@
 namespace EvaluationsBundle\Controller;
 
 
-class PayrollQualificationsController
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use EvaluationsBundle\Entity\Area;
+use EvaluationsBundle\Form\AreaType;
+
+class PayrollQualificationsController extends Controller
 {
     public function showPayrollQualificationsAction($id) {
         $em = $this->getDoctrine()->getManager();
