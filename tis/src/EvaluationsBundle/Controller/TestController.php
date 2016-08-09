@@ -42,13 +42,41 @@ class TestController extends Controller
         $em = $this->getDoctrine()->getManager();
         $idUser = $this->getUser();
 
-        $text = $request->request->get('bus');
-        //Svar_dump($text);exit;
-      $text = "texto de la busqueda que aun no me sale";
+        $text = $request->request->get('bus'); //palabra que se va a buscar para coincidir
+        $busq = $request->request->get('group1'); //por lo que se va a buscar (tittle, matter, institution)
+     
+      $text = "texto de la busqueda que aun no me sale"; //problemas para reccuperar parametro
+      $word = "programacion";
+       $busq = "tittle";
 
-        $testsResult = $em->getRepository('EvaluationsBundle:Test')->findBy(array('idUser'=>$idUser));
+
+        $repository = $em->getRepository('EvaluationsBundle:Test');
+if ($busq == "tittle") { //buscar por titulo
+
+$query = $repository->createQueryBuilder('p')
+               ->where('p.title LIKE :word')
+               ->setParameter('word', '%'.$word.'%')
+               ->getQuery();
+$testsResult = $query->getResult();
 
 
+} elseif ($bus == "matter") {
+
+$query = $repository->createQueryBuilder('p')
+               ->where('p.matter LIKE :word')
+               ->setParameter('word', '%'.$word.'%')
+               ->getQuery();
+$testsResult = $query->getResult();
+
+} else {
+
+$query = $repository->createQueryBuilder('p')
+               ->where('p.institution LIKE :word')
+               ->setParameter('word', '%'.$word.'%')
+               ->getQuery();
+$testsResult = $query->getResult();
+
+}
 
         return $this->render('test/searchResult.html.twig', array(
             'testsResult' => $testsResult, 'bus' => $text,
@@ -78,11 +106,12 @@ class TestController extends Controller
         }
         //var_dump($resp['answerEl'][4]);
         //exit;
-
+        $count = 0;
         $deleteForm = $this->createDeleteForm($test);
         return $this->render('test/preview.html.twig', array(
             'test' => $test,
             'data' => $data,
+            'count' => $count,
             'delete_form' => $deleteForm->createView(),
         ));
     }
