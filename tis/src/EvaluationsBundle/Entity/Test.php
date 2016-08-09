@@ -345,7 +345,7 @@ class Test
      *
      * @return PruebaD
      */
-    public function setAvailable($available)
+    public function setAvailable($available = true)
     {
         $this->available = $available;
 

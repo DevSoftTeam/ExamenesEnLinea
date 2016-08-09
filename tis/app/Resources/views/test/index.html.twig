@@ -59,7 +59,8 @@
         <tbody >
         {% for test in tests %}
             <tr>
-he                 <td>
+                {#<td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>#}
+                <td>
                     <a  href="{{ path('test_show', { 'id': test.idTest }) }}"><font color="black">{{test.title}}</font></a>
                 </td>
                 <td>

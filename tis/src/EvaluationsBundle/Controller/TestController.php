@@ -217,6 +217,7 @@ $testsResult = $query->getResult();
                 {
                     $userSession = $this->getUser();
                     $test->setIdUser($userSession);
+                    $test->setAvailable();
                     $em->persist($test);
                     $em->flush();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));

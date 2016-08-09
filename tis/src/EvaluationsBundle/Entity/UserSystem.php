@@ -201,7 +201,7 @@ class UserSystem implements UserInterface
     }
 
     public function __toString() {
-        return $this->login;
+        return $this->name." ".$this->lastName." alias :".$this->username;
     }
 }
 
