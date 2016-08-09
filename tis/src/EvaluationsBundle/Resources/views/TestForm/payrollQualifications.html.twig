@@ -5,33 +5,33 @@
     <br>
     <div class="row" >
     <div class="col s12">
-    {% for  in  %}
-    <table class="striped">
-        <thead>
-            <tr>
-               
-                <th class="teal-text lighten-4">Nombre : {{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</th>
-                </tr>
-        </thead>
-        <tbody >
-                <tr>
-                {% for question in questions %}
-                <td>
-                    <font color="black">Pregunta : </font></a>
-                </td>
-                <td>
-                    <font color="black">{{TestQuestion.getPercent}} pts. </font></a>
-                </td>
-                </tr>
-                <tr>
-                  <td>
-                    <font color="black" aligh="center">Puntaje total = {{ testTaken.userScore }}   pts.</font></a>
-                </td>
-                </tr>
-                {% endfor %}
-        </tbody>
-    </table>
-    {% endfor %}
+    {#{% for  in  %}#}
+    {#<table class="striped">#}
+        {#<thead>#}
+            {#<tr>#}
+               {##}
+                {#<th class="teal-text lighten-4">Nombre : {{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</th>#}
+                {#</tr>#}
+        {#</thead>#}
+        {#<tbody >#}
+                {#<tr>#}
+                {#{% for question in questions %}#}
+                {#<td>#}
+                    {#<font color="black">Pregunta : </font></a>#}
+                {#</td>#}
+                {#<td>#}
+                    {#<font color="black">{{TestQuestion.getPercent}} pts. </font></a>#}
+                {#</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                  {#<td>#}
+                    {#<font color="black" aligh="center">Puntaje total = {{ testTaken.userScore }}   pts.</font></a>#}
+                {#</td>#}
+                {#</tr>#}
+                {#{% endfor %}#}
+        {#</tbody>#}
+    {#</table>#}
+    {#{% endfor %}#}
 </div></div>
       
 
@@ -47,15 +47,11 @@
 
     {% for testTaken in testTaken %}
         <div class="col s12">
-            <div class="col s10"><pre>{{ testTaken. }}</pre></div>
-            <div class="input-field col s2">
-                <p>
-                    <input name="radio{{numQ}}"value="{{ans.idAnswerElement}}"type="radio" id="test{{ans.idAnswerElement}}"/>
-                    <label class="teal-text lighten-4" for="test{{ans.idAnswerElement}}">Correcta</label>
-                </p>
-            </div>
+            {{ testTaken.userScore }}
         </div>
     {% endfor %}
+
+    {#{% for  %}#}
 {% endblock %}
 
 
