@@ -45,9 +45,17 @@ class ExamController extends Controller
             $resp['answers'] = $answers;
             $data[] = $resp;
         }
+        $testsQuestion = $em->getRepository('EvaluationsBundle:TestQuestion')->findBy(array('idTest'=>$test));
+        $questionsPenalized = array();
+        foreach ($testsQuestion as $testQuestion) {
+            if ($testQuestion->getIsPenalized()) {
+                array_push($questionsPenalized,$testQuestion->getIdQuestion());
+            }
+        }
         return $this->render('EvaluationsBundle:TestForm:test.html.twig', array(
             'test' => $test,
             'data' => $data,
+            'questionsPenalized' => $questionsPenalized,
         ));
     }
     public function saveExamAction($idTest,Request $request)
@@ -166,9 +174,7 @@ class ExamController extends Controller
             $this->autoCalification($test);
         }
         
-        return $this->render('EvaluationsBundle:TestForm:scoreTest.html.twig', array(
-            'testTaken' => $testTaken,
-        ));
+        return $this->redirectToRoute('showExam', array('idTest' => $testTaken->getIdTest()->getIdTest()));
     }
 
     public function autoCalification($test){
@@ -343,6 +349,19 @@ class ExamController extends Controller
         $testTaken->setUserScore($score);
         $em->persist($testTaken);
         $em->flush();
+    }
+
+    public function showExamAction($idTest)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+        $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findOneBy(array('idUser'=>$user,'idTest'=>$test));
+        $userAnswers = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idUser'=>$user,'idTest'=>$test));
+        return $this->render('EvaluationsBundle:TestForm:scoreTest.html.twig', array(
+            'testTaken' => $testTaken,
+            'userAnswers' => $userAnswers,
+        ));
     }
 
 }
