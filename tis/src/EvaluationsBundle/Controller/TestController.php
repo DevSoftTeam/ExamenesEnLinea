@@ -78,11 +78,12 @@ class TestController extends Controller
         }
         //var_dump($resp['answerEl'][4]);
         //exit;
-
+        $count = 0;
         $deleteForm = $this->createDeleteForm($test);
         return $this->render('test/preview.html.twig', array(
             'test' => $test,
             'data' => $data,
+            'count' => $count,
             'delete_form' => $deleteForm->createView(),
         ));
     }
