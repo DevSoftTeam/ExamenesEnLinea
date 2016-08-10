@@ -2,8 +2,8 @@
 {% block title %} Examen {% endblock %}
 {% block body%}
 	<div class="row">
-		<label class="teal-text lighten-4"><h5>Resolviendo Examen</h5></label><br><br><br>
-	    <div class="row">
+		<label class="teal-text lighten-4"><h5>Resolviendo Examen:</h5></label>
+	    
 	        <div class="col s12 center">
 	        <label class="teal-text lighten-4"><h3>{{ test.title }}</h3></label>
 	        </div>
@@ -24,8 +24,7 @@
 	            <h5 class="teal-text darken-4">Nombre completo: <strong class="black-text">{{ app.user.name }} {{app.user.lastName}}</strong></h5>
 	            </div>
 	        </div>
-	    </div>
-	    <br><br>
+	    
 		<form action="/saveExam/{{test.idTest}}" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col s12">
