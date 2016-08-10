@@ -96,6 +96,7 @@ class ExamController extends Controller
                     break;
                 case 3:
                     $file=$request->files->get('file'.$i);
+                    $file_name = null ;
                     if (!is_null($file)) {
                        $ext=$file->guessExtension();
                        //if($ext=="pdf"){
@@ -104,12 +105,12 @@ class ExamController extends Controller
                         $pathFile =  $pathFile[0];
                         $file_name=$pathFile.".".$ext;
                         $file->move("uploads/users", $file_name);
-                        $userAnswer->setResponse($file_name);
-                        $em->persist($userAnswer);
                        /*}else{
                         $question->setPathImageQuestion(null);
                        }*/
                      }
+                     $userAnswer->setResponse($file_name);
+                     $em->persist($userAnswer);
                     break;
                 case 4:
                     $answerTF = $request->get('trueFalse'.$question->getIdQuestion());
