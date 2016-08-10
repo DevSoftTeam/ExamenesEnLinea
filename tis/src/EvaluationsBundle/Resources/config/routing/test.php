@@ -25,6 +25,26 @@ $collection->add('test_searchResult', new Route(
     array('GET','POST')
 ));
 
+$collection->add('test_asign_score', new Route(
+    '/asignscore/{idTest}/',
+    array('_controller' => 'EvaluationsBundle:Test:asignscore'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+$collection->add('test_score_asigned', new Route(
+    '/asignscore/{testid}/{idUserAnswer}/{score}',
+    array('_controller' => 'EvaluationsBundle:Test:score_asigned'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
 $collection->add('test_asign', new Route(
     '/asignar/{idT}/{idQ}/{percent}/{ispenalized}',
     array('_controller' => 'EvaluationsBundle:Test:asign'),

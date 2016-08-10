@@ -162,6 +162,19 @@ $testsResult = $query->getResult();
 
     }*/
 
+    public function asignscoreAction($idTest){
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+        $result = $em->createQueryBuilder();
+        $questions = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idTest'=>$idTest));
+        // var_dump($questions);exit;
+
+        return $this->render('test/asignscore.html.twig', array(
+                'test' => $test,
+                 'questions' => $questions
+            ));
+    }
+
     public function asignAction($idT,$idQ, $percent, $ispenalized){
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idT);
@@ -175,6 +188,17 @@ $testsResult = $query->getResult();
         $em->persist($testQuestion);
         $em->flush();
         return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));
+    }
+
+    public function score_asignedAction($testid,$idUserAnswer,$score){
+        $em = $this->getDoctrine()->getManager();
+        $UserAnswer=$em->getRepository('EvaluationsBundle:UserAnswer')->find($idUserAnswer);
+        
+        $UserAnswer->setScoreQuestion($score);
+
+        $em->persist($UserAnswer);
+        $em->flush();
+        return $this->redirectToRoute('test_asign_score',array('idTest' => $testid,'msg'=>'mensaje'));
     }
 
      public function dropAction($idT,$idQ){

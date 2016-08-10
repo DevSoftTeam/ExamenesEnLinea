@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+    <label class="teal-text lighten-4"><h3>Asignar puntaje a un examen</h3></label>
+
+        <div class="row">
+            <div class="col s6">
+                <label class="teal-text darken-4"><h6>Titulo :</h6></label>
+                <div>{{ test.title }}</div>
+            </div>
+            <div class="col s6">
+                <label class="teal-text darken-4"><h6>Materia :</h6></label>
+                <div>{{ test.matter }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 m3">
+            <a class="waves-effect waves-light btn" href="{{ path('test_show', { 'id': test.idTest }) }}">volver al Examen</a>
+        </div>
+        <div class="col s12 m3">
+            <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
+        </div>
+    </div>
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Enunciado</th>
+                <th>puntaje</th>
+                <th>accion asignar</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% for question in questions %}
+            {% if question.scoreQuestion is null %}
+	            <tr>
+	                <td>{{ question.idQuestion.statementQuestion[0:50] }}</td>
+	                <td class="red"> pregunta sin calificar </td>
+	                <td><button onclick="abrir('{{question.response}}','{{ path('test_score_asigned', {testid:test.idTest, idUserAnswer:question.idUserAnswer, score:0})}}');" class="waves-effect waves-light btn">calificar</button></td>
+	            </tr>
+            {% else %}
+                <tr>
+	                <td>{{ question.idQuestion.statementQuestion[0:50] }}</td>
+	                <td>{{ question.scoreQuestion }}</td>
+	                <td><button onclick="abrir('{{question.response}}','{{ path('test_score_asigned', {testid:test.idTest, idUserAnswer:question.idUserAnswer, score:0})}}');" class="waves-effect waves-light btn">cambiar nota</button></td>
+	            </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4 class="teal-text lighten-4">Asignar puntaje a la pregunta</h4>
+          	<h5 id="respuesta"></h5>
+          	<div class="row">
+          		<div class="col m3">
+          			<h5 class="teal-text lighten-4">nota: </h5>
+          		</div>
+          		<div class="col m9">
+ 		         	<input id="score" value="1" min=1 type="number">
+          		</div>
+          	</div>       	
+        </div>
+        <div class="modal-footer">
+          <button id="agregar" href="" onclick="guardar();" class="modal-action modal-close waves-effect waves-green btn-flat">Agregar</button>
+          <input id="url" type="hidden" name="">
+          <button class="modal-action modal-close waves-effect waves-green btn-flat" onclick="cerrar();">cancelar</button>
+        </div>
+      </div>
+   <script>
+    $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+    });
+
+    var abrir = function(respuesta,url) {
+        $('#modal1').openModal();
+        $('#respuesta')[0].innerText = respuesta;
+        $('#url')[0].value = url;
+    };
+
+    var guardar = function() {
+        var url = $('#url')[0].value;
+        var size = url.length-2;
+        var url = url.substring(0, size);
+        var score = $('#score')[0].value;
+        var url = url + '/'+ score;
+        if (parseInt(score) < 1) {
+            toast('no puede asignar puntos menores a 1');
+        }
+        else{
+                location.href=url;
+        }
+    };
+
+    var cerrar = function() {
+        $('#modal1').closeModal();
+    };
+    
+    $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+     });
+    
+    var toast = function(msg){
+        Materialize.toast(msg, 4000);
+    };
+
+    var agregado = function () {
+        var msg = window.location.search.substr(1); 
+        if (msg != "") {
+            toast("la pregunta fue calificada");
+        }
+    };
+    (agregado(),2000);
+    </script>  	
+{% endblock %}
