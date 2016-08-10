@@ -33,11 +33,13 @@
                 <p>{{ ans.content }}</p>
                 </div>
                 <div class="col s2">
-                <label class="teal-text darken-4"><h6>Estado :</h6></label>
+                <label class="teal-text darken-4"><h6> &nbsp; </h6></label>
                 {% if ans.isCorrect %}
                  <p>Correcta</p>
-                 {% else %}
+                 {% elseif ans.isCorrect is null %}
                  <p> No definida</p>
+                 {% else %}
+                 <p>Incorrecta</p>
                 {% endif %}
 
                 
