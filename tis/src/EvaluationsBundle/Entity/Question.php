@@ -357,5 +357,9 @@ class Question
         echo "Llamando al método de objeto '$name' "
             . implode(', ', $arguments). "\n";
     }
+
+    public function __toString() {
+        return $this->idQuestion." ".substr($this->statementQuestion, 0, 5)."...";
+    }
 }
 

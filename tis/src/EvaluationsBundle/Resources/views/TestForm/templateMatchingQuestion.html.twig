@@ -1,7 +1,6 @@
 
             {% set foo = 1 %}
-            <div class="row">
-              <div class="col s12">
+            <div class="col s12">
               <div class="col s5">
               {% for i in range(0,((question['answers']|length) / 2)-1) %}
                 <div class="col s1">
@@ -15,6 +14,7 @@
               </div>
               <div class="col s7">
               {% for k in range((question['answers']|length)/2, (question['answers']|length)-1) %}
+              <div class="col s12">
                 <div class="col s2">
                   <select name="match{{question['answers'][k].idAnswerElement}}">
                     <option value="" selected>Seleccione</option>
@@ -22,11 +22,11 @@
                     <option value="{{j}}" >{{ j }}</option>
                     {% endfor %}
                   </select>
-                  </div>
-                  <div class="col s10">
+                </div>
+                <div class="col s10">
                   <pre>{{(question['answers'][k]).content}}</pre>
                 </div>
+              </div>
               {% endfor %}
               </div>
-              </div>
-            </div>
+          </div>

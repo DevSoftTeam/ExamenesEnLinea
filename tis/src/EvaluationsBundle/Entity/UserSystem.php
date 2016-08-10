@@ -179,7 +179,6 @@ class UserSystem implements UserInterface
     {
         return $this->idUser === $user->getId();
     }
-    ////////////
 
     public function __call($name, $arguments)
     {
@@ -202,7 +201,7 @@ class UserSystem implements UserInterface
     }
 
     public function __toString() {
-        return $this->login;
+        return $this->name." ".$this->lastName." alias :".$this->username;
     }
 }
 

@@ -1,21 +1,24 @@
-<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
-<label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
 	{% set keys = question['question'].statementQuestion|split(' ') %}
-	<div class="row">
+	<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
+	<label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
+	<label class="pink-text lighten-4">
+			{% if question['question'] in questionsPenalized %}
+				Penalización, una respuesta mala anula una buena.
+			{% endif %}
+	</label>
 	<div class="col s12">
 	<label style="font-family:sans-serif; font-size:1.2em; color: black;">
 	{% set cont = 1 %}
 	{% for key in keys %}
-		{% if key starts with '[' %}
-		    	<input type="text" style="width:12em;" name="word{{numQ}}{{cont}}">
+		{% if key starts with "________" %}
+		    	<input type="text" style="width:12em;" name="word{{numQ}}{{cont}}"/>
 		    	{% set cont = cont + 1 %}
 		{% else %}
 			{{ key }}
 		{% endif %}
 	{% endfor %}
 	</label>
-	</div>
-	</div>
 	{% if question['question'].pathImageQuestion != null %}
-		<img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}">
+		<img align="center" height="30%" width="30%" src="{{ asset('uploads/images/')}}{{question.pathImageQuestion}}"/>
 	{% endif %}
+	</div>
