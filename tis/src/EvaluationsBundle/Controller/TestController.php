@@ -31,9 +31,11 @@ class TestController extends Controller
         foreach ($testsTaken as $testT) {
             array_push($testsT,$testT->getIdTest());
         }
+        $testsAvailable = $em->getRepository('EvaluationsBundle:Test')->findBy(array('available'=>TRUE));
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
             'testsT' => $testsT,
+            'testsAvailable' => $testsAvailable,
         ));
     }
 
@@ -42,13 +44,9 @@ class TestController extends Controller
         $em = $this->getDoctrine()->getManager();
         $idUser = $this->getUser();
 
-        $text = $request->request->get('bus'); //palabra que se va a buscar para coincidir
-        $busq = $request->request->get('group1'); //por lo que se va a buscar (tittle, matter, institution)
+        $word = $request->get('bus'); //palabra que se va a buscar para coincidir
+        $busq = $request->get('group1'); //por lo que se va a buscar (tittle, matter, institution)
      
-      $text = "texto de la busqueda que aun no me sale"; //problemas para reccuperar parametro
-      $word = "programacion";
-       $busq = "tittle";
-
 
         $repository = $em->getRepository('EvaluationsBundle:Test');
 if ($busq == "tittle") { //buscar por titulo
@@ -60,7 +58,7 @@ $query = $repository->createQueryBuilder('p')
 $testsResult = $query->getResult();
 
 
-} elseif ($bus == "matter") {
+} elseif ($busq == "matter") {
 
 $query = $repository->createQueryBuilder('p')
                ->where('p.matter LIKE :word')
@@ -79,7 +77,7 @@ $testsResult = $query->getResult();
 }
 
         return $this->render('test/searchResult.html.twig', array(
-            'testsResult' => $testsResult, 'bus' => $text,
+            'testsResult' => $testsResult, 'busq' => $word,
         ));
     }
 
@@ -162,6 +160,19 @@ $testsResult = $query->getResult();
 
     }*/
 
+    public function asignscoreAction($idTest){
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+        $result = $em->createQueryBuilder();
+        $questions = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idTest'=>$idTest));
+        // var_dump($questions);exit;
+
+        return $this->render('test/asignscore.html.twig', array(
+                'test' => $test,
+                 'questions' => $questions
+            ));
+    }
+
     public function asignAction($idT,$idQ, $percent, $ispenalized){
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idT);
@@ -175,6 +186,17 @@ $testsResult = $query->getResult();
         $em->persist($testQuestion);
         $em->flush();
         return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));
+    }
+
+    public function score_asignedAction($testid,$idUserAnswer,$score){
+        $em = $this->getDoctrine()->getManager();
+        $UserAnswer=$em->getRepository('EvaluationsBundle:UserAnswer')->find($idUserAnswer);
+        
+        $UserAnswer->setScoreQuestion($score);
+
+        $em->persist($UserAnswer);
+        $em->flush();
+        return $this->redirectToRoute('test_asign_score',array('idTest' => $testid,'msg'=>'mensaje'));
     }
 
      public function dropAction($idT,$idQ){

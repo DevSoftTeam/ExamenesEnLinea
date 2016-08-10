@@ -96,6 +96,7 @@ class ExamController extends Controller
                     break;
                 case 3:
                     $file=$request->files->get('file'.$i);
+                    $file_name = null ;
                     if (!is_null($file)) {
                        $ext=$file->guessExtension();
                        //if($ext=="pdf"){
@@ -104,12 +105,12 @@ class ExamController extends Controller
                         $pathFile =  $pathFile[0];
                         $file_name=$pathFile.".".$ext;
                         $file->move("uploads/users", $file_name);
-                        $userAnswer->setResponse($file_name);
-                        $em->persist($userAnswer);
                        /*}else{
                         $question->setPathImageQuestion(null);
                        }*/
                      }
+                     $userAnswer->setResponse($file_name);
+                     $em->persist($userAnswer);
                     break;
                 case 4:
                     $answerTF = $request->get('trueFalse'.$question->getIdQuestion());
@@ -357,10 +358,46 @@ class ExamController extends Controller
         $user = $this->getUser();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
         $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findOneBy(array('idUser'=>$user,'idTest'=>$test));
-        $userAnswers = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idUser'=>$user,'idTest'=>$test));
+        $userAnswers = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idUser'=>$user,'idTest'=>$test),array('idUserAnswer' => 'ASC'));
+        
+        $result = $em->createQueryBuilder();
+        $questions = $result->select(array('q'))
+            ->from('EvaluationsBundle:Question', 'q')
+            ->innerJoin('EvaluationsBundle:TestQuestion','t', 'WITH', 't.idQuestion = q.idQuestion and t.idTest = :idT')
+            ->where('t.idTest = '.$idTest)
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+        $data = array();
+        foreach ($questions as $question) {
+            $resp = array();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
+            if($question->getIdType()->getIdType()==7 && count($answers)>2){
+                $columA = array();
+                $columB = array();
+                for ($i=0; $i < count($answers)-1; $i=$i+2) { 
+                    array_push($columA,$answers[$i]);
+                    array_push($columB,$answers[$i+1]);
+                }
+                //shuffle($columB);
+                $answers = array_merge($columA,$columB);
+            }
+            $resp['question'] = $question;
+            $resp['answers'] = $answers;
+            $data[] = $resp;
+        }
+        $testsQuestion = $em->getRepository('EvaluationsBundle:TestQuestion')->findBy(array('idTest'=>$test));
+        $questionsPenalized = array();
+        foreach ($testsQuestion as $testQuestion) {
+            if ($testQuestion->getIsPenalized()) {
+                array_push($questionsPenalized,$testQuestion->getIdQuestion());
+            }
+        }
         return $this->render('EvaluationsBundle:TestForm:scoreTest.html.twig', array(
             'testTaken' => $testTaken,
             'userAnswers' => $userAnswers,
+            'data' => $data,
+            'questionsPenalized' => $questionsPenalized,
         ));
     }
 

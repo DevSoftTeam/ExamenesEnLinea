@@ -58,6 +58,7 @@ class WordCompletionQuestionController extends Controller
 
                 $em->persist($question);
                 $ques=$question->getStatementQuestion();
+                $enunciado=$question->getStatementQuestion();
 
 
                  $claves = "/(\[\*|^)\S*(\*\]|$)/";
