@@ -17,12 +17,12 @@ class PayrollQualificationsController extends Controller
 //                                    JOIN EvaluationsBundle:UserSystem u
 //                                    WITH u.idUser = c.idUser");
 
-        $query = $em->createQuery("SELECT  answer
+        $query = $em->createQuery( "SELECT  answer
                                     FROM EvaluationsBundle:UserAnswer answer
                                     JOIN EvaluationsBundle:TestQuestion question
                                     WITH question.idQuestion = answer.idQuestion
                                     WHERE answer.idTest = ?1")->setParameter('1',$id);
-        $answersDetails = $query->getResult();
+        $answersDetails = $query -> getResult();
 
         return $this->render('EvaluationsBundle:TestForm:payrollQualifications.html.twig', array(
             'testsTaken' => $testsTaken,
