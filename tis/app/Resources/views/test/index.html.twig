@@ -6,11 +6,11 @@
     <label class="teal-text lighten-4">
         <h3>Examenes  </h3>
     </label>
-
+<form action="result">
 
           <div class="row" >
            <div class="col s3">
-          <label class="grey-text lighten-1 "> <h5> buscar por: </h5> </label><br>
+          <label class="grey-text lighten-1 "> <h6> Buscar por: </h6> </label><br>
           </div>
           <div class="col s3">
             <p>
@@ -33,37 +33,27 @@
           </div>
 
 <div class="row" >
-<form action="result">
+
 
 <div class="col s4">
   <input type="text" name="bus" placeholder="nombre de examen" required>
       </div>
-  <button class="btn waves-effect waves-light" type="submit" name="search" >buscar
+  <button class="btn waves-effect waves-light" type="submit" name="search" >
     <i class="material-icons right">search</i>
   </button>
-        
+ </div>       
 </form>
-</div>
+
 
 
     <table class="striped">
         <thead>
             <tr>
-                {#<th>Nro Examen</th>#}
                 <th class="teal-text lighten-4">Titulo</th>
                 <th class="teal-text lighten-4">Materia</th>
+                <th class="teal-text lighten-4">Institucion</th>
                 <th class="teal-text lighten-4"> resolver</th>
-                <th class="teal-text lighten-4"> instituto</th>
-                {#<th>Hora Fin</th>#}
-                {#<th>Fecha Inicio</th>#}
-                {#<th>Fecha Fin</th>#}
-                {#<th>Hora Inicio Registro</th>#}
-                {#<th>Hora Fin Registro</th>#}
-                {#<th>Fecha Inicio Registro</th>#}
-                {#<th>Fecha Fin Registro</th>#}
-                {#<th>Puntuacion Maxima</th>#}
-                {#<th>Porcentage Total</th>#}
-                {#<th>Funciones</th>#}
+                <th class="teal-text lighten-4"> Notas </th>
             </tr>
         </thead>
         <tbody >
@@ -77,6 +67,9 @@
                     <a href="{{ path('test_show', { 'id': test.idTest }) }}"><FONT COLOR="black">{{test.matter}}</FONT></a>
                 </td>
                 <td>
+                    <a href="{{ path('test_show', { 'id': test.idTest }) }}"><FONT COLOR="black">{{test.institution}}</FONT></a>
+                </td>
+                <td>
                 {% if test in testsT %}
                     <p>Resuelto</p>
                 {% else %}
@@ -84,29 +77,8 @@
                 {% endif %}
                 </td>
                 <td>
-                    <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Planilla de calificaciones</a>
+                    <a href={{path('show_qualifications', {'id':test.idTest})}}>Planilla de calificaciones</a>
                 </td>
-                {#<td>#}
-                    {#<a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.title }}</a>#}
-                {#</td>#}
-                {#<td>{{ test.mat}}#}
-
-                <td>{{ test.institution }}</td>
-                {#<td>{% if test.startTime %}{{ test.startTime|date('H:i:s') }}{% endif %}</td>#}
-                {#<td>{% if test.endTime %}{{ test.endTime|date('H:i:s') }}{% endif %}</td>#}
-                {#<td>{% if test.startDate %}{{ test.startDate|date('Y-m-d') }}{% endif %}</td>#}
-                {#<td>{{ test.score }}</td>#}
-                {#<td>{{ test.percentage }}</td>#}
-                {#<td>#}
-                    {#<ul>#}
-                        {#<li>#}
-                            {#<a href="{{ path('test_show', { 'id': test.idTest }) }}">Detalles</a>#}
-                        {#</li>#}
-                        {#<li>#}
-                            {#<a href="{{ path('test_edit', { 'id': test.idTest }) }}">Editar</a>#}
-                        {#</li>#}
-                    {#</ul>#}
-                {#</td>#}
             {#</tr>#}
         {% endfor %}
         </tbody>
