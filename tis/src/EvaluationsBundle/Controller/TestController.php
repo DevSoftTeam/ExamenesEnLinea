@@ -46,9 +46,9 @@ class TestController extends Controller
 
         $word = $request->get('bus'); //palabra que se va a buscar para coincidir
         $busq = $request->get('group1'); //por lo que se va a buscar (tittle, matter, institution)
-     
 
         $repository = $em->getRepository('EvaluationsBundle:Test');
+ //       $reptestsAvailable = $em->getRepository('EvaluationsBundle:Test');
 if ($busq == "tittle") { //buscar por titulo
 
 $query = $repository->createQueryBuilder('p')
@@ -57,6 +57,21 @@ $query = $repository->createQueryBuilder('p')
                ->getQuery();
 $testsResult = $query->getResult();
 
+        $testsTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idUser'=>$idUser));
+        $testsT = array();
+        foreach ($testsTaken as $testT) {
+            array_push($testsT,$testT->getIdTest());
+        }
+$query2 = $repository->createQueryBuilder('p')
+               ->where('p.title LIKE :word')
+               ->andWhere('p.available=TRUE')
+               ->setParameter('word', '%'.$word.'%')
+               ->getQuery();
+
+
+$testsResult = $query->getResult();
+$testsAvailable = $query2->getResult();
+
 
 } elseif ($busq == "matter") {
 
@@ -64,20 +79,37 @@ $query = $repository->createQueryBuilder('p')
                ->where('p.matter LIKE :word')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
-$testsResult = $query->getResult();
+$query2 = $repository->createQueryBuilder('p')
+               ->where('p.matter LIKE :word')
+               ->andWhere('p.available=TRUE')
+               ->setParameter('word', '%'.$word.'%')
+               ->getQuery();
 
+
+
+$testsResult = $query->getResult();
+$testsAvailable = $query2->getResult();
 } else {
 
 $query = $repository->createQueryBuilder('p')
                ->where('p.institution LIKE :word')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
-$testsResult = $query->getResult();
+$query2 = $repository->createQueryBuilder('p')
+               ->where('p.institution LIKE :word')
+               ->andWhere('p.available=TRUE')
+               ->setParameter('word', '%'.$word.'%')
+               ->getQuery();
 
+
+
+$testsResult = $query->getResult();
+$testsAvailable = $query2->getResult();
 }
 
         return $this->render('test/searchResult.html.twig', array(
-            'testsResult' => $testsResult, 'busq' => $word,
+            'testsResult' => $testsResult, 'busq' => $word,'testsT' => $testsT,
+            'testsAvailable' => $testsAvailable,
         ));
     }
 
