@@ -8,9 +8,11 @@
             <thead>
                 <tr>
                     <th>Estudiante</th>
-                    {% for question in questions %}
-                        <th>{{ question.idQuestion }}
+                    {% for i in range(1, questions | length) %}
+                        <th>{{ 'Pregunta' }}{{ i }} </th>
                     {% endfor %}
+                    {#{% for question in questions %}#}
+                    {#{% endfor %}#}
                     <th>Nota Total</th>
                     <th>Calificacion Manual</th>
                 </tr>
@@ -21,15 +23,13 @@
                         <th>{{ taken.idUser }}</th>
                         {% for answer in answers %}
                             {% if taken.idUser == answer.idUser %}
-                                {#{% macro while(answer) %}#}
                                 {% if  answer.scoreQuestion is not null %}
                                 <th>
                                     {{ answer.scoreQuestion }}
                                 </th>
                                 {% else %}
-                                <th> Calificar </th>
+                                <th> No Calificado </th>
                                 {% endif %}
-                                {#{% endmacro %}#}
                             {% endif %}
                         {% endfor %}
                         <th>{{ taken.userScore }}</th>
