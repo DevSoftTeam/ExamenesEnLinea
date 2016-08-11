@@ -45,7 +45,6 @@
 </form>
 
 
-
 <label class="teal-text lighten-4"><h5>Examenes creados </h5></label>
     <table class="striped">
         <thead>
@@ -55,6 +54,7 @@
                 <th class="teal-text lighten-4">Institucion</th>
                 <th class="teal-text lighten-4"> Resolver</th>
                 <th class="teal-text lighten-4"> Notas </th>
+                <th class="teal-text lighten-4">Calificación manual</th>
             </tr>
         </thead>
         <tbody >
@@ -79,6 +79,9 @@
                 </td>
                 <td>
                     <a href={{path('show_qualifications', {'id':test.idTest})}}>Planilla de calificaciones</a>
+                </td>
+                <td>
+                <a href={{path('test_asign_score', {'idTest':test.idTest})}}>Calificar examen</a>
                 </td>
             {#</tr>#}
         {% endfor %}
@@ -113,9 +116,6 @@
                 {% else %}
                     <a href={{path('exam_homepage', {'idTest':testA.idTest})}}>Resolver</a>
                 {% endif %}
-                </td>
-                <td>
-                <a href={{path('test_asign_score', {'idTest':test.idTest})}}>Calificar examen</a>
                 </td>
 
             </tr>

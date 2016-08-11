@@ -87,7 +87,7 @@ $query = $repository->createQueryBuilder('p')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
 $query2 = $repository->createQueryBuilder('p')
-               ->where('p.matter LIKE :word')
+               ->where('LOWER(p.matter) LIKE :word')
                ->andWhere('p.available=TRUE')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
@@ -99,11 +99,11 @@ $testsAvailable = $query2->getResult();
 } else {
 
 $query = $repository->createQueryBuilder('p')
-               ->where('p.institution LIKE :word')
+               ->where('LOWER(p.institution) LIKE :word')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
 $query2 = $repository->createQueryBuilder('p')
-               ->where('p.institution LIKE :word')
+               ->where('LOWER(p.institution) LIKE :word')
                ->andWhere('p.available=TRUE')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
