@@ -55,7 +55,7 @@ class TestController extends Controller
             array_push($testsT,$testT->getIdTest());
         }
 
-        
+
 if ($busq == "tittle") { //buscar por titulo
 
 $query = $repository->createQueryBuilder('p')
@@ -70,7 +70,7 @@ $testsResult = $query->getResult();
             array_push($testsT,$testT->getIdTest());
         }
 $query2 = $repository->createQueryBuilder('p')
-               ->where('p.title LIKE :word')
+               ->where('LOWER(p.title) LIKE :word')
                ->andWhere('p.available=TRUE')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
@@ -83,7 +83,7 @@ $testsAvailable = $query2->getResult();
 } elseif ($busq == "matter") {
 
 $query = $repository->createQueryBuilder('p')
-               ->where('p.matter LIKE :word')
+               ->where('LOWER(p.matter) LIKE :word')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
 $query2 = $repository->createQueryBuilder('p')
