@@ -284,14 +284,12 @@ $testsAvailable = $query2->getResult();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
                 }
             }
-            return $this->render('test/errorFormTest.html.twig', array(
-                'test' => $test,
-                'form' => $form->createView(),
-            ));
+
         }
 
         return $this->render('test/new.html.twig', array(
             'test' => $test,
+            'mensaje'=>"mensaje uno",
             'form' => $form->createView(),
         ));
     }

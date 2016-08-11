@@ -4,7 +4,7 @@
     <label class="teal-text lighten-4" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><h3>Crear Examen</h3></label>
     </br>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'onsubmit':"return dateValidation();"}}) }}
         <div class="row">
 
             <div class="row input-field ">
@@ -25,11 +25,13 @@
                     <label for="input_text" class="teal-text darken-4"><h6>Fecha Inicio Inscripcion: </h6></label>
                     </br>
                     {{ form_widget(form.startDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
+                    <mark style="background-color: #2ab7a9"><span id="1"></span></mark>
                 </div>
                 </br>
                 <div class="input-field col s6">
                     <label for="input_text" class="active teal-text darken-4">Hora Inicio Inscripcion: (Hr:Min)</label>
                     {{ form_row(form.startTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
+                    <span id="2"></span>
                 </div>
             </div>
             {#</br>#}
@@ -38,11 +40,13 @@
                     <label for="input_text" class="teal-text darken-4"><h6>Fecha Fin Inscripcion: </h6></label>
                     </br>
                     {{ form_widget(form.endDateEnrollment, {'attr':{'placeholder':"Seleccione Fecha"}})}}
+                    <mark style="background-color: #2ab7a9"><span id="3"></span></mark>
                 </div>
                 </br>
                 <div class="input-field col s6">
                     <label for="input_text" class="active teal-text darken-4">Hora Fin Inscripcion: (HH:mm)</label>
                     {{ form_row(form.endTimeEnrollment,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
+                    <span id="4"></span>
                 </div>
             </div>
 
@@ -51,11 +55,13 @@
                     <label for="input_text" class="teal-text darken-4"><h6>Fecha Inicio: </h6></label>
                     </br>
                     {{ form_widget(form.startDate, {'attr':{'placeholder':"Seleccione Fecha",'type':"text"}})}}
+                    <mark style="background-color: #2ab7a9"><span id="5"></span></mark>
                 </div>
                 </br>
                 <div class="input-field col s6">
                     <label for="input_text" class="active teal-text darken-4">Hora Inicio: (Hr:Min)</label>
                     {{ form_row(form.startTime,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
+                    <span id="6"></span>
                 </div>
             </div>
 
@@ -64,11 +70,13 @@
                     <label for="input_text" class="teal-text darken-4"><h6>Fecha Fin: </h6></label>
                     </br>
                     {{ form_widget(form.endDate, {'attr':{'placeholder':"Seleccione Fecha", 'type':"text"}})}}
+                    <mark style="background-color: #2ab7a9"><span id="7"></span></mark>
                 </div>
                 </br>
                 <div class="input-field col s6">
                     <label  for="input_text" class="active teal-text darken-4">Hora Fin: (Hr:Min)</label>
                     {{ form_row(form.endTime,  {'attr': {'class':"input-field", 'class':"col s4"}})}}
+                    <span id="8"></span>
                 </div>
             </div>
             {#</br>#}
@@ -129,5 +137,89 @@
                 alert('las fechas son incosistentes');
             }
         }
+
+        var dateValidation = function () {
+
+            var eDInit =  new Date ($('#test_startDateEnrollment').val());//(document.getElementById("enrolDateInit").value).trim();
+//            var eTInit =  new Time ($('#test_startTimeEnrollment').val());//(document.getElementById("enrolTimeInit").value).trim();
+            var eDEnd =  new Date ($('#test_endDateEnrollment').val());//(document.getElementById("enrolDateEnd").value).trim();
+//            var eTEnd =  new Time ($('#test_endTimeEnrollment').val());//(document.getElementById("enrolTimeEnd").value).trim();
+
+
+            var dInit = new Date ($('#test_startDate').val());//(document.getElementById("dateInit").value).trim();
+//            var tInit = new Time ($('#test_startTime').val());//(document.getElementById("timeInit").value).trim();
+            var dEnd = new Date ($('#test_endDate').val());//(document.getElementById("dateEnd").value).trim();
+//            var tEnd = new Time ($('#test_endTime').val());//(document.getElementById("timeEnd").value).trim();
+            var isValid = true;
+
+            if(eDEnd > dInit) {
+                isValid = false;
+                var spamArea1 = document.getElementById("1");
+                var spamArea2 = document.getElementById("5");
+                spamArea1.textContent = "Inicio Inscrpcion debe ser antes a Inicio de examen";
+                spamArea2.textContent = "El examen debe iniciar despues que finalice la inscrpcion";
+//                return false;
+            }
+
+            if(eDInit > eDEnd) {
+                isValid = false;
+                var spamArea1 = document.getElementById("1");
+                var spamArea2 = document.getElementById("3");
+                spamArea1.textContent = "Inicio Inscrpcion debe ser antes a de fin de inscrpcion";
+                spamArea2.textContent = "La inscripcion debe terminar despues del inicio de inscrpcion";
+                return false;
+            }
+
+            if(dInit > dEnd) {
+                isValid = false;
+                var spamArea1 = document.getElementById("5");
+                var spamArea2 = document.getElementById("7");
+                spamArea1.textContent = "La fecha de inicio de examen debe antes a la fecha en q finalice";
+                spamArea2.textContent = "El examen  terminar despues de que comenzo";
+//                return false;
+            }
+//
+//            if(dInit < eDEnd || (dInit == eDEnd && tInit < eTEnd)) {
+////                alert('Mensaje manejado con JavaScript1');
+//                isValid = false;
+//                var spamArea = document.getElementbyId("Area1")
+//                spamArea.textContent = "examen debe ser despues o antes al fin de inscripcion";
+//            }
+//
+//            if(dInit > dEnd) {
+//                isValid = false;
+//                var  area = document.getElementById("Area2");
+//                area.textContent = message;
+//                message = 'La fecha de inicio del examen debe ser antes a la de su fin';
+////                alert('Mensaje manejado con JavaScript2');
+//            }
+//            if (dInit == dEnd && tInit > tEnd){
+//                isValid = false;
+//                var  area = document.getElementById("Area3");
+//                message = 'La fecha de inicio del examen debe ser antes a la de su fin';
+////                alert('Mensaje manejado con JavaScript3');
+//            }
+//
+//            if(eDInit > eDEnd) {
+////                var  area = document.getElementById("enrolDateInit");
+////                message = " La fecha de inicio de registro debe terminar despues de comenzar, no antes";
+////                area.textContent = message;
+////                alert('Mensaje manejado con JavaScript4');
+//
+//                isValid = false;
+//                var  area = document.getElementById("Area4");
+//                message = 'La fecha de inicio del examen debe ser antes a la de su fin';
+//            }
+//            if (eDInit == eDEnd && eTInit > eTEnd){
+////                var  area = document.getElementById("enrolTimeInit");
+////                area.textContent = "La hora de inicio de de registro debe ser antes a la de su fin";
+////                alert('Mensaje manejado con JavaScript5');
+//                isValid = false;
+//                var  area = document.getElementById("Area5");
+//                message = 'La fecha de inicio del examen debe ser antes a la de su fin';
+//            }
+            return isValid;
+        };
+
     </script>
 {% endblock %}
