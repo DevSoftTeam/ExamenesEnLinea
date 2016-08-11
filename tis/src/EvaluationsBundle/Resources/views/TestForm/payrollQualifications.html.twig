@@ -8,9 +8,11 @@
             <thead>
                 <tr>
                     <th>Estudiante</th>
-                    {% for question in questions %}
-                        <th>{{ question.idQuestion }}
+                    {% for i in range(1, questions | length) %}
+                        <th>{{ 'Pregunta' }}{{ i }} </th>
                     {% endfor %}
+                    {#{% for question in questions %}#}
+                    {#{% endfor %}#}
                     <th>Nota Total</th>
                 </tr>
             </thead>
