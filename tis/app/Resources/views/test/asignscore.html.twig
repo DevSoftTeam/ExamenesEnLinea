@@ -41,7 +41,7 @@
 	            <tr>
 	                <td>{{ question.idQuestion.statementQuestion[0:50] }}</td>
 	                <td class="red"> pregunta sin calificar </td>
-	                <td><button onclick="abrir('{{question.response}}','{{ path('test_score_asigned', {testid:test.idTest, idUserAnswer:question.idUserAnswer, score:0})}}');" class="waves-effect waves-light btn">calificar</button></td>
+	                <td><button onclick="abrir('{{question.response |replace({"\n":' ', "\r":' '})}}','{{ path('test_score_asigned', {testid:test.idTest, idUserAnswer:question.idUserAnswer, score:0})}}');" class="waves-effect waves-light btn">calificar</button></td>
 	            </tr>
             {% else %}
                 <tr>
