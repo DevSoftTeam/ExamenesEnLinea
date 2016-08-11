@@ -87,7 +87,7 @@ $query = $repository->createQueryBuilder('p')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
 $query2 = $repository->createQueryBuilder('p')
-               ->where('p.matter LIKE :word')
+               ->where('LOWER(p.matter) LIKE :word')
                ->andWhere('p.available=TRUE')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
@@ -99,11 +99,11 @@ $testsAvailable = $query2->getResult();
 } else {
 
 $query = $repository->createQueryBuilder('p')
-               ->where('p.institution LIKE :word')
+               ->where('LOWER(p.institution) LIKE :word')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
 $query2 = $repository->createQueryBuilder('p')
-               ->where('p.institution LIKE :word')
+               ->where('LOWER(p.institution) LIKE :word')
                ->andWhere('p.available=TRUE')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
@@ -199,11 +199,11 @@ $testsAvailable = $query2->getResult();
 
     }*/
 
-    public function asignscoreAction($idTest){
+    public function asignscoreAction($idTest, $idUser){
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
         $result = $em->createQueryBuilder();
-        $questions = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idTest'=>$idTest));
+        $questions = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idTest'=>$idTest,'idUser'=>$idUser));
         // var_dump($questions);exit;
 
         return $this->render('test/asignscore.html.twig', array(
@@ -235,7 +235,8 @@ $testsAvailable = $query2->getResult();
 
         $em->persist($UserAnswer);
         $em->flush();
-        return $this->redirectToRoute('test_asign_score',array('idTest' => $testid,'msg'=>'mensaje'));
+        $idUser = $UserAnswer->idUser->idUser;
+        return $this->redirectToRoute('test_asign_score',array('idTest' => $testid,'idUser'=>$idUser,'msg'=>'mensaje'));
     }
 
      public function dropAction($idT,$idQ){

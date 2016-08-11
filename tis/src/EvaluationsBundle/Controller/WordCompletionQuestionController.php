@@ -59,12 +59,13 @@ class WordCompletionQuestionController extends Controller
                 $em->persist($question);
                 $ques=$question->getStatementQuestion();
                 $enunciado=$question->getStatementQuestion();
+                //var_dump($enunciado); exit;
 
 
                  $claves = "/(\[\*|^)\S*(\*\]|$)/";
                  preg_match_all($claves, $ques, $todo);
 
-                 $sust = "________";
+                $sust = " ________ ";
                 $enun = preg_replace($claves, $sust, $ques);
                
                 $i = 1;
@@ -185,7 +186,7 @@ class WordCompletionQuestionController extends Controller
                  $claves = "/(\[\*|^)\S*(\*\]|$)/";
                  preg_match_all($claves, $ques, $todo);
 
-                 $sust = "________";
+                 $sust = " ________ ";
                 $enun = preg_replace($claves, $sust, $ques);
                
                 $i = 1;
