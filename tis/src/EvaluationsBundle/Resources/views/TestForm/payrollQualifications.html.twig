@@ -22,7 +22,6 @@
                         <th>{{ taken.idUser }}</th>
                         {% for answer in answers %}
                             {% if taken.idUser == answer.idUser %}
-                                {#{% macro while(answer) %}#}
                                 {% if  answer.scoreQuestion is not null %}
                                 <th>
                                     {{ answer.scoreQuestion }}
@@ -30,7 +29,6 @@
                                 {% else %}
                                 <th> No Calificado </th>
                                 {% endif %}
-                                {#{% endmacro %}#}
                             {% endif %}
                         {% endfor %}
                         <th>{{ taken.userScore }}</th>
