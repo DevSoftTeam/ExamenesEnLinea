@@ -22,13 +22,13 @@
         <div class="col s12">
         <label class="teal-text lighten-4"><h5>Puntuación preguntas del examen</h5></label>
 
-            <div class="col m2">
+            <div class="col s1">
                 <label class="teal-text lighten-4"><h5>Pregunta</h5></label>
             </div>
-            <div class="col m8">
+            <div class="col s10">
                 <label class="teal-text lighten-4"><h5>Descripción y respuesta(s) de pregunta</h5></label>
             </div>
-            <div class="col m2">
+            <div class="col s1">
                 <label class="teal-text lighten-4"><h5>Puntaje</h5></label>
             </div>
         </div>
@@ -36,11 +36,11 @@
         {% set numQ = 1 %}
         {% for question in data %}
             <div class="col s12">
-                <div class="col m2">
+                <div class="col s1">
                 <label class="teal-text lighten-4"><h5>{{numQ}}</h5></label>
                 </div>
             {% if question['question'].idType.idType != 8 %}
-                <div class="col m8">
+                <div class="col s10">
                     <label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
                     <label class="pink-text lighten-4">
                     {% if question['question'] in questionsPenalized %}
@@ -207,7 +207,7 @@
             {% endif %}
             </div>
             
-            <div class="col m2">
+            <div class="col s1" align="center">
                 {% if userAnswers[numQ - 1].scoreQuestion == null %}
                 
                 <p class="teal-text lighten-4">Falta calificar</p>
