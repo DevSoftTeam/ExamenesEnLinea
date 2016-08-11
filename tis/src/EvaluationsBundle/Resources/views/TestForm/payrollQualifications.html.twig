@@ -12,6 +12,7 @@
                         <th>{{ question.idQuestion }}
                     {% endfor %}
                     <th>Nota Total</th>
+                    <th>Calificacion Manual</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,9 @@
                             {% endif %}
                         {% endfor %}
                         <th>{{ taken.userScore }}</th>
+                        <th>
+                        <a href={{path('test_asign_score', {'idTest':taken.idTest.id, 'idUser':taken.idUser.id})}}>Calificar examen</a>
+                        </th>
                     </tr>
                 {% endfor %}
             </tbody>

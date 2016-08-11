@@ -121,6 +121,11 @@ class UserAnswer
         return $this->idUser;
     }
 
+    public function getIdUserSystem()
+    {
+        return $this->idUser->id;
+    }
+
     public function setIdUser($idUser)
     {
         $this->idUser = $idUser;

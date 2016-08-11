@@ -26,7 +26,7 @@ $collection->add('test_searchResult', new Route(
 ));
 
 $collection->add('test_asign_score', new Route(
-    '/asignscore/{idTest}/',
+    '/asignscore/{idTest}/{idUser}',
     array('_controller' => 'EvaluationsBundle:Test:asignscore'),
     array(),
     array(),
