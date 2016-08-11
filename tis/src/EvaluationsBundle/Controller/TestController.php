@@ -46,13 +46,20 @@ class TestController extends Controller
 
         $word = $request->get('bus'); //palabra que se va a buscar para coincidir
         $busq = $request->get('group1'); //por lo que se va a buscar (tittle, matter, institution)
-
+        $word = strtolower($word);
         $repository = $em->getRepository('EvaluationsBundle:Test');
  //       $reptestsAvailable = $em->getRepository('EvaluationsBundle:Test');
+        $testsTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idUser'=>$idUser));
+        $testsT = array();
+        foreach ($testsTaken as $testT) {
+            array_push($testsT,$testT->getIdTest());
+        }
+
+        
 if ($busq == "tittle") { //buscar por titulo
 
 $query = $repository->createQueryBuilder('p')
-               ->where('p.title LIKE :word')
+               ->where('LOWER(p.title) LIKE :word')
                ->setParameter('word', '%'.$word.'%')
                ->getQuery();
 $testsResult = $query->getResult();
