@@ -56,7 +56,7 @@
                         <div class="input-field col s4">
 
                             <input name="group{{ counter }}" type="radio" id="test{{ counter }}" value="verdadero"
-                                     {%if ans.isCorrect == 1%} checked="checked"{% endif %} />
+                                     {%if ans.isCorrect == 1%} checked="checked"{% endif %} {% if counter <= 3 %}required{% endif %}/>
 
                             <label for="test{{counter}}">Verdadero</label>
 
@@ -101,7 +101,7 @@
             var div = document.getElementById("col"+i);
             $(div).append('<div class="input-field col s8" id="10"></div>');
             var div10 = document.getElementById("10");
-            $(div10).append('<input placeholder="" name="answer'+i+'" id="name'+i+'" type="text">');
+            $(div10).append('<input placeholder="" name="answer'+i+'" id="name'+i+'" type="text" >');
 
             $(div).append('<div class="row input-field col s4" id="2"></div>');
             var div2 = document.getElementById("2");

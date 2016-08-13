@@ -21,7 +21,7 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <label class="teal-text darken-4"><h6>Introduccion :</h6></label>
+            <label class="teal-text darken-4"><h6>Enunciado :</h6></label>
             {{ form_widget(form.statementQuestion,{'attr':{'class':'materialize-textarea', 'id':'textarea1','length':'5000','placeholder':'Introduzca texto'}}) }}
             {{ form_errors(form.statementQuestion) }}
           </div>
@@ -43,7 +43,7 @@
         <div class="row" id="answers">
           {% for i in range(1, 10, 2) %}
                   <div class="input-field col s8">
-                      <input placeholder="" name="answer{{i}}" id="first_name" type="text">
+                      <input placeholder="" name="answer{{i}}" id="first_name" type="text" , {% if i <= 3 %}required{% endif %}>
                   </div>
                   <div class="input-field col s4">
                       <input name="group{{ i }}" type="radio" id="test{{ i }}" value="verdadero"/>
