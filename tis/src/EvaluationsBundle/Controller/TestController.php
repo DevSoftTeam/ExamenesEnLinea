@@ -300,17 +300,29 @@ $testsAvailable = $query2->getResult();
     {
         $em = $this->getDoctrine()->getManager();
         $result = $em->createQueryBuilder();
-        $questions = $result->select(array('q'))
+        $questions = $result->select(array('t'))
             ->from('EvaluationsBundle:Question', 'q')
             ->innerjoin('EvaluationsBundle:TestQuestion','t', 'WITH', 't.idQuestion = q.idQuestion and t.idTest = :idT')
             ->setParameter('idT' , $test->getIdTest())
             ->getQuery()
             ->getResult();
 
+        $score_asign = $result->select('sum(tq.percent) as score')
+            ->from('EvaluationsBundle:TestQuestion', 'tq')
+            ->where('tq.idTest = :idT')
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+            $score_asign = $score_asign[0]['score'];
+            if ($score_asign == null) {
+                $score_asign = 0;
+            }
+        // var_dump($questions); exit;
         $deleteForm = $this->createDeleteForm($test);
         return $this->render('test/show.html.twig', array(
             'test' => $test,
             'questions' => $questions,
+            'score_asign' => $score_asign,
             'delete_form' => $deleteForm->createView(),
         ));
     }

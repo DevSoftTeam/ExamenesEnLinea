@@ -101,36 +101,94 @@
                 <th>Enunciado</th>
                 <th>area</th>
                 <th>Tipo de pregunta</th>
+                <th>puntaje</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for question in questions %}
-                <!-- <tr {% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}>
-                {#<td><a href="{{ path('question_show', { 'id': question.idQuestion })}}{{question.getURL()}}">mostrar</a></td>#} -->
-                <!--     {#<td><a href="{{question.getURL()}}">{{question.idQuestion}}</a></td>#}-->
-                <td>{{ question.statementQuestion[0:15] }}</td>
-                <td>{% if question.idArea != null %}{{ question.idArea.nameArea }} {% endif %}</td>
-                <td>{% if question.idType != null %}{{ question.idType.nameType }} {% endif %}</td>
-                <td> <a class="btn-floating btn-large waves-effect waves-light gray"{% if question.idType != null %} onclick="javascript:location.href='{{question.getURL()}}'" {% endif %}><i class="material-icons">edit</i></a> <a  class="btn-floating btn-large waves-effect waves-light gray" href={{ path('test_drop', {idT:test.idTest, idQ:question.idQuestion})}}><i class="material-icons" >delete</i></a></td>
+                <td>{{ question.idQuestion.statementQuestion[0:15] }}</td>
+                <td>{% if question.idQuestion.idArea != null %}{{ question.idQuestion.idArea.nameArea }} {% endif %}</td>
+                <td>{% if question.idQuestion.idType != null %}{{ question.idQuestion.idType.nameType }} {% endif %}</td>
+                <td>{{question.percent}}</td>
+                <td> 
+                <a onclick="abrir('{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion.id, percent:0, ispenalized:0})}}');" class="btn-floating btn-large waves-effect waves-light gray"><i class="material-icons">edit</i></a> 
+
+                <a class="btn-floating btn-large waves-effect waves-light gray" href={{ path('test_drop', {idT:test.idTest, idQ:question.idQuestion})}}><i class="material-icons" >delete</i></a>
+                </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
-<script>
-$(document).ready(function(){
-$('.tooltipped').tooltip({delay: 50});
-});
 
-var toast = function(msg){
-Materialize.toast(msg, 2000);
-}
-var agregado = function () {
-var msg = window.location.search.substr(1);
-if (msg != "") {
-toast("la pregunta fue eliminada del examen");
-}
-};
-(eliminado(),2000);
+<!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h3 class="teal-text lighten-4">Editar Puntuje de la pregunta</h3>
+          <p class="teal-text lighten-4">puntaje de la pregunta:</p>
+          <p class="teal-text lighten-4">puntaje total: {{ test.score }}, puntaje usado: {{ score_asign }}</p>
+          <div class="row">
+          <div class="col m9">
+          <input id="percent" value="1" min=1 type="number">
+          </div>
+          <p class="col m3"> 
+          <input type="checkbox" id="penalized"/>
+          <label for="penalized">es penalizada?</label>
+          </p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="agregar" href="" onclick="guardar( {{score_asign}}, {{ test.score }} )" class="modal-action modal-close waves-effect waves-green btn-flat">Agregar</button>
+          <input id="url" type="hidden" name="">
+          <button class="modal-action modal-close waves-effect waves-green btn-flat" onclick="cerrar();">cancelar</button>
+        </div>
+      </div>
+
+<script> 
+    $(document).ready(function(){
+        $('.tooltipped').tooltip({delay: 50});
+    });
+
+    var guardar = function(score_asign, total_score) {
+        var url = $('#url')[0].value;
+        var penalized = $('#penalized').is(":checked")
+        var size = url.length-4;
+        var url = url.substring(0, size);
+        var percent = $('#percent')[0].value;
+        var url = url + '/'+ percent+'/'+penalized;
+        if (parseInt(percent) < 1) {
+            toast('no puede asignar puntos menores a 1');
+        }
+        else{
+            if (( parseInt(score_asign) + parseInt(percent)) > parseInt(total_score)) {
+                toast('Los puntos que intenta asignar superan a los puntos del examen');
+            }
+            else{
+                location.href=url;
+            }
+        }
+    };
+
+    var abrir = function(url) {
+        $('#modal1').openModal();
+        $('#url')[0].value = url;
+    };
+
+    var cerrar = function() {
+        $('#modal1').closeModal();
+    };
+
+    var toast = function(msg){
+        Materialize.toast(msg, 2000);
+    };
+
+    var agregado = function () {
+        var msg = window.location.search.substr(1);
+        if (msg != "") {
+            toast("la pregunta fue eliminada del examen");
+        }
+    };
+    
+    (eliminado(),2000);
 </script>
 {% endblock %}
