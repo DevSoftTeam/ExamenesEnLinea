@@ -55,6 +55,17 @@ $collection->add('test_asign', new Route(
     array('GET')
 ));
 
+$collection->add('test_asign_edit', new Route(
+    '/asignarEdit/{idT}/{idQ}/{percent}/{ispenalized}',
+    array('_controller' => 'EvaluationsBundle:Test:asign_edit'),
+    array(),
+    array(),
+    '',
+    array(),
+    array('GET')
+));
+
+
 $collection->add('test_preview', new Route(
     '/{id}/preview',
     array('_controller' => 'EvaluationsBundle:Test:preview'),

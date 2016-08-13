@@ -235,6 +235,18 @@ $testsAvailable = $query2->getResult();
         return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));
     }
 
+    public function asign_editAction($idT,$idQ, $percent, $ispenalized){
+        $em = $this->getDoctrine()->getManager();
+        
+        $testQuestion = $em->getRepository('EvaluationsBundle:TestQuestion')->find(array('idTest'=>$idT,'idQuestion'=>$idQ));
+         
+        $testQuestion->setPercent($percent);
+        $testQuestion->setIsPenalized($ispenalized);
+        $em->persist($testQuestion);
+        $em->flush();
+        return $this->redirectToRoute('test_show',array('id' => $idT,'msg'=>'mensaje'));
+    }
+
 
      public function dropAction($idT,$idQ){
         $em = $this->getDoctrine()->getManager();
@@ -307,6 +319,7 @@ $testsAvailable = $query2->getResult();
             ->getQuery()
             ->getResult();
 
+        $result = $em->createQueryBuilder();
         $score_asign = $result->select('sum(tq.percent) as score')
             ->from('EvaluationsBundle:TestQuestion', 'tq')
             ->where('tq.idTest = :idT')
@@ -317,7 +330,6 @@ $testsAvailable = $query2->getResult();
             if ($score_asign == null) {
                 $score_asign = 0;
             }
-        // var_dump($questions); exit;
         $deleteForm = $this->createDeleteForm($test);
         return $this->render('test/show.html.twig', array(
             'test' => $test,
