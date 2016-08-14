@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col s12">
             <label class="teal-text darken-4"><h6>Area :</h6></label>
-            <input list="areas" id="area" name="area" placeholder="seleccione o introzca nombre de area" value="{{question.idArea.nameArea}}" required>
+            <input list="areas" id="area" name="area" placeholder="Seleccione o introduzca nombre de area" value="{{question.idArea.nameArea}}" required>
               <datalist id="areas">
               {% for area in areas %}
                 <option value="{{ area.nameArea }}">
@@ -53,10 +53,8 @@
                 <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="" length="600"
                 {% if i <= 3 %}required{% endif %} >
                 {% if answers|length >= i %}{{answers[i-1].content}}{% endif %}</textarea>
-                <label class="teal-text lighten-4"><h6>Respuesta {{ i }} :</h6></label>
-                
                 <div class="input-field col s2">
-          <p>
+                <p>
                 <input class="with-gap" name="chec{{i}}" type="checkbox" id="test{{i}}" 
                 {% if i<= answers|length %} {% if answers[i-1].isCorrect %}
                 checked="checked"{% endif %} {% endif %}/>
@@ -94,8 +92,6 @@
       $(answers).append('<br><br><div class="input-field col s12" id="col'+i+'">');
       var div = document.getElementById("col"+i);
       $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea>');
-      
-      $(div).append('<label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label>');
       
 
       $(div).append('<div class="input-field col s2"><p><input class="with-gap" name="chec'+i+'" value="'+i+'" type="checkbox" id="test'+i+'"/><label class="teal-text lighten-4" for="test'+i+'">Correcta</label></p></div>');

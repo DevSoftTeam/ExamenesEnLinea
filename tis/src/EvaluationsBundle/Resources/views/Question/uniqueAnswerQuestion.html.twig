@@ -2,7 +2,7 @@
 {% block title %} Crear pregunta {% endblock %}
 {% block body %}
     
-  <label class="teal-text lighten-4"><h3>Crear pregunta de seleccion simple:</h3></label>
+  <label class="teal-text lighten-4"><h3>Crear pregunta de selección simple:</h3></label>
   <div class="row">
 
     <!--form action={{ path('openQuestion_new',{ 'id_type': 1}) }} method="POST" class="col s12" enctype="multipart/form-data" -->
@@ -54,18 +54,18 @@
       {% for i in 1..4 %}
       <div class="input-field col s12">
           <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
-          <div><label class="teal-text lighten-4  "><h6>Opción {{ i }} :</h6></label></div>
+          <!--<div><label class="teal-text lighten-4  "><h6>Opción {{ i }} :</h6></label></div>-->
           <br>
-          <br>
-          <textarea class="materialize-textarea validate col s10" name="answer{{i}}" placeholder="Introduzca texto" length="600" 
+          <textarea class="materialize-textarea validate col s10" name="answer{{i}}" length="600" 
           {% if i <= 3 %}required{% endif %}></textarea>
           <div></div>
           
           <div class="input-field col s2">
-          <p>
+
+          
           <input class="" name="chec1" value="{{i}}" type="radio" id="test{{i}}"  />
           <label class="teal-text lighten-4" for="test{{i}}">Correcta</label>
-          </p>
+          
           </div>
           </div>
         
@@ -76,7 +76,7 @@
 
         <br><br>
         <div class="row">
-          <a class="btn waves-effect waves-light " onClick="addElement();">Agregar respuesta</a>
+          <a class="btn waves-effect waves-light " onClick="addElement();">Agregar opción</a>
         <div class=" alight center">
         <button class="btn waves-effect waves-light " type="submit" name="action" onclick="validation();">Guardar</button>
       <a class="waves-effect waves-light btn" href={{ path('question_new') }}>Cancelar</a>
@@ -91,8 +91,7 @@
       
       $(answers).append('<div class="input-field col s12" id="col'+i+'"></div>');
       var div = document.getElementById("col"+i);
-      $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea>');
-      $(div).append(' <label class="teal-text lighten-4"><h6>Respuesta '+i+':</h6></label>');
+      $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" length="600"></textarea>');
       $(div).append('<div class="input-field col s2"><input class="with-gap" name="chec1" value="'+i+'" type="radio" id="test'+i+'"/><label class="teal-text lighten-4" for="test'+i+'">Correcta</label></div>');
       i++;
       

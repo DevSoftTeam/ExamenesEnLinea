@@ -65,7 +65,7 @@ class WordCompletionQuestionController extends Controller
                  $claves = "/(\[\*|^)\S*(\*\]|$)/";
                  preg_match_all($claves, $ques, $todo);
 
-                $sust = " ________ ";
+              $sust = " ________ ";
                 $enun = preg_replace($claves, $sust, $ques);
                
                 $i = 1;
