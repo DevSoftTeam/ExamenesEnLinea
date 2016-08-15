@@ -106,7 +106,7 @@
             {% set validHour = (currentDate == testA.startDate|date("d/m/Y ") and currentTime >= testStartTime) %}
             {% set validDate = currentDate > testA.startDate|date("d/m/Y")%}
 
-            {% if areNull and (validHour or validDate) %}
+            {% if (validHour or validDate) %}
             <tr>
                 <td>
                     <a  href="{{ path('test_show', { 'id': testA.idTest }) }}"><font color="black">{{testA.title}}</font></a>
