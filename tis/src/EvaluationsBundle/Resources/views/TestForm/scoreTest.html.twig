@@ -20,10 +20,8 @@
     <div class="row">
         
         <div class="col s12 m12 l12">
-        <label class="teal-text lighten-4"><h5>Puntuación preguntas del examen</h5></label>
-
             <div class="col s12 m12 l11">
-                <label class="teal-text lighten-4"><h5>Descripción y respuesta(s) de pregunta</h5></label>
+                <label class="teal-text lighten-4"><h5>Descripción y respuesta(s) de pregunta(s)</h5></label>
             </div>
             <div class="col s12 m12 l1">
                 <label class="teal-text lighten-4"><h5>Puntaje</h5></label>
@@ -51,7 +49,7 @@
             {% endif %}
 
             {% if question['question'].idType.idType == 1 %}
-                <div class="input-text-field col s12">
+                <div class="input-text-field col s12 m12 l12">
                     <textarea class="materialize-textarea" name="answer{{numQ}}" disabled>{{userAnswers[numQ - 1].response}}</textarea>
                 </div>
 
@@ -60,11 +58,11 @@
                 {% set numResp = 1 %}
                 {% for ans in question['answers'] %}
                 {% set resp = resps[numResp]|split(',') %}
-                <div class="col s12">
-                    <div class="col s7">
+                <div class="col s12 m12 l12">
+                    <div class="col s10 m10 l7">
                     <pre>{{ ans.content }}</pre>
                     </div>
-                    <div class="col s2">
+                    <div class="col s2 m2 l2">
                         <p>{{ resp[1] }}</p>
                     </div>
                 </div>
@@ -72,7 +70,7 @@
                 {% endfor %}
 
             {% elseif question['question'].idType.idType == 3 %}
-                <div class="col s12">
+                <div class="col s12 m12 l12">
                 {% if userAnswers[numQ - 1].response != null %}
                     <label class="teal-text darken-4"><h6>Archivo adjunto :</h6></label>
                     <a class="waves-effect waves-light btn" href="/uploads/users/{{userAnswers[numQ - 1].response}}" download>Descargar</a>
@@ -82,7 +80,7 @@
                 </div>
 
             {% elseif question['question'].idType.idType == 4 %}
-                <div class="col s12">
+                <div class="col s12 m12 l12">
                     <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="t{{numQ}}" value="true" {% if userAnswers[numQ - 1].response == "true" %} checked="checked" {% else %}disabled="disabled"{% endif %}/>
                     <label for="t{{numQ}}">Verdadero</label>
                     <input name="trueFalse{{question['question'].idQuestion}}" type="radio" id="f{{numQ}}" value="false"{% if userAnswers[numQ - 1].response == "false" %} checked="checked" {% else %}disabled="disabled"{% endif %}/>
@@ -91,9 +89,9 @@
 
             {% elseif question['question'].idType.idType == 5 %}
                 {% for ans in question['answers'] %}
-                  <div class="col s12">
-                      <div class="col s10"><pre>{{ ans.content }}</pre></div>
-                      <div class="input-field col s2">
+                  <div class="col s12 m12 l12">
+                      <div class="col s10 m10 l10"><pre>{{ ans.content }}</pre></div>
+                      <div class="input-field col s2 m2 l2">
                         <p>
                         <input name="radio{{numQ}}"value="{{ans.idAnswerElement}}"type="radio" id="test{{ans.idAnswerElement}}" {% if userAnswers[numQ - 1].response == ans.idAnswerElement %} checked="checked" {% else %}disabled="disabled"{% endif %}/>
                         <label class="teal-text lighten-4" for="test{{ans.idAnswerElement}}">Correcta</label>
@@ -105,14 +103,13 @@
             {% elseif question['question'].idType.idType == 6 %}
                   {% set resps = userAnswers[numQ - 1].response|split(' ') %}
                   {% for ans in question['answers'] %}
-                          <div class="col s12">
-                              <div class="col s10">
+                          <div class="col s12 m12 l12">
+                              <div class="col s10 m10 l10">
                                 <pre>{{ ans.content }}</pre>
                               </div>
-                              <div class="input-field col s2">
+                              <div class="input-field col s2 m2 l2">
                                 <p><input class="with-gap" name="check{{ans.idAnswerElement}}" value="1" type="checkbox" id="test{{ans.idAnswerElement}}" {% if ans.idAnswerElement in resps %} checked="checked" {% endif %}disabled="disabled">
                                 <label class="teal-text lighten-4" for="test{{ans.idAnswerElement}}">Correcta</label></p>
-                                
                               </div>
                           </div>
                   {% endfor %}
@@ -120,8 +117,8 @@
             {% elseif question['question'].idType.idType == 7 %}
                 {% set resps = userAnswers[numQ - 1].response|split(' ') %}
                  {% set foo = 1 %}
-                    <div class="col s12">
-                      <div class="col s5">
+                    <div class="col s12 m12 l12">
+                      <div class="col s12 m5 l5">
                       {% for i in range(0,((question['answers']|length) / 2)-1) %}
                         <div class="col s1">
                           <label class="teal-text lighten-4"><h6>{{ foo }}. </h6></label>
@@ -132,18 +129,18 @@
                       {% set foo = foo + 1 %}
                       {% endfor %}
                       </div>
-                      <div class="col s7">
+                      <div class="col s12 m7 l7">
                       {% set numR = 0 %}
                       {% for k in range((question['answers']|length)/2, (question['answers']|length)-1) %}
                       {% set resp = resps[numR]|split(',') %}
-                      <div class="col s12">
+                      
                         <div class="col s1">
                           <p>{{ resp[1] }}</p>
                         </div>
                         <div class="col s11">
                           <pre>{{(question['answers'][k]).content}}</pre>
                         </div>
-                      </div>
+                      
                       {% set numR = numR + 1 %}
                       {% endfor %}
                       </div>
@@ -152,7 +149,7 @@
             {% elseif question['question'].idType.idType == 8 %}
             <div class="col s12 m10 l10">
                 {% set keys = question['question'].statementQuestion|split(' ') %}
-                    <div class="col s12">
+                    <div class="col s12 m12 l12">
                     <label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
                     <label class="pink-text lighten-4">
                         {% if question['question'] in questionsPenalized %}
@@ -180,18 +177,18 @@
                     </div>
 
             {% elseif question['question'].idType.idType == 9 %}
-                <div class="col s12">
+                <div class="col s12 m12 l12">
                     {% set resps = userAnswers[numQ - 1].response|split(' ') %}
                     {% set iRes = 0 %}
 
                     {% set counter = 1 %}
                     {% for ans in question['answers'] %}
                         {% set falseC = counter + 1 %}
-                        <div class="input-field col s8">
+                        <div class="input-field col s12 m8 l8">
                             <pre>{{ ans.content }}</pre>
                         </div>
                         {% set resp = resps[iRes]|split(',') %}
-                        <div class="input-field col s4">
+                        <div class="input-field col s12 m4 l4">
                             <input name="group{{ ans.idAnswerElement }}" type="radio" id="test{{numQ}}{{counter}}" value="TRUE" {% if resp[1] == "TRUE" %} checked="checked" {% else %}disabled="disabled"{% endif %}/>
                             <label for="test{{numQ}}{{counter}}">Es Verdadero</label>
                             <input name="group{{ ans.idAnswerElement }}" type="radio" id="test{{numQ}}{{falseC}}" value="FALSE" {% if resp[1] == "FALSE" %} checked="checked" {% else %}disabled="disabled"{% endif %}/>
