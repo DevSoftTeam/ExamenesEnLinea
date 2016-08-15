@@ -27,7 +27,7 @@ $collection->add('test_searchResult', new Route(
 
 $collection->add('test_asign_score', new Route(
     '/asignscore/{idTest}/{idUser}',
-    array('_controller' => 'EvaluationsBundle:Test:asignscore'),
+    array('_controller' => 'EvaluationsBundle:Test:asignscore2'),
     array(),
     array(),
     '',
@@ -36,7 +36,7 @@ $collection->add('test_asign_score', new Route(
 ));
 
 $collection->add('test_score_asigned', new Route(
-    '/asignscore/{testid}/{idUserAnswer}/{score}',
+    '/asignscore/{testid}/{questionid}/{score}',
     array('_controller' => 'EvaluationsBundle:Test:score_asigned'),
     array(),
     array(),
