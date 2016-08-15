@@ -4,14 +4,14 @@
 {% block body %}
     <div class="row">
 
-    <div class="col s12">
+    <div class="col s12 m12 l12">
         <label class="teal-text lighten-4"><h3>Nota de {{ testTaken.idTest.title }}</h3></label>
 
-        <div class="col m6">
+        <div class="col s12 m6 l6">
             <label class="teal-text darken-4"><h5>Nombre:  <span class="black-text">{{ testTaken.idUser.name }} {{ testTaken.idUser.lastName }}</span></h5>  </label>   
         </div>
 
-        <div class="col m6">
+        <div class="col s12 m6 l6">
             <label class="teal-text darken-4"><h5>Puntuación:  <span class="black-text">{{ testTaken.userScore }}</span></h5>  </label>
         </div>
     </div>
@@ -19,28 +19,25 @@
 
     <div class="row">
         
-        <div class="col s12">
+        <div class="col s12 m12 l12">
         <label class="teal-text lighten-4"><h5>Puntuación preguntas del examen</h5></label>
 
-            <div class="col s1">
-                <label class="teal-text lighten-4"><h5>Pregunta</h5></label>
-            </div>
-            <div class="col s10">
+            <div class="col s12 m12 l11">
                 <label class="teal-text lighten-4"><h5>Descripción y respuesta(s) de pregunta</h5></label>
             </div>
-            <div class="col s1">
+            <div class="col s12 m12 l1">
                 <label class="teal-text lighten-4"><h5>Puntaje</h5></label>
             </div>
         </div>
         
         {% set numQ = 1 %}
         {% for question in data %}
-            <div class="col s12">
-                <div class="col s1">
-                <label class="teal-text lighten-4"><h5>{{numQ}}</h5></label>
+            <div class="col s12 m12 l12">
+                <div class="col s12 m2 l1">
+                <label class="teal-text lighten-4"><h5>Preg. {{numQ}}</h5></label>
                 </div>
             {% if question['question'].idType.idType != 8 %}
-                <div class="col s10">
+                <div class="col s12 m10 l10">
                     <label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
                     <label class="pink-text lighten-4">
                     {% if question['question'] in questionsPenalized %}
@@ -153,7 +150,7 @@
                   </div>
 
             {% elseif question['question'].idType.idType == 8 %}
-            <div class="col s10">
+            <div class="col s12 m10 l10">
                 {% set keys = question['question'].statementQuestion|split(' ') %}
                     <div class="col s12">
                     <label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
@@ -167,7 +164,7 @@
                     {% set iRes = 0 %}
                     {% set cont = 1 %}
                     {% for key in keys %}
-                        {% if key starts with '[' %}
+                        {% if key starts with '________' %}
                             {% set resp = resps[iRes]|split(',') %}
                                 <input type="text" style="width:12em;" name="word{{numQ}}{{cont}}" value="{{resp[1]}}" />
                                 {% set cont = cont + 1 %}
@@ -207,7 +204,7 @@
             {% endif %}
             </div>
             
-            <div class="col s1" align="center">
+            <div class="col s2 m2 l1" align="center">
                 {% if userAnswers[numQ - 1].scoreQuestion == null %}
                 
                 <p class="teal-text lighten-4">Falta calificar</p>
