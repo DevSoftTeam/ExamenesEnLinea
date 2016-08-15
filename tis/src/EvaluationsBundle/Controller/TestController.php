@@ -210,14 +210,22 @@ $testsAvailable = $query2->getResult();
     }
 
     public function score_asignedAction($testid,$questionid,$score){
+        $msg = "";
         $em = $this->getDoctrine()->getManager();
         $UserAnswer=$em->getRepository('EvaluationsBundle:UserAnswer')->findOneBy(array('idTest'=>$testid,'idQuestion'=>$questionid));
+        $TestQuestion=$em->getRepository('EvaluationsBundle:TestQuestion')->findOneBy(array('idTest'=>$testid,'idQuestion'=>$questionid));
+        if ($TestQuestion->percent >= $score) {
+            $UserAnswer->setScoreQuestion($score);
+            $em->persist($UserAnswer);
+            $em->flush();
+            $msg = "agregado correctamente";
+        }
+        else{
+            $msg = "El puntaje debe ser menor a ".$TestQuestion->percent;
+        }
         
-        $UserAnswer->setScoreQuestion($score);
-        $em->persist($UserAnswer);
-        $em->flush();
         $idUser = $UserAnswer->idUser->idUser;
-        return $this->redirectToRoute('test_asign_score',array('idTest' => $testid,'idUser'=>$idUser,'msg'=>'mensaje'));
+        return $this->redirectToRoute('test_asign_score',array('idTest' => $testid,'idUser'=>$idUser,'msg'=>$msg));
     }
 
     public function asignAction($idT,$idQ, $percent, $ispenalized){
