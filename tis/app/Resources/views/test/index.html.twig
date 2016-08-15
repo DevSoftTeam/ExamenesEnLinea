@@ -102,8 +102,8 @@
             {% set currentTime = "now"|date("H:i") %}
             {% set currentDate = "now"|date("d/m/Y ") %}
             {% set areNull = testA.startTime is not empty and testA.startDate is not empty %}
-            {% set validHour = (currentDate == date(testA.startDate) and currentTime >= date(testA.startTime)) %}
-            {% set validDate = currentDate > date(testA.startDate)%}
+            {% set validHour = (currentDate == testA.startDate|date("d/m/Y ") and currentTime >= testA.startTime|date("H:i")) %}
+            {% set validDate = currentDate > testA.startDate|date("d/m/Y")%}
 
             {% if areNull and (validHour or validDate) %}
             <tr>
@@ -123,8 +123,9 @@
                     <a href={{path('exam_homepage', {'idTest':testA.idTest})}}>Resolver</a>
                 {% endif %}
                 </td>
-                <td>{{ currentTime }}</td>
-                <td>{{ currentDate }}</td>
+                <td>{{ date(testA.startDate)|date("d/m/Y")}}</td>
+                <td>{{ "now"|date("d/m/Y H:i")}}</td>
+                <td>{{ testA.startTime|date("H:i", "America/La_Paz") }}</td>
                 <td>grfsd</td>
             </tr>
             {% endif %}
