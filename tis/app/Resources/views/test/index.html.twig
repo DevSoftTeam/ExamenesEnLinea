@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
-
+{#{% block meta %}#}
+    {#{{ parent() }}#}
+    {#<META HTTP-EQUIV="REFRESH" CONTENT="5">#}
+    {#<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">#}
+{#{% endblock meta %}#}
 {% block body %}
 
 
@@ -59,7 +63,6 @@
         <tbody >
         {% for test in tests %}
             <tr>
-                {#<td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>#}
                 <td>
                     <a  href="{{ path('test_show', { 'id': test.idTest }) }}"><font color="black">{{test.title}}</font></a>
                 </td>
@@ -96,8 +99,14 @@
         </thead>
         <tbody >
         {% for testA in testsAvailable %}
+            {% set currentTime = "now"|date("H:i") %}
+            {% set currentDate = "now"|date("d/m/Y ") %}
+            {% set areNull = testA.startTime is empty and testA.startDate is empty %}
+            {% set valid = (currentDate == testA.startDate
+                                and currentTime >= testA.startTime) or  (currentDate > testA.startDate)%}
+
+            {% if areNull and valid %}
             <tr>
-                {#<td><a href="{{ path('test_show', { 'id': test.idTest }) }}">{{ test.idTest }}</a></td>#}
                 <td>
                     <a  href="{{ path('test_show', { 'id': testA.idTest }) }}"><font color="black">{{testA.title}}</font></a>
                 </td>
@@ -114,8 +123,9 @@
                     <a href={{path('exam_homepage', {'idTest':testA.idTest})}}>Resolver</a>
                 {% endif %}
                 </td>
-
+                <td>{{ testA.startTime }}</td>
             </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>

@@ -69,6 +69,7 @@ class Test
      * @ORM\Column(name="end_date", type="date", nullable=true)
      */
     private $endDate;
+    
     /**
      * @var \Time
      *
