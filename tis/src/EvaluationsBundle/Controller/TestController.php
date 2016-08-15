@@ -209,11 +209,11 @@ $testsAvailable = $query2->getResult();
             ));
     }
 
-    public function score_asignedAction($testid,$idUserAnswer,$score){
+    public function score_asignedAction($testid,$questionid,$score){
         $em = $this->getDoctrine()->getManager();
-        $UserAnswer=$em->getRepository('EvaluationsBundle:UserAnswer')->find($idUserAnswer);
+        $UserAnswer=$em->getRepository('EvaluationsBundle:UserAnswer')->findOneBy(array('idTest'=>$testid,'idQuestion'=>$questionid));
+        
         $UserAnswer->setScoreQuestion($score);
-
         $em->persist($UserAnswer);
         $em->flush();
         $idUser = $UserAnswer->idUser->idUser;
@@ -488,6 +488,61 @@ $testsAvailable = $query2->getResult();
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+
+    /*codigo de jhannet para recuperar informacion del examen dado*/
+    public function asignscore2Action($idTest, $idUser)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+        $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findOneBy(array('idUser'=>$user,'idTest'=>$test));
+        $userAnswers = $em->getRepository('EvaluationsBundle:UserAnswer')->findBy(array('idUser'=>$user,'idTest'=>$test),array('idUserAnswer' => 'ASC'));
+        
+        $result = $em->createQueryBuilder();
+        $questions = $result->select(array('q'))
+            ->from('EvaluationsBundle:Question', 'q')
+            ->innerJoin('EvaluationsBundle:TestQuestion','t', 'WITH', 't.idQuestion = q.idQuestion and t.idTest = :idT')
+            ->where('t.idTest = '.$idTest)
+            ->setParameter('idT' , $test->getIdTest())
+            ->getQuery()
+            ->getResult();
+        $data = array();
+        foreach ($questions as $question) {
+            $resp = array();
+            $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
+            if($question->getIdType()->getIdType()==7 && count($answers)>2){
+                $columA = array();
+                $columB = array();
+                for ($i=0; $i < count($answers)-1; $i=$i+2) { 
+                    array_push($columA,$answers[$i]);
+                    array_push($columB,$answers[$i+1]);
+                }
+                //shuffle($columB);
+                $answers = array_merge($columA,$columB);
+            }
+            $resp['question'] = $question;
+            $resp['answers'] = $answers;
+            $data[] = $resp;
+        }
+        $testsQuestion = $em->getRepository('EvaluationsBundle:TestQuestion')->findBy(array('idTest'=>$test));
+        $questionsPenalized = array();
+        foreach ($testsQuestion as $testQuestion) {
+            if ($testQuestion->getIsPenalized()) {
+                array_push($questionsPenalized,$testQuestion->getIdQuestion());
+            }
+        }
+
+        return $this->render('test/asignscore2.html.twig', array(
+            'testTaken' => $testTaken,
+            'userAnswers' => $userAnswers,
+            'testsQuestion' => $testsQuestion,
+            'data' => $data,
+            'test_id' => $idTest,
+            'user_id' => $idUser,
+            'questionsPenalized' => $questionsPenalized,
+        ));
     }
 
 }
