@@ -17,6 +17,8 @@
     </div>
     </div>
 
+    <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver examenes</a>
+
     <div class="row">
         
         <div class="col s12">
@@ -209,19 +211,15 @@
             
             <div class="col m2" align="center">
                 {% if userAnswers[numQ - 1].scoreQuestion == null %}
-                    <button onclick="abrir('{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}');" class="waves-effect waves-light btn red">Sin_Calificar</button>
+                    <button onclick="abrir('{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}',1);" class="waves-effect waves-light btn red">Sin_Calificar</button>
                 {% else %}
 
-                <button onclick="abrir('{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}');" class="waves-effect waves-light btn">Cambiar_Nota</button>
+                <button onclick="abrir('{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}',{{userAnswers[numQ - 1].scoreQuestion}});" class="waves-effect waves-light btn">Cambiar_Nota</button>
                 {% endif %}
             </div>
             {% set numQ = numQ + 1 %}
         </div>
         {% endfor %}                             
-    </div>
-
-    <div align="center">
-        <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver examenes</a>
     </div>
 
     <!-- Modal Structure -->
@@ -254,9 +252,10 @@
         }
     }
 
-    var abrir = function(url) {
+    var abrir = function(url, notaActual) {
         $('#modal1').openModal();
         $('#url')[0].value = url;
+        $('#percent')[0].value = notaActual;
     };
 
     var cerrar = function() {
@@ -266,5 +265,14 @@
     var toast = function(msg){
         Materialize.toast(msg, 3000);
     };
+
+    var agregado = function () {
+        var msg = window.location.search.substr(1);
+        if (msg != "") {
+            msg = msg.split("=")[1].replace(/[+]/g, " ");
+            toast(msg);
+        }
+    };
+    (agregado(),2000);
     </script>
 {% endblock %}
