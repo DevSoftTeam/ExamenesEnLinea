@@ -101,11 +101,12 @@
         {% for testA in testsAvailable %}
             {% set currentTime = "now"|date("H:i") %}
             {% set currentDate = "now"|date("d/m/Y ") %}
+            {% set testStartTime = testA.startTime|date_modify("+5 hour")|date("H:i") %}
             {% set areNull = testA.startTime is not empty and testA.startDate is not empty %}
-            {% set validHour = (currentDate == testA.startDate|date("d/m/Y ") and currentTime >= testA.startTime|date("H:i")) %}
+            {% set validHour = (currentDate == testA.startDate|date("d/m/Y ") and currentTime >= testStartTime) %}
             {% set validDate = currentDate > testA.startDate|date("d/m/Y")%}
 
-            {% if areNull and (validHour or validDate) %}
+            {% if (validHour or validDate) %}
             <tr>
                 <td>
                     <a  href="{{ path('test_show', { 'id': testA.idTest }) }}"><font color="black">{{testA.title}}</font></a>
@@ -124,9 +125,13 @@
                 {% endif %}
                 </td>
                 <td>{{ date(testA.startDate)|date("d/m/Y")}}</td>
+<<<<<<< HEAD
                 <td>{{ "now"|date("d/m/Y H:i")}}</td>
                 <td>{{ testA.startTime|date("H:i", "America/La_Paz") }}</td>
                 
+=======
+                <td>{{ testA.startTime|date_modify("+5 hour")|date("H:i") }}</td>
+>>>>>>> 64cf7ce21e15068d404d27e8469b17a6fbc00174
             </tr>
             {% endif %}
         {% endfor %}
