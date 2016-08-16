@@ -9,6 +9,8 @@ use EvaluationsBundle\Entity\Test;
 use EvaluationsBundle\Entity\TestTaken;
 use EvaluationsBundle\Entity\AnswerElement;
 use EvaluationsBundle\Entity\UserAnswer;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Time;
 
 class ExamController extends Controller
 {
@@ -169,14 +171,24 @@ class ExamController extends Controller
             $i++;
             $idQuestion = $request->get('idQuestion'.$i);
         }
-        $em->flush();
-        $reviewAuto = true;
-        if($reviewAuto){
-            $this->autoCalification($test);
-        }
-        
+
+        $currentTime = new Time();
+        if($test->getEndTime() <= $currentTime ) {
+            $em->flush();
+            $reviewAuto = true;
+            if($reviewAuto){
+                $this->autoCalification($test);
+            }
         return $this->redirectToRoute('showExam', array('idTest' => $testTaken->getIdTest()->getIdTest()));
+        }
+        else
+        {
+            return $this->render('EvaluationsBundle:TestForm:errorFinish.html.twig');
+        }
+
     }
+
+
 
     public function autoCalification($test){
         $em = $this->getDoctrine()->getManager();

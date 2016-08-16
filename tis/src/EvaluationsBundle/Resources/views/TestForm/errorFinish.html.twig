@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="center-align">
+        <h6><b>Ya termino la fecha de examen. este examen no puede ser resuelto</b></h6>
+    </div>
+    <div align="center">
+        <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver Examenes</a>
+  	</div>
+
+{% endblock %}

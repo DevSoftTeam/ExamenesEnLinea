@@ -52,6 +52,3 @@ showExam:
     path: /showExam/{idTest}
     defaults: {_controller: EvaluationsBundle:Exam:showExam}
 
-#indexerror_homepage:
-#    path:     /Test
-#    defaults: { _controller: EvaluationsBundle:Test:indexError }

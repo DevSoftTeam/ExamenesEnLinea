@@ -31,7 +31,8 @@ class TestController extends Controller
         foreach ($testsTaken as $testT) {
             array_push($testsT,$testT->getIdTest());
         }
-        $testsAvailable = $em->getRepository('EvaluationsBundle:Test')->findBy(array('available'=>TRUE));
+
+        $testsAvailable = $em->getRepository('EvaluationsBundle:Test')->findAll();
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
             'testsT' => $testsT,
