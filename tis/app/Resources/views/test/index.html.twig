@@ -127,6 +127,14 @@
                     <a href={{path('exam_homepage', {'idTest':testA.idTest})}}>Resolver</a>
                 {% endif %}
                 </td>
+<<<<<<< HEAD
+=======
+                <td>{{ date(testA.startDate)|date("d/m/Y")}}</td>
+                <td>{{ "now"|date("d/m/Y H:i")}}</td>
+                <td>{{ testA.startTime|date("H:i", "America/La_Paz") }}</td>
+                
+                <td>{{ testA.startTime|date_modify("+5 hour")|date("H:i") }}</td>
+>>>>>>> b4bdf4e73441345a04bae05811a377d95e4297d1
             </tr>
             {% endif %}
         {% endfor %}
@@ -138,6 +146,10 @@
             <a class="waves-effect waves-light btn" href="{{ path('test_new') }}">Crear Examen</a>
         </li>
     </ul>
+<<<<<<< HEAD
     <META HTTP-EQUIV="REFRESH" CONTENT="60">
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+=======
+    <META HTTP-EQUIV="REFRESH" CONTENT="120">
+>>>>>>> b4bdf4e73441345a04bae05811a377d95e4297d1
 {% endblock %}

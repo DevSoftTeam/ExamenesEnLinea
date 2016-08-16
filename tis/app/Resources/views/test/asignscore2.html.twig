@@ -169,7 +169,7 @@
                     {% set iRes = 0 %}
                     {% set cont = 1 %}
                     {% for key in keys %}
-                        {% if key starts with '[' %}
+                        {% if key starts with '________' %}
                             {% set resp = resps[iRes]|split(',') %}
                                 <input type="text" style="width:12em;" name="word{{numQ}}{{cont}}" value="{{resp[1]}}" />
                                 {% set cont = cont + 1 %}
@@ -248,6 +248,7 @@
             toast('no puede asignar puntos menores a 1');
         }
         else{
+            // if (true) {}
                 location.href=url;
         }
     }
