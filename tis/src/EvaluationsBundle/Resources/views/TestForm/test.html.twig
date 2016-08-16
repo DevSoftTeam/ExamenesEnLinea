@@ -98,8 +98,13 @@
 			</div>
 		    <div class="center-align">
 		        <button class="btn waves-effect waves-light" type="submit" name="action" >Terminar</button>
-		        <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Cancelar</a>
+		        <a class="waves-effect waves-light btn" href={{ path('test_index') }} onclick="alerta();">Cancelar</a>
 		    </div>
 		</form>
 	</div>
+	<script>
+    var alerta = function(){
+    	alert("Si cancela el examen no tendra nota en este examen y perdera la unica opcion de dar el examen.");
+    };
+    </script>
 {% endblock %}
