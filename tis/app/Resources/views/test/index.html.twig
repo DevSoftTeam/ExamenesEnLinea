@@ -125,7 +125,13 @@
                 {% endif %}
                 </td>
                 <td>{{ date(testA.startDate)|date("d/m/Y")}}</td>
+<<<<<<< HEAD
+                <td>{{ "now"|date("d/m/Y H:i")}}</td>
+                <td>{{ testA.startTime|date("H:i", "America/La_Paz") }}</td>
+                
+=======
                 <td>{{ testA.startTime|date_modify("+5 hour")|date("H:i") }}</td>
+>>>>>>> 64cf7ce21e15068d404d27e8469b17a6fbc00174
             </tr>
             {% endif %}
         {% endfor %}
