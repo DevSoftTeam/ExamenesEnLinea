@@ -253,7 +253,7 @@ $testsAvailable = $query2->getResult();
         $testQuestion->setIsPenalized($ispenalized);
         $em->persist($testQuestion);
         $em->flush();
-        return $this->redirectToRoute('test_show',array('id' => $idT,'msg'=>'mensaje'));
+        return $this->redirectToRoute('test_show',array('id' => $idT,'msg'=>'La nota de la pregunta fue editada'));
     }
 
 
@@ -267,7 +267,7 @@ $testsAvailable = $query2->getResult();
 
         $em->remove($testQuestion); //delete from test_question Where test_Question.id_Test = idT and test_question.id_Question= idQ
         $em->flush();
-        return $this->redirectToRoute('test_data',array('id' => $test->getId(),'msg'=>'mensaje'));
+        return $this->redirectToRoute('test_data',array('id' => $test->getId(),'msg'=>'Esta pregunta se elimino del examen'));
     }
 
     public function newAction(Request $request)
@@ -378,11 +378,6 @@ $testsAvailable = $query2->getResult();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
                 }
             }
-            return $this->render('test/errorFormTest.html.twig', array(
-                'test' => $test,
-                'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-            ));
         }
         return $this->render('test/edit.html.twig', array(
             'test' => $test,

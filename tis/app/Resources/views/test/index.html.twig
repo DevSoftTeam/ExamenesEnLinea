@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
-{#{% block meta %}#}
-    {#{{ parent() }}#}
-    {#<META HTTP-EQUIV="REFRESH" CONTENT="5">#}
-    {#<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">#}
-{#{% endblock meta %}#}
+
 {% block body %}
 
 
@@ -99,14 +95,17 @@
         </thead>
         <tbody >
         {% for testA in testsAvailable %}
-            {% set currentTime = "now"|date("H:i") %}
-            {% set currentDate = "now"|date("d/m/Y ") %}
-            {% set testStartTime = testA.startTime|date_modify("+5 hour")|date("H:i") %}
-            {% set areNull = testA.startTime is not empty and testA.startDate is not empty %}
-            {% set validHour = (currentDate == testA.startDate|date("d/m/Y ") and currentTime >= testStartTime) %}
-            {% set validDate = currentDate > testA.startDate|date("d/m/Y")%}
+            {% set currentTime = "now"|date("H:i", "America/La_Paz") %}
+            {% set currentDate = "now"|date("d/m/Y ", "America/La_Paz") %}
 
-            {% if (validHour or validDate) %}
+            {% set areNull = testA.startTime is not empty and testA.startDate is not empty and
+                                testA.endTime is not empty and testA.endDate is not empty %}
+            {% set validInit = (currentDate == testA.startDate|date("d/m/Y") and currentTime >= testA.startTime|date("H:i"))
+                                or (currentDate > testA.startDate|date("d/m/Y")) %}
+            {% set validFinish = (currentDate == testA.endDate|date("d/m/Y") and currentTime <= testA.endTime|date("H:i") )
+                                    or (currentDate < testA.endDate|date("d/m/Y"))%}
+
+            {% if  areNull and validInit and validFinish %}
             <tr>
                 <td>
                     <a  href="{{ path('test_show', { 'id': testA.idTest }) }}"><font color="black">{{testA.title}}</font></a>
@@ -124,11 +123,7 @@
                     <a href={{path('exam_homepage', {'idTest':testA.idTest})}}>Resolver</a>
                 {% endif %}
                 </td>
-                <td>{{ date(testA.startDate)|date("d/m/Y")}}</td>
-                <td>{{ "now"|date("d/m/Y H:i")}}</td>
-                <td>{{ testA.startTime|date("H:i", "America/La_Paz") }}</td>
-                
-                <td>{{ testA.startTime|date_modify("+5 hour")|date("H:i") }}</td>
+
             </tr>
             {% endif %}
         {% endfor %}
@@ -140,5 +135,6 @@
             <a class="waves-effect waves-light btn" href="{{ path('test_new') }}">Crear Examen</a>
         </li>
     </ul>
-    <META HTTP-EQUIV="REFRESH" CONTENT="120">
+    <META HTTP-EQUIV="REFRESH" CONTENT="60">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 {% endblock %}

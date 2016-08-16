@@ -122,7 +122,7 @@ class Question
         if ($this->pathImageQuestion != null) {
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
-                        <div><h5>".$this->statementQuestion."</h5></div>
+                        <div><h6>".$this->statementQuestion."</h6></div>
                     </div><br><br><br>
                     <div class=\"col s12\">
                         <img height=\"40%\" width=\"40%\" src=\"/uploads/images/".$this->pathImageQuestion."\">
@@ -131,7 +131,7 @@ class Question
         else{
             $html = "<div class=\"row\">
                     <div class=\"col s12\">
-                    <h5>".$this->statementQuestion."</h5>
+                    <h6>".$this->statementQuestion."</h6>
                     </div>
                 </div>";
         }
@@ -177,12 +177,17 @@ class Question
     public function getViewOrdenamiento($elements){
         shuffle($elements);
         $html = $this->getViewStatement()."<div class=\"row\">";  
+        
         foreach ($elements as $value) {
             $el = "
-                <div class=\"col s12\">
+                <div class=\"col s6\">
                     <p>".$value->content."</p>
+                </div>
+                <div class=\"col s6\">
+                    <p>___</p>
                 </div>";
             $html = $html.$el;
+            
         }
         return $html."</div>";
     }
@@ -257,16 +262,32 @@ class Question
     }
 
     public function getTrueFalse($elements){
-        $html = $this->getViewStatement();
- 
-        $answerEl = " <div id=\"TrueFalse\">
+              $html = "";
+        if ($this->pathImageQuestion != null) {
+            $html = "<div class=\"row\">
+                    <div class=\"col s8\">
+                        <div><h6>".$this->statementQuestion."</h6></div>
+                    </div><br><br><br>
+                    <div class=\"col s8\">
+                        <img height=\"40%\" width=\"40%\" src=\"/uploads/images/".$this->pathImageQuestion."\">
+                    </div>";
+        }
+        else{
+            $html = "<div class=\"row\">
+                    <div class=\"col s8\">
+                    <h6>".$this->statementQuestion."</h6>
+                </div>";
+        }
+
+        $answerEl = " <div class=\"col s4\" id=\"TrueFalse\">
             <input type=\"radio\" id=\"t\" disabled>
               <label for=\"t\">V</label>
  
               <input type=\"radio\" id=\"f\" disabled>
               <label for=\"f\">F</label>
         </div>";
-        return $html.$answerEl;
+
+        return $html.$answerEl."</div>";
     }
 
     public function getURL()

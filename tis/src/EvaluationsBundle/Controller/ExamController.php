@@ -173,7 +173,8 @@ class ExamController extends Controller
         }
 
         $currentTime = new Time();
-        if($test->getEndTime() <= $currentTime ) {
+        $currentDate = new Date();
+        if( $currentDate < $test->getEndDate() or ($currentDate == $test->getEndDate() and $currentTime <= $test->getEndTime())  ) {
             $em->flush();
             $reviewAuto = true;
             if($reviewAuto){
