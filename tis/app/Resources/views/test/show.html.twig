@@ -161,11 +161,12 @@
             toast('no puede asignar puntos menores a 1');
         }
         else{ 
-            if (parseInt(total_score)>=(parseInt(score_asign)-parseInt(percetAcutal) + parseInt(percent))){
-                toast('Los puntos que intenta asignar superan a los puntos del examen');
+            var total =Math.abs(parseInt(score_asign)-parseInt(percetAcutal))+parseInt(percent);
+            if (total_score >= total){
+                location.href=url;
             }
             else{
-                location.href=url;
+                toast('Los puntos que intenta asignar superan a los puntos del examen');
             }
         }
     };
@@ -185,22 +186,13 @@
         Materialize.toast(msg, 3000);
     };
 
-    var agregado = function () {
+    var mensaje = function () {
         var msg = window.location.search.substr(1);
         if (msg != "") {
-            toast("la pregunta fue eliminada del examen");
+            msg = msg.split("=")[1].replace(/[+]/g, " ");
+            toast(msg);
         }
     };
-    
-
-    var editado = function () {
-        var msg = window.location.search.substr(1); 
-        if (msg != "") {
-            toast("la pregunta fue editada");
-        }
-    };
-
-    (editado(),3000);
-    (eliminado(),2000);
+    (mensaje(),3000);
 </script>
 {% endblock %}

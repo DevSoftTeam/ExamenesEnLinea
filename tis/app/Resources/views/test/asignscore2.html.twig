@@ -211,10 +211,10 @@
             
             <div class="col m2" align="center">
                 {% if userAnswers[numQ - 1].scoreQuestion == null %}
-                    <button onclick="abrir(,'{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}',1);" class="waves-effect waves-light btn red">Sin_Calificar</button>
+                    <button onclick="abrir('{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}',1);" class="waves-effect waves-light btn red">Sin_Calificar</button>
                 {% else %}
 
-                <button onclick="abrir(,'{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}',{{userAnswers[numQ - 1].scoreQuestion}});" class="waves-effect waves-light btn">Cambiar_Nota</button>
+                <button onclick="abrir('{{ path('test_score_asigned', {testid: test_id, questionid:userAnswers[numQ - 1].idQuestion.idQuestion, score:0})}}',{{userAnswers[numQ - 1].scoreQuestion}});" class="waves-effect waves-light btn">Cambiar_Nota</button>
                 {% endif %}
             </div>
             {% set numQ = numQ + 1 %}
