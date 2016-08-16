@@ -59,13 +59,13 @@
             <p>
                 {{'El examen iniciara a partir del: '}}
                 {% if test.startDate and  test.startTime%}
-                    {{ test.startDate|date('d / m /d')}}{{ test.startTime|date(' H:i')  }}
+                    {{ test.startDate|date('y/m/d')}}{{ test.startTime|date(' H:i')  }}
                 {% else %}
                     <b class="pink-text"> No Definido o Incompleto</b>
                 {% endif %}
                 {{ 'hasta el' }}
                 {% if test.endDate and  test.endTime%}
-                    {{ test.endDate|date('d/m/d')}}{{ test.endTime|date(' H:i')  }}
+                    {{ test.endDate|date('y/m/d')}}{{ test.endTime|date(' H:i')  }}
                 {% else %}
                     <b class="pink-text"> No Definido o Incompleto </b>
                 {% endif %}

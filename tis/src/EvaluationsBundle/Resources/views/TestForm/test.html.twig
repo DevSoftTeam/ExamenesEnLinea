@@ -7,13 +7,30 @@
 	        <div class="col s12 center">
 	        <label class="teal-text lighten-4"><h3>{{ test.title }}</h3></label>
 	        </div>
-	        <div class="col s12">
-	        <div class="col s5">
+	        <div class="col s12 m12 l12">
+	        <div class="col s12 m6 l6">
 	            <label><h5 class="teal-text darken-4">Materia: <strong class="black-text">{{ test.matter }}</strong></h5></label>
 	        </div>
-	        <div class="col s5">
+	        <div class="col s12 m6 l6">
 	            {% if test.institution%}
 	                <label class="teal-text darken-4"><h5>Institucion :  <strong class="black-text">{{ test.institution }}</strong></h5></label>
+	            {% else %}
+	                {{ 'No Definido'}}
+	            {% endif %}
+	        </div>
+	        <div class="col s12 m6 l6">
+	            {% if test.startTime%}
+	                <label class="teal-text darken-4"><h5>Hora inicio habilitado:  <strong class="black-text">
+	                {{ test.startDate|date('y/m/d')}}{{ test.startTime|date(' H:i')  }}</strong></h5></label>
+	            {% else %}
+	                {{ 'No Definido'}}
+	            {% endif %}
+	        </div>
+	        <div class="col s12 m6 l6">
+	            {% if test.endTime%}
+	                <label class="teal-text darken-4"><h5>Hora fin habilitado:  <strong class="black-text">
+	                	{{ test.endDate|date('y/m/d')}}{{ test.endTime|date(' H:i')  }}
+	                </strong></h5></label>
 	            {% else %}
 	                {{ 'No Definido'}}
 	            {% endif %}
