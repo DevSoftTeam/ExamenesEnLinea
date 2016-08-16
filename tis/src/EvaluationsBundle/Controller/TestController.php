@@ -378,11 +378,6 @@ $testsAvailable = $query2->getResult();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
                 }
             }
-            return $this->render('test/errorFormTest.html.twig', array(
-                'test' => $test,
-                'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-            ));
         }
         return $this->render('test/edit.html.twig', array(
             'test' => $test,
