@@ -96,16 +96,20 @@
         <tbody >
         {% for testA in testsAvailable %}
             {% set currentTime = "now"|date("H:i", "America/La_Paz") %}
-            {% set currentDate = "now"|date("d/m/Y ", "America/La_Paz") %}
-
+            {% set currentDate = "now"|date_modify("00:00:00")|date("m/d/Y H:i")%}
+            {% set startTime = testA.startTime|date("H:i") %}
+            {% set startDate = testA.startDate|date("d/m/Y H:i")%}
+            {% set endTime = testA.endTime|date("H:i") %}
+            {% set endDate = testA.endDate|date("d/m/Y H:i")%}
             {% set areNull = testA.startTime is not empty and testA.startDate is not empty and
                                 testA.endTime is not empty and testA.endDate is not empty %}
-            {% set validInit = (currentDate == testA.startDate|date("d/m/Y") and currentTime >= testA.startTime|date("H:i"))
-                                or (currentDate > testA.startDate|date("d/m/Y")) %}
-            {% set validFinish = (currentDate == testA.endDate|date("d/m/Y") and currentTime <= testA.endTime|date("H:i") )
-                                    or (currentDate < testA.endDate|date("d/m/Y"))%}
 
-            {% if  areNull and validInit and validFinish %}
+            {% set validDateTime = ((currentDate == startDate)and(currentTime >= startTime))
+                                        or  ((currentDate == endDate)and(currentTime <= endTime)) %}
+            {% set validDateInterval = (currentDate > startDate)and(currentDate < endDate)%}
+
+            {% if validDateInterval or validDateTime or
+            (currentTime <= endTime and currentTime >= startTime)%}
             <tr>
                 <td>
                     <a  href="{{ path('test_show', { 'id': testA.idTest }) }}"><font color="black">{{testA.title}}</font></a>
