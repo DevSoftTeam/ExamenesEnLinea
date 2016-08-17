@@ -18,7 +18,7 @@
     </div>
 
     <a class="waves-effect waves-light btn" href={{ path('test_index') }}>Ver examenes</a>
-
+    {% if userAnswers|length > 0 %}
     <div class="row">
         
         <div class="col s12">
@@ -221,6 +221,13 @@
         </div>
         {% endfor %}                             
     </div>
+    {% else %}
+    <div class="row">
+        <div class="col s12 m12 l12" align="center">
+        <p>No se tiene respuestas, el examen fue cancelado.</p>
+        </div>
+    </div>
+    {% endif %}
 
     <!-- Modal Structure -->
       <div id="modal1" class="modal">
