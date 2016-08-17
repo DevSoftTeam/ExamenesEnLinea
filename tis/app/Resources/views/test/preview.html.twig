@@ -2,8 +2,10 @@
 
 {#{% set html %}#}
 {% block body %}
-    <div id="dvContainer"  >
 
+    <div id="dvContainer"  >
+        <link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
+        <style > </style>
         <div class="row">
             <div class="col s12 center">
             <label class="teal-text lighten-4" id="title"><h3>{{ test.title }}</h3></label>
@@ -40,7 +42,12 @@
         {% endfor %}
         </div>
 
-
+        <script>
+        var imprimir = function() {
+            document.getElementById("eliminar").outerHTML = "";
+            print();
+        };
+        </script>
 
 
     </div>
@@ -60,16 +67,20 @@
             var title = document.getElementById('title');
             var divContents = $("#dvContainer").html();
             var printWindow = window.open('', '', 'height=400,width=800');
-            printWindow.document.write('<html><head>');
-            printWindow.document.write('</head><body >');
+            printWindow.document.write("<html><head>");
+            printWindow.document.write("</head><body> <button id=\"eliminar\" onclick=\" imprimir(); \">imprimir</button> ");
             printWindow.document.write(divContents);
             printWindow.document.write('</body></html>');
             printWindow.document.close();
-            printWindow.print();
+            // (wait(),30000);
+            // printWindow.print();
         });
     </script>
 
     <script>
+        var wait = function(){
+            console.log("no te olvides de poner el where en el delete del from");
+        };
         $(function () {
             var specialElementHandlers = {
                 '#editor': function (element,renderer) {
