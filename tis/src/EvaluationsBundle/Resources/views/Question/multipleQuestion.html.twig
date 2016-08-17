@@ -59,10 +59,10 @@
       {% for i in 1..4 %}
       <div class="input-field col s12">
           <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
+          <div class="input-field col s10">
+          <textarea class="materialize-textarea validate" name="answer{{i}}"  
+          {% if i <= 3 %}required{% endif %}></textarea></div>
           
-          <textarea class="materialize-textarea validate col s10" name="answer{{i}}" length="600" 
-          {% if i <= 3 %}required{% endif %}></textarea>
-          <div></div>
           
           <div class="input-field col s2">
           <p>
@@ -74,11 +74,11 @@
         
 
         {% endfor %}
-        <br>
+        
         </div>
         </div>
 
-        <br><br>
+        
         <div class="row">
           <a class="btn waves-effect waves-light " onClick="addElement();">Agregar opción</a>
         <div class=" alight center">
@@ -93,9 +93,9 @@
       var addElement = function(){
       var answers = document.getElementById("answers");
       
-      $(answers).append('<br><br><div class="input-field col s12" id="col'+i+'">');
+      $(answers).append('<div class="input-field col s12" id="col'+i+'">');
       var div = document.getElementById("col"+i);
-      $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" placeholder="" length="600"></textarea>');
+      $(div).append('<div class="input-field col s10"><textarea class="materialize-textarea validate" name="answer'+i+'"></textarea></div>');
       
 
       $(div).append('<div class="input-field col s2"><p><input class="with-gap" name="chec'+i+'" value="'+i+'" type="checkbox" id="test'+i+'"/><label class="teal-text lighten-4" for="test'+i+'">Correcta</label></p></div>');

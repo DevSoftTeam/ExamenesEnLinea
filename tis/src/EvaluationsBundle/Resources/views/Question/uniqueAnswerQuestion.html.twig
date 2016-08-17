@@ -61,9 +61,9 @@
       <div class="input-field col s12">
           <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
           <!--<div><label class="teal-text lighten-4  "><h6>Opción {{ i }} :</h6></label></div>-->
-          
-          <textarea class="materialize-textarea validate col s10" name="answer{{i}}" length="600" 
-          {% if i <= 3 %}required{% endif %}></textarea>
+          <div class="input-field col s10">
+          <textarea class="materialize-textarea validate" name="answer{{i}}"  
+          {% if i <= 3 %}required{% endif %}></textarea></div>
           <div></div>
           
           <div class="input-field col s2">
@@ -79,7 +79,6 @@
         </div>
         </div>
 
-        <br><br>
         <div class="row">
           <a class="btn waves-effect waves-light " onClick="addElement();">Agregar opción</a>
         <div class=" alight center">
@@ -96,7 +95,7 @@
       
       $(answers).append('<div class="input-field col s12" id="col'+i+'"></div>');
       var div = document.getElementById("col"+i);
-      $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" length="600"></textarea>');
+      $(div).append('<div class="input-field col s10"><textarea class="materialize-textarea validate" name="answer'+i+'"></textarea></div>');
       $(div).append('<div class="input-field col s2"><input class="with-gap" name="chec1" value="'+i+'" type="radio" id="test'+i+'"/><label class="teal-text lighten-4" for="test'+i+'">Correcta</label></div>');
       i++;
       

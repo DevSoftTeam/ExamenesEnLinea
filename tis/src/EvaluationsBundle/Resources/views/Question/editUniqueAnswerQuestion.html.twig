@@ -56,9 +56,10 @@
                 <div class="input-field col s12">
                 
                 <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
-                <textarea class="materialize-textarea validate col s10" name="answer{{i}}" length="600"
+                <div class="input-field col s10">
+                <textarea class="materialize-textarea validate" name="answer{{i}}" 
                 {% if i <= 3 %}required{% endif %}>
-                {% if answers|length >= i %}{{answers[i-1].content}}{% endif %}</textarea>
+                {% if answers|length >= i %}{{answers[i-1].content}}{% endif %}</textarea></div>
                 
                 <div class="input-field col s2">
                 <p>
@@ -98,7 +99,7 @@
       
       $(answers).append('<div class="input-field col s12" id="col'+i+'"></div>');
       var div = document.getElementById("col"+i);
-      $(div).append('<textarea class="materialize-textarea validate col s10" name="answer'+i+'" length="600"></textarea>');
+      $(div).append('<div class="input-field col s10"><textarea class="materialize-textarea validate" name="answer'+i+'"></textarea>');
       $(div).append('<div class="input-field col s2"><input class="with-gap" name="chec1" value="'+i+'" type="radio" id="test'+i+'"/><label class="teal-text lighten-4" for="test'+i+'">Correcta</label></div>');
       i++;
       
