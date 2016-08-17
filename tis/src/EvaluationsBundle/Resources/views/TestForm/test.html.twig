@@ -2,7 +2,7 @@
 {% block title %} Examen {% endblock %}
 {% block body%}
 	<div class="row">
-		<label class="teal-text lighten-4"><h5>Resolviendo Examen:</h5></label>
+	   <label class="pink-text lighten-4"><h6>Nota: Si sale de esta página se cancelara el exámen y su nota será 0.</h6></label>
 
 	        <div class="col s12 center">
 	        <label class="teal-text lighten-4"><h3>{{ test.title }}</h3></label>
@@ -21,7 +21,7 @@
 	        <div class="col s12 m6 l6">
 	            {% if test.startTime%}
 	                <label class="teal-text darken-4"><h5>Hora inicio habilitado:  <strong class="black-text">
-	                {{ test.startDate|date('y/m/d')}}{{ test.startTime|date(' H:i')  }}</strong></h5></label>
+	                {{ test.startDate|date('Y/m/d')}}{{ test.startTime|date(' H:i')  }}</strong></h5></label>
 	            {% else %}
 	                {{ 'No Definido'}}
 	            {% endif %}
@@ -29,7 +29,7 @@
 	        <div class="col s12 m6 l6">
 	            {% if test.endTime%}
 	                <label class="teal-text darken-4"><h5>Hora fin habilitado:  <strong class="black-text">
-	                	{{ test.endDate|date('y/m/d')}}{{ test.endTime|date(' H:i')  }}
+	                	{{ test.endDate|date('Y/m/d')}}{{ test.endTime|date(' H:i')  }}
 	                </strong></h5></label>
 	            {% else %}
 	                {{ 'No Definido'}}
@@ -106,11 +106,11 @@
       <div id="modal1" class="modal">
         <div class="modal-content">
           <h3 class="teal-text lighten-4">Nota</h3>
-          <p id="nota" class="teal-text lighten-4">Si cancela el examen no tendra nota en este examen y perdera la unica opcion de dar el examen.</p>
+          <p id="nota" class="teal-text lighten-4">Si cancela el examen su nota será 0 en este examen y perdera la unica opción de dar el examen.</p>
         </div>
         
         <div class="modal-footer">
-          <a id="agregar" href={{ path('exam_cancel',{'idTest':test.idTest}) }} class="modal-action modal-close waves-effect waves-green btn-flat">Sí cancelar</a>
+          <a id="agregar" href={{ path('test_index') }} class="modal-action modal-close waves-effect waves-green btn-flat">Sí cancelar</a>
           <button class="modal-action modal-close waves-effect waves-green btn-flat" onclick="cerrar();">No cancelar</button>
         </div>
       </div>

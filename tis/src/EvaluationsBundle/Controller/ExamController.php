@@ -18,6 +18,17 @@ class ExamController extends Controller
     { 
         $em = $this->getDoctrine()->getManager();
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+        $user = $this->getUser();
+        $testsTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findBy(array('idTest'=>$test,'idUser'=>$user));
+
+        if(count($testsTaken)<1){
+        $testTaken = new TestTaken();
+        $testTaken->setIdTest($test);
+        $testTaken->setIdUser($user);
+        $testTaken->setUserScore(0);
+        $em->persist($testTaken);
+        $em->flush();
+
         $result = $em->createQueryBuilder();
         $questions = $result->select(array('q'))
             ->from('EvaluationsBundle:Question', 'q')
@@ -59,6 +70,9 @@ class ExamController extends Controller
             'data' => $data,
             'questionsPenalized' => $questionsPenalized,
         ));
+        }else {
+            return $this->redirectToRoute('test_index');
+        }
     }
     public function cancelAction($idTest)
     {   
@@ -79,10 +93,7 @@ class ExamController extends Controller
         $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
         $user = $this->getUser();
         // save test taken
-        $testTaken = new TestTaken();
-        $testTaken->setIdTest($test);
-        $testTaken->setIdUser($user);
-        $em->persist($testTaken);
+        $testTaken = $em->getRepository('EvaluationsBundle:TestTaken')->findOneBy(array('idTest'=>$test,'idUser'=>$user));
         // save answers user
         $i = 1;
         $idQuestion = $request->get('idQuestion'.$i);
@@ -187,16 +198,20 @@ class ExamController extends Controller
 
         $currentTime = new Time();
         $currentDate = new Date();
+        //echo(date("Y:m:d"));
+        //exit;
         if( $currentDate < $test->getEndDate() or ($currentDate == $test->getEndDate() and $currentTime <= $test->getEndTime())  ) {
             $em->flush();
             $reviewAuto = true;
             if($reviewAuto){
                 $this->autoCalification($test);
             }
-        return $this->redirectToRoute('showExam', array('idTest' => $testTaken->getIdTest()->getIdTest()));
+            return $this->redirectToRoute('showExam', array('idTest' => $testTaken->getIdTest()->getIdTest()));
         }
         else
         {
+            //$em->remove($testTaken);
+            //$em->flush();
             return $this->render('EvaluationsBundle:TestForm:errorFinish.html.twig');
         }
 
