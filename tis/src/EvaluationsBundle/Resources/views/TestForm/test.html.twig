@@ -2,8 +2,9 @@
 {% block title %} Examen {% endblock %}
 {% block body%}
 	<div class="row">
-	   <label class="pink-text lighten-4"><h6>Nota: Si sale de esta página se cancelara el exámen y su nota será 0.</h6></label>
-
+			<div class="col s12 m12 l12">
+	   			<label class="pink-text lighten-4"><h5>Nota: Si sale de esta página se cancelara el exámen y su nota será 0.</h5></label>
+	   		</div>
 	        <div class="col s12 center">
 	        <label class="teal-text lighten-4"><h3>{{ test.title }}</h3></label>
 	        </div>
@@ -18,30 +19,23 @@
 	                {{ 'No Definido'}}
 	            {% endif %}
 	        </div>
-	        <div class="col s12 m6 l6">
-	            {% if test.startTime%}
-	                <label class="teal-text darken-4"><h5>Hora inicio habilitado:  <strong class="black-text">
-	                {{ test.startDate|date('Y/m/d')}}{{ test.startTime|date(' H:i')  }}</strong></h5></label>
-	            {% else %}
-	                {{ 'No Definido'}}
-	            {% endif %}
 	        </div>
-	        <div class="col s12 m6 l6">
+	        <div class="col s12 m12 l12">
+	            <div class="col s9">
+	            <h5 class="teal-text darken-4">Nombre completo: <strong class="black-text">{{ app.user.name }} {{app.user.lastName}}</strong></h5>
+	            </div>
+	        </div>
+	        <br>
+	        <div class="col s12 m12 l12">
 	            {% if test.endTime%}
-	                <label class="teal-text darken-4"><h5>Hora fin habilitado:  <strong class="black-text">
+	                <label class="teal-text darken-4"><h5>El examen finaliza:  <strong class="black-text">
 	                	{{ test.endDate|date('Y/m/d')}}{{ test.endTime|date(' H:i')  }}
 	                </strong></h5></label>
 	            {% else %}
 	                {{ 'No Definido'}}
 	            {% endif %}
 	        </div>
-	        </div>
-	        <div class="col s12">
-	            <div class="col s9">
-	            <h5 class="teal-text darken-4">Nombre completo: <strong class="black-text">{{ app.user.name }} {{app.user.lastName}}</strong></h5>
-	            </div>
-	        </div>
-	    
+	</div>
 		<form action="/saveExam/{{test.idTest}}" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col s12">
