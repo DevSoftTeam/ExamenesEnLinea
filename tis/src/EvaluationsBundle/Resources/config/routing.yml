@@ -52,3 +52,6 @@ showExam:
     path: /showExam/{idTest}
     defaults: {_controller: EvaluationsBundle:Exam:showExam}
 
+exam_cancel:
+    path: /cancel/{idTest}
+    defaults: {_controller: EvaluationsBundle:Exam:cancel}

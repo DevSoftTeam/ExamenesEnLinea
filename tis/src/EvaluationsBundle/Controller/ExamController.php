@@ -60,6 +60,19 @@ class ExamController extends Controller
             'questionsPenalized' => $questionsPenalized,
         ));
     }
+    public function cancelAction($idTest)
+    {   
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('EvaluationsBundle:Test')->find($idTest);
+        $user = $this->getUser();
+        $testTaken = new TestTaken();
+        $testTaken->setIdTest($test);
+        $testTaken->setIdUser($user);
+        $testTaken->setUserScore(0);
+        $em->persist($testTaken);
+        $em->flush();
+        return $this->redirectToRoute('test_index');
+    }
     public function saveExamAction($idTest,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
