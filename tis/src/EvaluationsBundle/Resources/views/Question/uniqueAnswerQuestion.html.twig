@@ -50,19 +50,24 @@
       </div>
       </div>
 
+      
+      <div class="col s12">
+       <label class="teal-text lighten-4 col s10"><h6>&nbsp;</h6></label>
+        <label class="teal-text lighten-4 col s2"><h6>&nbsp; &nbsp; RESPUESTA:</h6></label>
+      </div>
+
       <div class="row" id="answers">
       {% for i in 1..4 %}
       <div class="input-field col s12">
           <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
           <!--<div><label class="teal-text lighten-4  "><h6>Opción {{ i }} :</h6></label></div>-->
-          <br>
+          
           <textarea class="materialize-textarea validate col s10" name="answer{{i}}" length="600" 
           {% if i <= 3 %}required{% endif %}></textarea>
           <div></div>
           
           <div class="input-field col s2">
-
-          
+                   
           <input class="" name="chec1" value="{{i}}" type="radio" id="test{{i}}"  />
           <label class="teal-text lighten-4" for="test{{i}}">Correcta</label>
           
