@@ -109,10 +109,36 @@ class Question
             case 9:
                 $html = $this->getBouquetQestion($elements);
                 break;
+            case 8:
+                $html = $this->getCompleteQestion();
+                break;
 
             default:
                 $html = $this->getViewStatement();
                 break;
+        }
+        return $html;
+    }
+    public function getCompleteQestion(){
+        $html = "";
+        $enun = json_decode($this->statementQuestion, true);
+        $enun = $enun["show"];
+
+        if ($this->pathImageQuestion != null) {
+            $html = "<div class=\"row\">
+                    <div class=\"col s12\">
+                        <div><h6>".$enun."</h6></div>
+                    </div><br><br><br>
+                    <div class=\"col s12\">
+                        <img height=\"40%\" width=\"40%\" src=\"/uploads/images/".$this->pathImageQuestion."\">
+                    </div></div>";
+        }
+        else{
+            $html = "<div class=\"row\">
+                    <div class=\"col s12\">
+                    <h6>".$enun."</h6>
+                    </div>
+                </div>";
         }
         return $html;
     }
@@ -164,8 +190,9 @@ class Question
                 </div>
                     
                 <div class=\"col s6\">
+                <p>
                     ".$value->content."
-
+                </p>
               </div>  </div>";
             $html = $html.$el;
             $i++;
@@ -233,10 +260,12 @@ class Question
                 </div>
                     
                 <div class=\"col s6 m6\">
+                <p>
                     <input type=\"radio\" id=\"t\" disabled>
                       <label for=\"t\">V</label>
                       <input type=\"radio\" id=\"f\" disabled>
                       <label for=\"f\">F</label>
+                     </p>    
                 </div>
                 </div>";
             $html = $html.$el;
@@ -254,7 +283,6 @@ class Question
                     </div>
                 </div>
                 <div class=\"col s12\">
-                <label class=\"teal-text darken-4\"  ><h6>Archivo :</h6></label>
                 <a class=\"waves-effect waves-light btn\" id=\"btnDown\" href=\"/uploads/".$this->pathFileQuestion."\" download>Download</a>
             </div>"
         ;

@@ -114,7 +114,7 @@
                 <td> 
                 <a onclick="abrir('{{question.percent}}','{{ path('test_asign_edit', {idT:test.idTest, idQ:question.idQuestion.id, percent:0, ispenalized:0})}}');" class="btn-floating btn-large waves-effect waves-light gray"><i class="material-icons">edit</i></a> 
 
-                <a class="btn-floating btn-large waves-effect waves-light gray" href={{ path('test_drop', {idT:test.idTest, idQ:question.idQuestion})}}><i class="material-icons" >delete</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light gray" href={{ path('test_drop', {idT:test.idTest, idQ:question.idQuestion.id})}}><i class="material-icons" >delete</i></a>
                 </td>
             </tr>
         {% endfor %}
