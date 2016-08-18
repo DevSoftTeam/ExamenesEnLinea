@@ -39,6 +39,8 @@ class ExamController extends Controller
             ->getResult();
 
         $data = array();
+
+        //if($question->getIdType()->getIdType()==7){}
         foreach ($questions as $question) {
             $resp = array();
             $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));

@@ -1,4 +1,4 @@
-	{% set keys = question['question'].statementQuestion|split(' ') %}
+	
 	<label class="teal-text lighten-4"><h5>Pregunta {{ numQ }}</h5></label>
 	<label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
 	<label class="pink-text lighten-4">
@@ -8,6 +8,8 @@
 	</label>
 	<div class="col s12">
 	<label style="font-family:sans-serif; font-size:1.2em; color: black;">
+	{#% set enunciados = twig_json_decode(question['question'].statementQuestion) %#}
+	{% set keys = question['question'].statementQuestion|split(' ') %}
 	{% set cont = 1 %}
 	{% for key in keys %}
 		{% if key starts with "________" %}
