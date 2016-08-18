@@ -240,6 +240,8 @@ $testsAvailable = $query2->getResult();
         $testQuestion->setPercent($percent);
         $testQuestion->setIsPenalized($ispenalized);
         $em->persist($testQuestion);
+        $test->setAvailable(true);
+        $em->persist($test);
         $em->flush();
         return $this->redirectToRoute('test_asosiation',array('id' => $test->getId(),'msg'=>'mensaje'));
     }
@@ -297,7 +299,7 @@ $testsAvailable = $query2->getResult();
                 {
                     $userSession = $this->getUser();
                     $test->setIdUser($userSession);
-                    $test->setAvailable();
+                    $test->setAvailable(false);
                     $em->persist($test);
                     $em->flush();
                     return $this->redirectToRoute('test_show', array('id' => $test->getId()));
