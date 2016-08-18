@@ -62,6 +62,8 @@ class WordCompletionQuestionController extends Controller
                 //var_dump($enunciado); exit;
 
 
+
+
                  $claves = "/(\[\*|^)\S*(\*\]|$)/";
                  preg_match_all($claves, $ques, $todo);
 
@@ -85,6 +87,13 @@ class WordCompletionQuestionController extends Controller
                         
               }
             }
+
+            
+            $enunciados = "{\"show\":\"".$enun."\"".","."\"edit\":\"".$enunciado."\"}";
+
+                var_dump($enunciados); exit;
+
+            
 
 
             $question->setStatementQuestion($enun);
