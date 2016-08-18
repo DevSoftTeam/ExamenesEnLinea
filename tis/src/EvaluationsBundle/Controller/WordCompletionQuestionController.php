@@ -91,12 +91,12 @@ class WordCompletionQuestionController extends Controller
             
             $enunciados = "{\"show\":\"".$enun."\"".","."\"edit\":\"".$enunciado."\"}";
 
-                var_dump($enunciados); exit;
+                //var_dump($enunciados); exit;
 
             
 
 
-            $question->setStatementQuestion($enun);
+            $question->setStatementQuestion($enunciados);
             $em->persist($question);
 
                 $em->flush();
@@ -119,10 +119,17 @@ class WordCompletionQuestionController extends Controller
      */
     public function showAction(Question $question)
     {
+        $ques=$question->getStatementQuestion();
+
+        $respuesta = json_decode($ques, true);
+           $enunciado = $respuesta["show"];
+           //var_dump($enunciado);exit;
+            
         $deleteForm = $this->createDeleteForm($question);
         $em = $this->getDoctrine()->getManager();
         $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion' =>$question));
         return $this->render('EvaluationsBundle:Question:showWordCompletionQuestion.html.twig', array(
+            'enunciado'=> $enunciado,
             'answers' => $answers,
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
@@ -142,11 +149,19 @@ class WordCompletionQuestionController extends Controller
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
+        $ques=$question->getStatementQuestion();
+
+        $respuesta = json_decode($ques, true);
+           $enunciado = $respuesta["edit"];
+           //var_dump($enunciado);exit;
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            $statement = $editForm['statementQuestion']->getData();
-          if(!is_null($statement) && strlen($statement)<=5000){
+           /* $statement = $editForm['statementQuestion']->getData();
+            $respuesta = json_decode($statement, true);
+            $enunciado = $respuesta["edit"];
+            //var_dump($enunciado); exit;*/
+          if(!is_null($enunciado) && strlen($enunciado)<=5000){
 
 
             $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
@@ -226,6 +241,7 @@ class WordCompletionQuestionController extends Controller
           }
         }
         return $this->render('EvaluationsBundle:Question:editWordCompletionQuestion.html.twig', array(
+            'enunciado'=> $enunciado,
             'areas' => $areas,
             'question' => $question,
             'answers' => $answers,
