@@ -32,7 +32,8 @@ class TestController extends Controller
             array_push($testsT,$testT->getIdTest());
         }
 
-        $testsAvailable = $em->getRepository('EvaluationsBundle:Test')->findAll();
+        $testsAvailable = $em->getRepository('EvaluationsBundle:Test')->findBy(array('available'=>TRUE));
+        
         return $this->render('test/index.html.twig', array(
             'tests' => $tests,
             'testsT' => $testsT,
