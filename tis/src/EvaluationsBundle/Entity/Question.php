@@ -156,18 +156,17 @@ class Question
         shuffle($left);
         shuffle($right);
         foreach ($right as $value) {
-            $el = "
-                <div class=\"col s12\">
-                <div class=\"col s6 m6\">
+            $el = "  <div class=\"col s12 \">
+                    <div class=\"col s6 \">
                     <p>
                       ".$left[$i]->content."
                     </p>
                 </div>
                     
-                <div class=\"col s6 m6\">
+                <div class=\"col s6\">
                     ".$value->content."
-                </div>
-                </div>";
+
+              </div>  </div>";
             $html = $html.$el;
             $i++;
         }
@@ -246,19 +245,29 @@ class Question
     }
 
     public function getViewFileQuestion(){
+                $html = "";
+        if ( $this->pathFileQuestion!= null) {
         $html = "<div class=\"row\">
                     <div class=\"col s12\">
-                        <label class=\"teal-text darken-4\"><h6>Enunciado :</h6></label>
+
                     <pre>".$this->statementQuestion."</pre>
                     </div>
                 </div>
                 <div class=\"col s12\">
-                <label class=\"teal-text darken-4\"><h6>Archivo :</h6></label>
-                <a class=\"waves-effect waves-light btn\" href=\"/uploads/".$this->pathFileQuestion."\" download>Download</a>
+                <label class=\"teal-text darken-4\"  ><h6>Archivo :</h6></label>
+                <a class=\"waves-effect waves-light btn\" id=\"btnDown\" href=\"/uploads/".$this->pathFileQuestion."\" download>Download</a>
             </div>"
         ;
+        } else {
+               $html = "<div class=\"row\">
+                    <div class=\"col s12\">
+                    <pre>".$this->statementQuestion."</pre>
+                    </div>
+                </div>
+                <div class=\"col s12\">
+           </div>";
+        }
         return $html;
-
     }
 
     public function getTrueFalse($elements){
