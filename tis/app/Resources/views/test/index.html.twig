@@ -95,21 +95,21 @@
         </thead>
         <tbody >
         {% for testA in testsAvailable %}
-            {% set currentTime = "now"|date("H:i", "America/La_Paz") %}
-            {% set currentDate = "now"|date_modify("00:00:00")|date("m/d/Y H:i")%}
-            {% set startTime = testA.startTime|date("H:i") %}
-            {% set startDate = testA.startDate|date("d/m/Y H:i")%}
-            {% set endTime = testA.endTime|date("H:i") %}
-            {% set endDate = testA.endDate|date("d/m/Y H:i")%}
-            {% set areNull = testA.startTime is not empty and testA.startDate is not empty and
-                                testA.endTime is not empty and testA.endDate is not empty %}
+            {#{% set currentTime = "now"|date("H:i", "America/La_Paz") %}#}
+            {#{% set currentDate = "now"|date_modify("00:00:00")|date("m/d/Y H:i")%}#}
+            {#{% set startTime = testA.startTime|date("H:i") %}#}
+            {#{% set startDate = testA.startDate|date("d/m/Y H:i")%}#}
+            {#{% set endTime = testA.endTime|date("H:i") %}#}
+            {#{% set endDate = testA.endDate|date("d/m/Y H:i")%}#}
+            {#{% set areNull = testA.startTime is not empty and testA.startDate is not empty and#}
+                                {#testA.endTime is not empty and testA.endDate is not empty %}#}
 
-            {% set validDateTime = ((currentDate == startDate)and(currentTime >= startTime))
-                                        or  ((currentDate == endDate)and(currentTime <= endTime)) %}
-            {% set validDateInterval = (currentDate > startDate)and(currentDate < endDate)%}
+            {#{% set validDateTime = ((currentDate == startDate)and(currentTime >= startTime))#}
+                                        {#or  ((currentDate == endDate)and(currentTime <= endTime)) %}#}
+            {#{% set validDateInterval = (currentDate > startDate)and(currentDate < endDate)%}#}
 
-            {% if validDateInterval or validDateTime or
-            (currentTime <= endTime and currentTime >= startTime)%}
+            {#{% if validDateInterval or validDateTime or#}
+            {#(currentTime <= endTime and currentTime >= startTime)%}#}
             <tr>
                 <td>
                     <a  href="{{ path('test_show', { 'id': testA.idTest }) }}"><font color="black">{{testA.title}}</font></a>
@@ -129,7 +129,7 @@
                 </td>
 
             </tr>
-            {% endif %}
+            {#{% endif %}#}
         {% endfor %}
         </tbody>
     </table>

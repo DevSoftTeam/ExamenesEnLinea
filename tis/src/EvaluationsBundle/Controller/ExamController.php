@@ -196,25 +196,19 @@ class ExamController extends Controller
             $idQuestion = $request->get('idQuestion'.$i);
         }
 
-        $currentTime = new Time();
-        $currentDate = new Date();
-        //echo(date("Y:m:d"));
-        //exit;
-        if( $currentDate < $test->getEndDate() or ($currentDate == $test->getEndDate() and $currentTime <= $test->getEndTime())  ) {
+//        $currentTime = new Time();
+//        if($test->getEndTime() >= $currentTime) {
             $em->flush();
             $reviewAuto = true;
             if($reviewAuto){
                 $this->autoCalification($test);
             }
             return $this->redirectToRoute('showExam', array('idTest' => $testTaken->getIdTest()->getIdTest()));
-        }
-        else
-        {
-            //$em->remove($testTaken);
-            //$em->flush();
-            return $this->render('EvaluationsBundle:TestForm:errorFinish.html.twig');
-        }
-
+//        }
+//        else
+//        {
+//            return $this->render('EvaluationsBundle:TestForm:errorFinish.html.twig');
+//        }
     }
 
 
