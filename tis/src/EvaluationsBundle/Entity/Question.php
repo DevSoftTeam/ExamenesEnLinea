@@ -164,8 +164,9 @@ class Question
                 </div>
                     
                 <div class=\"col s6\">
+                <p>
                     ".$value->content."
-
+                </p>
               </div>  </div>";
             $html = $html.$el;
             $i++;
@@ -233,10 +234,12 @@ class Question
                 </div>
                     
                 <div class=\"col s6 m6\">
+                <p>
                     <input type=\"radio\" id=\"t\" disabled>
                       <label for=\"t\">V</label>
                       <input type=\"radio\" id=\"f\" disabled>
                       <label for=\"f\">F</label>
+                     </p>    
                 </div>
                 </div>";
             $html = $html.$el;
