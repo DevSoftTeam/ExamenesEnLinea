@@ -197,9 +197,10 @@ class ExamController extends Controller
         }
 
         $currentTime = new Time();
-        $currentDate = new Date();
-        //echo(date("Y:m:d"));
-        //exit;
+        $currentDate = date("Y/m/d");
+//        echo(strtotime("now"));
+//        echo(date("Y:m:d"));
+//        exit;
         if( $currentDate < $test->getEndDate() or ($currentDate == $test->getEndDate() and $currentTime <= $test->getEndTime())  ) {
             $em->flush();
             $reviewAuto = true;
