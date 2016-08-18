@@ -149,22 +149,19 @@ class WordCompletionQuestionController extends Controller
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('EvaluationsBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
-        $ques=$question->getStatementQuestion();
 
+        $ques=$question->getStatementQuestion();
         $respuesta = json_decode($ques, true);
            $enunciado = $respuesta["edit"];
            //var_dump($enunciado);exit;
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted()) {
+            $quest=$request->request->get('statementQuestion');
 
-           /* $statement = $editForm['statementQuestion']->getData();
-            $respuesta = json_decode($statement, true);
-            $enunciado = $respuesta["edit"];
-            //var_dump($enunciado); exit;*/
-          if(!is_null($enunciado) && strlen($enunciado)<=5000){
-
-
+            //var_dump($quest);exit;
+          if(!is_null($quest) && strlen($quest)<=5000){
             $idArea = $em->getRepository('EvaluationsBundle:Area')->findOneBy(array('nameArea' => $request->request->get('area')));
+           // var_dump($ques);exit
             /// si no exisite el area lo crea
             if(is_null($idArea)){
                 $idArea = new Area();
@@ -195,7 +192,7 @@ class WordCompletionQuestionController extends Controller
             $question->setIdArea($idArea);
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($question);
+            //$em->persist($question);
 
             $answers = $em->getRepository('EvaluationsBundle:AnswerElement')->findBy(array('idQuestion'=>$question));
             foreach ($answers as $answer) {
@@ -203,22 +200,23 @@ class WordCompletionQuestionController extends Controller
             }
 
 
-                $em->persist($question);
-                $ques=$question->getStatementQuestion();
+                //$em->persist($question);
+                //$ques=$question->getStatementQuestion();
 
 
                  $claves = "/(\[\*|^)\S*(\*\]|$)/";
-                 preg_match_all($claves, $ques, $todo);
+                 preg_match_all($claves, $quest, $todo);
 
                  $sust = " ________ ";
-                $enun = preg_replace($claves, $sust, $ques);
+                $enun = preg_replace($claves, $sust, $quest);
+                //var_dump($enun);exit;
                
                 $i = 1;
                 $j=0;
                 $size=count($todo[0])-1;
 
                 
-                if($ques!=""){
+                if($quest!=""){
                    while(($size)>=0){
                    if($todo[$j] != ""){
                         $answer = new AnswerElement();
@@ -229,10 +227,13 @@ class WordCompletionQuestionController extends Controller
                         $j=$j+1;}
                         
               }
+              $enunciados = "{\"show\":\"".$enun."\"".","."\"edit\":\"".$quest."\"}";
+              //var_dump($question);exit;
+              $question->setStatementQuestion($enunciados);
             }
 
 
-            $question->setStatementQuestion($enun);
+            
             $em->persist($question);
 
                 $em->flush();
