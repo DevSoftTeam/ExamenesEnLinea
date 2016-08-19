@@ -57,8 +57,7 @@
                 
                 <!--input placeholder="Introduzca texto" name="answer{{i}}" type="textArea" class="validate" length="250"-->
                 <div class="input-field col s10">
-                <textarea class="materialize-textarea validate" name="answer{{i}}" 
-                {% if i <= 3 %}required{% endif %}>
+                <textarea class="materialize-textarea validate" name="answer{{i}}"{% if i <= 3 %}required{% endif %}>
                 {% if answers|length >= i %}{{answers[i-1].content}}{% endif %}</textarea></div>
                 
                 <div class="input-field col s2">
