@@ -8,12 +8,11 @@
 	</label>
 	<div class="col s12">
 	<label style="font-family:sans-serif; font-size:1.2em; color: black;">
-	{#% set enunciados = twig_json_decode(question['question'].statementQuestion) %#}
-	{% set keys = question['question'].statementQuestion|split(' ') %}
+	{% set keys = question['question'].getCompletionStatement()|split(' ') %}
 	{% set cont = 1 %}
 	{% for key in keys %}
 		{% if key starts with "________" %}
-		    	<input type="text" style="width:12em;" name="word{{numQ}}{{cont}}"/>
+		    	<input type="text" style="width:10em;" name="word{{numQ}}{{cont}}"/>
 		    	{% set cont = cont + 1 %}
 		{% else %}
 			{{ key }}

@@ -22,8 +22,6 @@
     <div class="row">
         
         <div class="col s12">
-        <label class="teal-text lighten-4"><h5>Puntuación preguntas del examen</h5></label>
-
             <div class="col m2">
                 <label class="teal-text lighten-4"><h5>Pregunta</h5></label>
             </div>
@@ -156,7 +154,7 @@
 
             {% elseif question['question'].idType.idType == 8 %}
             <div class="col m8">
-                {% set keys = question['question'].statementQuestion|split(' ') %}
+                {% set keys = question['question'].getCompletionStatement()|split(' ') %}
                     <div class="col s12">
                     <label class="teal-text lighten-4">{{question['question'].idType.nameType}}.</label>
                     <label class="pink-text lighten-4">
@@ -171,7 +169,7 @@
                     {% for key in keys %}
                         {% if key starts with '________' %}
                             {% set resp = resps[iRes]|split(',') %}
-                                <input type="text" style="width:12em;" name="word{{numQ}}{{cont}}" value="{{resp[1]}}" />
+                                <input type="text" style="width:10em;" name="word{{numQ}}{{cont}}" value="{{resp[1]}}" disabled/>
                                 {% set cont = cont + 1 %}
                             {% set iRes = iRes + 1 %}
                         {% else %}

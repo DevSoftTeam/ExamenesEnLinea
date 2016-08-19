@@ -143,6 +143,13 @@ class Question
         return $html;
     }
 
+    public function getCompletionStatement()
+    {
+        $statement = json_decode($this->statementQuestion,true);
+        $statement = $statement["show"];
+        return $statement;
+    }
+
     public function getViewStatement(){
         $html = "";
         if ($this->pathImageQuestion != null) {
