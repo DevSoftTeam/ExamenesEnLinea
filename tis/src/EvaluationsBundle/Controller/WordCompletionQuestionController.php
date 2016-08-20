@@ -218,7 +218,7 @@ class WordCompletionQuestionController extends Controller
                 
                 if($quest!=""){
                    while(($size)>=0){
-                   if($todo[$j] != ""){
+                   if($todo[0][$j] != ""){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
                         $answer->setContent(substr($todo[0][$j], 2, -2));
