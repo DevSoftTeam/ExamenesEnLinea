@@ -2,9 +2,9 @@
 parameters:
     database_host: 127.0.0.1
     database_port: '5432'
-    database_name: DB_EvaluacionesEnLinea
-    database_user: postgres
-    database_password: postgres
+    database_name: tis_devsoftdb
+    database_user: devsoftpg
+    database_password: SxuJPmxc
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
