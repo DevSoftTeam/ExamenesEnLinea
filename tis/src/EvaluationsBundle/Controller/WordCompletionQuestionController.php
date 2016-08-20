@@ -64,29 +64,33 @@ class WordCompletionQuestionController extends Controller
 
 
 
-                 $claves = "/(\[\*|^)\S*(\*\]|$)/";
+                 $claves = "/.(\[\*|^)\S*(\*\]|$)/";
                  preg_match_all($claves, $ques, $todo);
+
 
               $sust = " ________ ";
                 $enun = preg_replace($claves, $sust, $ques);
                
-                $i = 1;
+                
                 $j=0;
-                $size=count($todo[0])-1;
-
+                $size=count($todo[0]);
+                 //var_dump($size); exit;
                 
                 if($ques!=""){
-                   while(($size)>=0){
-                   if($todo[$j] != ""){
+                   while(($size)>$j){
+                   if($todo[0][$j] != ""){
                         $answer = new AnswerElement();
                         $answer->setIdQuestion($question);
-                        $answer->setContent(substr($todo[0][$j], 2, -2));
+                        $answer->setContent(substr($todo[0][$j], 3, -2));
                         $em->persist($answer);
-                        $size=$size-1;
+                        //$size=$size-1;
                         $j=$j+1;}
                         
               }
+//var_dump($j); exit;
+              
             }
+
 
             
             $enunciados = "{\"show\":\"".$enun."\"".","."\"edit\":\"".$enunciado."\"}";
@@ -200,11 +204,7 @@ class WordCompletionQuestionController extends Controller
             }
 
 
-                //$em->persist($question);
-                //$ques=$question->getStatementQuestion();
-
-
-                 $claves = "/(\[\*|^)\S*(\*\]|$)/";
+                 $claves = "/.(\[\*|^)\S*(\*\]|$)/";
                  preg_match_all($claves, $quest, $todo);
 
                  $sust = " ________ ";
