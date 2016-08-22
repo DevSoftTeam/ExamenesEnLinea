@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col s12">
             <label class="teal-text darken-4"><h6>Area :</h6></label>
-            <input list="areas" id="area" name="area" placeholder="seleccione o introzca nombre de area" value="{{question.idArea.nameArea}}" required>
+            <input list="areas" id="area" name="area" placeholder="seleccione o introduzca nombre de area" value="{{question.idArea.nameArea}}" required>
               <datalist id="areas">
               {% for area in areas %}
                 <option value="{{ area.nameArea }}">
