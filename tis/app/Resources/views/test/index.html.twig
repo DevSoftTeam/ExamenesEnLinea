@@ -72,11 +72,11 @@
                 {% if test in testsT %}
                     <p>Resuelto</p>
                 {% else %}
-                    <a href={{path('exam_homepage', {'idTest':test.idTest})}}>Resolver</a>
+                    <a href="{{path('exam_homepage', {'idTest':test.idTest})}}">Resolver</a>
                 {% endif %}
                 </td>
                 <td>
-                    <a href={{path('show_qualifications', {'id':test.idTest})}}>Planilla de calificaciones</a>
+                    <a href="{{path('show_qualifications', {'id':test.idTest})}}">Planilla de calificaciones</a>
                 </td>
                 
             {#</tr>#}
@@ -124,7 +124,7 @@
                 {% if testA in testsT %}
                     <p>Resuelto</p>
                 {% else %}
-                    <a href={{path('exam_homepage', {'idTest':testA.idTest})}}>Resolver</a>
+                    <a href="{{path('exam_homepage', {'idTest':testA.idTest})}}">Resolver</a>
                 {% endif %}
                 </td>
 

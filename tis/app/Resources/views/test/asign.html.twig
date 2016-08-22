@@ -38,11 +38,19 @@
         <tbody>
         
         {% for question in questions %}
-            <tr  >
+            <tr>
+                {% if question.idType.idType != 8 %}
                 <td>{{ question.statementQuestion[0:15] }}</td>
+                {% else %}
+                <td>{{ question.getCompletionStatement()[0:15] }}</td>
+                {% endif %}
                 <td>{{ question.idArea.nameArea }}</td>
                 <td>{{ question.idType.nameType }}</td>
+                {% if question.idType.idType != 8 %}
                 <td><button onclick="abrir('{{ question.statementQuestion |replace({"\n":' ', "\r":' '}) }}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0, ispenalized:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
+                {% else %}
+                <td><button onclick="abrir('{{ question.getCompletionStatement() |replace({"\n":' ', "\r":' '}) }}','{{ question.idType.nameType }}','{{ path('test_asign', {idT:test.idTest, idQ:question.idQuestion, percent:0, ispenalized:0})}}');" class="waves-effect waves-light btn">asignar</button></td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

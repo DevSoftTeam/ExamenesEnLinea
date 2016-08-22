@@ -95,9 +95,9 @@
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="side-nav" id="mobile-demo">
             <li><a href="#"><b>Evaluaciones En Linea</b></a></li>
-            <li><a href="/question/new">Crear Pregunta</a></li>
-            <li><a href="/test">Examenes</a></li>
-            <li><a href="/test/new">Crear Examen</a></li>
+            <li><a href="{{ path('question_new') }}">Crear Pregunta</a></li>
+            <li><a href="{{ path('test_index') }}">Examenes</a></li>
+            <li><a href="{{ path('test_new') }}">Crear Examen</a></li>
             <li><a  href={{ path('logout') }} >Salir</a></li>
           </ul> 
             </div>

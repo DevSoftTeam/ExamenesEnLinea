@@ -107,7 +107,12 @@
         </thead>
         <tbody>
             {% for question in questions %}
+            <tr>
+                {% if question.idQuestion.idType.idType != 8 %}
                 <td>{{ question.idQuestion.statementQuestion[0:15] }}</td>
+                {% else %}
+                <td>{{ question.idQuestion.getCompletionStatement()[0:15] }}</td>
+                {% endif %}
                 <td>{% if question.idQuestion.idArea != null %}{{ question.idQuestion.idArea.nameArea }} {% endif %}</td>
                 <td>{% if question.idQuestion.idType != null %}{{ question.idQuestion.idType.nameType }} {% endif %}</td>
                 <td>{{question.percent}}</td>
